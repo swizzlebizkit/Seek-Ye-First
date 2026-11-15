@@ -1,0 +1,17 @@
+{
+ "id": "narration_intro",
+ "speaker": "",
+ "narration": true,
+ "origin": "fiction",
+ "entries": [{"node": "start"}],
+ "nodes": {
+  "start": {
+   "lines": [
+    "Prologue: A Voice in the Wilderness",
+    "Galilee. Pontius Pilate is governor of Judaea, and Herod is tetrarch of Galilee. Rome's roads cross the hills, but in the village of Kefar Zayit the days are still measured by the well, the olive press and the sabbath.",
+    "You are no one in particular. Today there is bread to bake, errands to run, and whatever news the road brings with it.",
+    "Move with WASD or the arrow keys. Press E near people and objects to interact. Press J for your journal."
+   ]
+  }
+ }
+}

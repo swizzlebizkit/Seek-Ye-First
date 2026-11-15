@@ -1,0 +1,61 @@
+{
+ "id": "yosef",
+ "speaker": "Yosef",
+ "origin": "fiction",
+ "entries": [
+  {"when": {"flag": "yosef_rumor_told"}, "node": "again"},
+  {"node": "greeting"}
+ ],
+ "nodes": {
+  "greeting": {
+   "lines": [
+    "Figs from Magdala! Dried fish from the lake! Ah, a neighbor with open ears.",
+    "Tell me, do you want to hear the strangest thing I have seen in thirty years of walking these roads?"
+   ],
+   "choices": [
+    {"text": "Tell me.", "next": "rumor"},
+    {"text": "Not now.", "next": "brush"}
+   ]
+  },
+  "brush": {
+   "lines": ["Your loss. It will keep until you are curious."]
+  },
+  "rumor": {
+   "effects": [
+    {"set_flag": "yosef_rumor_told"},
+    {"set_flag": "heard_rumor"},
+    {"journal": "rumor_yosef"},
+    {"quest_start": "word_jordan"},
+    {"quest_objective": {"quest": "word_jordan", "objective": "hear_rumor"}},
+    {"knowledge": {"event": "john_preaching", "level": "rumor", "source": "Yosef"}},
+    {"when": {"flag": "hannah_told"}, "set_status": {"entry": "rumor_yosef", "status": "corroborated"}}
+   ],
+   "lines": [
+    "I came up the Jordan road. All the way, the road was thick with people: Jerusalem folk, Judaeans, even a few soldiers, all walking out into the wilderness.",
+    "A man is out there preaching beside the river. John, they call him. They say he wears camel's hair and lives on locusts and wild honey, though I did not get near enough to see his supper.",
+    "He cries out, 'Repent, for the kingdom of heaven is at hand!' And those who confess their sins, he plunges beneath the river. Baptizes them, he calls it."
+   ],
+   "choices": [
+    {"text": "Do you believe it?", "next": "doubt"},
+    {"text": "Who might know more?", "next": "advice"},
+    {"text": "Thank you, Yosef.", "next": null}
+   ]
+  },
+  "doubt": {
+   "lines": [
+    "I believe my own eyes. The road was as busy as a feast day. As for the man's message, I only sell figs. But I have never seen so large a crowd go so quiet."
+   ],
+   "next": "advice"
+  },
+  "advice": {
+   "lines": [
+    "Ask Elder Ezra, he knows the Scriptures better than anyone in Kefar Zayit. And there is a woman resting by the east road, Hannah. She walked up from that country. Ask her what she saw."
+   ]
+  },
+  "again": {
+   "lines": [
+    "Still turning it over? Well, the road east is open when you are ready. But buy something first. Figs? No? Hm."
+   ]
+  }
+ }
+}

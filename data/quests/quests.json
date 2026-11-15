@@ -1,0 +1,24 @@
+{
+ "missing_jar": {
+  "title": "A Jar Gone Astray",
+  "kind": "side",
+  "origin": "fiction",
+  "summary": "Miriam's water jar rolled away while the children were playing by the well.",
+  "objectives": [
+   {"id": "find_jar", "text": "Find Miriam's water jar. It rolled toward the olive grove."},
+   {"id": "return_jar", "text": "Bring the jar back to Miriam."}
+  ]
+ },
+ "word_jordan": {
+  "title": "Word from the Jordan",
+  "kind": "main",
+  "origin": "fiction",
+  "summary": "A strange report has reached the village. What is really happening out in the wilderness?",
+  "objectives": [
+   {"id": "hear_rumor", "text": "Hear what is being said about a preacher at the Jordan."},
+   {"id": "ask_elder", "text": "Ask Elder Ezra what he makes of it."},
+   {"id": "seek_witness", "text": "Find someone who has seen the preacher with their own eyes."}
+  ],
+  "on_complete": [{"set_flag": "road_east_ready"}, {"journal": "q_who_is_john"}]
+ }
+}

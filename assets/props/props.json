@@ -1,0 +1,221 @@
+{
+ "olive_tree_a": {
+  "file": "olive_tree_a.png",
+  "size": [
+   64,
+   80
+  ],
+  "origin": [
+   32,
+   76
+  ],
+  "collider": [
+   14,
+   8
+  ]
+ },
+ "olive_tree_b": {
+  "file": "olive_tree_b.png",
+  "size": [
+   64,
+   80
+  ],
+  "origin": [
+   32,
+   76
+  ],
+  "collider": [
+   14,
+   8
+  ]
+ },
+ "cypress": {
+  "file": "cypress.png",
+  "size": [
+   32,
+   72
+  ],
+  "origin": [
+   16,
+   68
+  ],
+  "collider": [
+   8,
+   6
+  ]
+ },
+ "bush": {
+  "file": "bush.png",
+  "size": [
+   32,
+   24
+  ],
+  "origin": [
+   16,
+   21
+  ],
+  "collider": [
+   22,
+   8
+  ]
+ },
+ "bush_flowers": {
+  "file": "bush_flowers.png",
+  "size": [
+   32,
+   24
+  ],
+  "origin": [
+   16,
+   21
+  ],
+  "collider": [
+   22,
+   8
+  ]
+ },
+ "boulder": {
+  "file": "boulder.png",
+  "size": [
+   32,
+   24
+  ],
+  "origin": [
+   16,
+   21
+  ],
+  "collider": [
+   24,
+   10
+  ]
+ },
+ "well": {
+  "file": "well.png",
+  "size": [
+   48,
+   56
+  ],
+  "origin": [
+   24,
+   50
+  ],
+  "collider": [
+   36,
+   14
+  ]
+ },
+ "jar_small": {
+  "file": "jar_small.png",
+  "size": [
+   16,
+   16
+  ],
+  "origin": [
+   8,
+   14
+  ],
+  "collider": null
+ },
+ "jar_large": {
+  "file": "jar_large.png",
+  "size": [
+   20,
+   30
+  ],
+  "origin": [
+   10,
+   27
+  ],
+  "collider": [
+   10,
+   6
+  ]
+ },
+ "crate": {
+  "file": "crate.png",
+  "size": [
+   24,
+   24
+  ],
+  "origin": [
+   12,
+   21
+  ],
+  "collider": [
+   18,
+   8
+  ]
+ },
+ "basket": {
+  "file": "basket.png",
+  "size": [
+   20,
+   18
+  ],
+  "origin": [
+   10,
+   16
+  ],
+  "collider": [
+   14,
+   6
+  ]
+ },
+ "market_stall": {
+  "file": "market_stall.png",
+  "size": [
+   72,
+   60
+  ],
+  "origin": [
+   36,
+   54
+  ],
+  "collider": [
+   56,
+   12
+  ]
+ },
+ "signpost": {
+  "file": "signpost.png",
+  "size": [
+   32,
+   48
+  ],
+  "origin": [
+   16,
+   44
+  ],
+  "collider": [
+   6,
+   5
+  ]
+ },
+ "clay_oven": {
+  "file": "clay_oven.png",
+  "size": [
+   36,
+   34
+  ],
+  "origin": [
+   18,
+   31
+  ],
+  "collider": [
+   26,
+   10
+  ]
+ },
+ "flowers_patch": {
+  "file": "flowers_patch.png",
+  "size": [
+   20,
+   12
+  ],
+  "origin": [
+   10,
+   11
+  ],
+  "collider": null
+ }
+}

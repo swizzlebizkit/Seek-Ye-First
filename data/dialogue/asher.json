@@ -1,0 +1,14 @@
+{
+ "id": "asher",
+ "speaker": "Asher",
+ "origin": "fiction",
+ "entries": [{"node": "chat"}],
+ "nodes": {
+  "chat": {
+   "lines": [
+    "Shh! Don't scare him. There's a lizard on that rock, and he's MY lizard.",
+    "Mother says the road people talk too much. Father says the talk isn't strange if it's true. I don't know which of them is right."
+   ]
+  }
+ }
+}

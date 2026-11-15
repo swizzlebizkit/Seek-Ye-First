@@ -1,0 +1,50 @@
+{
+ "id": "hannah",
+ "speaker": "Hannah",
+ "origin": "fiction",
+ "entries": [
+  {"when": {"flag": "hannah_told"}, "node": "again"},
+  {"node": "greeting"}
+ ],
+ "nodes": {
+  "greeting": {
+   "lines": [
+    "Peace to you. Forgive me, I am only resting my feet. I have walked three days from the south, out of the Jordan country."
+   ],
+   "choices": [
+    {"text": "What did you see along the way?", "next": "testimony"},
+    {"text": "Safe travels.", "next": null}
+   ]
+  },
+  "testimony": {
+   "effects": [
+    {"set_flag": "hannah_told"},
+    {"set_flag": "heard_rumor"},
+    {"journal": "testimony_hannah"},
+    {"quest_start": "word_jordan"},
+    {"quest_objective": {"quest": "word_jordan", "objective": "hear_rumor"}},
+    {"quest_objective": {"quest": "word_jordan", "objective": "seek_witness"}},
+    {"knowledge": {"event": "john_preaching", "level": "testimony", "source": "Hannah"}},
+    {"when": {"flag": "yosef_rumor_told"}, "set_status": {"entry": "rumor_yosef", "status": "corroborated"}},
+    {"when": {"flag": "yosef_rumor_told"}, "annotate": {"id": "hannah_confirms", "entry": "rumor_yosef", "source": "Hannah", "text": "Hannah has seen John herself and confirms what Yosef told me.", "refs": []}}
+   ],
+   "lines": [
+    "I saw the preacher, John, with these eyes. A lean man, brown as a root, in a garment of camel's hair with a leather girdle about his loins. They say he lives on locusts and wild honey.",
+    "The people went down into the river by hundreds, confessing their sins. He is no priest of the Temple. He has no fine robe and no censer. But when he speaks, nobody looks away.",
+    "I did not stay. I have a sister waiting in Capernaum. But I have not stopped thinking of it, not for three days."
+   ],
+   "choices": [
+    {"text": "Where is he preaching?", "next": "where"},
+    {"text": "Thank you, Hannah.", "next": null}
+   ]
+  },
+  "where": {
+   "lines": [
+    "Down the road east, past the hills, then the long way down to the Jordan. If you go, go early. By midday the river bank is thick with people."
+   ]
+  },
+  "again": {
+   "lines": ["Peace to you again. Take the east road and you will come to it, if you are of a mind to see for yourself."]
+  }
+ }
+}

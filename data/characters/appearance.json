@@ -1,0 +1,93 @@
+{
+ "frame_size": [
+  32,
+  48
+ ],
+ "directions": [
+  "down",
+  "left",
+  "right",
+  "up"
+ ],
+ "frames": 4,
+ "characters": {
+  "protagonist": {
+   "skin": 1,
+   "hair": "dark",
+   "hair_style": "short",
+   "beard": "none",
+   "robe": "wool",
+   "sash": "indigo",
+   "trim": null,
+   "mantle": null,
+   "cover": null,
+   "long": false,
+   "child": false
+  },
+  "miriam": {
+   "skin": 1,
+   "hair": "black",
+   "hair_style": "short",
+   "beard": "none",
+   "robe": "madder",
+   "sash": "cream",
+   "trim": "cream",
+   "mantle": null,
+   "cover": "indigo",
+   "long": true,
+   "child": false
+  },
+  "yosef": {
+   "skin": 3,
+   "hair": "black",
+   "hair_style": "short",
+   "beard": "short",
+   "robe": "olive",
+   "sash": "saffron",
+   "trim": null,
+   "mantle": "umber",
+   "cover": null,
+   "long": false,
+   "child": false
+  },
+  "ezra": {
+   "skin": 0,
+   "hair": "white",
+   "hair_style": "long",
+   "beard": "full",
+   "robe": "linen",
+   "sash": "dust",
+   "trim": null,
+   "mantle": "indigo",
+   "cover": null,
+   "long": true,
+   "child": false
+  },
+  "hannah": {
+   "skin": 2,
+   "hair": "brown",
+   "hair_style": "short",
+   "beard": "none",
+   "robe": "brown",
+   "sash": "dust",
+   "trim": null,
+   "mantle": "umber",
+   "cover": "dust",
+   "long": true,
+   "child": false
+  },
+  "asher": {
+   "skin": 2,
+   "hair": "black",
+   "hair_style": "short",
+   "beard": "none",
+   "robe": "cream",
+   "sash": "madder",
+   "trim": null,
+   "mantle": null,
+   "cover": null,
+   "long": false,
+   "child": true
+  }
+ }
+}

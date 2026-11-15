@@ -1,0 +1,1283 @@
+{
+ "id": "kefar_zayit",
+ "name": "Kefar Zayit",
+ "origin": "fiction",
+ "note": "An invented Galilean village; no canonical event occurs here.",
+ "size": [
+  40,
+  28
+ ],
+ "spawn": [
+  7.5,
+  8.4
+ ],
+ "ground": [
+  "cccccccccccccccccccccccccccccccccccccccc",
+  "cccccccccccccccccccccccccccccccccccccccc",
+  "cccccccggccgcccggcgcgcggccgggcggcgcgggcc",
+  "ccgggggggggggggggggddggggggggggggggggccc",
+  "cccggggggggggggggggddgggggggggggggggggcc",
+  "cccghhhhhggggggggggddggggggggggggggggccc",
+  "cccghhhghggggggggggddghhhghgggggggggggcc",
+  "ccgghhdddggggggggggddghhdddgggggggggggcc",
+  "ccggggdddgggdddggggddghhdddgggggggggggcc",
+  "cccggggdggggdddggggddggggdgggggdddgggccc",
+  "ccgggggdgggggdggghgddggggdgggggdddggggcc",
+  "cccggggdgggggdggpppppppphdhgggggdggggccc",
+  "cccggggdgggggdggppppppppgdhghhggdgggggcc",
+  "ccgdddddddddddddppppppppddddddddddddddcc",
+  "ccgdddddddddddddppppppppddddddddddddddcc",
+  "ccggggggggggggggppppppppgggghghhggggggcc",
+  "cccgggggggggggggppppppppgggggggggggggccc",
+  "cccsswwwssgggggggggddggggggggggggggggccc",
+  "cccswwwwwsgggggggggddggggggggggggggggccc",
+  "cccswwwwwsghhhhggggddgggggggggggggggggcc",
+  "cccswwwwwshhgghggggddggggggggghhghhgggcc",
+  "cccssssssshhhghggggddggdddgggghhgghggccc",
+  "ccgggggggggggdddhhhdddddddggggfffffffccc",
+  "cccggggggggggddddddddgggggggggfffffffgcc",
+  "ccgggggggggggghghhhddgggggggggfffffffgcc",
+  "cccgcggccgcccgcggcggggccccgggcfffffffccc",
+  "cccccccccccccccccccccccccccccccccccccccc",
+  "cccccccccccccccccccccccccccccccccccccccc"
+ ],
+ "ground_legend": {
+  "g": [
+   "grass_0",
+   "grass_0",
+   "grass_0",
+   "grass_1",
+   "grass_1",
+   "grass_2",
+   "grass_2",
+   "grass_2",
+   "grass_1",
+   "grass_flowers"
+  ],
+  "h": [
+   "grass_dry_0",
+   "grass_dry_1"
+  ],
+  "d": [
+   "dirt_0",
+   "dirt_1"
+  ],
+  "p": [
+   "path_0",
+   "path_1"
+  ],
+  "s": [
+   "sand_0",
+   "sand_1"
+  ],
+  "w": [
+   "water_0",
+   "water_1"
+  ],
+  "c": [
+   "cliff_0",
+   "cliff_1"
+  ],
+  "f": [
+   "field_0",
+   "field_1"
+  ]
+ },
+ "objects": [
+  [
+   5,
+   4,
+   "roof_tl"
+  ],
+  [
+   6,
+   4,
+   "roof_t"
+  ],
+  [
+   7,
+   4,
+   "roof_t"
+  ],
+  [
+   8,
+   4,
+   "roof_t"
+  ],
+  [
+   9,
+   4,
+   "roof_tr"
+  ],
+  [
+   5,
+   5,
+   "roof_bl"
+  ],
+  [
+   6,
+   5,
+   "roof_b"
+  ],
+  [
+   7,
+   5,
+   "roof_b"
+  ],
+  [
+   8,
+   5,
+   "roof_b"
+  ],
+  [
+   9,
+   5,
+   "roof_br"
+  ],
+  [
+   5,
+   6,
+   "wall_window"
+  ],
+  [
+   6,
+   6,
+   "wall_stone_b"
+  ],
+  [
+   7,
+   6,
+   "wall_door"
+  ],
+  [
+   8,
+   6,
+   "wall_stone_b"
+  ],
+  [
+   9,
+   6,
+   "wall_window"
+  ],
+  [
+   11,
+   4,
+   "roof_tl"
+  ],
+  [
+   12,
+   4,
+   "roof_t"
+  ],
+  [
+   13,
+   4,
+   "roof_t"
+  ],
+  [
+   14,
+   4,
+   "roof_t"
+  ],
+  [
+   15,
+   4,
+   "roof_tr"
+  ],
+  [
+   11,
+   5,
+   "roof_l"
+  ],
+  [
+   12,
+   5,
+   "roof_c"
+  ],
+  [
+   13,
+   5,
+   "roof_c"
+  ],
+  [
+   14,
+   5,
+   "roof_c"
+  ],
+  [
+   15,
+   5,
+   "roof_r"
+  ],
+  [
+   11,
+   6,
+   "roof_bl"
+  ],
+  [
+   12,
+   6,
+   "roof_b"
+  ],
+  [
+   13,
+   6,
+   "roof_b"
+  ],
+  [
+   14,
+   6,
+   "roof_b"
+  ],
+  [
+   15,
+   6,
+   "roof_br"
+  ],
+  [
+   11,
+   7,
+   "wall_stone"
+  ],
+  [
+   12,
+   7,
+   "wall_stone"
+  ],
+  [
+   13,
+   7,
+   "wall_door"
+  ],
+  [
+   14,
+   7,
+   "wall_stone"
+  ],
+  [
+   15,
+   7,
+   "wall_window"
+  ],
+  [
+   24,
+   4,
+   "roof_tl"
+  ],
+  [
+   25,
+   4,
+   "roof_t"
+  ],
+  [
+   26,
+   4,
+   "roof_t"
+  ],
+  [
+   27,
+   4,
+   "roof_t"
+  ],
+  [
+   28,
+   4,
+   "roof_tr"
+  ],
+  [
+   24,
+   5,
+   "roof_bl"
+  ],
+  [
+   25,
+   5,
+   "roof_b"
+  ],
+  [
+   26,
+   5,
+   "roof_b"
+  ],
+  [
+   27,
+   5,
+   "roof_b"
+  ],
+  [
+   28,
+   5,
+   "roof_br"
+  ],
+  [
+   24,
+   6,
+   "wall_stone_b"
+  ],
+  [
+   25,
+   6,
+   "wall_door"
+  ],
+  [
+   26,
+   6,
+   "wall_stone_b"
+  ],
+  [
+   27,
+   6,
+   "wall_window"
+  ],
+  [
+   28,
+   6,
+   "wall_stone_b"
+  ],
+  [
+   31,
+   5,
+   "roof_tl"
+  ],
+  [
+   32,
+   5,
+   "roof_t"
+  ],
+  [
+   33,
+   5,
+   "roof_t"
+  ],
+  [
+   34,
+   5,
+   "roof_t"
+  ],
+  [
+   35,
+   5,
+   "roof_tr"
+  ],
+  [
+   31,
+   6,
+   "roof_l"
+  ],
+  [
+   32,
+   6,
+   "roof_c"
+  ],
+  [
+   33,
+   6,
+   "roof_c"
+  ],
+  [
+   34,
+   6,
+   "roof_c"
+  ],
+  [
+   35,
+   6,
+   "roof_r"
+  ],
+  [
+   31,
+   7,
+   "roof_bl"
+  ],
+  [
+   32,
+   7,
+   "roof_b"
+  ],
+  [
+   33,
+   7,
+   "roof_b"
+  ],
+  [
+   34,
+   7,
+   "roof_b"
+  ],
+  [
+   35,
+   7,
+   "roof_br"
+  ],
+  [
+   31,
+   8,
+   "wall_stone_b"
+  ],
+  [
+   32,
+   8,
+   "wall_door"
+  ],
+  [
+   33,
+   8,
+   "wall_stone"
+  ],
+  [
+   34,
+   8,
+   "wall_window"
+  ],
+  [
+   35,
+   8,
+   "wall_stone_b"
+  ],
+  [
+   12,
+   19,
+   "roof_tl"
+  ],
+  [
+   13,
+   19,
+   "roof_t"
+  ],
+  [
+   14,
+   19,
+   "roof_t"
+  ],
+  [
+   15,
+   19,
+   "roof_t"
+  ],
+  [
+   16,
+   19,
+   "roof_tr"
+  ],
+  [
+   12,
+   20,
+   "roof_bl"
+  ],
+  [
+   13,
+   20,
+   "roof_b"
+  ],
+  [
+   14,
+   20,
+   "roof_b"
+  ],
+  [
+   15,
+   20,
+   "roof_b"
+  ],
+  [
+   16,
+   20,
+   "roof_br"
+  ],
+  [
+   12,
+   21,
+   "wall_window"
+  ],
+  [
+   13,
+   21,
+   "wall_stone_b"
+  ],
+  [
+   14,
+   21,
+   "wall_door"
+  ],
+  [
+   15,
+   21,
+   "wall_stone"
+  ],
+  [
+   16,
+   21,
+   "wall_stone"
+  ],
+  [
+   22,
+   17,
+   "roof_tl"
+  ],
+  [
+   23,
+   17,
+   "roof_t"
+  ],
+  [
+   24,
+   17,
+   "roof_t"
+  ],
+  [
+   25,
+   17,
+   "roof_t"
+  ],
+  [
+   26,
+   17,
+   "roof_t"
+  ],
+  [
+   27,
+   17,
+   "roof_tr"
+  ],
+  [
+   22,
+   18,
+   "roof_l"
+  ],
+  [
+   23,
+   18,
+   "roof_c"
+  ],
+  [
+   24,
+   18,
+   "roof_c"
+  ],
+  [
+   25,
+   18,
+   "roof_c"
+  ],
+  [
+   26,
+   18,
+   "roof_c"
+  ],
+  [
+   27,
+   18,
+   "roof_r"
+  ],
+  [
+   22,
+   19,
+   "roof_bl"
+  ],
+  [
+   23,
+   19,
+   "roof_b"
+  ],
+  [
+   24,
+   19,
+   "roof_b"
+  ],
+  [
+   25,
+   19,
+   "roof_b"
+  ],
+  [
+   26,
+   19,
+   "roof_b"
+  ],
+  [
+   27,
+   19,
+   "roof_br"
+  ],
+  [
+   22,
+   20,
+   "wall_window"
+  ],
+  [
+   23,
+   20,
+   "wall_stone_b"
+  ],
+  [
+   24,
+   20,
+   "wall_door"
+  ],
+  [
+   25,
+   20,
+   "wall_stone_b"
+  ],
+  [
+   26,
+   20,
+   "wall_window"
+  ],
+  [
+   27,
+   20,
+   "wall_stone_b"
+  ],
+  [
+   29,
+   21,
+   "lowwall_h"
+  ],
+  [
+   30,
+   21,
+   "lowwall_h"
+  ],
+  [
+   31,
+   21,
+   "lowwall_h"
+  ],
+  [
+   32,
+   21,
+   "lowwall_h"
+  ],
+  [
+   33,
+   21,
+   "lowwall_h"
+  ],
+  [
+   34,
+   21,
+   "lowwall_h"
+  ],
+  [
+   35,
+   21,
+   "lowwall_h"
+  ],
+  [
+   36,
+   21,
+   "lowwall_h"
+  ],
+  [
+   29,
+   22,
+   "lowwall_v"
+  ],
+  [
+   29,
+   23,
+   "lowwall_v"
+  ],
+  [
+   29,
+   24,
+   "lowwall_v"
+  ],
+  [
+   29,
+   25,
+   "lowwall_v"
+  ]
+ ],
+ "props": [
+  {
+   "prop": "well",
+   "tile": [
+    19,
+    13
+   ]
+  },
+  {
+   "prop": "market_stall",
+   "tile": [
+    28,
+    11
+   ]
+  },
+  {
+   "prop": "signpost",
+   "tile": [
+    36,
+    12
+   ]
+  },
+  {
+   "prop": "clay_oven",
+   "tile": [
+    8,
+    8
+   ]
+  },
+  {
+   "prop": "basket",
+   "tile": [
+    22,
+    15
+   ]
+  },
+  {
+   "prop": "crate",
+   "tile": [
+    24,
+    15
+   ]
+  },
+  {
+   "prop": "jar_large",
+   "tile": [
+    17,
+    12
+   ]
+  },
+  {
+   "prop": "jar_large",
+   "tile": [
+    14,
+    8
+   ]
+  },
+  {
+   "prop": "basket",
+   "tile": [
+    30,
+    12
+   ]
+  },
+  {
+   "prop": "crate",
+   "tile": [
+    33,
+    12
+   ]
+  },
+  {
+   "prop": "olive_tree_b",
+   "tile": [
+    5,
+    24
+   ]
+  },
+  {
+   "prop": "olive_tree_a",
+   "tile": [
+    8,
+    25
+   ]
+  },
+  {
+   "prop": "olive_tree_b",
+   "tile": [
+    11,
+    24
+   ]
+  },
+  {
+   "prop": "olive_tree_a",
+   "tile": [
+    14,
+    25
+   ]
+  },
+  {
+   "prop": "olive_tree_b",
+   "tile": [
+    6,
+    22
+   ]
+  },
+  {
+   "prop": "olive_tree_a",
+   "tile": [
+    10,
+    22
+   ]
+  },
+  {
+   "prop": "olive_tree_b",
+   "tile": [
+    3,
+    25
+   ]
+  },
+  {
+   "prop": "cypress",
+   "tile": [
+    18,
+    8
+   ]
+  },
+  {
+   "prop": "cypress",
+   "tile": [
+    22,
+    8
+   ]
+  },
+  {
+   "prop": "cypress",
+   "tile": [
+    17,
+    18
+   ]
+  },
+  {
+   "prop": "cypress",
+   "tile": [
+    34,
+    17
+   ]
+  },
+  {
+   "prop": "cypress",
+   "tile": [
+    5,
+    10
+   ]
+  },
+  {
+   "prop": "olive_tree_a",
+   "tile": [
+    4,
+    5
+   ]
+  },
+  {
+   "prop": "olive_tree_a",
+   "tile": [
+    30,
+    9
+   ]
+  },
+  {
+   "prop": "olive_tree_a",
+   "tile": [
+    36,
+    10
+   ]
+  },
+  {
+   "prop": "olive_tree_a",
+   "tile": [
+    10,
+    16
+   ]
+  },
+  {
+   "prop": "olive_tree_b",
+   "tile": [
+    33,
+    19
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    30,
+    20
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    27,
+    15
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    17,
+    10
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    17,
+    24
+   ]
+  },
+  {
+   "prop": "bush_flowers",
+   "tile": [
+    31,
+    3
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    5,
+    12
+   ]
+  },
+  {
+   "prop": "bush_flowers",
+   "tile": [
+    25,
+    23
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    17,
+    4
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    29,
+    17
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    3,
+    8
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    33,
+    3
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    9,
+    12
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    31,
+    18
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    5,
+    8
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    31,
+    16
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    6,
+    15
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    24,
+    11
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    14,
+    16
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    12,
+    17
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    11,
+    12
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    18,
+    21
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    8,
+    9
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    9,
+    10
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    9,
+    8
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    9,
+    9
+   ]
+  },
+  {
+   "prop": "bush_flowers",
+   "tile": [
+    22,
+    24
+   ]
+  }
+ ],
+ "npcs": [
+  {
+   "id": "miriam",
+   "name": "Miriam",
+   "dialogue": "miriam",
+   "tile": [
+    17.5,
+    14.6
+   ],
+   "wander": 40
+  },
+  {
+   "id": "yosef",
+   "name": "Yosef the trader",
+   "dialogue": "yosef",
+   "tile": [
+    28.0,
+    12.7
+   ],
+   "wander": 28
+  },
+  {
+   "id": "ezra",
+   "name": "Elder Ezra",
+   "dialogue": "ezra",
+   "tile": [
+    13.5,
+    8.6
+   ],
+   "wander": 24
+  },
+  {
+   "id": "hannah",
+   "name": "Hannah",
+   "dialogue": "hannah",
+   "tile": [
+    34.4,
+    12.8
+   ],
+   "wander": 12
+  },
+  {
+   "id": "asher",
+   "name": "Asher",
+   "dialogue": "asher",
+   "tile": [
+    21.5,
+    15.6
+   ],
+   "wander": 80
+  }
+ ],
+ "interactables": [
+  {
+   "type": "pickup",
+   "id": "water_jar",
+   "name": "Clay jar",
+   "item": "water_jar",
+   "prop": "jar_small",
+   "tile": [
+    8,
+    22
+   ],
+   "text": [
+    "A clay water jar, chipped at the lip but whole. Someone is surely missing it."
+   ],
+   "effects": [
+    {
+     "quest_objective": {
+      "quest": "missing_jar",
+      "objective": "find_jar"
+     }
+    }
+   ]
+  },
+  {
+   "type": "examine",
+   "name": "The well",
+   "tile": [
+    19,
+    13.7
+   ],
+   "radius": 40,
+   "text": [
+    "A stone well, its rim worn smooth by generations of ropes. The water is cool and sweet."
+   ]
+  },
+  {
+   "type": "examine",
+   "name": "Your home",
+   "tile": [
+    7.5,
+    7.15
+   ],
+   "radius": 26,
+   "text": [
+    "Home. The bread is baked, the floor swept. Today there is little more to do here."
+   ]
+  },
+  {
+   "type": "examine",
+   "name": "Elder Ezra's house",
+   "tile": [
+    13.5,
+    8.15
+   ],
+   "radius": 26,
+   "text": [
+    "The door of Elder Ezra's house. Scrolls are said to be kept inside, though few have seen them."
+   ]
+  },
+  {
+   "type": "examine",
+   "name": "Door",
+   "tile": [
+    25.5,
+    7.15
+   ],
+   "radius": 26,
+   "text": [
+    "The door is shut. Its owners are out in the fields."
+   ]
+  },
+  {
+   "type": "examine",
+   "name": "Door",
+   "tile": [
+    32.5,
+    9.15
+   ],
+   "radius": 26,
+   "text": [
+    "The door is barred from within. A dog barks once, then thinks better of it."
+   ]
+  },
+  {
+   "type": "examine",
+   "name": "Door",
+   "tile": [
+    14.5,
+    22.15
+   ],
+   "radius": 26,
+   "text": [
+    "Miriam's house. Her door stands open, but nobody is inside."
+   ]
+  },
+  {
+   "type": "examine",
+   "name": "Door",
+   "tile": [
+    24.5,
+    21.15
+   ],
+   "radius": 26,
+   "text": [
+    "A heavy door. The family that lives here is away at a wedding in Cana."
+   ]
+  },
+  {
+   "type": "examine",
+   "name": "Pond",
+   "tile": [
+    6,
+    21.2
+   ],
+   "radius": 34,
+   "text": [
+    "A small pond fed by a spring. Reeds crowd the sandy edge, and something small plops into the water."
+   ]
+  },
+  {
+   "type": "examine",
+   "name": "The olive grove",
+   "tile": [
+    8,
+    23.2
+   ],
+   "radius": 30,
+   "once_flag": "saw_grove",
+   "text": [
+    "Old olive trees, gnarled and silver-leaved. Some of them were here before your grandfather was born."
+   ]
+  },
+  {
+   "type": "examine",
+   "name": "Signpost",
+   "tile": [
+    36,
+    12.9
+   ],
+   "radius": 36,
+   "variants": [
+    {
+     "when": {
+      "flag": "road_east_ready"
+     },
+     "text": [
+      "The road east drops out of the hills toward the Jordan valley.",
+      "You cannot stop thinking about what you have heard. You mean to see it for yourself.",
+      "[Prototype boundary] The road to the Jordan opens in Milestone 2."
+     ],
+     "effects": [
+      {
+       "journal": "obs_decision"
+      }
+     ]
+    },
+    {
+     "text": [
+      "A weathered signpost. The road east leads down toward the Jordan valley.",
+      "You have no particular reason to go that way. Not yet."
+     ]
+    }
+   ]
+  }
+ ]
+}

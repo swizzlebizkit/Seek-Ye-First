@@ -1,0 +1,56 @@
+{
+ "id": "miriam",
+ "speaker": "Miriam",
+ "origin": "fiction",
+ "entries": [
+  {"when": {"has_item": "water_jar"}, "node": "return_jar"},
+  {"when": {"flag": ["jar_returned", "heard_rumor"]}, "node": "after_idle"},
+  {"when": {"flag": "jar_returned"}, "node": "after_hint"},
+  {"when": {"flag": "jar_asked"}, "node": "reminder"},
+  {"node": "greeting"}
+ ],
+ "nodes": {
+  "greeting": {
+   "lines": [
+    "Peace be with you, neighbor. Oh, forgive me, I am in such a state.",
+    "The children ran past the well and sent my water jar rolling off like a lamb let loose. I cannot leave my washing to chase it."
+   ],
+   "choices": [
+    {"text": "I'll find it for you.", "next": "accept", "effects": [{"set_flag": "jar_asked"}, {"quest_start": "missing_jar"}]},
+    {"text": "I'm sorry, not just now.", "next": "decline"}
+   ]
+  },
+  "accept": {
+   "lines": ["Bless you! It rolled off toward the olive grove, south and west of here, past the pond. Look among the trees."]
+  },
+  "decline": {
+   "lines": ["Of course. Everyone has their own work. If you change your mind, I will be here."]
+  },
+  "reminder": {
+   "lines": ["Any sign of my jar? It went toward the olive grove, south and west, beyond the pond."]
+  },
+  "return_jar": {
+   "effects": [
+    {"quest_start": "missing_jar"},
+    {"quest_objective": {"quest": "missing_jar", "objective": "find_jar"}},
+    {"take_item": {"item": "water_jar", "count": 1}},
+    {"set_flag": "jar_returned"},
+    {"quest_objective": {"quest": "missing_jar", "objective": "return_jar"}},
+    {"give_item": {"item": "lepton", "count": 2}}
+   ],
+   "lines": [
+    "My jar! And not a crack in it. The Lord is kind, and so are you.",
+    "Here, take these two lepta. It is not much, but it is honestly meant."
+   ],
+   "next": "after_hint"
+  },
+  "after_hint": {
+   "lines": [
+    "Have you spoken to Yosef yet? The trader, by the market stall. He has come up from the Jordan road with the strangest tale. You were always the curious one."
+   ]
+  },
+  "after_idle": {
+   "lines": ["Thank you again for the jar. And mind the road, if you go east. A great many people are on it."]
+  }
+ }
+}

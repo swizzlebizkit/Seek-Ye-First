@@ -1,0 +1,12 @@
+{
+ "water_jar": {
+  "name": "Clay water jar",
+  "description": "A chipped but whole clay jar for carrying water. It belongs to Miriam.",
+  "quest_item": true
+ },
+ "lepton": {
+  "name": "Copper lepton",
+  "description": "The smallest coin in common use. Two of them are scarcely a loaf's worth of bread.",
+  "quest_item": false
+ }
+}

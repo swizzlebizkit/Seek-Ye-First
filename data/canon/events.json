@@ -1,0 +1,19 @@
+{
+ "note": "Canonical events. They are advanced by the story controller only; nothing the player does can add, remove, reorder or alter them.",
+ "events": [
+  {
+   "id": "john_preaching",
+   "order": 1,
+   "title": "John the Baptist preaches and baptizes in the wilderness of Judaea",
+   "refs": ["Matthew 3:1-6", "Mark 1:4-5", "Luke 3:3"],
+   "origin": "scripture"
+  },
+  {
+   "id": "baptism_of_jesus",
+   "order": 2,
+   "title": "Jesus is baptized by John in the Jordan",
+   "refs": ["Matthew 3:13-17"],
+   "origin": "scripture"
+  }
+ ]
+}

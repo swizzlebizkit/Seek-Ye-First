@@ -1,0 +1,42 @@
+{
+ "translation": "KJV",
+ "name": "King James Version",
+ "license": "Public domain",
+ "note": "Only the passages the game currently cites. Add verses here as new content needs them.",
+ "books": {
+  "Matthew": {
+   "3": {
+    "1": "In those days came John the Baptist, preaching in the wilderness of Judaea,",
+    "2": "And saying, Repent ye: for the kingdom of heaven is at hand.",
+    "3": "For this is he that was spoken of by the prophet Esaias, saying, The voice of one crying in the wilderness, Prepare ye the way of the Lord, make his paths straight.",
+    "4": "And the same John had his raiment of camel's hair, and a leathern girdle about his loins; and his meat was locusts and wild honey.",
+    "5": "Then went out to him Jerusalem, and all Judaea, and all the region round about Jordan,",
+    "6": "And were baptized of him in Jordan, confessing their sins.",
+    "13": "Then cometh Jesus from Galilee to Jordan unto John, to be baptized of him.",
+    "14": "But John forbad him, saying, I have need to be baptized of thee, and comest thou to me?",
+    "15": "And Jesus answering said unto him, Suffer it to be so now: for thus it becometh us to fulfil all righteousness. Then he suffered him.",
+    "16": "And Jesus, when he was baptized, went up straightway out of the water: and, lo, the heavens were opened unto him, and he saw the Spirit of God descending like a dove, and lighting upon him:",
+    "17": "And lo a voice from heaven, saying, This is my beloved Son, in whom I am well pleased."
+   },
+   "6": {
+    "33": "But seek ye first the kingdom of God, and his righteousness; and all these things shall be added unto you."
+   }
+  },
+  "Mark": {
+   "1": {
+    "4": "John did baptize in the wilderness, and preach the baptism of repentance for the remission of sins.",
+    "5": "And there went out unto him all the land of Judaea, and they of Jerusalem, and were all baptized of him in the river of Jordan, confessing their sins."
+   }
+  },
+  "Luke": {
+   "3": {
+    "3": "And he came into all the country about Jordan, preaching the baptism of repentance for the remission of sins;"
+   }
+  },
+  "Isaiah": {
+   "40": {
+    "3": "The voice of him that crieth in the wilderness, Prepare ye the way of the LORD, make straight in the desert a highway for our God."
+   }
+  }
+ }
+}
