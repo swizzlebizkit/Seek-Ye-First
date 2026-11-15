@@ -26,7 +26,8 @@ func run(runner: Node) -> void:
 	test_no_skipped_transitions()
 	t._section = "world-save"
 	test_journey_save()
-	test_old_save()
+	await test_old_save()
+	test_old_save_synthetic()
 	t._section = "world-regions"
 	test_region_data()
 	await test_transitions()
@@ -142,6 +143,22 @@ func test_geography() -> void:
 	var mid := World.point_on_route("kefar_zayit__magdala__land", float(kz["length_km"]) / 2.0)
 	t.check(World.in_bounds(mid), "a point part-way along a route is on the map")
 	t.check(World.point_on_route("kefar_zayit__magdala__land", 0.0).is_equal_approx(Vector2(35.40, 32.78)), "a route starts at its first location")
+	# no land road runs across a lake or the sea (checked every 200 m along each road)
+	var wet := 0
+	for rid in World.routes:
+		var r: Dictionary = World.routes[rid]
+		if r["mode"] != "land":
+			continue
+		var n := int(float(r["length_km"]) * 5.0)
+		for i in range(1, n):
+			var pt := World.point_on_route(rid, float(r["length_km"]) * i / n)
+			for fid in ["sea_of_galilee", "dead_sea", "mediterranean"]:
+				var poly := PackedVector2Array()
+				for q in World.features[fid]["polygon"]:
+					poly.append(Vector2(q[0], q[1]))
+				if Geometry2D.is_point_in_polygon(pt, poly):
+					wet += 1
+	t.check(wet == 0, "no land road crosses water (%d wet points)" % wet)
 	# a break in the data is caught
 	var saved: Dictionary = World.routes["cana__nazareth__land"]
 	World.routes["cana__nazareth__land"] = saved.duplicate()
@@ -564,6 +581,29 @@ func test_journey_save() -> void:
 
 
 func test_old_save() -> void:
+	# a real save written by the very first milestone (version 1: no equipment, combat, map or journey)
+	_fresh()
+	var raw_text := FileAccess.get_file_as_string("res://tests/fixtures/pre_w1_v1_slot.json")
+	t.check(raw_text != "", "the version-1 fixture is present")
+	DirAccess.make_dir_recursive_absolute(SaveManager.save_dir)
+	var fx := FileAccess.open(SaveManager.slot_path(1), FileAccess.WRITE)
+	fx.store_string(raw_text)
+	fx.close()
+	var fixture: Dictionary = JSON.parse_string(raw_text)
+	t.check(int(fixture["version"]) == 1 and not fixture.has("geo") and not fixture.has("travel"), "it has no W1 data")
+	t.check(SaveManager.load_slot(1), "an old version-1 save loads")
+	t.check(GameState.region_id == "kefar_zayit" and GameState.has_saved_position, "it puts the player in the village at the saved spot")
+	t.check(absf(GameState.player_pos.x - float(fixture["game"]["player"]["x"])) < 0.01 and absf(WorldSim.minute_of_day - float(fixture["world"]["minute"])) < 0.001, "position and time are exactly as saved")
+	t.check(World.level_of("kefar_zayit") == "visited" and World.level_of("magdala") == "discovered" and World.level_of("jericho") == "unknown", "the map starts from its defaults")
+	t.check(not Travel.active() and World.explored.is_empty(), "no journey and nothing explored beyond what is played from here")
+	var old_game: Node = await t._spawn_game({"mode": "load", "slot": 1})
+	t.check(old_game.region.data["id"] == "kefar_zayit" and old_game.region.is_walkable_px(old_game.player.global_position), "the old save plays: the village is built and the player stands on open ground")
+	old_game.free()
+	SaveManager.delete_slot(1)
+
+
+# -- (older, synthetic save) --
+func test_old_save_synthetic() -> void:
 	_fresh()
 	SaveManager.save_slot(1)
 	var raw := SaveManager.read_slot(1)

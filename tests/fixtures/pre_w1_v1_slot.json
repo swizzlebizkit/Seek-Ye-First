@@ -1,0 +1,170 @@
+{
+	"canon": {
+		"occurred": [
+			"john_preaching"
+		]
+	},
+	"game": {
+		"flags": {
+			"ezra_consulted": true,
+			"hannah_told": true,
+			"heard_rumor": true,
+			"jar_asked": true,
+			"jar_returned": true,
+			"picked_water_jar": true,
+			"road_east_ready": true,
+			"yosef_rumor_told": true
+		},
+		"inventory": {
+			"lepton": 2
+		},
+		"play_seconds": 395.628451666451,
+		"player": {
+			"facing": "right",
+			"x": 282.308135986328,
+			"y": 452.970031738281
+		},
+		"region": "kefar_zayit"
+	},
+	"journal": {
+		"entries": {
+			"q_who_is_john": {
+				"day": 1,
+				"id": "q_who_is_john",
+				"notes": [],
+				"origin": "fiction",
+				"refs": [
+					"Matthew 3:2"
+				],
+				"source": "My own thoughts",
+				"status": "open",
+				"text": "Everyone speaks as though something is about to happen. 'The kingdom of heaven is at hand.' What kingdom? Whose? I do not know, and I find I cannot leave it alone.",
+				"title": "Who is John, and what is coming?",
+				"type": "question"
+			},
+			"rumor_yosef": {
+				"day": 1,
+				"id": "rumor_yosef",
+				"notes": [
+					{
+						"day": 1,
+						"id": "hannah_confirms",
+						"refs": [],
+						"source": "Hannah",
+						"text": "Hannah has seen John herself and confirms what Yosef told me."
+					},
+					{
+						"day": 1,
+						"id": "ezra_isaiah_yosef",
+						"refs": [
+							"Isaiah 40:3"
+						],
+						"source": "Elder Ezra",
+						"text": "Ezra says the words remind him of the prophet Isaiah."
+					}
+				],
+				"origin": "fiction",
+				"refs": [
+					"Matthew 3:1-2",
+					"Matthew 3:5-6"
+				],
+				"source": "Yosef, a trader on the roads",
+				"status": "corroborated",
+				"text": "Yosef the trader says a man named John is preaching beside the river Jordan, crying that people must repent, for the kingdom of heaven is at hand. Crowds are walking out from Jerusalem and all Judaea to hear him, and those who confess their sins are baptized in the river. I have only Yosef's word for it.",
+				"title": "A preacher at the Jordan",
+				"type": "rumor"
+			},
+			"testimony_ezra": {
+				"day": 1,
+				"id": "testimony_ezra",
+				"notes": [],
+				"origin": "fiction",
+				"refs": [
+					"Isaiah 40:3"
+				],
+				"source": "Elder Ezra of Kefar Zayit",
+				"status": "recorded",
+				"text": "Elder Ezra says the preacher's words put him in mind of the prophet Isaiah: 'The voice of him that crieth in the wilderness, Prepare ye the way of the LORD.' He would not say what it means, only that I should go with open eyes, if I go, and tell him what I see.",
+				"title": "Elder Ezra: the voice in the wilderness",
+				"type": "testimony"
+			},
+			"testimony_hannah": {
+				"day": 1,
+				"id": "testimony_hannah",
+				"notes": [
+					{
+						"day": 1,
+						"id": "ezra_isaiah_hannah",
+						"refs": [
+							"Isaiah 40:3"
+						],
+						"source": "Elder Ezra",
+						"text": "Ezra says what Hannah describes puts him in mind of Isaiah's 'voice in the wilderness'."
+					}
+				],
+				"origin": "fiction",
+				"refs": [
+					"Matthew 3:4-6"
+				],
+				"source": "Hannah, a traveler from the south",
+				"status": "recorded",
+				"text": "Hannah, resting by the east road, has seen the preacher herself. She says John wears a garment of camel's hair with a leather girdle about his loins, and that it is said he eats locusts and wild honey. Hundreds go down into the Jordan confessing their sins. She did not stay long, but she has not stopped thinking about it.",
+				"title": "Hannah has seen John",
+				"type": "testimony"
+			}
+		},
+		"order": [
+			"rumor_yosef",
+			"testimony_hannah",
+			"testimony_ezra",
+			"q_who_is_john"
+		]
+	},
+	"knowledge": {
+		"facts": {
+			"john_preaching": {
+				"level": "testimony",
+				"sources": [
+					"Yosef",
+					"Hannah"
+				]
+			}
+		},
+		"understood": []
+	},
+	"meta": {
+		"journal_entries": 4,
+		"place": "Kefar Zayit",
+		"play_seconds": 395.628451666451
+	},
+	"quests": {
+		"order": [
+			"missing_jar",
+			"word_jordan"
+		],
+		"state": {
+			"missing_jar": {
+				"done": {
+					"find_jar": true,
+					"return_jar": true
+				},
+				"state": "done"
+			},
+			"word_jordan": {
+				"done": {
+					"ask_elder": true,
+					"hear_rumor": true,
+					"seek_witness": true
+				},
+				"state": "done"
+			}
+		}
+	},
+	"saved_at": "2026-11-14 22:01:42",
+	"saved_unix": 1794715302.1,
+	"version": 1,
+	"world": {
+		"day": 1,
+		"minute": 469.644204166626
+	}
+}

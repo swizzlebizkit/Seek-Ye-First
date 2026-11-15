@@ -25,7 +25,7 @@ Godot_v4.7.2-stable_win64_console.exe --headless --path . --import
 | WASD / arrows | Move |
 | E / Space / Enter | Interact, advance dialogue, confirm |
 | Up/Down (or 1-9) | Choose a dialogue option |
-| J / Tab | Journal, quests, satchel (Left/Right switch tabs, PgUp/PgDn scroll) |
+| J / Tab | Journal, quests, satchel, map (Left/Right switch tabs, PgUp/PgDn scroll; on the Map tab 1 2 3 choose level, + / - zoom) |
 | Esc | Pause menu (save, load, quit) / close screens |
 | K / X / R | Swing the sword (needs a sword equipped) |
 | H | Eat food from the satchel (restores health) |
@@ -37,7 +37,7 @@ Godot_v4.7.2-stable_win64_console.exe --headless --path . --import
 
 - `scripts/autoload/` the three world systems plus services: `canonical_timeline` (A), `world_sim` (B), `player_knowledge` (C), `journal`, `quests`, `dialogue_runner`, `save_manager`, `scripture`, `game_state`.
 - `scripts/entities/`, `scripts/world/`, `scripts/ui/`, `scripts/core/` entities, region loader, screens, shared helpers.
-- `data/` all content as JSON: dialogue, journal entries, quests, canon events, KJV verses, items, region.
+- `data/` all content as JSON: dialogue, journal entries, quests, canon events, KJV verses, items, regions, world (calendar, geography, travel).
 - `tools/procgen/` deterministic procedural art (pure Python, no dependencies). `tools/mapgen/` builds the village layout.
 - `tests/` headless suite.
 
@@ -46,6 +46,7 @@ Godot_v4.7.2-stable_win64_console.exe --headless --path . --import
 ```
 python -I tools/procgen/generate_all.py     # tiles, props, characters, UI art (then re-run --import)
 python -I tools/mapgen/kefar_zayit.py       # data/regions/kefar_zayit.json
+python -I tools/mapgen/galilee.py           # galilee_hills, magdala_shore, road_camp, outskirts
 ```
 
 ## Tests
@@ -77,3 +78,15 @@ Behaviour profiles are data: `data/combat/profiles.json` (hostile / noncombatant
 ## Calendar (S1.1)
 
 `Calendar` (`data/world/calendar.json`, `data/world/festivals.json`) is a simplified lunisolar Jewish calendar worked out from `WorldSim`. It is a gameplay approximation, not a historical reconstruction; see `docs/calendar.md`. Months are 29 or 30 days from a fixed mean lunation, a year is 12 or 13 months (Adar I and II in leap years, by a configurable 19-year pattern plus per-year overrides), and the date starts from a configurable start date. The seven-day week never resets and the Sabbath runs sunset on the sixth day to sunset on the seventh. Saves are unchanged (only the clock is stored). The HUD reads `The first day | 1 Nisan | 7:00`. Conditions in data: `weekday` (0 to 6, a list means any of), `sabbath` (bool), `day_phase`. Festival dates are looked up only; schedules, closed stalls and festival gameplay are planned, not built.
+
+## The living world (W1)
+
+Three levels: **local** (a village such as Kefar Zayit), **regional** (walkable country: `galilee_hills`, `magdala_shore`, and the shared template regions `road_camp` and `outskirts`) and **strategic** (a map of places and routes, `data/world/geography.json`). Read `docs/world_architecture.md` for the design and `docs/geography.md` for what is documented, uncertain and invented (Kefar Zayit is invented).
+
+- **Walking:** regions connect through data-driven `exits` and `entries`, no per-map code. Leaving Kefar Zayit by the east road enters the hills, which lead on to the lake shore.
+- **Travel:** a road marker, landing or camp opens the strategic map (`Travel`, `data/world/travel.json`). The traveller walks (4 km/h, dawn to sunset, resting overnight) or sails (6 km/h, day and night). The clock advances in steps that always stop at sunset and midnight, so nothing is skipped. A journey can be stopped at a waypoint, paused, resumed or abandoned (you stay on the road and may go on to either end).
+- **Sabbath:** the only authority is `Calendar`. Overland travel stops at sunset on the sixth day at the exact progress reached and you are put in a camp; no overland start or resume during the Sabbath, and nothing resumes by itself. A boat already at sea keeps sailing; no boat departs on the Sabbath.
+- **Journal map:** the Map tab shows what has been discovered (unknown, rumored, discovered, visited, investigated), with fog over country not yet walked. It cannot move you.
+- **Saves:** version 3 adds `geo` and `travel` blocks; older saves load with defaults. See `docs/w1_playtest.md` for what has and has not been played by a person.
+- **Dev:** `-- --autostart=new --autoplay=w1` plays the whole demonstration through the live game. Other hooks: `--region`, `--loc`, `--clock`, `--journey`, `--ui=strategic|map`, `--travel=<route>`.
+

@@ -93,3 +93,21 @@ Stops: each route lists `stops` (id, distance along route, optional region). The
 ## 9. Acceptance criteria (summary)
 
 See each Beads task. Overall: the 17-step demonstration plays; every item in the brief's test list has a check; existing 1,396 checks still pass; six screenshots reviewed; unplayed features reported.
+
+## 10. As built (changes from the design above)
+
+- **Autoloads:** `World` (geography, regions, discovery, fog) and `Travel` (journeys). `WorldSim.advance()` steps to sunset and
+  midnight and emits `sunset_passed` and `day_rolled`.
+- **Transitions:** `World.go()` stores the destination and emits `transition_requested`; `Game` answers by reloading the scene with
+  `start_request = {"mode": "resume"}` (it ignores the signal when it is not the live scene, which keeps tests safe). Exits keep the player's
+  place along an edge through `entry.span` and `World.entry_offset`.
+- **Budget:** `Travel.run(n)` spends `n` minutes of walking or sailing; overnight rests advance the clock but cost nothing from the
+  budget, so the animated map does not sit through a night. `estimate()` and `estimate_option()` run the same loop on a copy.
+- **Abandon:** the destination is dropped but the protagonist stays at the same place on the road (`World.context = {route, km}`); either end can then be chosen. No distance is gained.
+- **Notices:** `Travel.notice` ("sabbath", "stop", "arrived") is read once by the next scene. Not saved.
+- **Discovery:** `visit()` also makes neighbours "discovered" and learns the roads out of the place. `reveal(place, level, source)` records who told you. A canon event
+  can put a place on the map through `reveal_on` in `geography.json`; canon itself is never touched.
+- **Fog:** `World.explored` holds 4x4-tile blocks the protagonist has seen (sight radius 7 tiles), saved per region. The regional and local map views draw only those.
+- **Saves:** version 3. A real version-1 save from the first milestone is kept as `tests/fixtures/pre_w1_v1_slot.json` and loads.
+- **Dev:** `scripts/dev/autoplay_w1.gd` plays the demonstration through the live game, scene reloads included.
+
