@@ -149,8 +149,12 @@ func test_data() -> void:
 			t.check(FileAccess.file_exists("res://data/dialogue/%s.json" % n["dialogue"]), "yard NPC %s dialogue exists" % n["id"])
 		if n.get("encounter", "") != "":
 			t.check(Combat.has_encounter(n["encounter"]), "yard NPC %s encounter exists" % n["id"])
+	var everyone: Array = actors.duplicate()
+	for rid in World.region_ids():
+		for n in World.region_meta(rid).get("npcs", []):
+			everyone.append(n["id"])
 	for eid in Combat.encounters:
-		t.check(actors.has(Combat.encounters[eid]["actor"]), "encounter %s actor exists in the yard" % eid)
+		t.check(everyone.has(Combat.encounters[eid]["actor"]), "encounter %s actor exists in a region" % eid)
 	t.check(FileAccess.file_exists("res://assets/characters/protagonist_attack.png"), "protagonist attack sheet exists")
 	t.check(FileAccess.file_exists("res://assets/characters/swipe_fx.png"), "swipe effect sheet exists")
 	for st in ["full", "half", "empty"]:

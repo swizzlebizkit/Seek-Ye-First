@@ -1,0 +1,302 @@
+{
+ "id": "road_camp",
+ "name": "Wayside camp: {place}",
+ "kind": "template",
+ "template": true,
+ "note": "Shared by every journey stop that has no hand-built region.",
+ "size": [
+  30,
+  20
+ ],
+ "spawn": [
+  14.5,
+  12.5
+ ],
+ "entries": {
+  "camp": {
+   "tile": [
+    14,
+    12
+   ],
+   "facing": "down"
+  },
+  "arrival": {
+   "tile": [
+    14,
+    12
+   ],
+   "facing": "down"
+  }
+ },
+ "exits": [],
+ "ground": [
+  "cccccccccccccccccccccccccccccc",
+  "cccccccccccccccccccccccccccccc",
+  "cccggggggcggggcggccgcgcccgggcc",
+  "cccgggggggggggggggggggggggggcc",
+  "ccggggggggggggggggggggggggggcc",
+  "ccgggggggggggggggggggggggggccc",
+  "cccgggddddddddddddddddddggggcc",
+  "cccgggddddddddddddddddddggggcc",
+  "ccggggddhhhhhhhhhhhhhhddggggcc",
+  "ddddddddhhhhddddddhhhhdddddddd",
+  "ddddddddhhhhddddddhhhhdddddddd",
+  "ddddddddhhhhddddddhhhhdddddddd",
+  "ccggggddhhhhhhhhhhhhhhddggggcc",
+  "cccgggddddddddddddddddddggggcc",
+  "ccggggddddddddddddddddddgggccc",
+  "ccgggggggggggggggggggggggggccc",
+  "cccggggggggggggggggggggggggccc",
+  "ccccggccggcccgggccgccccgggggcc",
+  "cccccccccccccccccccccccccccccc",
+  "cccccccccccccccccccccccccccccc"
+ ],
+ "ground_legend": {
+  "g": [
+   "grass_0",
+   "grass_0",
+   "grass_0",
+   "grass_1",
+   "grass_1",
+   "grass_2",
+   "grass_2",
+   "grass_2",
+   "grass_1",
+   "grass_flowers"
+  ],
+  "h": [
+   "grass_dry_0",
+   "grass_dry_1"
+  ],
+  "d": [
+   "dirt_0",
+   "dirt_1"
+  ],
+  "p": [
+   "path_0",
+   "path_1"
+  ],
+  "s": [
+   "sand_0",
+   "sand_1"
+  ],
+  "w": [
+   "water_0",
+   "water_1"
+  ],
+  "c": [
+   "cliff_0",
+   "cliff_1"
+  ],
+  "f": [
+   "field_0",
+   "field_1"
+  ]
+ },
+ "objects": [],
+ "props": [
+  {
+   "prop": "clay_oven",
+   "tile": [
+    14,
+    10
+   ]
+  },
+  {
+   "prop": "crate",
+   "tile": [
+    10,
+    8
+   ]
+  },
+  {
+   "prop": "basket",
+   "tile": [
+    19,
+    8
+   ]
+  },
+  {
+   "prop": "jar_large",
+   "tile": [
+    10,
+    12
+   ]
+  },
+  {
+   "prop": "crate",
+   "tile": [
+    19,
+    12
+   ]
+  },
+  {
+   "prop": "olive_tree_a",
+   "tile": [
+    4,
+    5
+   ]
+  },
+  {
+   "prop": "olive_tree_a",
+   "tile": [
+    26,
+    5
+   ]
+  },
+  {
+   "prop": "olive_tree_a",
+   "tile": [
+    4,
+    16
+   ]
+  },
+  {
+   "prop": "olive_tree_a",
+   "tile": [
+    25,
+    16
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    16,
+    5
+   ]
+  },
+  {
+   "prop": "bush_flowers",
+   "tile": [
+    19,
+    15
+   ]
+  },
+  {
+   "prop": "bush_flowers",
+   "tile": [
+    11,
+    5
+   ]
+  },
+  {
+   "prop": "bush_flowers",
+   "tile": [
+    9,
+    15
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    8,
+    3
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    19,
+    5
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    24,
+    4
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    13,
+    15
+   ]
+  },
+  {
+   "prop": "bush_flowers",
+   "tile": [
+    7,
+    3
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    14,
+    16
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    11,
+    15
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    14,
+    3
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    14,
+    4
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    16,
+    16
+   ]
+  }
+ ],
+ "npcs": [],
+ "interactables": [
+  {
+   "type": "waymark",
+   "name": "The road",
+   "tile": [
+    14,
+    7.6
+   ],
+   "radius": 36,
+   "modes": [
+    "land"
+   ],
+   "text": [
+    "{place}. A trodden ring of earth where others have camped before you, a hearth of blackened stones, and the road running on past it in both directions."
+   ]
+  },
+  {
+   "type": "examine",
+   "name": "The hearth",
+   "tile": [
+    14,
+    10.9
+   ],
+   "radius": 34,
+   "variants": [
+    {
+     "when": {
+      "sabbath": true
+     },
+     "text": [
+      "It is the Sabbath. No one lights a fire; the ashes are cold, and the few travelers here sit quietly and wait for the sun to go down."
+     ]
+    },
+    {
+     "text": [
+      "The ashes are warm. It is a place travelers use again and again."
+     ]
+    }
+   ]
+  }
+ ]
+}

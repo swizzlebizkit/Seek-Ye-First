@@ -1,0 +1,715 @@
+{
+ "id": "magdala_shore",
+ "name": "Magdala shore",
+ "kind": "regional",
+ "anchor": "magdala",
+ "origin": "documented",
+ "note": "The shore road and landing just outside Magdala. Only the approach is modelled; the town itself is a later chapter.",
+ "size": [
+  48,
+  34
+ ],
+ "spawn": [
+  6.5,
+  17.5
+ ],
+ "entries": {
+  "from_hills": {
+   "tile": [
+    3,
+    16
+   ],
+   "span": 3,
+   "axis": "y",
+   "facing": "right"
+  },
+  "arrival": {
+   "tile": [
+    28,
+    17
+   ],
+   "span": 1,
+   "axis": "y",
+   "facing": "right"
+  },
+  "camp": {
+   "tile": [
+    27,
+    18
+   ],
+   "facing": "down"
+  }
+ },
+ "exits": [
+  {
+   "id": "to_hills",
+   "rect": [
+    0,
+    16,
+    1,
+    4
+   ],
+   "to": {
+    "region": "galilee_hills",
+    "entry": "from_shore"
+   },
+   "facing": "left"
+  }
+ ],
+ "ground": [
+  "cccccccccccccccccccccccccccccccccccccccccccccccc",
+  "cccccccccccccccccccccccccccccccccccccccccccccccc",
+  "cccccgcgccgccgccccggccgcggggggggssswwwwwwwwwwwcc",
+  "ccggggggggggggggggggggggggggggggssswwwwwwwwwwwcc",
+  "cccgggggggggggggggggggggggggggggssswwwwwwwwwwwcc",
+  "cccgggggggggggggggggggggggggggggssswwwwwwwwwwwcc",
+  "cccgggggggggggggggggggggggggggggssswwwwwwwwwwwcc",
+  "cccgggggggggggggggggggggggggggggssswwwwwwwwwwwcc",
+  "cccgggggggdgggggggdggggggggdggggssswwwwwwwwwwwcc",
+  "ccggggggggdgggggggdgdggggggdgggssswwwwwwwwwwwwcc",
+  "ccggggggggdgggggggddddgggggdgggssswwwwwwwwwwwwcc",
+  "ccggggggggdgggggggdgdggggggdggssswwwwwwwwwwwwwcc",
+  "cchhhhhgggdgggggggdgdggggggdggssswwwwwwwwwwwwwcc",
+  "cccghhggggdgggggggdgdggggggdggssswwwwwwwwwwwwwcc",
+  "ccchhhhgggdgggggggdgdggggggdggssswwwwwwwwwwwwwcc",
+  "cccgggggggdggggdddddddddddgdggssswwwwwwwwwwwwwcc",
+  "dddddddddddddddddddddddddddddddddwwwwwwwwwwwwwcc",
+  "dddddddddddddddddddddddddddddddddpppppppppwwwwcc",
+  "ddddddddddddddddggggggggggdddddddpppppppppwwwwcc",
+  "ddcggggggggggggggggggggggggggggssswwwwwwwwwwwwcc",
+  "cccggggggggggggggggggggggghhhhggssswwwwwwwwwwwcc",
+  "ccgggggggggggggggggggggggghghhhgssswwwwwwwwwwwcc",
+  "ccgggggggggggggggggggggggghghhggssswwwwwwwwwwwcc",
+  "ccggggggggggggggggghghhgggggggggssswwwwwwwwwwwcc",
+  "cccgggggggggggggggghhhhgggggggggssswwwwwwwwwwwcc",
+  "ccgggggggggggggggghhhhhgggggggggssswwwwwwwwwwwcc",
+  "cccgggggggggggggggggggggggggggggssswwwwwwwwwwwcc",
+  "ccggggggggggggggggggggggggggggggssswwwwwwwwwwwcc",
+  "ccgggggggggggggggggggggghhhghggssswwwwwwwwwwwwcc",
+  "ccgggggggggggggggggggggghhghhggssswwwwwwwwwwwwcc",
+  "ccgggggggggggggggggggggghhhhhgssswwwwwwwwwwwwwcc",
+  "cccggggggggcgccgggggggcgccggcgssswwwwwwwwwwwwwcc",
+  "cccccccccccccccccccccccccccccccccccccccccccccccc",
+  "cccccccccccccccccccccccccccccccccccccccccccccccc"
+ ],
+ "ground_legend": {
+  "g": [
+   "grass_0",
+   "grass_0",
+   "grass_0",
+   "grass_1",
+   "grass_1",
+   "grass_2",
+   "grass_2",
+   "grass_2",
+   "grass_1",
+   "grass_flowers"
+  ],
+  "h": [
+   "grass_dry_0",
+   "grass_dry_1"
+  ],
+  "d": [
+   "dirt_0",
+   "dirt_1"
+  ],
+  "p": [
+   "path_0",
+   "path_1"
+  ],
+  "s": [
+   "sand_0",
+   "sand_1"
+  ],
+  "w": [
+   "water_0",
+   "water_1"
+  ],
+  "c": [
+   "cliff_0",
+   "cliff_1"
+  ],
+  "f": [
+   "field_0",
+   "field_1"
+  ]
+ },
+ "objects": [
+  [
+   8,
+   5,
+   "roof_tl"
+  ],
+  [
+   9,
+   5,
+   "roof_t"
+  ],
+  [
+   10,
+   5,
+   "roof_t"
+  ],
+  [
+   11,
+   5,
+   "roof_t"
+  ],
+  [
+   12,
+   5,
+   "roof_tr"
+  ],
+  [
+   8,
+   6,
+   "roof_bl"
+  ],
+  [
+   9,
+   6,
+   "roof_b"
+  ],
+  [
+   10,
+   6,
+   "roof_b"
+  ],
+  [
+   11,
+   6,
+   "roof_b"
+  ],
+  [
+   12,
+   6,
+   "roof_br"
+  ],
+  [
+   8,
+   7,
+   "wall_window"
+  ],
+  [
+   9,
+   7,
+   "wall_stone_b"
+  ],
+  [
+   10,
+   7,
+   "wall_door"
+  ],
+  [
+   11,
+   7,
+   "wall_stone_b"
+  ],
+  [
+   12,
+   7,
+   "wall_window"
+  ],
+  [
+   15,
+   4,
+   "roof_tl"
+  ],
+  [
+   16,
+   4,
+   "roof_t"
+  ],
+  [
+   17,
+   4,
+   "roof_t"
+  ],
+  [
+   18,
+   4,
+   "roof_t"
+  ],
+  [
+   19,
+   4,
+   "roof_t"
+  ],
+  [
+   20,
+   4,
+   "roof_tr"
+  ],
+  [
+   15,
+   5,
+   "roof_l"
+  ],
+  [
+   16,
+   5,
+   "roof_c"
+  ],
+  [
+   17,
+   5,
+   "roof_c"
+  ],
+  [
+   18,
+   5,
+   "roof_c"
+  ],
+  [
+   19,
+   5,
+   "roof_c"
+  ],
+  [
+   20,
+   5,
+   "roof_r"
+  ],
+  [
+   15,
+   6,
+   "roof_bl"
+  ],
+  [
+   16,
+   6,
+   "roof_b"
+  ],
+  [
+   17,
+   6,
+   "roof_b"
+  ],
+  [
+   18,
+   6,
+   "roof_b"
+  ],
+  [
+   19,
+   6,
+   "roof_b"
+  ],
+  [
+   20,
+   6,
+   "roof_br"
+  ],
+  [
+   15,
+   7,
+   "wall_stone"
+  ],
+  [
+   16,
+   7,
+   "wall_window"
+  ],
+  [
+   17,
+   7,
+   "wall_stone"
+  ],
+  [
+   18,
+   7,
+   "wall_door"
+  ],
+  [
+   19,
+   7,
+   "wall_stone_b"
+  ],
+  [
+   20,
+   7,
+   "wall_stone"
+  ],
+  [
+   26,
+   5,
+   "roof_tl"
+  ],
+  [
+   27,
+   5,
+   "roof_t"
+  ],
+  [
+   28,
+   5,
+   "roof_t"
+  ],
+  [
+   29,
+   5,
+   "roof_t"
+  ],
+  [
+   30,
+   5,
+   "roof_tr"
+  ],
+  [
+   26,
+   6,
+   "roof_bl"
+  ],
+  [
+   27,
+   6,
+   "roof_b"
+  ],
+  [
+   28,
+   6,
+   "roof_b"
+  ],
+  [
+   29,
+   6,
+   "roof_b"
+  ],
+  [
+   30,
+   6,
+   "roof_br"
+  ],
+  [
+   26,
+   7,
+   "wall_stone"
+  ],
+  [
+   27,
+   7,
+   "wall_door"
+  ],
+  [
+   28,
+   7,
+   "wall_stone"
+  ],
+  [
+   29,
+   7,
+   "wall_window"
+  ],
+  [
+   30,
+   7,
+   "wall_stone_b"
+  ]
+ ],
+ "props": [
+  {
+   "prop": "jar_large",
+   "tile": [
+    31,
+    14
+   ]
+  },
+  {
+   "prop": "basket",
+   "tile": [
+    30,
+    14
+   ]
+  },
+  {
+   "prop": "crate",
+   "tile": [
+    32,
+    20
+   ]
+  },
+  {
+   "prop": "basket",
+   "tile": [
+    31,
+    20
+   ]
+  },
+  {
+   "prop": "jar_large",
+   "tile": [
+    29,
+    21
+   ]
+  },
+  {
+   "prop": "olive_tree_b",
+   "tile": [
+    5,
+    24
+   ]
+  },
+  {
+   "prop": "olive_tree_a",
+   "tile": [
+    10,
+    26
+   ]
+  },
+  {
+   "prop": "olive_tree_b",
+   "tile": [
+    16,
+    24
+   ]
+  },
+  {
+   "prop": "olive_tree_a",
+   "tile": [
+    23,
+    27
+   ]
+  },
+  {
+   "prop": "olive_tree_b",
+   "tile": [
+    4,
+    12
+   ]
+  },
+  {
+   "prop": "signpost",
+   "tile": [
+    7,
+    16
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    18,
+    26
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    13,
+    22
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    8,
+    14
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    17,
+    13
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    12,
+    24
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    12,
+    13
+   ]
+  },
+  {
+   "prop": "bush_flowers",
+   "tile": [
+    14,
+    13
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    25,
+    22
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    9,
+    29
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    15,
+    11
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    20,
+    28
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    11,
+    28
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    13,
+    27
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    7,
+    26
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    8,
+    10
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    24,
+    4
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    12,
+    25
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    29,
+    23
+   ]
+  },
+  {
+   "prop": "bush_flowers",
+   "tile": [
+    5,
+    25
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    23,
+    23
+   ]
+  },
+  {
+   "prop": "bush_flowers",
+   "tile": [
+    9,
+    12
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    12,
+    30
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    4,
+    28
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    19,
+    24
+   ]
+  }
+ ],
+ "npcs": [],
+ "interactables": [
+  {
+   "type": "waymark",
+   "name": "Road marker",
+   "tile": [
+    7,
+    15
+   ],
+   "radius": 34,
+   "modes": [
+    "land"
+   ],
+   "text": [
+    "A squared milestone. The road west climbs back into the hills; the lake road runs along the shore from here to Capernaum in one direction and Tiberias in the other."
+   ]
+  },
+  {
+   "type": "waymark",
+   "name": "The landing",
+   "tile": [
+    38,
+    16.2
+   ],
+   "radius": 38,
+   "modes": [
+    "water"
+   ],
+   "text": [
+    "Boats are drawn up on the sand, and a few rest at the end of the pier, tarred and patched.",
+    "Fishermen will carry a passenger across the water for a small fee, when the weather lets them."
+   ]
+  },
+  {
+   "type": "examine",
+   "name": "Magdala",
+   "tile": [
+    20,
+    10.5
+   ],
+   "radius": 38,
+   "text": [
+    "The houses of Magdala run along the shore a little farther on, where the lane bends. Drying racks for salted fish stand between them.",
+    "[The town itself is not yet part of the road.]"
+   ]
+  },
+  {
+   "type": "examine",
+   "name": "The lake",
+   "tile": [
+    35,
+    24
+   ],
+   "radius": 44,
+   "text": [
+    "The lake lies flat and bright. Across the water, the far hills are blue. A boat is working its way back with the wind behind it."
+   ]
+  }
+ ]
+}

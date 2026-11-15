@@ -209,15 +209,24 @@ interactables = [
          {"when": {"flag": "road_east_ready"},
           "text": ["The road east drops out of the hills toward the Jordan valley.",
                    "You cannot stop thinking about what you have heard. You mean to see it for yourself.",
-                   "[Prototype boundary] The road to the Jordan opens in Milestone 2."],
+                   "The road is open."],
           "effects": [{"journal": "obs_decision"}]},
          {"text": ["A weathered signpost. The road east leads down toward the Jordan valley.",
                    "You have no particular reason to go that way. Not yet."]},
      ]},
 ]
 
+# --- the east road leaves the village (W1): a gap in the boundary cliffs where the road runs out ----
+for yy in range(12, 16):
+    for xx in (38, 39):
+        ground[yy][xx] = "d"
+
 region = {
     "id": "kefar_zayit",
+    "kind": "local",
+    "anchor": "kefar_zayit",
+    "entries": {"from_hills": {"tile": [36, 13], "span": 1, "axis": "y", "facing": "left"}},
+    "exits": [{"id": "east_road", "rect": [39, 12, 1, 4], "to": {"region": "galilee_hills", "entry": "from_village"}, "facing": "right"}],
     "name": "Kefar Zayit",
     "origin": "fiction",
     "note": "An invented Galilean village; no canonical event occurs here.",

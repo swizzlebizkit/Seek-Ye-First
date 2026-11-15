@@ -6,8 +6,10 @@ signal mode_changed(mode: int)
 signal flag_changed(flag: String, value: bool)
 signal inventory_changed
 signal toast(text: String)
+## A waymark or landing asks for the strategic map; `modes` limits which routes it offers.
+signal map_requested(modes: Array)
 
-enum Mode { MENU, EXPLORE, DIALOGUE, JOURNAL, PAUSED, EQUIPMENT, DEFEAT }
+enum Mode { MENU, EXPLORE, DIALOGUE, JOURNAL, PAUSED, EQUIPMENT, DEFEAT, MAP }
 
 var mode: int = Mode.MENU:
 	set(value):
@@ -54,6 +56,8 @@ func new_game() -> void:
 	PlayerKnowledge.reset()
 	CanonicalTimeline.reset()
 	WorldSim.reset()
+	World.reset()
+	Travel.reset()
 	Combat.reset()
 	Equipment.reset()
 	# The Baptist's ministry is already under way when the prologue opens.
@@ -107,7 +111,9 @@ func item_count(id: String) -> int:
 
 
 func place_name() -> String:
-	return "Training Yard (dev)" if region_id == "training_yard" else "Kefar Zayit"
+	if region_id == "training_yard":
+		return "Training Yard (dev)"
+	return World.region_name(region_id)
 
 
 func item_name(id: String) -> String:
@@ -155,6 +161,20 @@ func check(cond: Dictionary) -> bool:
 			"day_phase":
 				if Calendar.current_phase() != str(v):
 					return false
+			"time_of_day":
+				# {"from": minute, "to": minute}; a window that crosses midnight is fine
+				var now := WorldSim.minute_of_day
+				var a := float(v["from"])
+				var b := float(v["to"])
+				if not ((now >= a and now < b) if a <= b else (now >= a or now < b)):
+					return false
+			"place_known":
+				if not World.knows_place(v["place"], v.get("level", "rumored")):
+					return false
+			"landmark":
+				for l in _as_array(v):
+					if not World.landmarks_found.get(l, false):
+						return false
 			"quest_active":
 				if not Quests.is_active(v):
 					return false

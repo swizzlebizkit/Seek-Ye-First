@@ -1,5 +1,34 @@
 {
  "id": "kefar_zayit",
+ "kind": "local",
+ "anchor": "kefar_zayit",
+ "entries": {
+  "from_hills": {
+   "tile": [
+    36,
+    13
+   ],
+   "span": 1,
+   "axis": "y",
+   "facing": "left"
+  }
+ },
+ "exits": [
+  {
+   "id": "east_road",
+   "rect": [
+    39,
+    12,
+    1,
+    4
+   ],
+   "to": {
+    "region": "galilee_hills",
+    "entry": "from_village"
+   },
+   "facing": "right"
+  }
+ ],
  "name": "Kefar Zayit",
  "origin": "fiction",
  "note": "An invented Galilean village; no canonical event occurs here.",
@@ -24,10 +53,10 @@
   "cccggggdggggdddggggddggggdgggggdddgggccc",
   "ccgggggdgggggdggghgddggggdgggggdddggggcc",
   "cccggggdgggggdggpppppppphdhgggggdggggccc",
-  "cccggggdgggggdggppppppppgdhghhggdgggggcc",
-  "ccgdddddddddddddppppppppddddddddddddddcc",
-  "ccgdddddddddddddppppppppddddddddddddddcc",
-  "ccggggggggggggggppppppppgggghghhggggggcc",
+  "cccggggdgggggdggppppppppgdhghhggdgggggdd",
+  "ccgdddddddddddddppppppppdddddddddddddddd",
+  "ccgdddddddddddddppppppppdddddddddddddddd",
+  "ccggggggggggggggppppppppgggghghhggggggdd",
   "cccgggggggggggggppppppppgggggggggggggccc",
   "cccsswwwssgggggggggddggggggggggggggggccc",
   "cccswwwwwsgggggggggddggggggggggggggggccc",
@@ -1308,7 +1337,7 @@
      "text": [
       "The road east drops out of the hills toward the Jordan valley.",
       "You cannot stop thinking about what you have heard. You mean to see it for yourself.",
-      "[Prototype boundary] The road to the Jordan opens in Milestone 2."
+      "The road is open."
      ],
      "effects": [
       {

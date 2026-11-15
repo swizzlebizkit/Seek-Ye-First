@@ -3,6 +3,9 @@ extends Node
 ## fictional events. Milestone 1 keeps this lightweight: a day/time clock only. NPC wandering
 ## lives in the Npc entity for now and will move under this system as schedules arrive.
 
+signal sunset_passed(day: int)
+signal day_rolled(day: int)
+
 const GAME_MINUTES_PER_REAL_SECOND := 0.5
 
 var day := 1
@@ -12,10 +15,36 @@ var minute_of_day := 7.0 * 60.0
 func _process(delta: float) -> void:
 	if GameState.mode != GameState.Mode.EXPLORE:
 		return
-	minute_of_day += delta * GAME_MINUTES_PER_REAL_SECOND
-	while minute_of_day >= 1440.0:
-		minute_of_day -= 1440.0
-		day += 1
+	advance(delta * GAME_MINUTES_PER_REAL_SECOND)
+
+
+## Moves the clock forward without ever stepping over a boundary: each step stops exactly at sunset
+## and at midnight, and announces it. Travel, rests and the real-time clock all go through here, so a
+## big jump cannot skip the start of a Sabbath, a new day, or a new month or year.
+func advance(minutes: float) -> void:
+	var left := minutes
+	while left > 0.0:
+		var sunset := float(Calendar.sunset_for(day))
+		var step := minf(left, 1440.0 - minute_of_day)
+		var hits_sunset := minute_of_day < sunset and minute_of_day + step >= sunset
+		if hits_sunset:
+			step = sunset - minute_of_day
+		minute_of_day = sunset if hits_sunset else minute_of_day + step
+		left -= step
+		if hits_sunset:
+			sunset_passed.emit(day)
+		if minute_of_day >= 1440.0:
+			minute_of_day -= 1440.0
+			day += 1
+			day_rolled.emit(day)
+
+
+## Minutes from now until the next sunset (the day number and the Sabbath both turn over there).
+func minutes_to_sunset() -> float:
+	var sunset := float(Calendar.sunset_for(day))
+	if minute_of_day < sunset:
+		return sunset - minute_of_day
+	return 1440.0 - minute_of_day + float(Calendar.sunset_for(day + 1))
 
 
 func time_string() -> String:

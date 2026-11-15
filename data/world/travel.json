@@ -1,0 +1,23 @@
+{
+  "_note": "Gameplay travel rules, not historical measurements. Speeds are kilometres per game hour; minutes are game minutes after midnight.",
+  "land": {
+    "speed_kmh": 4.0,
+    "window_start": 360,
+    "window_end": "sunset",
+    "start_on_sabbath": false,
+    "continue_on_sabbath": false,
+    "stop_region": "road_camp"
+  },
+  "water": {
+    "speed_kmh": 6.0,
+    "window_start": 0,
+    "window_end": 1440,
+    "start_on_sabbath": false,
+    "continue_on_sabbath": true,
+    "stop_region": "road_camp"
+  },
+  "arrival_region": "outskirts",
+  "chunk_max_minutes": 120,
+  "animation_minutes_per_second": 120,
+  "max_catchup_days": 30
+}

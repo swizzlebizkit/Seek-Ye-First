@@ -49,6 +49,11 @@ static func run(e: Dictionary) -> void:
 	if e.has("actor"):
 		var a: Dictionary = e["actor"]
 		Combat.command_actor(a["id"], a["command"])
+	if e.has("landmark"):
+		World.find_landmark(e["landmark"])
+	if e.has("reveal_place"):
+		var rp: Dictionary = e["reveal_place"]
+		World.reveal(rp["place"], rp.get("level", "rumored"))
 	if e.has("knowledge"):
 		var k: Dictionary = e["knowledge"]
 		PlayerKnowledge.learn(k["event"], k["level"], k.get("source", ""))

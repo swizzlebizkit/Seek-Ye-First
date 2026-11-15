@@ -4,7 +4,7 @@ extends Node
 ## mid-save cannot corrupt an existing slot.
 
 const SLOTS := 3
-const VERSION := 2
+const VERSION := 3
 
 ## Overridden by tests so they never touch real saves.
 var save_dir := "user://saves"
@@ -81,6 +81,8 @@ func save_slot(slot: int) -> bool:
 		"world": WorldSim.serialize(),
 		"equipment": Equipment.serialize(),
 		"combat": Combat.serialize(),
+		"geo": World.serialize(),
+		"travel": Travel.serialize(),
 	}
 	var path := slot_path(slot)
 	var tmp := path + ".tmp"
@@ -113,6 +115,9 @@ func load_slot(slot: int) -> bool:
 	# Saves from before version 2 have neither block: defaults apply.
 	Equipment.deserialize(data.get("equipment", {}))
 	Combat.deserialize(data.get("combat", {}))
+	# Saves from before version 3 have no map knowledge or journey: start-of-game defaults apply.
+	World.deserialize(data.get("geo", {}))
+	Travel.deserialize(data.get("travel", {}))
 	return true
 
 

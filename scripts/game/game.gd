@@ -12,7 +12,9 @@ var hud: Hud
 func _ready() -> void:
 	var request := GameState.start_request
 	var is_new := true
-	if request.get("mode", "new") == "load":
+	if request.get("mode", "new") == "resume":
+		is_new = false  # a region change: every autoload already holds the game
+	elif request.get("mode", "new") == "load":
 		if SaveManager.load_slot(int(request["slot"])):
 			is_new = false
 		else:
@@ -30,10 +32,12 @@ func _ready() -> void:
 	player = Player.new()
 	player.name = "Player"
 	region.entities.add_child(player)
-	if GameState.has_saved_position:
+	if GameState.has_saved_position and region.is_walkable_px(GameState.player_pos):
 		player.teleport(GameState.player_pos, GameState.player_facing)
+	elif region.has_entry(World.entry_id):
+		player.teleport(region.entry_position(World.entry_id), region.entry_facing(World.entry_id))
 	else:
-		player.teleport(region.spawn_position(), "down")
+		player.teleport(region.spawn_position(), "down")  # new game, or a saved spot that is no longer valid
 
 	var camera := Camera2D.new()
 	camera.zoom = Vector2(2, 2)
@@ -53,12 +57,22 @@ func _ready() -> void:
 	hud.load_requested.connect(_load_from)
 	hud.quit_requested.connect(_quit_to_menu)
 	Combat.player_defeated.connect(_on_player_defeated)
+	World.transition_requested.connect(_on_transition)
 	hud.defeat_continue.connect(recover_from_defeat)
 
 	GameState.mode = GameState.Mode.EXPLORE
 	if is_new and request.get("mode", "new") != "training":
 		DialogueRunner.start("narration_intro")
 	DevHooks.apply(self)
+
+
+## Leaving through an exit (or stopping on a journey) rebuilds the scene around the new region.
+func _on_transition(_region: String, _entry: String) -> void:
+	if get_tree().current_scene != self:
+		return  # not the live game (e.g. under test)
+	GameState.start_request = {"mode": "resume"}
+	GameState.mode = GameState.Mode.EXPLORE
+	get_tree().reload_current_scene()
 
 
 func _unhandled_input(event: InputEvent) -> void:

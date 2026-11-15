@@ -4,6 +4,8 @@ extends Node
 ## This is separate from the Canonical Timeline (what happened) and from what the human player
 ## already knows. An event can have occurred without the protagonist knowing anything about it.
 
+signal learned(event_id: String, level: String)
+
 const LEVELS := ["unknown", "rumor", "testimony", "witnessed"]
 
 var _facts: Dictionary = {}  # event_id -> {"level": String, "sources": [String]}
@@ -23,6 +25,7 @@ func learn(event_id: String, level: String, source: String = "") -> void:
 	if source != "" and not fact["sources"].has(source):
 		fact["sources"].append(source)
 	_facts[event_id] = fact
+	learned.emit(event_id, fact["level"])
 
 
 func level_of(event_id: String) -> String:

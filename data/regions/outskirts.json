@@ -1,0 +1,407 @@
+{
+ "id": "outskirts",
+ "name": "Outskirts of {place}",
+ "kind": "template",
+ "template": true,
+ "note": "Shared arrival scene for any location that has no hand-built region yet.",
+ "size": [
+  34,
+  22
+ ],
+ "spawn": [
+  8.5,
+  11.5
+ ],
+ "entries": {
+  "arrival": {
+   "tile": [
+    6,
+    11
+   ],
+   "facing": "right"
+  },
+  "camp": {
+   "tile": [
+    6,
+    11
+   ],
+   "facing": "right"
+  }
+ },
+ "exits": [],
+ "ground": [
+  "cccccccccccccccccccccccccccccccccc",
+  "cccccccccccccccccccccccccccccccccc",
+  "cccgggcgcggcggccgcggcccgcgccggcgcc",
+  "cccgggggggggggggggggggggggggggggcc",
+  "ccggggggggggggggggggggggggggggggcc",
+  "ccggggggggggggggggggggggggggggggcc",
+  "ccggggggggggggpppppppppggggggggccc",
+  "cccgggggggggggpppppppppgggggggggcc",
+  "ccggggggggggggpppppppppggggggggccc",
+  "cccgggggggggggpppppppppggggggggccc",
+  "ddddddddddddddpppppppppddddddddddd",
+  "ddddddddddddddpppppppppddddddddddd",
+  "ddddddddddddddpppppppppddddddddddd",
+  "ccggggggggggggpppppppppggggggggccc",
+  "ccggggggggggggpppppppppggggggggccc",
+  "ccggggggggggggpppppppppgggggggggcc",
+  "cccgggggggggggggggggggggggggggggcc",
+  "cccgggggggggggggggggggggggggggggcc",
+  "ccgggggggggggggggggggggggggggggccc",
+  "ccgccggccgcgggcccgcgggcgcggggcggcc",
+  "cccccccccccccccccccccccccccccccccc",
+  "cccccccccccccccccccccccccccccccccc"
+ ],
+ "ground_legend": {
+  "g": [
+   "grass_0",
+   "grass_0",
+   "grass_0",
+   "grass_1",
+   "grass_1",
+   "grass_2",
+   "grass_2",
+   "grass_2",
+   "grass_1",
+   "grass_flowers"
+  ],
+  "h": [
+   "grass_dry_0",
+   "grass_dry_1"
+  ],
+  "d": [
+   "dirt_0",
+   "dirt_1"
+  ],
+  "p": [
+   "path_0",
+   "path_1"
+  ],
+  "s": [
+   "sand_0",
+   "sand_1"
+  ],
+  "w": [
+   "water_0",
+   "water_1"
+  ],
+  "c": [
+   "cliff_0",
+   "cliff_1"
+  ],
+  "f": [
+   "field_0",
+   "field_1"
+  ]
+ },
+ "objects": [
+  [
+   13,
+   3,
+   "wall_stone"
+  ],
+  [
+   13,
+   2,
+   "roof_b"
+  ],
+  [
+   14,
+   3,
+   "wall_stone"
+  ],
+  [
+   14,
+   2,
+   "roof_b"
+  ],
+  [
+   15,
+   3,
+   "wall_stone"
+  ],
+  [
+   15,
+   2,
+   "roof_b"
+  ],
+  [
+   16,
+   3,
+   "wall_stone"
+  ],
+  [
+   16,
+   2,
+   "roof_b"
+  ],
+  [
+   19,
+   3,
+   "wall_stone"
+  ],
+  [
+   19,
+   2,
+   "roof_b"
+  ],
+  [
+   20,
+   3,
+   "wall_stone"
+  ],
+  [
+   20,
+   2,
+   "roof_b"
+  ],
+  [
+   21,
+   3,
+   "wall_stone"
+  ],
+  [
+   21,
+   2,
+   "roof_b"
+  ],
+  [
+   22,
+   3,
+   "wall_stone"
+  ],
+  [
+   22,
+   2,
+   "roof_b"
+  ],
+  [
+   23,
+   3,
+   "wall_stone"
+  ],
+  [
+   23,
+   2,
+   "roof_b"
+  ],
+  [
+   17,
+   3,
+   "wall_door"
+  ],
+  [
+   18,
+   3,
+   "wall_door"
+  ]
+ ],
+ "props": [
+  {
+   "prop": "olive_tree_b",
+   "tile": [
+    6,
+    5
+   ]
+  },
+  {
+   "prop": "olive_tree_b",
+   "tile": [
+    28,
+    5
+   ]
+  },
+  {
+   "prop": "olive_tree_b",
+   "tile": [
+    6,
+    17
+   ]
+  },
+  {
+   "prop": "olive_tree_b",
+   "tile": [
+    28,
+    17
+   ]
+  },
+  {
+   "prop": "well",
+   "tile": [
+    21,
+    8
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    8,
+    3
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    11,
+    18
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    22,
+    18
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    13,
+    5
+   ]
+  },
+  {
+   "prop": "bush_flowers",
+   "tile": [
+    12,
+    5
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    20,
+    17
+   ]
+  },
+  {
+   "prop": "bush_flowers",
+   "tile": [
+    29,
+    18
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    22,
+    16
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    25,
+    18
+   ]
+  },
+  {
+   "prop": "bush_flowers",
+   "tile": [
+    15,
+    18
+   ]
+  },
+  {
+   "prop": "bush_flowers",
+   "tile": [
+    30,
+    3
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    4,
+    16
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    6,
+    18
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    8,
+    18
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    23,
+    16
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    25,
+    4
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    21,
+    5
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    18,
+    5
+   ]
+  }
+ ],
+ "npcs": [],
+ "interactables": [
+  {
+   "type": "waymark",
+   "name": "Road marker",
+   "tile": [
+    8,
+    9.2
+   ],
+   "radius": 36,
+   "modes": [
+    "land",
+    "water"
+   ],
+   "text": [
+    "You are on the approach to {place}. The roads you know lead on from here."
+   ]
+  },
+  {
+   "type": "examine",
+   "name": "The way into {place}",
+   "tile": [
+    17.5,
+    4.2
+   ],
+   "radius": 44,
+   "text": [
+    "The gate of {place} stands before you; the sounds of people and animals drift out from within.",
+    "[The streets of {place} are not yet part of this journey. This is as far as the road goes for now.]"
+   ]
+  },
+  {
+   "type": "examine",
+   "name": "The well",
+   "tile": [
+    21,
+    8.7
+   ],
+   "radius": 36,
+   "text": [
+    "A well with a stone curb, shared by everyone who comes to {place} by this road."
+   ]
+  }
+ ]
+}

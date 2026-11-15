@@ -1,0 +1,707 @@
+{
+ "id": "galilee_hills",
+ "name": "The hills above the lake",
+ "kind": "regional",
+ "anchor": "kefar_zayit",
+ "origin": "fiction",
+ "note": "An invented stretch of lower-Galilean countryside on the way from Kefar Zayit to Magdala.",
+ "size": [
+  64,
+  44
+ ],
+ "spawn": [
+  36.5,
+  22.5
+ ],
+ "entries": {
+  "from_village": {
+   "tile": [
+    3,
+    21
+   ],
+   "span": 3,
+   "axis": "y",
+   "facing": "right"
+  },
+  "from_shore": {
+   "tile": [
+    60,
+    21
+   ],
+   "span": 3,
+   "axis": "y",
+   "facing": "left"
+  },
+  "camp": {
+   "tile": [
+    34,
+    23
+   ],
+   "facing": "down"
+  }
+ },
+ "exits": [
+  {
+   "id": "to_village",
+   "rect": [
+    0,
+    21,
+    1,
+    4
+   ],
+   "to": {
+    "region": "kefar_zayit",
+    "entry": "from_hills"
+   },
+   "facing": "left"
+  },
+  {
+   "id": "to_shore",
+   "rect": [
+    63,
+    21,
+    1,
+    4
+   ],
+   "to": {
+    "region": "magdala_shore",
+    "entry": "from_hills"
+   },
+   "facing": "right"
+  }
+ ],
+ "ground": [
+  "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+  "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+  "ccggcgccggcgccgggccswwssggccgggcgggggcgcggccgggcgcgggccccgccgccc",
+  "cccggggggggggggggggswwssggghghghggggggggggggggggggggggggggggggcc",
+  "ccggggggggggggggggggswwssgghhhhhgggggghhhhhhhgggggggggggggggggcc",
+  "ccgggggggggggghhggggswwssgghhhghgggggghhppphhgggggggggggggggggcc",
+  "cccgcggccccccccchhhgswwssggggggggggggghhppphhgggggggggggggggggcc",
+  "ccgggcccccccccccghhgswwssggggggggggggghhppphhgggcccgggccgcgggccc",
+  "ccggcccccccccccgggggswwssggggggggggggdhhhhhhhggggccccccccccggccc",
+  "cccggcccccccccccggggswwssgggggggggggdddgggggggggccccccccccggggcc",
+  "ccgggcccccccccccgggswwssggggggggggggddggggggggggcccccccccccgggcc",
+  "cccgccccccccccccgggswwssggggggggggggddgggggggggggccccccccccgggcc",
+  "cccgccgcgccgcccgggswwssgggggggggggggddgghhggggggcgcgcgcccgggggcc",
+  "cccgggggggggggggggswwssgggggggggggggddhhhgggggggggggggggggggggcc",
+  "ccgggggggggggggggswwssgggggggggggggdddhhhhgggggggggggggggggggccc",
+  "cccggggggggggggggswwssggggggggggggggdgggggggggggggggggggggggggcc",
+  "ccggggggggggggggswwsshggggggggggggggdggggggggggggggggggggggggccc",
+  "ccggggggggggggggswwsshggggggggggggghdghhggggggggggggggggggggggcc",
+  "cccgggggggggggggswwsshgggggggghhhhhhdhhhggggggggggggggghghhhggcc",
+  "cccgggggggggggggpppdddddddddgghhghhhdhghggggggggggggggghghhhggcc",
+  "cccggggggggddddddddddddddddddddddddddddgggggggggggggggghhhhhggcc",
+  "dddddddddddddddddddddddddddddddddddddddddddggggggggggggggggddddd",
+  "ddddddddddddddddddddppgggggddddddddddddddddddddddddddddddddddddd",
+  "ddddddddddddgggggpppppggggggggggggghhhdddddddddddddddddddddddddd",
+  "ddcggggggggggggggswwssggggggggggggghhhhhggdddddddddddddddddghgdd",
+  "ccggggggggggggggggswwssgggggggggggggggggggggggdggggggggggggggccc",
+  "ccghhhhgggggggggggswwssgggggggggggggggggggggggdgggggggggggggggcc",
+  "ccgghhhggggggggggggswwssggggggggggggggggggggggdggggggggggggggccc",
+  "ccgghhhggggggggggggswwssggggggggggggggggggggggdggggggggggggggccc",
+  "ccggggggggggggggggggswwsscccgccgggggggggggggggdgggggcgcgcggccgcc",
+  "cccgggggggggggggggggswwsscccccggggggggggggggggdgggggcccccccccgcc",
+  "ccggggggggggggggggggswwscccccccggggggggggggggdddgggggcccccccgccc",
+  "ccggggggggggggggggggswwsccccccgggggggggggggggddggggggcccccccgccc",
+  "cccgggggggggggggggggswwsccccccggggggggghghhgddgggggggccccccccccc",
+  "cccggggggggggggggghhswwsscccccgghhhhhgghhghgddggggggcccccccccccc",
+  "cchhhghggggggggggghswwsscccccccgghggggghhhgddgggggggggccggcccccc",
+  "ccghhghggggggggggggswwsscccccccghhhhhgggggdddggggggggggggggggccc",
+  "cchhhhggggggggggggswwsshggcccccgggggggggddddggggggggggggggggggcc",
+  "ccggggggggggggggggswwsshgggggggggggggggdddggggggggggggggggggggcc",
+  "cccggggggggggggggswwssghggggggggggggggggdgggggggggggggggggggggcc",
+  "cccggggggggggggggswwssgggggggggggswwwsgggggggggggggggggggggggccc",
+  "ccgcgccggcccgggccswwsscgccccgccccswwwscgccccgcccccgggcggcgcggccc",
+  "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+  "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+ ],
+ "ground_legend": {
+  "g": [
+   "grass_0",
+   "grass_0",
+   "grass_0",
+   "grass_1",
+   "grass_1",
+   "grass_2",
+   "grass_2",
+   "grass_2",
+   "grass_1",
+   "grass_flowers"
+  ],
+  "h": [
+   "grass_dry_0",
+   "grass_dry_1"
+  ],
+  "d": [
+   "dirt_0",
+   "dirt_1"
+  ],
+  "p": [
+   "path_0",
+   "path_1"
+  ],
+  "s": [
+   "sand_0",
+   "sand_1"
+  ],
+  "w": [
+   "water_0",
+   "water_1"
+  ],
+  "c": [
+   "cliff_0",
+   "cliff_1"
+  ],
+  "f": [
+   "field_0",
+   "field_1"
+  ]
+ },
+ "objects": [],
+ "props": [
+  {
+   "prop": "olive_tree_b",
+   "tile": [
+    10,
+    18
+   ]
+  },
+  {
+   "prop": "olive_tree_a",
+   "tile": [
+    13,
+    26
+   ]
+  },
+  {
+   "prop": "olive_tree_b",
+   "tile": [
+    17,
+    17
+   ]
+  },
+  {
+   "prop": "olive_tree_a",
+   "tile": [
+    28,
+    25
+   ]
+  },
+  {
+   "prop": "olive_tree_b",
+   "tile": [
+    31,
+    17
+   ]
+  },
+  {
+   "prop": "olive_tree_a",
+   "tile": [
+    40,
+    26
+   ]
+  },
+  {
+   "prop": "olive_tree_b",
+   "tile": [
+    50,
+    19
+   ]
+  },
+  {
+   "prop": "olive_tree_a",
+   "tile": [
+    55,
+    26
+   ]
+  },
+  {
+   "prop": "olive_tree_b",
+   "tile": [
+    7,
+    27
+   ]
+  },
+  {
+   "prop": "cypress",
+   "tile": [
+    38,
+    4
+   ]
+  },
+  {
+   "prop": "cypress",
+   "tile": [
+    44,
+    5
+   ]
+  },
+  {
+   "prop": "cypress",
+   "tile": [
+    39,
+    9
+   ]
+  },
+  {
+   "prop": "cypress",
+   "tile": [
+    35,
+    12
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    41,
+    5
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    42,
+    6
+   ]
+  },
+  {
+   "prop": "signpost",
+   "tile": [
+    35,
+    19
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    17,
+    30
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    56,
+    18
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    3,
+    27
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    7,
+    40
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    48,
+    19
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    37,
+    39
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    37,
+    25
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    27,
+    26
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    27,
+    15
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    41,
+    3
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    44,
+    38
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    53,
+    16
+   ]
+  },
+  {
+   "prop": "bush_flowers",
+   "tile": [
+    10,
+    4
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    52,
+    25
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    33,
+    29
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    56,
+    20
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    34,
+    18
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    27,
+    6
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    21,
+    17
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    8,
+    16
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    25,
+    18
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    30,
+    4
+   ]
+  },
+  {
+   "prop": "bush_flowers",
+   "tile": [
+    6,
+    20
+   ]
+  },
+  {
+   "prop": "bush_flowers",
+   "tile": [
+    25,
+    8
+   ]
+  },
+  {
+   "prop": "bush_flowers",
+   "tile": [
+    24,
+    12
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    15,
+    32
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    60,
+    3
+   ]
+  },
+  {
+   "prop": "bush_flowers",
+   "tile": [
+    58,
+    26
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    31,
+    14
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    44,
+    40
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    3,
+    39
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    4,
+    30
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    49,
+    15
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    5,
+    18
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    32,
+    6
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    24,
+    10
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    12,
+    39
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    36,
+    28
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    5,
+    15
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    5,
+    4
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    56,
+    39
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    35,
+    35
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    12,
+    29
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    48,
+    36
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    4,
+    15
+   ]
+  },
+  {
+   "prop": "bush_flowers",
+   "tile": [
+    53,
+    38
+   ]
+  }
+ ],
+ "npcs": [
+  {
+   "id": "hills_highwayman",
+   "name": "Highwayman",
+   "sprite": "highwayman",
+   "profile": "highwayman",
+   "dialogue": "",
+   "encounter": "hills_highwayman",
+   "tile": [
+    41.5,
+    37.5
+   ],
+   "wander": 0,
+   "facing": "up",
+   "when": {
+    "time_of_day": {
+     "from": 360,
+     "to": 1080
+    }
+   }
+  }
+ ],
+ "interactables": [
+  {
+   "type": "waymark",
+   "name": "Road marker",
+   "tile": [
+    35,
+    20
+   ],
+   "radius": 34,
+   "modes": [
+    "land"
+   ],
+   "text": [
+    "A squared stone at the meeting of the roads, its top worn smooth by travelers' hands.",
+    "West, the road runs back to Kefar Zayit. East, it falls toward the lake and Magdala. From there, other roads lead on."
+   ]
+  },
+  {
+   "type": "examine",
+   "name": "The shepherds' cairn",
+   "tile": [
+    41,
+    7
+   ],
+   "radius": 38,
+   "variants": [
+    {
+     "when": {
+      "not_flag": "saw_cairn"
+     },
+     "text": [
+      "A heap of fieldstones taller than a man, each one laid by a passing shepherd for luck or for a landmark.",
+      "From up here the land opens out. East, beyond the hills, the lake lies like a dropped blue coin. Smoke rises from the fishing towns on its shore."
+     ],
+     "effects": [
+      {
+       "landmark": "shepherds_cairn"
+      },
+      {
+       "set_flag": "saw_cairn"
+      },
+      {
+       "reveal_place": {
+        "place": "tiberias",
+        "level": "discovered"
+       }
+      },
+      {
+       "reveal_place": {
+        "place": "capernaum",
+        "level": "rumored"
+       }
+      }
+     ]
+    },
+    {
+     "text": [
+      "The shepherds' cairn. Someone has added a stone since you were last here."
+     ]
+    }
+   ]
+  },
+  {
+   "type": "examine",
+   "name": "The spring",
+   "tile": [
+    35,
+    39
+   ],
+   "radius": 34,
+   "text": [
+    "A spring seeps from the foot of the rocks into a clear pool. The ground around it is trodden by sheep and, you think, by people who prefer not to be seen."
+   ]
+  },
+  {
+   "type": "examine",
+   "name": "The ford",
+   "tile": [
+    20,
+    21.5
+   ],
+   "radius": 40,
+   "text": [
+    "Flat stones set across the stream where the road crosses. The water runs cold and fast underneath."
+   ]
+  }
+ ]
+}
