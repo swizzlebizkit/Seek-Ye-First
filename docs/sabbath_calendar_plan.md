@@ -1,6 +1,6 @@
 # Sabbath and calendar: plan (not built yet)
 
-Status: planning only. Nothing in this document is implemented. It exists so the decisions below can be
+Status: planning only. **Decisions settled (see section 10).** Nothing in this document is implemented. It exists so the decisions below can be
 agreed before any code is written. Proposed home: its own milestone after 2B, because it touches the
 world clock, NPC schedules and the village layout.
 
@@ -121,11 +121,57 @@ keeps it the same way, and some travelers are not Jews at all.
 3. **S3: The Sabbath in the village.** Assembly place, gathering, closed stalls, observance variety.
 4. **S4: Scripture teaching at the gathering.** Extra scroll readings and teacher disagreement.
 
-## 9. Questions to settle before S1
+## 9. Decisions (settled)
 
-1. Is the five-day block fixed at year end (my recommendation) or seeded per year?
-2. Should Day 1 be tied to a real historical date (and weekday), or just be a chosen weekday?
-   If real: which year do you want the story to open in?
-3. Is a fixed 18:00 sunset acceptable for the first version, or do you want seasonal sunsets from the start?
-4. Do you want the feasts (Passover, Pentecost, Tabernacles) in scope for this milestone or left as a
-   later table?
+1. **The five extra days are one block at the end of the year.** No historical calendar of this region
+   places them elsewhere: the 360+5 shape is itself a simplification (the Jewish calendar was lunisolar;
+   the only real calendar with five extra days, the Egyptian civil one, put them at the year's end).
+2. **No real date.** Days are simply counted 1, 2, 3, and each has a day of the week.
+   **Day 1 is the first day of the week.** Days run sunset to sunset (see 10), so the first day begins at
+   sunset on the evening before Day 1's morning, and the Sabbath (the seventh day) runs from sunset on the
+   sixth day to sunset on the seventh.
+3. **Sunset is a fixed 18:00** for now. The sunset lookup is one function, so seasonal sunsets can replace
+   it later without touching anything else.
+4. **Feasts come later, but the calendar is built to receive them** (see 11).
+
+## 10. Consequence of sunset-to-sunset days: the day number turns over at 18:00
+
+Today `WorldSim.day` turns over at midnight. Under your rule a day *is* sunset to sunset, so the
+calendar must turn over at 18:00:
+
+    calendar_day = WorldSim.day + (1 if minute_of_day >= 18:00 else 0)
+    weekday      = (calendar_day - 1) mod 7        # 0 = first day ... 6 = Sabbath
+
+- The game still opens at 07:00 and that morning is Day 1 (the first day), already running since the
+  previous sunset. At 18:00 Day 1 ends and Day 2 (the second day) begins. At 18:00 on the sixth day the
+  Sabbath begins, and at 18:00 on the seventh it ends.
+- `WorldSim.day` and `minute_of_day` stay as they are, so **no save changes** are needed; the calendar is
+  computed from them. Journal entries record `WorldSim.day`; they could later record the calendar day
+  instead (one-line change) if "Day N" should match the HUD.
+- HUD shows the weekday and day count, with a small marker during the Sabbath and the preparation
+  afternoon. Weekday names are ordinal ("the first day", "the second day" ... "the Sabbath"), which is
+  how the New Testament names them (Mark 16:2, Acts 20:7), not the later planetary names.
+
+## 11. Planning for the feasts (not built)
+
+- Months are named and numbered from the spring: month 1 is Nisan (Exodus 12:2), through month 12.
+  Which month and day Day 1 falls on is one data value (`start_date`). My default would be 1 Nisan,
+  unless you prefer another start.
+- `data/world/feasts.json` (empty at first) holds entries of the form
+  `{id, name, month, day, length_days, sources, observance}`, e.g. Passover 14 Nisan, Unleavened Bread
+  15 to 21 Nisan, Weeks/Pentecost, Trumpets 1 Tishri, Atonement 10 Tishri, Tabernacles 15 to 21 Tishri,
+  Dedication 25 Kislev (John 10:22), Purim 14 Adar.
+- Because the game year is a fixed 365 days, feasts fall on fixed month dates but on a different weekday
+  each year. That is realistic. A feast can fall on a Sabbath, so the rules layer feast and Sabbath
+  observance separately and combine them.
+- Hooks reserved now: a `feast` condition key and the same schedule table as the Sabbath (phases
+  `ordinary`, `preparation`, `sabbath`, `feast`). Pilgrim travel to Jerusalem, crowds and closed stalls are
+  schedule data, not code.
+- Dating the feasts to real days (a lunar month, a leap month) is **out of scope**; if wanted, the same
+  table gains a per-year override.
+
+## 12. Order of work
+
+Unchanged from section 8. S1 (calendar core, HUD, condition keys, tests) can begin on your go-ahead and
+touches no saves. Tests will cover: the weekday cycle across the month boundary, the year boundary and the
+five extra days; the 18:00 turnover; Sabbath start and end; and that a save from before the calendar loads.
