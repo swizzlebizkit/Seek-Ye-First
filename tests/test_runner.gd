@@ -6,7 +6,7 @@ extends Node
 const TEST_SAVE_DIR := "user://test_saves"
 const EFFECT_KEYS := ["when", "set_flag", "clear_flag", "journal", "annotate", "set_status", "quest_start",
 	"quest_objective", "give_item", "take_item", "knowledge", "equip", "encounter", "actor", "scripture_link", "read_scroll"]
-const COND_KEYS := ["flag", "not_flag", "has_item", "equipped", "quest_active", "quest_done", "knows", "encounter", "actor"]
+const COND_KEYS := ["flag", "not_flag", "has_item", "equipped", "quest_active", "quest_done", "knows", "encounter", "actor", "weekday", "sabbath", "day_phase"]
 
 var _failures: Array[String] = []
 var _checks := 0
@@ -40,6 +40,8 @@ func _ready() -> void:
 	await load("res://tests/m2a_tests.gd").new().run(self)
 	_section = "m2a1"
 	await load("res://tests/m2a1_tests.gd").new().run(self)
+	_section = "calendar"
+	await load("res://tests/calendar_tests.gd").new().run(self)
 
 	_clean_test_saves()
 	print("")

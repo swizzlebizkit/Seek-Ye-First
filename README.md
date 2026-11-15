@@ -73,3 +73,7 @@ Behaviour profiles are data: `data/combat/profiles.json` (hostile / noncombatant
 - **Scrolls:** scroll items (`category: scroll`, `reveals: [link ids]`) are found in the world. Elder Ezra reads one you bring him (effect `read_scroll`). After the sword gift he has a new conversation teaching the protagonist to look back at what was written before.
 - **Health:** resting heals slowly up to half of full health (`data/combat/player.json`, can be turned off); food (`heal`) restores more with H. Bread and fig cakes are in the yard crates and the village.
 - **Planned, not built:** the Sabbath and calendar, see `docs/sabbath_calendar_plan.md`.
+
+## Calendar (S1)
+
+`Calendar` (`data/world/calendar.json`) works out the date from `WorldSim`; it keeps no state, so saves are unchanged. Days run sunset (18:00) to sunset and are counted from Day 1, the first day of the week; every seventh day is the Sabbath (sunset on the sixth day to sunset on the seventh). A year is 12 months of 30 days plus five extra days at the end. Conditions in data: `weekday` (0 to 6, a list means any of), `sabbath` (bool), `day_phase` (`ordinary`, `preparation`, `sabbath`). The HUD shows the weekday, with the Sabbath in gold. Schedules, closed stalls and the feasts are planned, not built: `docs/sabbath_calendar_plan.md`.

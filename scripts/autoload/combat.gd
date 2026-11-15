@@ -180,7 +180,7 @@ func resolve_encounter(encounter_id: String, outcome: String) -> bool:
 		return false
 	if outcomes.has(encounter_id):
 		return false
-	outcomes[encounter_id] = {"outcome": outcome, "day": WorldSim.day}
+	outcomes[encounter_id] = {"outcome": outcome, "day": Calendar.current_day()}
 	GameState.set_flag("encounter_%s" % encounter_id)
 	match outcome:
 		"combat_victory":

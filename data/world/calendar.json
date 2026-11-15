@@ -1,0 +1,17 @@
+{
+ "note": "The game calendar. Days run sunset to sunset and are counted 1, 2, 3 ... with no real date. Day 1 is the first day of the week. A year is twelve 30-day months plus five extra days at the end. The week never resets: every seventh day is the Sabbath whatever the month or year. Weekday names are ordinal, as in the New Testament (Mark 16:2, Acts 20:7).",
+ "sunset_minute": 1080,
+ "preparation_minute": 900,
+ "week": {
+  "length": 7,
+  "sabbath_index": 6,
+  "names": ["The first day", "The second day", "The third day", "The fourth day", "The fifth day", "The sixth day", "The Sabbath"]
+ },
+ "year": {
+  "month_length": 30,
+  "months": ["Nisan", "Iyyar", "Sivan", "Tammuz", "Av", "Elul", "Tishri", "Heshvan", "Kislev", "Tebeth", "Shebat", "Adar"],
+  "extra_days": 5,
+  "extra_name": "Year's end"
+ },
+ "start_date": {"month": 1, "day": 1}
+}

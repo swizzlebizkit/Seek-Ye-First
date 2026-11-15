@@ -145,6 +145,16 @@ func check(cond: Dictionary) -> bool:
 			"actor":
 				if Combat.actor_status(v["id"]) != v["status"]:
 					return false
+			"weekday":
+				var today := Calendar.weekday(Calendar.current_day())
+				if not _as_array(v).any(func(w): return int(w) == today):  # a list means "any of these days"
+					return false
+			"sabbath":
+				if Calendar.is_sabbath(WorldSim.day, WorldSim.minute_of_day) != bool(v):
+					return false
+			"day_phase":
+				if Calendar.current_phase() != str(v):
+					return false
 			"quest_active":
 				if not Quests.is_active(v):
 					return false

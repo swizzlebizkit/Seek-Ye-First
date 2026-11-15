@@ -1,6 +1,6 @@
 # Sabbath and calendar: plan (not built yet)
 
-Status: planning only. **Decisions settled (see section 10).** Nothing in this document is implemented. It exists so the decisions below can be
+Status: **S1 (calendar core) is built**; S2 to S4 are still planned. Decisions are settled (section 9). It exists so the decisions below can be
 agreed before any code is written. Proposed home: its own milestone after 2B, because it touches the
 world clock, NPC schedules and the village layout.
 
@@ -172,6 +172,5 @@ calendar must turn over at 18:00:
 
 ## 12. Order of work
 
-Unchanged from section 8. S1 (calendar core, HUD, condition keys, tests) can begin on your go-ahead and
-touches no saves. Tests will cover: the weekday cycle across the month boundary, the year boundary and the
+S1 is done (the `Calendar` autoload, `data/world/calendar.json`, the HUD weekday, the `weekday`, `sabbath` and `day_phase` condition keys, journal and encounter day stamps now using the calendar day). It touches no saves. Tests will cover: the weekday cycle across the month boundary, the year boundary and the
 five extra days; the 18:00 turnover; Sabbath start and end; and that a save from before the calendar loads.

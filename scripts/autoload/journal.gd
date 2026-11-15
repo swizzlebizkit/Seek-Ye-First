@@ -56,7 +56,7 @@ func discover(id: String) -> bool:
 		"origin": d.get("origin", "fiction"),
 		"refs": d.get("refs", []).duplicate(),
 		"status": d.get("status", "recorded"),
-		"day": WorldSim.day,
+		"day": Calendar.current_day(),
 		"notes": [],
 	}
 	_order.append(id)
@@ -74,7 +74,7 @@ func annotate(id: String, text: String, refs: Array = [], source: String = "", n
 		for n in rec["notes"]:
 			if n.get("id", "") == note_id:
 				return false
-	rec["notes"].append({"id": note_id, "text": text, "refs": refs.duplicate(), "source": source, "day": WorldSim.day})
+	rec["notes"].append({"id": note_id, "text": text, "refs": refs.duplicate(), "source": source, "day": Calendar.current_day()})
 	entry_updated.emit(id)
 	GameState.toast.emit("Journal note added: %s" % rec["title"])
 	return true
@@ -110,7 +110,7 @@ func discover_link(link_id: String, source: String = "") -> bool:
 	if not _link_defs.has(link_id):
 		push_error("Journal: unknown scripture link '%s'" % link_id)
 		return false
-	_found[link_id] = {"day": WorldSim.day, "source": source, "understood": false}
+	_found[link_id] = {"day": Calendar.current_day(), "source": source, "understood": false}
 	link_found.emit(link_id)
 	var entry: String = _link_defs[link_id]["entry"]
 	if _entries.has(entry):

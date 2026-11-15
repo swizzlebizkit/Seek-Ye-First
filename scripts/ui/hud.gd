@@ -52,7 +52,7 @@ func _ready() -> void:
 
 	_clock = UiTheme.outlined(UiTheme.label("", 18, UiTheme.MUTED))
 	_clock.set_anchors_preset(Control.PRESET_TOP_RIGHT)
-	_clock.offset_left = -200
+	_clock.offset_left = -520
 	_clock.offset_right = -24
 	_clock.offset_top = 18
 	_clock.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
@@ -107,7 +107,9 @@ func bind(player: Player) -> void:
 
 
 func _process(_delta: float) -> void:
-	_clock.text = "Day %d   %s" % [WorldSim.day, WorldSim.time_string()]
+	var phase := Calendar.current_phase()
+	_clock.text = "%s   Day %d   %s" % [Calendar.weekday_label(WorldSim.day, WorldSim.minute_of_day), Calendar.current_day(), WorldSim.time_string()]
+	_clock.add_theme_color_override("font_color", UiTheme.GOLD if phase == "sabbath" else UiTheme.MUTED)
 
 
 func show_toast(text: String) -> void:
