@@ -11,8 +11,16 @@ var display_name := ""
 var verb := "Examine"
 var radius := 24.0
 var prompt_offset := Vector2(0, -28)
+## Tie-breaker when several things are in reach and equally well aimed at: people beat
+## pickups, which beat scenery.
+var target_priority := 0
+## Where the gold ring is drawn while this is the current target, relative to the node.
+var ring_offset := Vector2.ZERO
+## Optional extra availability test, e.g. a person who is running away cannot be talked to.
+var gate: Callable = Callable()
 
 var _icon: Sprite2D
+var _focused := false
 var _bob := 0.0
 
 
@@ -36,6 +44,7 @@ func _ready() -> void:
 	_icon.visible = false
 	_icon.z_index = 50
 	add_child(_icon)
+	z_index = 0
 
 
 func _process(delta: float) -> void:
@@ -45,12 +54,32 @@ func _process(delta: float) -> void:
 
 
 func set_focused(on: bool) -> void:
-	_icon.visible = on and is_available()
+	_focused = on and is_available()
+	_icon.visible = _focused
 	_bob = 0.0
+	queue_redraw()
+
+
+## The point the player's aim and distance are measured against.
+func focus_point() -> Vector2:
+	return global_position
 
 
 func is_available() -> bool:
-	return true
+	return not gate.is_valid() or gate.call()
+
+
+## The ring under whatever is currently targeted, so there is never doubt what E will do.
+func _draw() -> void:
+	if not _focused:
+		return
+	var rx := clampf(radius * 0.4, 9.0, 14.0)
+	var pts := PackedVector2Array()
+	for i in range(25):
+		var a := TAU * i / 24.0
+		pts.append(ring_offset + Vector2(cos(a) * rx, sin(a) * rx * 0.45))
+	draw_polyline(pts, Color(0.09, 0.06, 0.04, 0.9), 4.0)
+	draw_polyline(pts, Color("e8d29a"), 2.0)
 
 
 func prompt_text() -> String:

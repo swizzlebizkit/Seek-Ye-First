@@ -7,7 +7,7 @@ signal flag_changed(flag: String, value: bool)
 signal inventory_changed
 signal toast(text: String)
 
-enum Mode { MENU, EXPLORE, DIALOGUE, JOURNAL, PAUSED }
+enum Mode { MENU, EXPLORE, DIALOGUE, JOURNAL, PAUSED, EQUIPMENT, DEFEAT }
 
 var mode: int = Mode.MENU:
 	set(value):
@@ -23,7 +23,8 @@ var player_facing := "down"
 var has_saved_position := false
 var play_seconds := 0.0
 
-## Set by the menu before the game scene loads: {"mode": "new"} or {"mode": "load", "slot": 1}.
+## Set by the menu before the game scene loads: {"mode": "new"}, {"mode": "load", "slot": 1}
+## or {"mode": "training"} (the dev-only combat training yard).
 var start_request: Dictionary = {"mode": "new"}
 
 var items: Dictionary = {}
@@ -53,6 +54,8 @@ func new_game() -> void:
 	PlayerKnowledge.reset()
 	CanonicalTimeline.reset()
 	WorldSim.reset()
+	Combat.reset()
+	Equipment.reset()
 	# The Baptist's ministry is already under way when the prologue opens.
 	CanonicalTimeline.story_advance("john_preaching")
 
@@ -74,10 +77,17 @@ func has_flag(flag: String) -> bool:
 
 
 # -- inventory ---------------------------------------------------------------------------------
-func add_item(id: String, count: int = 1) -> void:
+## Unique items (e.g. a gift that carries meaning) can only be received once. Returns false if refused.
+func add_item(id: String, count: int = 1, quiet: bool = false) -> bool:
+	if items.get(id, {}).get("unique", false):
+		if item_count(id) > 0:
+			return false
+		count = 1
 	inventory[id] = int(inventory.get(id, 0)) + count
 	inventory_changed.emit()
-	toast.emit("Received: %s%s" % [item_name(id), " x%d" % count if count > 1 else ""])
+	if not quiet:
+		toast.emit("Received: %s%s" % [item_name(id), " x%d" % count if count > 1 else ""])
+	return true
 
 
 func remove_item(id: String, count: int = 1) -> bool:
@@ -96,12 +106,17 @@ func item_count(id: String) -> int:
 	return int(inventory.get(id, 0))
 
 
+func place_name() -> String:
+	return "Training Yard (dev)" if region_id == "training_yard" else "Kefar Zayit"
+
+
 func item_name(id: String) -> String:
 	return items.get(id, {}).get("name", id)
 
 
 # -- conditions --------------------------------------------------------------------------------
-## All keys must hold. Supported: flag, not_flag, has_item, quest_active, quest_done, knows.
+## All keys must hold. Supported: flag, not_flag, has_item, equipped, quest_active, quest_done, knows,
+## encounter ({"id", "outcome"}; outcome "any" or a specific one), actor ({"id", "status"}).
 func check(cond: Dictionary) -> bool:
 	for key in cond:
 		var v = cond[key]
@@ -118,6 +133,18 @@ func check(cond: Dictionary) -> bool:
 				for i in _as_array(v):
 					if item_count(i) < 1:
 						return false
+			"equipped":
+				for i in _as_array(v):
+					if not Equipment.is_equipped(i):
+						return false
+			"encounter":
+				var got := Combat.outcome_of(v["id"])
+				var want: String = v.get("outcome", "any")
+				if got == "" or (want != "any" and got != want):
+					return false
+			"actor":
+				if Combat.actor_status(v["id"]) != v["status"]:
+					return false
 			"quest_active":
 				if not Quests.is_active(v):
 					return false

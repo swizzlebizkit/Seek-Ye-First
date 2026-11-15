@@ -74,7 +74,36 @@ def title_backdrop(w=640, h=360, seed=7):
     return cv
 
 
+HEART = [
+    "0110110",
+    "1111111",
+    "1111111",
+    "1111111",
+    "0111110",
+    "0011100",
+    "0001000",
+]
+
+
+def heart(state):
+    """9x9 heart icon: 'full', 'half' or 'empty'."""
+    cv = Canvas(9, 9)
+    fill = (206, 52, 56)
+    for gy, row in enumerate(HEART):
+        for gx, ch in enumerate(row):
+            if ch == "1":
+                if state == "full" or (state == "half" and gx <= 2):
+                    col = (236, 96, 90) if (gx, gy) in ((1, 1), (2, 1)) else fill
+                else:
+                    col = (70, 42, 44)
+                cv.set(1 + gx, 1 + gy, col)
+    cv.outline(P.OUTLINE)
+    return cv
+
+
 def write(out_dir):
+    for st in ("full", "half", "empty"):
+        heart(st).save(os.path.join(out_dir, f"heart_{st}.png"))
     prompt_icon().save(os.path.join(out_dir, "prompt_e.png"))
     title_backdrop().save(os.path.join(out_dir, "title_bg.png"))
 

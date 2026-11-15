@@ -160,7 +160,8 @@ func _refresh() -> void:
 				_row_ids.append(id)
 		Tab.SATCHEL:
 			for id in GameState.inventory:
-				_list.add_item("%s  x%d" % [GameState.item_name(id), GameState.item_count(id)])
+				var worn := "  (equipped)" if Equipment.is_equipped(id) else ""
+				_list.add_item("%s  x%d%s" % [GameState.item_name(id), GameState.item_count(id), worn])
 				_row_ids.append(id)
 	if _row_ids.is_empty():
 		_details.text = _empty_text()

@@ -41,11 +41,13 @@ func _ready() -> void:
 	var new_btn := _add_button("New Game", _on_new_game)
 	var load_btn := _add_button("Load Game", _on_load_game)
 	load_btn.disabled = not SaveManager.has_any_save()
+	if OS.is_debug_build():
+		_add_button("Combat Training Yard (dev)", func(): start_game({"mode": "training"}))
 	_add_button("Quit", func(): get_tree().quit())
 	(new_btn if continue_btn.disabled else continue_btn).grab_focus()
 
 	var footer := UiTheme.outlined(UiTheme.label(
-		"Prototype: Milestone 1.  Kefar Zayit and its people are invented for the story.  Scripture text: King James Version (public domain).", 14, UiTheme.MUTED), 4)
+		"Prototype: Milestone 2A.  Kefar Zayit and its people are invented for the story.  Scripture text: King James Version (public domain).", 14, UiTheme.MUTED), 4)
 	footer.set_anchors_preset(Control.PRESET_BOTTOM_LEFT)
 	footer.offset_left = 24
 	footer.offset_top = -34

@@ -1,0 +1,17 @@
+{
+ "id": "yard_merchant",
+ "speaker": "Merchant",
+ "origin": "fiction",
+ "entries": [
+  {
+   "node": "greeting"
+  }
+ ],
+ "nodes": {
+  "greeting": {
+   "lines": [
+    "Dyed linen, good thread, honest weights. Nothing for sale in a training yard, I am afraid, but I like to keep my hand in."
+   ]
+  }
+ }
+}

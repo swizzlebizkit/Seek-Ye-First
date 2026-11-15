@@ -5,8 +5,8 @@ extends Node
 
 const TEST_SAVE_DIR := "user://test_saves"
 const EFFECT_KEYS := ["when", "set_flag", "clear_flag", "journal", "annotate", "set_status", "quest_start",
-	"quest_objective", "give_item", "take_item", "knowledge"]
-const COND_KEYS := ["flag", "not_flag", "has_item", "quest_active", "quest_done", "knows"]
+	"quest_objective", "give_item", "take_item", "knowledge", "equip", "encounter", "actor"]
+const COND_KEYS := ["flag", "not_flag", "has_item", "equipped", "quest_active", "quest_done", "knows", "encounter", "actor"]
 
 var _failures: Array[String] = []
 var _checks := 0
@@ -36,6 +36,8 @@ func _ready() -> void:
 	test_region_walkability()
 	_section = "integration"
 	await test_integration()
+	_section = "m2a"
+	await load("res://tests/m2a_tests.gd").new().run(self)
 
 	_clean_test_saves()
 	print("")
@@ -349,7 +351,8 @@ func test_playthrough_order_b() -> void:
 	check(Journal.get_entry("rumor_yosef")["status"] == "corroborated", "B: rumor is corroborated on arrival because Hannah already testified")
 	check(Quests.is_done("word_jordan"), "B: quest completes regardless of order")
 	var jar := Journal.list()
-	check(jar.size() == 4, "B: four journal entries (Hannah, Ezra, Yosef, question)")
+	# Milestone 2A: Ezra's gift adds a fifth entry (his sword) to the original four
+	check(jar.size() == 5, "B: five journal entries (Hannah, Ezra, Yosef, question, Ezra's sword)")
 
 
 # -- save / load -------------------------------------------------------------------------------

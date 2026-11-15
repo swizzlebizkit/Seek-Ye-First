@@ -1,0 +1,123 @@
+{
+ "id": "yard_guard",
+ "speaker": "Guard",
+ "origin": "fiction",
+ "entries": [
+  {
+   "when": {
+    "actor": {
+     "id": "yard_guard",
+     "status": "surrendered"
+    }
+   },
+   "node": "yielded"
+  },
+  {
+   "when": {
+    "actor": {
+     "id": "yard_guard",
+     "status": "challenge"
+    }
+   },
+   "node": "warned"
+  },
+  {
+   "when": {
+    "actor": {
+     "id": "yard_guard",
+     "status": "stood_down"
+    }
+   },
+   "node": "after_apology"
+  },
+  {
+   "node": "calm"
+  }
+ ],
+ "nodes": {
+  "calm": {
+   "lines": [
+    "Move along, friend. Keep the peace in this yard and I will keep out of your way."
+   ]
+  },
+  "warned": {
+   "lines": [
+    "\"That person was minding their own business. Explain yourself.\""
+   ],
+   "choices": [
+    {
+     "text": "I am sorry. It will not happen again.",
+     "effects": [
+      {
+       "actor": {
+        "id": "yard_guard",
+        "command": "stand_down"
+       }
+      },
+      {
+       "encounter": {
+        "id": "yard_guard",
+        "outcome": "diplomacy"
+       }
+      }
+     ],
+     "next": "forgiven"
+    },
+    {
+     "text": "Mind your own business.",
+     "effects": [
+      {
+       "actor": {
+        "id": "yard_guard",
+        "command": "provoke"
+       }
+      }
+     ],
+     "next": "angry"
+    },
+    {
+     "text": "Say nothing.",
+     "next": null
+    }
+   ]
+  },
+  "forgiven": {
+   "lines": [
+    "The guard studies you a long moment. \"See that it does not. I shall be watching.\""
+   ]
+  },
+  "angry": {
+   "lines": [
+    "\"Then you can explain it at the point of my spear.\""
+   ]
+  },
+  "after_apology": {
+   "lines": [
+    "\"I have my eye on you. Keep that blade where it belongs.\""
+   ]
+  },
+  "yielded": {
+   "lines": [
+    "\"Enough. I stand down.\""
+   ],
+   "choices": [
+    {
+     "text": "Thank you. Go in peace.",
+     "effects": [
+      {
+       "actor": {
+        "id": "yard_guard",
+        "command": "release"
+       }
+      }
+     ],
+     "next": null
+    },
+    {
+     "text": "Leave him.",
+     "next": null
+    }
+   ]
+  }
+ }
+}

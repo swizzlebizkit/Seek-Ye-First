@@ -20,7 +20,10 @@
    "source": "Yosef, a trader on the roads",
    "origin": "fiction",
    "text": "Yosef the trader says a man named John is preaching beside the river Jordan, crying that people must repent, for the kingdom of heaven is at hand. Crowds are walking out from Jerusalem and all Judaea to hear him, and those who confess their sins are baptized in the river. I have only Yosef's word for it.",
-   "refs": ["Matthew 3:1-2", "Matthew 3:5-6"]
+   "refs": [
+    "Matthew 3:1-2",
+    "Matthew 3:5-6"
+   ]
   },
   "testimony_hannah": {
    "type": "testimony",
@@ -29,7 +32,9 @@
    "source": "Hannah, a traveler from the south",
    "origin": "fiction",
    "text": "Hannah, resting by the east road, has seen the preacher herself. She says John wears a garment of camel's hair with a leather girdle about his loins, and that it is said he eats locusts and wild honey. Hundreds go down into the Jordan confessing their sins. She did not stay long, but she has not stopped thinking about it.",
-   "refs": ["Matthew 3:4-6"]
+   "refs": [
+    "Matthew 3:4-6"
+   ]
   },
   "testimony_ezra": {
    "type": "testimony",
@@ -38,7 +43,9 @@
    "source": "Elder Ezra of Kefar Zayit",
    "origin": "fiction",
    "text": "Elder Ezra says the preacher's words put him in mind of the prophet Isaiah: 'The voice of him that crieth in the wilderness, Prepare ye the way of the LORD.' He would not say what it means, only that I should go with open eyes, if I go, and tell him what I see.",
-   "refs": ["Isaiah 40:3"]
+   "refs": [
+    "Isaiah 40:3"
+   ]
   },
   "q_who_is_john": {
    "type": "question",
@@ -47,7 +54,9 @@
    "source": "My own thoughts",
    "origin": "fiction",
    "text": "Everyone speaks as though something is about to happen. 'The kingdom of heaven is at hand.' What kingdom? Whose? I do not know, and I find I cannot leave it alone.",
-   "refs": ["Matthew 3:2"]
+   "refs": [
+    "Matthew 3:2"
+   ]
   },
   "obs_decision": {
    "type": "observation",
@@ -56,6 +65,15 @@
    "source": "My own thoughts",
    "origin": "fiction",
    "text": "At the east edge of the village, the road drops away toward the Jordan valley. I have heard enough from others. I want to see it with my own eyes.",
+   "refs": []
+  },
+  "obs_ezra_sword": {
+   "type": "observation",
+   "status": "recorded",
+   "title": "Ezra's sword",
+   "source": "Elder Ezra",
+   "origin": "fiction",
+   "text": "Before I set out, Elder Ezra pressed his old sword into my hands. He said the road to the Jordan is long and not everyone on it is honest. He told me to keep it sheathed unless I must, for a sword answers a danger but does not answer a question. I do not know yet whether I will be glad to have it.",
    "refs": []
   }
  }

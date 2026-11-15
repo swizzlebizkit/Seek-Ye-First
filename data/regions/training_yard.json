@@ -1,0 +1,423 @@
+{
+ "id": "training_yard",
+ "name": "Training Yard",
+ "origin": "fiction",
+ "note": "Developer test area for combat and conflict resolution. Not part of the story.",
+ "size": [
+  34,
+  22
+ ],
+ "spawn": [
+  5.5,
+  10.5
+ ],
+ "ground": [
+  "cccccccccccccccccccccccccccccccccc",
+  "cccccccccccccccccccccccccccccccccc",
+  "ccggggggggggggggggggggggggggggggcc",
+  "ccgppppppppgddddddddddddddddddddcc",
+  "ccgppppppppgddddddddddddddddddddcc",
+  "ccgppppppppgddddddddddddddddddddcc",
+  "ccgppppppppgddddddddddddddddddddcc",
+  "ccgpppppppppppppppppppppppppppppcc",
+  "ccgpppppppppppppppppppppppppppppcc",
+  "ccgppppppppgddddddddddddddddddddcc",
+  "cchppppppppgddddddddddddddddddddcc",
+  "ccgppppppppgddddddddddddddddddddcc",
+  "ccgppppppppgddddddddddddddddddddcc",
+  "ccgppppppppgddddddddddddddddddddcc",
+  "ccgppppppppgddddddddddddddddddddcc",
+  "ccggggggggggddddddddddddddddddddcc",
+  "ccggghggggggddddddddddddddddddddcc",
+  "cchgggggggghddddddddddddddddddddcc",
+  "ccggggggggggddddddddddddddddddddcc",
+  "ccgghghgggggddddddddddddddddddddcc",
+  "cccccccccccccccccccccccccccccccccc",
+  "cccccccccccccccccccccccccccccccccc"
+ ],
+ "ground_legend": {
+  "g": [
+   "grass_0",
+   "grass_0",
+   "grass_0",
+   "grass_1",
+   "grass_1",
+   "grass_2",
+   "grass_2",
+   "grass_2",
+   "grass_1",
+   "grass_flowers"
+  ],
+  "h": [
+   "grass_dry_0",
+   "grass_dry_1"
+  ],
+  "d": [
+   "dirt_0",
+   "dirt_1"
+  ],
+  "p": [
+   "path_0",
+   "path_1"
+  ],
+  "s": [
+   "sand_0",
+   "sand_1"
+  ],
+  "w": [
+   "water_0",
+   "water_1"
+  ],
+  "c": [
+   "cliff_0",
+   "cliff_1"
+  ],
+  "f": [
+   "field_0",
+   "field_1"
+  ]
+ },
+ "objects": [
+  [
+   17,
+   11,
+   "lowwall_h"
+  ],
+  [
+   18,
+   11,
+   "lowwall_h"
+  ],
+  [
+   19,
+   11,
+   "lowwall_h"
+  ],
+  [
+   20,
+   11,
+   "lowwall_h"
+  ],
+  [
+   25,
+   13,
+   "lowwall_v"
+  ],
+  [
+   25,
+   14,
+   "lowwall_v"
+  ],
+  [
+   25,
+   15,
+   "lowwall_v"
+  ],
+  [
+   27,
+   16,
+   "lowwall_h"
+  ],
+  [
+   28,
+   16,
+   "lowwall_h"
+  ],
+  [
+   29,
+   16,
+   "lowwall_h"
+  ],
+  [
+   30,
+   16,
+   "lowwall_h"
+  ]
+ ],
+ "props": [
+  {
+   "prop": "signpost",
+   "tile": [
+    4,
+    12
+   ]
+  },
+  {
+   "prop": "signpost",
+   "tile": [
+    6,
+    12
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    13,
+    4
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    30,
+    4
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    31,
+    11
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    12,
+    12
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    24,
+    18
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    22,
+    4
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    10,
+    18
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    3,
+    17
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    3,
+    18
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    5,
+    17
+   ]
+  }
+ ],
+ "npcs": [
+  {
+   "id": "yard_toll_taker",
+   "name": "Toll-taker",
+   "sprite": "toll_taker",
+   "profile": "toll_taker",
+   "dialogue": "yard_toll_taker",
+   "encounter": "yard_toll",
+   "tile": [
+    20.5,
+    7.9
+   ],
+   "wander": 0,
+   "facing": "left"
+  },
+  {
+   "id": "yard_highwayman",
+   "name": "Highwayman",
+   "sprite": "highwayman",
+   "profile": "highwayman",
+   "dialogue": "",
+   "encounter": "yard_highwayman",
+   "tile": [
+    24.5,
+    12.0
+   ],
+   "wander": 0,
+   "facing": "left"
+  },
+  {
+   "id": "yard_cutthroat",
+   "name": "Cutthroat",
+   "sprite": "cutthroat",
+   "profile": "cutthroat",
+   "dialogue": "",
+   "encounter": "yard_cutthroat",
+   "tile": [
+    28.5,
+    18.4
+   ],
+   "wander": 0,
+   "facing": "up"
+  },
+  {
+   "id": "yard_guard",
+   "name": "Guard",
+   "sprite": "guard",
+   "profile": "guard",
+   "dialogue": "yard_guard",
+   "encounter": "yard_guard",
+   "tile": [
+    14.5,
+    14.5
+   ],
+   "wander": 0,
+   "facing": "down"
+  },
+  {
+   "id": "yard_traveler",
+   "name": "Traveler",
+   "sprite": "traveler",
+   "profile": "wayfarer",
+   "dialogue": "yard_traveler",
+   "tile": [
+    16.5,
+    16.5
+   ],
+   "wander": 20,
+   "facing": "left"
+  },
+  {
+   "id": "yard_merchant",
+   "name": "Merchant",
+   "sprite": "merchant",
+   "profile": "merchant",
+   "dialogue": "yard_merchant",
+   "tile": [
+    12.5,
+    17.5
+   ],
+   "wander": 20,
+   "facing": "right"
+  }
+ ],
+ "interactables": [
+  {
+   "type": "pickup",
+   "id": "yard_crate_shield",
+   "name": "Crate of shields",
+   "item": "wicker_shield",
+   "prop": "crate",
+   "tile": [
+    4,
+    4
+   ],
+   "radius": 20,
+   "text": [
+    "A crate of wicker shields. You take one."
+   ]
+  },
+  {
+   "type": "pickup",
+   "id": "yard_crate_cap",
+   "name": "Crate of caps",
+   "item": "felt_cap",
+   "prop": "crate",
+   "tile": [
+    6,
+    4
+   ],
+   "radius": 20,
+   "text": [
+    "A crate of felt caps. You take one."
+   ]
+  },
+  {
+   "type": "pickup",
+   "id": "yard_crate_belt",
+   "name": "Crate of belts",
+   "item": "leather_belt",
+   "prop": "crate",
+   "tile": [
+    8,
+    4
+   ],
+   "radius": 20,
+   "text": [
+    "A crate of leather belts. You take one."
+   ]
+  },
+  {
+   "type": "pickup",
+   "id": "yard_crate_vest",
+   "name": "Crate of vests",
+   "item": "quilted_vest",
+   "prop": "crate",
+   "tile": [
+    4,
+    7
+   ],
+   "radius": 20,
+   "text": [
+    "A crate of quilted vests. You take one."
+   ]
+  },
+  {
+   "type": "pickup",
+   "id": "yard_crate_boots",
+   "name": "Crate of boots",
+   "item": "road_boots",
+   "prop": "crate",
+   "tile": [
+    6,
+    7
+   ],
+   "radius": 20,
+   "text": [
+    "A crate of road boots. You take one."
+   ]
+  },
+  {
+   "type": "pickup",
+   "id": "yard_crate_coin",
+   "name": "Coin box",
+   "item": "lepton",
+   "prop": "crate",
+   "tile": [
+    8,
+    7
+   ],
+   "radius": 20,
+   "text": [
+    "A box of copper coins for the toll-taker. You take one."
+   ]
+  },
+  {
+   "type": "ledger",
+   "name": "Training ledger",
+   "tile": [
+    4.5,
+    12.4
+   ],
+   "radius": 28
+  },
+  {
+   "type": "examine",
+   "name": "Yard rules",
+   "tile": [
+    6.5,
+    12.4
+   ],
+   "radius": 28,
+   "text": [
+    "TRAINING YARD (development only).",
+    "K or X swings the sword. Shift or L is a quick dodge step. I or Q opens equipment.",
+    "The toll-taker on the road will talk. The highwayman will give chase and can be outrun. The cutthroat by the wall will fight. The guard reacts only to what he sees you do.",
+    "Every way an encounter can end counts. Nothing here has to be fought."
+   ]
+  }
+ ]
+}

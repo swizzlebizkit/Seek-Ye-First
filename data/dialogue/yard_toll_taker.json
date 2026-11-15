@@ -1,0 +1,147 @@
+{
+ "id": "yard_toll_taker",
+ "speaker": "Toll-taker",
+ "origin": "fiction",
+ "entries": [
+  {
+   "when": {
+    "actor": {
+     "id": "yard_toll_taker",
+     "status": "surrendered"
+    }
+   },
+   "node": "yielded"
+  },
+  {
+   "when": {
+    "actor": {
+     "id": "yard_toll_taker",
+     "status": "stood_down"
+    }
+   },
+   "node": "after_deal"
+  },
+  {
+   "node": "parley"
+  }
+ ],
+ "nodes": {
+  "parley": {
+   "lines": [
+    "Well? Coin for the road, or an answer that pleases me."
+   ],
+   "choices": [
+    {
+     "text": "Pay him a lepton.",
+     "when": {
+      "has_item": "lepton"
+     },
+     "effects": [
+      {
+       "take_item": {
+        "item": "lepton"
+       }
+      },
+      {
+       "actor": {
+        "id": "yard_toll_taker",
+        "command": "stand_down"
+       }
+      },
+      {
+       "encounter": {
+        "id": "yard_toll",
+        "outcome": "diplomacy"
+       }
+      }
+     ],
+     "next": "paid"
+    },
+    {
+     "text": "Tell him honestly where you are going.",
+     "next": "honest"
+    },
+    {
+     "text": "Bluff: say a soldier is walking just behind you.",
+     "next": "bluff"
+    },
+    {
+     "text": "Back away slowly.",
+     "next": null
+    }
+   ]
+  },
+  "paid": {
+   "lines": [
+    "He weighs the coin in his palm and grunts. \"Fair enough. Go on, and mind the road.\""
+   ]
+  },
+  "honest": {
+   "effects": [
+    {
+     "actor": {
+      "id": "yard_toll_taker",
+      "command": "stand_down"
+     }
+    },
+    {
+     "encounter": {
+      "id": "yard_toll",
+      "outcome": "diplomacy"
+     }
+    }
+   ],
+   "lines": [
+    "He listens with his head on one side. \"A preacher at the Jordan? Half the valley has walked past me for that man.\"",
+    "\"Go on, then. I am not so hard a man as I look.\""
+   ]
+  },
+  "bluff": {
+   "effects": [
+    {
+     "actor": {
+      "id": "yard_toll_taker",
+      "command": "provoke"
+     }
+    }
+   ],
+   "lines": [
+    "He laughs, short and ugly. \"A soldier? Out here? You are a poor liar.\"",
+    "His hand drops to his belt."
+   ]
+  },
+  "yielded": {
+   "lines": [
+    "\"I yield! Take what you like. Only let me go.\""
+   ],
+   "choices": [
+    {
+     "text": "Go, and leave travelers alone.",
+     "effects": [
+      {
+       "actor": {
+        "id": "yard_toll_taker",
+        "command": "release"
+       }
+      }
+     ],
+     "next": "spared"
+    },
+    {
+     "text": "Say nothing and walk on.",
+     "next": null
+    }
+   ]
+  },
+  "spared": {
+   "lines": [
+    "He stares at you, then nods slowly and backs away. \"I will remember this.\""
+   ]
+  },
+  "after_deal": {
+   "lines": [
+    "\"Go on. The road is yours. Mind the highwayman beyond the wall, though. He asks no questions.\""
+   ]
+  }
+ }
+}

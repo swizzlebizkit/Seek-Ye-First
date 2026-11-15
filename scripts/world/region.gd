@@ -95,6 +95,8 @@ func _build_props() -> void:
 
 func _build_npcs() -> void:
 	for def in data["npcs"]:
+		if Combat.actor_status(def["id"]) == "dead":
+			continue  # defeated earlier; the save remembers
 		var npc := Npc.new()
 		npc.setup(def)
 		entities.add_child(npc)
@@ -116,6 +118,12 @@ func _build_interactables() -> void:
 				else:
 					ex.variants = [{"text": def["text"]}]
 				entities.add_child(ex)
+			"ledger":
+				var lg := LedgerInteractable.new()
+				lg.display_name = def["name"]
+				lg.radius = float(def.get("radius", 28))
+				lg.position = pos
+				entities.add_child(lg)
 			"pickup":
 				if GameState.has_flag("picked_" + def["id"]):
 					continue

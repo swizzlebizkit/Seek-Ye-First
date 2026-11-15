@@ -1,0 +1,19 @@
+{
+ "_comment": "Six ordinary physical equipment slots. Wearing an item grants only the physical stats on the item. The slots are arranged to echo Ephesians 6:14-17 (KJV), but that meaning belongs to Paul's later teaching: the 'later' block is developer-only metadata and is never shown in the UI or spoken by the protagonist before that teaching.",
+ "stat_labels": {
+  "attack": "Attack",
+  "reach": "Reach",
+  "cooldown": "Swing time",
+  "defense": "Defense",
+  "block": "Frontal guard",
+  "mobility": "Mobility"
+ },
+ "slots": [
+  {"id": "helmet", "label": "Helmet", "default": "", "later": {"ref": "Ephesians 6:17", "reveal_after": "paul_teaching"}},
+  {"id": "body", "label": "Body armor", "default": "plain_tunic", "later": {"ref": "Ephesians 6:14", "reveal_after": "paul_teaching"}},
+  {"id": "belt", "label": "Belt", "default": "rope_belt", "later": {"ref": "Ephesians 6:14", "reveal_after": "paul_teaching"}},
+  {"id": "footwear", "label": "Footwear", "default": "worn_sandals", "later": {"ref": "Ephesians 6:15", "reveal_after": "paul_teaching"}},
+  {"id": "shield", "label": "Shield", "default": "", "later": {"ref": "Ephesians 6:16", "reveal_after": "paul_teaching"}},
+  {"id": "sword", "label": "Sword", "default": "", "later": {"ref": "Ephesians 6:17", "reveal_after": "paul_teaching"}}
+ ]
+}

@@ -3,9 +3,28 @@
  "speaker": "Elder Ezra",
  "origin": "fiction",
  "entries": [
-  {"when": {"flag": "ezra_consulted"}, "node": "after"},
-  {"when": {"flag": "heard_rumor"}, "node": "rumor_talk"},
-  {"node": "greeting"}
+  {
+   "when": {
+    "flag": "ezra_consulted",
+    "not_flag": "ezra_sword_given"
+   },
+   "node": "sword_gift"
+  },
+  {
+   "when": {
+    "flag": "ezra_consulted"
+   },
+   "node": "after"
+  },
+  {
+   "when": {
+    "flag": "heard_rumor"
+   },
+   "node": "rumor_talk"
+  },
+  {
+   "node": "greeting"
+  }
  ],
  "nodes": {
   "greeting": {
@@ -15,11 +34,46 @@
   },
   "rumor_talk": {
    "effects": [
-    {"set_flag": "ezra_consulted"},
-    {"journal": "testimony_ezra"},
-    {"quest_objective": {"quest": "word_jordan", "objective": "ask_elder"}},
-    {"when": {"flag": "yosef_rumor_told"}, "annotate": {"id": "ezra_isaiah_yosef", "entry": "rumor_yosef", "source": "Elder Ezra", "text": "Ezra says the words remind him of the prophet Isaiah.", "refs": ["Isaiah 40:3"]}},
-    {"when": {"flag": "hannah_told"}, "annotate": {"id": "ezra_isaiah_hannah", "entry": "testimony_hannah", "source": "Elder Ezra", "text": "Ezra says what Hannah describes puts him in mind of Isaiah's 'voice in the wilderness'.", "refs": ["Isaiah 40:3"]}}
+    {
+     "set_flag": "ezra_consulted"
+    },
+    {
+     "journal": "testimony_ezra"
+    },
+    {
+     "quest_objective": {
+      "quest": "word_jordan",
+      "objective": "ask_elder"
+     }
+    },
+    {
+     "when": {
+      "flag": "yosef_rumor_told"
+     },
+     "annotate": {
+      "id": "ezra_isaiah_yosef",
+      "entry": "rumor_yosef",
+      "source": "Elder Ezra",
+      "text": "Ezra says the words remind him of the prophet Isaiah.",
+      "refs": [
+       "Isaiah 40:3"
+      ]
+     }
+    },
+    {
+     "when": {
+      "flag": "hannah_told"
+     },
+     "annotate": {
+      "id": "ezra_isaiah_hannah",
+      "entry": "testimony_hannah",
+      "source": "Elder Ezra",
+      "text": "Ezra says what Hannah describes puts him in mind of Isaiah's 'voice in the wilderness'.",
+      "refs": [
+       "Isaiah 40:3"
+      ]
+     }
+    }
    ],
    "lines": [
     "You have been listening to the road talk, I see. Sit a moment.",
@@ -27,19 +81,65 @@
     "The prophet Isaiah wrote: 'The voice of him that crieth in the wilderness, Prepare ye the way of the LORD, make straight in the desert a highway for our God.' I do not say this John is anything. I say the words came to mind, and they have not left."
    ],
    "choices": [
-    {"text": "What does it mean?", "next": "mean"},
-    {"text": "Thank you, Elder.", "next": null}
+    {
+     "text": "What does it mean?",
+     "next": "mean"
+    },
+    {
+     "text": "Thank you, Elder.",
+     "next": "sword_gift"
+    }
    ]
   },
   "mean": {
    "lines": [
     "If I knew that, I would be a rich teacher in Jerusalem and not an old man with bad knees.",
     "Go and see, if your heart tells you to. Go with open eyes, and come back and tell me what you saw."
-   ]
+   ],
+   "next": "sword_gift"
   },
   "after": {
    "lines": [
     "Have you been to the river? No? Then why are you standing in front of an old man's door? Go and see. Come back and tell me."
+   ]
+  },
+  "sword_gift": {
+   "effects": [
+    {
+     "give_item": {
+      "item": "ezra_sword"
+     }
+    },
+    {
+     "equip": "ezra_sword"
+    },
+    {
+     "set_flag": "ezra_sword_given"
+    },
+    {
+     "journal": "obs_ezra_sword"
+    }
+   ],
+   "lines": [
+    "Wait a moment. The road to the Jordan is long, and not everyone you will meet on it is an honest traveler.",
+    "Take this. It was mine when I was young and the roads were worse. For protection on the road.",
+    "Keep it sheathed unless you must. A sword answers a danger. It does not answer a question."
+   ],
+   "choices": [
+    {
+     "text": "I will carry it carefully. Thank you, Elder.",
+     "next": null
+    },
+    {
+     "text": "Is it truly mine to keep?",
+     "next": "sword_keep"
+    }
+   ]
+  },
+  "sword_keep": {
+   "lines": [
+    "It has hung on my wall for forty years, doing nothing but gathering dust and reproach. Better it walks than hangs.",
+    "Now go. Come back and tell me what you saw."
    ]
   }
  }

@@ -88,6 +88,84 @@
    "cover": null,
    "long": false,
    "child": true
+  },
+  "toll_taker": {
+   "skin": 3,
+   "hair": "black",
+   "hair_style": "short",
+   "beard": "short",
+   "robe": "umber",
+   "sash": "madder",
+   "trim": null,
+   "mantle": null,
+   "cover": "dust",
+   "long": false,
+   "child": false
+  },
+  "highwayman": {
+   "skin": 2,
+   "hair": "dark",
+   "hair_style": "short",
+   "beard": "full",
+   "robe": "brown",
+   "sash": "olive",
+   "trim": null,
+   "mantle": "umber",
+   "cover": null,
+   "long": false,
+   "child": false
+  },
+  "cutthroat": {
+   "skin": 1,
+   "hair": "brown",
+   "hair_style": "short",
+   "beard": "none",
+   "robe": "dust",
+   "sash": "umber",
+   "trim": null,
+   "mantle": null,
+   "cover": "umber",
+   "long": false,
+   "child": false
+  },
+  "guard": {
+   "skin": 2,
+   "hair": "black",
+   "hair_style": "short",
+   "beard": "none",
+   "robe": "madder",
+   "sash": "umber",
+   "trim": "saffron",
+   "mantle": "brown",
+   "cover": null,
+   "long": false,
+   "child": false
+  },
+  "traveler": {
+   "skin": 0,
+   "hair": "gray",
+   "hair_style": "short",
+   "beard": "none",
+   "robe": "olive",
+   "sash": "cream",
+   "trim": null,
+   "mantle": "dust",
+   "cover": null,
+   "long": true,
+   "child": false
+  },
+  "merchant": {
+   "skin": 3,
+   "hair": "brown",
+   "hair_style": "short",
+   "beard": "short",
+   "robe": "saffron",
+   "sash": "indigo",
+   "trim": null,
+   "mantle": "cream",
+   "cover": null,
+   "long": false,
+   "child": false
   }
  }
 }

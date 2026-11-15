@@ -36,6 +36,14 @@ static func run(e: Dictionary) -> void:
 	if e.has("take_item"):
 		var t: Dictionary = e["take_item"]
 		GameState.remove_item(t["item"], int(t.get("count", 1)))
+	if e.has("equip"):
+		Equipment.equip(e["equip"])
+	if e.has("encounter"):
+		var enc: Dictionary = e["encounter"]
+		Combat.resolve_encounter(enc["id"], enc["outcome"])
+	if e.has("actor"):
+		var a: Dictionary = e["actor"]
+		Combat.command_actor(a["id"], a["command"])
 	if e.has("knowledge"):
 		var k: Dictionary = e["knowledge"]
 		PlayerKnowledge.learn(k["event"], k["level"], k.get("source", ""))

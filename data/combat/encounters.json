@@ -1,0 +1,32 @@
+{
+ "_comment": "Encounter outcomes. Every listed outcome is a valid, complete resolution; none is required. Used by the training yard and available to future quests and journal entries through the 'encounter' condition.",
+ "outcomes": {
+  "diplomacy": "Talked it through",
+  "avoidance": "Got away",
+  "combat_victory": "Defeated in combat",
+  "combat_routed": "Drove them off",
+  "combat_surrender": "Forced to yield"
+ },
+ "encounters": {
+  "yard_toll": {
+   "title": "The toll on the yard road",
+   "actor": "yard_toll_taker",
+   "valid": ["diplomacy", "avoidance", "combat_victory", "combat_routed", "combat_surrender"]
+  },
+  "yard_highwayman": {
+   "title": "The highwayman in the open",
+   "actor": "yard_highwayman",
+   "valid": ["avoidance", "diplomacy", "combat_victory", "combat_routed", "combat_surrender"]
+  },
+  "yard_cutthroat": {
+   "title": "The cutthroat by the wall",
+   "actor": "yard_cutthroat",
+   "valid": ["avoidance", "diplomacy", "combat_victory", "combat_routed", "combat_surrender"]
+  },
+  "yard_guard": {
+   "title": "The guard at the gate",
+   "actor": "yard_guard",
+   "valid": ["avoidance", "diplomacy", "combat_victory", "combat_routed", "combat_surrender"]
+  }
+ }
+}

@@ -1,0 +1,81 @@
+{
+ "_comment": "Behaviour profiles. Disposition describes how ONE individual acts in a situation. It is never derived from a group, faction, religion or ethnicity. Any character can be given any profile.",
+ "defaults": {
+  "hp": 4, "speed": 50, "hit_stun": 0.3, "flee_speed": 74
+ },
+ "profiles": {
+  "villager": {
+   "disposition": "noncombatant",
+   "hp": 4,
+   "alarm_radius": 96,
+   "flee_time": 5.0,
+   "wary_time": 20.0,
+   "seek_help": true,
+   "refusal": "Keep away from me! Please, just keep away!"
+  },
+  "merchant": {
+   "disposition": "noncombatant",
+   "hp": 4,
+   "alarm_radius": 110,
+   "flee_time": 4.0,
+   "wary_time": 25.0,
+   "seek_help": true,
+   "refusal": "No more business with you today. Go away!"
+  },
+  "wayfarer": {
+   "disposition": "noncombatant",
+   "hp": 4,
+   "alarm_radius": 100,
+   "flee_time": 6.0,
+   "wary_time": 15.0,
+   "seek_help": false,
+   "refusal": "I want no trouble. Leave me be."
+  },
+  "toll_taker": {
+   "disposition": "hostile",
+   "hp": 6,
+   "speed": 52,
+   "aggro_radius": 84,
+   "lose_radius": 200,
+   "lose_sight_time": 3.0,
+   "warn_time": 7.0,
+   "warn_line": "Halt! This road is mine. Pay, or turn around.",
+   "attack": {"damage": 3, "reach": 22, "windup": 0.5, "strike": 0.12, "recover": 0.75, "knockback": 80},
+   "low_hp": {"fraction": 0.5, "behavior": "surrender"}
+  },
+  "highwayman": {
+   "disposition": "hostile",
+   "hp": 6,
+   "speed": 62,
+   "aggro_radius": 120,
+   "lose_radius": 190,
+   "lose_sight_time": 2.5,
+   "attack": {"damage": 3, "reach": 22, "windup": 0.5, "strike": 0.12, "recover": 0.8, "knockback": 80},
+   "low_hp": {"fraction": 0.34, "behavior": "fight_on"}
+  },
+  "cutthroat": {
+   "disposition": "hostile",
+   "hp": 6,
+   "speed": 54,
+   "aggro_radius": 100,
+   "lose_radius": 220,
+   "lose_sight_time": 4.0,
+   "attack": {"damage": 3, "reach": 22, "windup": 0.5, "strike": 0.12, "recover": 0.8, "knockback": 80},
+   "low_hp": {"fraction": 0.4, "behavior": "flee"}
+  },
+  "guard": {
+   "disposition": "contextual",
+   "hp": 10,
+   "speed": 58,
+   "aggro_radius": 110,
+   "lose_radius": 220,
+   "lose_sight_time": 4.0,
+   "warn_time": 6.0,
+   "warn_line": "You there! Stop that at once!",
+   "provoked_by": ["assault_witnessed", "attacked"],
+   "calm_after": 10.0,
+   "attack": {"damage": 4, "reach": 22, "windup": 0.55, "strike": 0.12, "recover": 0.8, "knockback": 100},
+   "low_hp": {"fraction": 0.25, "behavior": "surrender"}
+  }
+ }
+}

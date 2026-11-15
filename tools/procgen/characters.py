@@ -246,12 +246,99 @@ CHARACTERS = {
                       mantle="indigo", long=True),
     "hannah": make_spec(skin=2, hair="brown", robe="brown", sash="dust", cover="dust", mantle="umber", long=True),
     "asher": make_spec(skin=2, hair="black", robe="cream", sash="madder", child=True),
+    # combat-test cast (see data/combat/profiles.json); looks carry no meaning about behaviour
+    "toll_taker": make_spec(skin=3, hair="black", beard="short", robe="umber", sash="madder", cover="dust"),
+    "highwayman": make_spec(skin=2, hair="dark", beard="full", robe="brown", sash="olive", mantle="umber"),
+    "cutthroat": make_spec(skin=1, hair="brown", robe="dust", sash="umber", cover="umber"),
+    "guard": make_spec(skin=2, hair="black", robe="madder", sash="umber", mantle="brown", trim="saffron"),
+    "traveler": make_spec(skin=0, hair="gray", robe="olive", sash="cream", mantle="dust", long=True),
+    "merchant": make_spec(skin=3, hair="brown", beard="short", robe="saffron", sash="indigo", mantle="cream"),
 }
+
+ATTACK_FW, ATTACK_FH = 48, 48
+ATTACK_PAD = 8  # a 32px walk frame sits at x=8 inside the 48px attack frame
+STEEL = (214, 220, 226)
+STEEL_D = (150, 160, 172)
+HILT = (120, 84, 52)
+GUARD = (202, 162, 72)
+
+
+def _blade(cv, x0, y0, x1, y1):
+    """Blade from the hand (x0,y0) to the tip (x1,y1): steel with a darker edge, plus a cross-guard."""
+    cv.line(x0, y0, x1, y1, STEEL_D)
+    dx, dy = (1, 0) if abs(y1 - y0) >= abs(x1 - x0) else (0, 1)
+    cv.line(x0 + dx, y0 + dy, x1 + dx, y1 + dy, STEEL)
+    cv.set(x1, y1, (250, 252, 255))
+    # grip + guard at the hand
+    cv.set(x0, y0, HILT)
+    cv.set(x0 - dy, y0 - dx, GUARD)
+    cv.set(x0 + dy, y0 + dx, GUARD)
+    cv.set(x0 + 2 * dy, y0 + 2 * dx, GUARD)
+
+
+# per direction and phase: (body dx, body dy, (hand x, hand y, tip x, tip y)) in the 48px frame.
+# phases: 0 wind-up (blade drawn back), 1 swing (blade fully out), 2 recover (blade lowered)
+ATTACK_POSES = {
+    "down": [(0, 0, (31, 31, 33, 19)), (0, 2, (31, 33, 31, 47)), (0, 1, (30, 33, 28, 42))],
+    "up": [(0, 0, (17, 28, 15, 38)), (0, -2, (18, 26, 18, 6)), (0, -1, (19, 27, 22, 14))],
+    "left": [(0, 0, (22, 29, 31, 18)), (-3, 0, (21, 30, 2, 29)), (-1, 0, (20, 31, 7, 38))],
+    "right": None,  # mirror of left
+}
+
+
+def _attack_frame(sp, d, phase):
+    src = "left" if d == "right" else d
+    if src == "down":
+        base = _front_back(sp, False, 0)
+    elif src == "up":
+        base = _front_back(sp, True, 0)
+    else:
+        base = _side(sp, 0)
+    bx, by, (hx, hy, tx, ty) = ATTACK_POSES[src][phase]
+    cv = Canvas(ATTACK_FW, ATTACK_FH)
+    cv.blit(base, ATTACK_PAD + bx, by)
+    if src == "up":  # blade passes behind the head in the back view
+        pass
+    _blade(cv, hx, hy, tx, ty)
+    cv.outline(P.OUTLINE)
+    out = Canvas(ATTACK_FW, ATTACK_FH)
+    out.ellipse(24, 45.5, 8, 2, (30, 24, 20, 60))
+    out.blit(cv, 0, 0)
+    return out.flip_h() if d == "right" else out
+
+
+def attack_sheet(sp):
+    """3 phases x 4 directions of 48x48 frames (rows: down, left, right, up)."""
+    out = Canvas(ATTACK_FW * 3, ATTACK_FH * 4)
+    for row, d in enumerate(DIRS):
+        for ph in range(3):
+            out.blit(_attack_frame(sp, d, ph), ph * ATTACK_FW, row * ATTACK_FH)
+    return out
+
+
+def swipe_sheet():
+    """Crescent sword-swipe effect: 3 growing arcs x 4 directions of 48x48 frames."""
+    import math
+    out = Canvas(ATTACK_FW * 3, ATTACK_FH * 4)
+    for row, d in enumerate(DIRS):
+        ang0 = {"down": 90, "left": 180, "right": 0, "up": 270}[d]
+        for ph in range(3):
+            cv = Canvas(ATTACK_FW, ATTACK_FH)
+            span = (40, 90, 120)[ph]
+            alpha = (170, 235, 120)[ph]
+            for step in range(span * 2):
+                a = math.radians(ang0 - span / 2 + step / 2.0)
+                for r, col in ((17, (255, 255, 255, alpha)), (18, (255, 244, 200, alpha)), (19, (236, 214, 150, alpha // 2))):
+                    cv.set(int(24 + math.cos(a) * r), int(24 + math.sin(a) * r), col)
+            out.blit(cv, ph * ATTACK_FW, row * ATTACK_FH)
+    return out
 
 
 def write(out_dir, data_dir):
     for name, sp in CHARACTERS.items():
         sheet(sp).save(os.path.join(out_dir, f"{name}.png"))
+        attack_sheet(sp).save(os.path.join(out_dir, f"{name}_attack.png"))
+    swipe_sheet().save(os.path.join(out_dir, "swipe_fx.png"))
     with open(os.path.join(data_dir, "appearance.json"), "w") as f:
         json.dump({"frame_size": [FW, FH], "directions": DIRS, "frames": 4, "characters": CHARACTERS}, f, indent=1)
 

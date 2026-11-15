@@ -16,7 +16,7 @@ static func _args() -> Dictionary:
 static func maybe_autostart(menu: Node) -> void:
 	var args := _args()
 	if args.has("autostart"):
-		var request := {"mode": "new"} if args["autostart"] == "new" else {"mode": "load", "slot": int(args["autostart"])}
+		var request := {"mode": args["autostart"]} if args["autostart"] in ["new", "training"] else {"mode": "load", "slot": int(args["autostart"])}
 		menu.start_game.call_deferred(request)
 	if args.has("menushot"):
 		menu.get_tree().create_timer(0.8).timeout.connect(func(): _shot(menu, args["menushot"]))
@@ -38,7 +38,21 @@ static func apply(game: Node) -> void:
 		game.player.teleport(Vector2(float(p[0]), float(p[1])) * 32.0, args.get("face", ""))
 	if args.has("skipintro") and DialogueRunner.active:
 		DialogueRunner.cancel()
+	if args.has("hp"):
+		Combat.player_hp = int(args["hp"])
+		Combat.player_hp_changed.emit(Combat.player_hp, Combat.max_hp())
+	if args.has("give"):
+		for id in args["give"].split(","):
+			GameState.add_item(id, 1, true)
+			Equipment.equip(id)
+	if args.has("swing"):
+		game.get_tree().create_timer(float(args["swing"])).timeout.connect(func(): game.player.try_attack())
+	if args.has("wake"):
+		for id in args["wake"].split(","):
+			game.region.npcs[id].set_physics_process(true)
 	match args.get("ui", ""):
+		"equipment":
+			game.hud.equipment_view.open()
 		"journal":
 			game.hud.journal_view.open()
 		"pause":

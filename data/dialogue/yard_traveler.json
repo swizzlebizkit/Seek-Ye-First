@@ -1,0 +1,18 @@
+{
+ "id": "yard_traveler",
+ "speaker": "Traveler",
+ "origin": "fiction",
+ "entries": [
+  {
+   "node": "greeting"
+  }
+ ],
+ "nodes": {
+  "greeting": {
+   "lines": [
+    "The road has been rough this season. I only want to reach Capernaum before the market closes.",
+    "They say the man at the toll lets honest answers pass."
+   ]
+  }
+ }
+}

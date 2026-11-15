@@ -8,5 +8,87 @@
   "name": "Copper lepton",
   "description": "The smallest coin in common use. Two of them are scarcely a loaf's worth of bread.",
   "quest_item": false
+ },
+ "ezra_sword": {
+  "name": "Ezra's Sword",
+  "description": "A plain, well-kept sword with a worn grip. Elder Ezra carried it on the roads when he was young, and gave it to you for the road to the Jordan. He told you to keep it sheathed unless you must.",
+  "origin": "fiction",
+  "category": "equipment",
+  "slot": "sword",
+  "unique": true,
+  "gift_from": "ezra",
+  "stats": {"attack": 2, "reach": 26, "cooldown": 0.42}
+ },
+ "rope_belt": {
+  "name": "Rope belt",
+  "description": "A length of knotted rope that keeps a tunic from flapping. Everyone in the village owns one.",
+  "origin": "fiction",
+  "category": "equipment",
+  "slot": "belt",
+  "placeholder": true,
+  "stats": {}
+ },
+ "leather_belt": {
+  "name": "Leather belt",
+  "description": "A stiff leather belt with a bronze buckle. It holds a tunic snugly and does not fray.",
+  "origin": "fiction",
+  "category": "equipment",
+  "slot": "belt",
+  "placeholder": true,
+  "stats": {"defense": 1}
+ },
+ "plain_tunic": {
+  "name": "Plain tunic",
+  "description": "Undyed wool, patched at the elbow. It keeps off the sun and very little else.",
+  "origin": "fiction",
+  "category": "equipment",
+  "slot": "body",
+  "placeholder": true,
+  "stats": {}
+ },
+ "quilted_vest": {
+  "name": "Quilted vest",
+  "description": "Layers of linen stitched together and stuffed with wool. Warm, and a little hard to run in.",
+  "origin": "fiction",
+  "category": "equipment",
+  "slot": "body",
+  "placeholder": true,
+  "stats": {"defense": 1, "mobility": -0.04}
+ },
+ "worn_sandals": {
+  "name": "Worn sandals",
+  "description": "Leather soles and cord ties, shaped by your own feet over many seasons.",
+  "origin": "fiction",
+  "category": "equipment",
+  "slot": "footwear",
+  "placeholder": true,
+  "stats": {}
+ },
+ "road_boots": {
+  "name": "Road boots",
+  "description": "Sturdy boots with hobnailed soles, made for a long walk on a bad road.",
+  "origin": "fiction",
+  "category": "equipment",
+  "slot": "footwear",
+  "placeholder": true,
+  "stats": {"mobility": 0.06}
+ },
+ "wicker_shield": {
+  "name": "Wicker shield",
+  "description": "A round shield of woven reeds over a wooden frame. Light, and good against a blow from the front.",
+  "origin": "fiction",
+  "category": "equipment",
+  "slot": "shield",
+  "placeholder": true,
+  "stats": {"block": 2, "mobility": -0.03}
+ },
+ "felt_cap": {
+  "name": "Felt cap",
+  "description": "A thick felt cap that takes some of the sting out of a knock on the head.",
+  "origin": "fiction",
+  "category": "equipment",
+  "slot": "helmet",
+  "placeholder": true,
+  "stats": {"defense": 1}
  }
 }
