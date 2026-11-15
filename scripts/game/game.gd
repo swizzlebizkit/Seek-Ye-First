@@ -24,6 +24,7 @@ func _ready() -> void:
 		if request.get("mode", "new") == "training":
 			_set_up_training_yard()
 
+	DevHooks.before_build()
 	region = Region.new()
 	region.name = "Region"
 	add_child(region)
@@ -60,10 +61,25 @@ func _ready() -> void:
 	World.transition_requested.connect(_on_transition)
 	hud.defeat_continue.connect(recover_from_defeat)
 
+	World.note_player(GameState.region_id, player.global_position / 32.0)
 	GameState.mode = GameState.Mode.EXPLORE
-	if is_new and request.get("mode", "new") != "training":
+	if is_new and request.get("mode", "new") != "training" and Travel.notice == "":
 		DialogueRunner.start("narration_intro")
+	_show_travel_notice()
 	DevHooks.apply(self)
+
+
+## Tells the player why they are here when a journey has just put them in a place.
+func _show_travel_notice() -> void:
+	match Travel.notice:
+		"sabbath":
+			DialogueRunner.start_text(["The sun has gone down, and the Sabbath has begun.",
+				"No one sets out on the road tonight. Strategic overland travel has paused until the Sabbath ends at sunset tomorrow. You may still walk about the country, look around, and speak with people."])
+		"stop":
+			hud.show_toast("You make camp on the road.")
+		"arrived":
+			hud.show_toast("You arrive at %s." % World.location_name(Travel.last_arrival))
+	Travel.notice = ""
 
 
 ## Leaving through an exit (or stopping on a journey) rebuilds the scene around the new region.
@@ -73,6 +89,19 @@ func _on_transition(_region: String, _entry: String) -> void:
 	GameState.start_request = {"mode": "resume"}
 	GameState.mode = GameState.Mode.EXPLORE
 	get_tree().reload_current_scene()
+
+
+var _sight_tile := Vector2i(-1, -1)
+
+
+func _process(_delta: float) -> void:
+	if player == null or region == null or GameState.mode == GameState.Mode.MENU:
+		return
+	World.player_px = player.global_position
+	var t := Vector2i(floori(player.global_position.x / 32.0), floori(player.global_position.y / 32.0))
+	if t != _sight_tile:
+		_sight_tile = t
+		World.note_player(GameState.region_id, Vector2(t))
 
 
 func _unhandled_input(event: InputEvent) -> void:

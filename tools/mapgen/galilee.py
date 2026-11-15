@@ -262,7 +262,7 @@ def galilee_hills():
         {"type": "waymark", "name": "Road marker", "tile": [35, 20], "radius": 34, "modes": ["land"],
          "text": ["A squared stone at the meeting of the roads, its top worn smooth by travelers' hands.",
                   "West, the road runs back to Kefar Zayit. East, it falls toward the lake and Magdala. From there, other roads lead on."]},
-        {"type": "examine", "name": "The shepherds' cairn", "tile": [41, 7], "radius": 38,
+        {"type": "examine", "name": "The shepherds' cairn", "tile": [41, 7], "radius": 38, "landmark": "shepherds_cairn",
          "variants": [
              {"when": {"not_flag": "saw_cairn"},
               "text": ["A heap of fieldstones taller than a man, each one laid by a passing shepherd for luck or for a landmark.",

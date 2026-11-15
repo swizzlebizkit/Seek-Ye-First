@@ -14,6 +14,7 @@ var dialogue_box: DialogueBox
 var journal_view: JournalView
 var pause_menu: PauseMenu
 var equipment_view: EquipmentView
+var strategic_view: StrategicView
 
 var _tracker: Label
 var _clock: Label
@@ -84,6 +85,9 @@ func _ready() -> void:
 	_root.add_child(journal_view)
 	equipment_view = EquipmentView.new()
 	_root.add_child(equipment_view)
+	strategic_view = StrategicView.new()
+	_root.add_child(strategic_view)
+	GameState.map_requested.connect(func(modes): strategic_view.open(modes))
 	pause_menu = PauseMenu.new()
 	_root.add_child(pause_menu)
 	_build_defeat_screen()

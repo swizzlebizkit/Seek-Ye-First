@@ -38,7 +38,8 @@ func _ready() -> void:
 	clip_contents = true
 	mouse_filter = Control.MOUSE_FILTER_STOP
 	focus_mode = Control.FOCUS_NONE
-	custom_minimum_size = Vector2(360, 360)
+	if custom_minimum_size == Vector2.ZERO:
+		custom_minimum_size = Vector2(360, 360)
 
 
 # -- coordinates -------------------------------------------------------------------------------
@@ -150,7 +151,9 @@ func _gui_input(event: InputEvent) -> void:
 func _draw() -> void:
 	if World.locations.is_empty():
 		return
-	draw_rect(Rect2(Vector2.ZERO, size), LAND)
+	draw_rect(Rect2(Vector2.ZERO, size), Color("b9a97c"))
+	var tl := to_screen(Vector2.ZERO)
+	draw_rect(Rect2(tl, to_screen(Vector2.ONE) - tl), LAND)
 	_draw_features()
 	_draw_areas()
 	_draw_routes()
@@ -269,6 +272,8 @@ func _draw_traveller() -> void:
 	if traveller == Vector2.ZERO:
 		return
 	var p := ll_to_screen(traveller)
+	draw_set_transform(p, 0.0, Vector2(1.4, 1.4))
+	p = Vector2.ZERO
 	if traveller_mode == "water":
 		var hull := PackedVector2Array([p + Vector2(-9, 2), p + Vector2(9, 2), p + Vector2(5, 8), p + Vector2(-5, 8)])
 		draw_colored_polygon(hull, Color("5a3a1e"))
@@ -280,6 +285,7 @@ func _draw_traveller() -> void:
 		draw_colored_polygon(PackedVector2Array([p + Vector2(0, -3), p + Vector2(6, 8), p + Vector2(-6, 8)]), Color("a8452f"))
 		draw_line(p + Vector2(7, 8), p + Vector2(7, -8), INK, 2.0)
 	draw_arc(p, 14.0, 0, TAU, 24, GOLD, 2.0)
+	draw_set_transform(Vector2.ZERO, 0.0, Vector2.ONE)
 
 
 func _text(text: String, pos: Vector2, font_size: int, color: Color, centered: bool = false, outline: bool = false) -> void:

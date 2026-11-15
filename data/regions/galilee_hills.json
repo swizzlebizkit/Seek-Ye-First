@@ -642,6 +642,7 @@
     7
    ],
    "radius": 38,
+   "landmark": "shepherds_cairn",
    "variants": [
     {
      "when": {

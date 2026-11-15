@@ -53,7 +53,7 @@ static func run(e: Dictionary) -> void:
 		World.find_landmark(e["landmark"])
 	if e.has("reveal_place"):
 		var rp: Dictionary = e["reveal_place"]
-		World.reveal(rp["place"], rp.get("level", "rumored"))
+		World.reveal(rp["place"], rp.get("level", "rumored"), rp.get("source", ""))
 	if e.has("knowledge"):
 		var k: Dictionary = e["knowledge"]
 		PlayerKnowledge.learn(k["event"], k["level"], k.get("source", ""))

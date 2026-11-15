@@ -21,6 +21,8 @@ const EPS := 0.0001
 ## start_pos, state ("underway"/"paused"), pause, stop, fired, started_day, stop_requested.
 var journey: Dictionary = {}
 var last_arrival := ""
+## What the next region should tell the player ("sabbath", "stop", "arrived"); not saved.
+var notice := ""
 
 
 func reset() -> void:
@@ -263,6 +265,8 @@ func _simulate(j: Dictionary, budget: float, real: bool) -> Dictionary:
 				break
 			var ev: Dictionary = milestone["event"]
 			(j["fired"] as Array).append(ev["id"])
+			if not real and not bool(ev.get("pause", false)):
+				continue  # an estimate sails on past a harmless event
 			out["text"] = str(ev.get("text", ""))
 			out["event"] = "scripted"
 			out["scripted"] = ev

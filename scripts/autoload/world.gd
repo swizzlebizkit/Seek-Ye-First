@@ -16,6 +16,8 @@ const KINDS := ["village", "town", "city", "port", "ford", "landmark"]
 const MODES := ["land", "water"]
 const REGION_DIR := "res://data/regions"
 const KM_PER_DEG_LAT := 111.2
+const BLOCK := 4  ## tiles per side of a block of explored map
+const SIGHT := 7.0  ## tiles the protagonist can see around them
 
 var map_id := "galilee_judea"
 var maps: Dictionary = {}
@@ -30,7 +32,10 @@ var place_level: Dictionary = {}  # location id -> level (absent = unknown)
 var route_known: Dictionary = {}  # route id -> true
 var landmarks_found: Dictionary = {}  # landmark id -> true
 var regions_visited: Dictionary = {}  # region id -> true
+var explored: Dictionary = {}  # region id -> {block key (by * 1000 + bx): true}; the parts of a region the player has seen
+var place_sources: Dictionary = {}  # location id -> [where the protagonist heard of it]
 var context: Dictionary = {}  # for template regions: {"location": id} or {"route": id, "km": float}
+var player_px := Vector2.ZERO  # where the player stands in the current region (not saved; for the map)
 var entry_id := ""  # the entry the next region should place the player at
 var entry_offset := 0.0  # tiles along that entry, so crossing an edge keeps the player's place
 
@@ -271,6 +276,46 @@ func go(region: String, entry: String) -> void:
 	transition_requested.emit(region, entry)
 
 
+## Marks the blocks of a region around a tile as seen. Returns true if anything new was revealed.
+func note_player(region: String, tile: Vector2) -> bool:
+	var m := region_meta(region)
+	if m.is_empty():
+		return false
+	var seen: Dictionary = explored.get(region, {})
+	var size: Array = m["size"]
+	var fresh := false
+	var r := int(ceil(SIGHT))
+	for dy in range(-r, r + 1):
+		for dx in range(-r, r + 1):
+			if dx * dx + dy * dy > SIGHT * SIGHT:
+				continue
+			var tx := int(tile.x) + dx
+			var ty := int(tile.y) + dy
+			if tx < 0 or ty < 0 or tx >= int(size[0]) or ty >= int(size[1]):
+				continue
+			var key := (ty / BLOCK) * 1000 + (tx / BLOCK)
+			if not seen.has(key):
+				seen[key] = true
+				fresh = true
+	explored[region] = seen
+	if fresh:
+		discovery_changed.emit()
+	return fresh
+
+
+func is_explored(region: String, tile: Vector2i) -> bool:
+	return explored.get(region, {}).has((tile.y / BLOCK) * 1000 + (tile.x / BLOCK))
+
+
+func explored_fraction(region: String) -> float:
+	var m := region_meta(region)
+	if m.is_empty():
+		return 0.0
+	var size: Array = m["size"]
+	var total := int(ceil(float(size[0]) / BLOCK)) * int(ceil(float(size[1]) / BLOCK))
+	return float(explored.get(region, {}).size()) / maxf(1.0, float(total))
+
+
 func _note_region(region: String) -> void:
 	regions_visited[region] = true
 	var loc := current_location(region)
@@ -292,10 +337,15 @@ func knows_place(loc: String, min_level: String = "rumored") -> bool:
 
 
 ## Raises a place to at least `level`. A rumor reveals only an approximate marker.
-func reveal(loc: String, level: String) -> void:
+func reveal(loc: String, level: String, source: String = "") -> void:
 	if not locations.has(loc) or not LEVELS.has(level):
 		push_warning("World.reveal: unknown place or level (%s, %s)" % [loc, level])
 		return
+	if source != "":
+		var heard: Array = place_sources.get(loc, [])
+		if not heard.has(source):
+			heard.append(source)
+		place_sources[loc] = heard
 	if LEVELS.find(level) > level_index(loc):
 		place_level[loc] = level
 		discovery_changed.emit()
@@ -374,6 +424,8 @@ func validate() -> Dictionary:
 			errors.append("location %s: region %s does not exist" % [id, reg])
 		elif reg != null and region_meta(str(reg)).get("anchor", "") != id:
 			errors.append("location %s: region %s is not anchored to it" % [id, reg])
+		elif reg != null and not region_meta(str(reg)).get("entries", {}).has("arrival"):
+			errors.append("location %s: region %s has no arrival entry for travellers" % [id, reg])
 	for id in routes:
 		var r: Dictionary = routes[id]
 		if not locations.has(r.get("a", "")) or not locations.has(r.get("b", "")):
@@ -461,6 +513,8 @@ func reset() -> void:
 	route_known.clear()
 	landmarks_found.clear()
 	regions_visited.clear()
+	explored.clear()
+	place_sources.clear()
 	context.clear()
 	entry_id = ""
 	entry_offset = 0.0
@@ -483,10 +537,19 @@ func serialize() -> Dictionary:
 		"routes": route_known.keys(),
 		"landmarks": landmarks_found.keys(),
 		"regions": regions_visited.keys(),
+		"explored": _explored_out(),
+		"sources": place_sources.duplicate(true),
 		"context": context.duplicate(),
 		"entry": entry_id,
 		"offset": entry_offset,
 	}
+
+
+func _explored_out() -> Dictionary:
+	var out := {}
+	for rid in explored:
+		out[rid] = explored[rid].keys()
+	return out
 
 
 ## Absent or partial data (older saves) falls back to the start-of-game knowledge.
@@ -505,6 +568,16 @@ func deserialize(d: Dictionary) -> void:
 		landmarks_found[id] = true
 	for id in d.get("regions", []):
 		regions_visited[id] = true
+	for rid in d.get("explored", {}):
+		if region_meta(rid).is_empty():
+			continue
+		var seen := {}
+		for k in d["explored"][rid]:
+			seen[int(k)] = true
+		explored[rid] = seen
+	for id in d.get("sources", {}):
+		if locations.has(id):
+			place_sources[id] = (d["sources"][id] as Array).duplicate()
 	context = d.get("context", {}).duplicate()
 	entry_id = str(d.get("entry", ""))
 	entry_offset = float(d.get("offset", 0.0))

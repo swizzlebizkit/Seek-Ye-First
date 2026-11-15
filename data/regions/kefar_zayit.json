@@ -11,6 +11,13 @@
    "span": 1,
    "axis": "y",
    "facing": "left"
+  },
+  "arrival": {
+   "tile": [
+    35,
+    14
+   ],
+   "facing": "left"
   }
  },
  "exits": [

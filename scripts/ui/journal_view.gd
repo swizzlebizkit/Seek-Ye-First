@@ -3,7 +3,8 @@ extends Control
 ## The protagonist's journal, quest log and satchel. Journal entries show their original text first,
 ## then relevant KJV passages, then any later notes the protagonist added.
 
-enum Tab { JOURNAL, QUESTS, SATCHEL }
+enum Tab { JOURNAL, QUESTS, SATCHEL, MAP }
+const TAB_NAMES := ["Journal", "Quests", "Satchel", "Map"]
 
 const TYPE_COLORS := {
 	"eyewitness": Color("9fd3a4"),
@@ -21,6 +22,8 @@ const ORIGIN_LABELS := {
 var _tab_buttons: Array[Button] = []
 var _list: ItemList
 var _details: RichTextLabel
+var _map: JournalMap
+const HINT := "Left/Right: tab    Up/Down: choose    PgUp/PgDn: scroll    J or Esc: close"
 var _hint: Label
 var _tab: int = Tab.JOURNAL
 var _row_ids: Array = []
@@ -54,11 +57,11 @@ func _ready() -> void:
 	var header := HBoxContainer.new()
 	header.add_theme_constant_override("separation", 8)
 	root.add_child(header)
-	for i in range(3):
+	for i in range(TAB_NAMES.size()):
 		var b := Button.new()
 		b.toggle_mode = true
 		b.focus_mode = Control.FOCUS_NONE
-		b.text = ["Journal", "Quests", "Satchel"][i]
+		b.text = TAB_NAMES[i]
 		UiTheme.style_button(b, 22)
 		b.alignment = HORIZONTAL_ALIGNMENT_CENTER
 		b.pressed.connect(_set_tab.bind(i))
@@ -100,6 +103,10 @@ func _ready() -> void:
 	_details.add_theme_font_size_override("italics_font_size", 20)
 	_details.add_theme_color_override("default_color", UiTheme.TEXT)
 	body.add_child(_details)
+	_map = JournalMap.new()
+	_map.visible = false
+	_map.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	body.add_child(_map)
 
 
 func open() -> void:
@@ -123,10 +130,18 @@ func _input(event: InputEvent) -> void:
 		close()
 	elif event.is_action_pressed("ui_left"):
 		get_viewport().set_input_as_handled()
-		_set_tab(wrapi(_tab - 1, 0, 3))
+		_set_tab(wrapi(_tab - 1, 0, TAB_NAMES.size()))
 	elif event.is_action_pressed("ui_right"):
 		get_viewport().set_input_as_handled()
-		_set_tab(wrapi(_tab + 1, 0, 3))
+		_set_tab(wrapi(_tab + 1, 0, TAB_NAMES.size()))
+	elif _tab == Tab.MAP and event is InputEventKey and event.pressed and not event.echo and event.keycode in [KEY_1, KEY_2, KEY_3, KEY_EQUAL, KEY_PLUS, KEY_KP_ADD, KEY_MINUS, KEY_KP_SUBTRACT]:
+		get_viewport().set_input_as_handled()
+		match event.keycode:
+			KEY_1: _map.set_level(JournalMap.Level.STRATEGIC)
+			KEY_2: _map.set_level(JournalMap.Level.REGIONAL)
+			KEY_3: _map.set_level(JournalMap.Level.LOCAL)
+			KEY_EQUAL, KEY_PLUS, KEY_KP_ADD: _map.zoom(1.3)
+			_: _map.zoom(1.0 / 1.3)
 	elif event is InputEventKey and event.pressed and (event.keycode == KEY_PAGEDOWN or event.keycode == KEY_PAGEUP):
 		get_viewport().set_input_as_handled()
 		var bar := _details.get_v_scroll_bar()
@@ -145,6 +160,15 @@ func _refresh() -> void:
 	_tab_buttons[0].text = "Journal (%d)" % Journal.count()
 	_list.clear()
 	_row_ids.clear()
+	var on_map := _tab == Tab.MAP
+	_hint.text = "Left/Right: tab    Up/Down: choose    1 2 3: level    + / -: zoom    J: close" if on_map else HINT
+	_list.visible = not on_map
+	_details.visible = not on_map
+	_map.visible = on_map
+	if on_map:
+		_map.refresh()
+		_map.focus_list()
+		return
 	match _tab:
 		Tab.JOURNAL:
 			for rec in Journal.list():
