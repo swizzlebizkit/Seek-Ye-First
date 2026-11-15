@@ -11,6 +11,8 @@ extends CharacterBody2D
 
 enum State { IDLE, CHALLENGE, CHASE, WINDUP, STRIKE, RECOVER, STUNNED, FLEE, SURRENDER, STANDDOWN, WARY, RETURN, ROUTED, DEAD }
 
+## States from which turning to chase the player is a fresh aggression (so it gets a threat line).
+const THREAT_FROM: Array = [State.IDLE, State.STANDDOWN, State.WARY, State.RETURN, State.ROUTED]
 const LAYER_NPC := 4
 const LAYER_WORLD := 1
 const LAYER_PLAYER := 2
@@ -95,7 +97,7 @@ func _ready() -> void:
 	if _armed():
 		_fx = AnimatedSprite2D.new()
 		_fx.sprite_frames = CharacterSprites.swipe_frames()
-		_fx.position = Vector2(0, -14)
+		_fx.position = Vector2(0, -20)
 		_fx.modulate = Color(1.0, 0.7, 0.6, 0.9)
 		_fx.z_index = 5
 		_fx.visible = false
@@ -162,6 +164,9 @@ func status_name() -> String:
 
 
 func _set_state(s: State) -> void:
+	# Closing in is not an attack by itself: whoever starts coming at the player in earnest says so first.
+	if s == State.CHASE and disposition != "noncombatant" and state in THREAT_FROM:
+		_bark_text(profile.get("threat_line", "I'll cut you down!"), true)
 	state = s
 	state_time = 0.0
 	_facing_locked = s in [State.WINDUP, State.STRIKE, State.RECOVER]
@@ -656,8 +661,9 @@ func _sees_player(radius: float) -> bool:
 
 
 # -- presentation ------------------------------------------------------------------------------
-func _bark_text(text: String) -> void:
+func _bark_text(text: String, threat: bool = false) -> void:
 	_bark.text = text
+	_bark.add_theme_color_override("font_color", Color("ff6a5a") if threat else UiTheme.GOLD)
 	_bark.visible = true
 	_bark.modulate.a = 1.0
 	var tw := create_tween()

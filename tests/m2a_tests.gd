@@ -34,6 +34,7 @@ func run(runner: Node) -> void:
 	await test_avoidance()
 	await test_combat_outcomes()
 	await test_guard()
+	await test_threat_text()
 	await test_interruption()
 	t._section = "m2a-save"
 	await test_save_load()
@@ -867,6 +868,26 @@ func test_guard() -> void:
 	other.queue_free()
 	guard.set_physics_process(false)
 	trav.set_physics_process(false)
+
+
+func test_threat_text() -> void:
+	await t._frames(1)
+	freeze_all()
+	var hw = dummy(Vector2(24.5, 12.0) * 32.0, "highwayman")
+	hw._bark.visible = false
+	hw._set_state(Npc.State.CHASE)
+	t.check(hw._bark.visible and hw._bark.get_theme_color("font_color") == Color("ff6a5a"), "an enemy turning to attack shouts a red threat line")
+	hw._bark.visible = false
+	hw._set_state(Npc.State.WINDUP)
+	hw._set_state(Npc.State.RECOVER)
+	hw._set_state(Npc.State.CHASE)
+	t.check(not hw._bark.visible, "and does not repeat it between swings")
+	var vil = dummy(Vector2(26.5, 8.5) * 32.0, "villager")
+	vil._bark.visible = false
+	vil._set_state(Npc.State.CHASE)
+	t.check(not vil._bark.visible, "noncombatants never threaten")
+	hw.queue_free()
+	vil.queue_free()
 
 
 func test_interruption() -> void:

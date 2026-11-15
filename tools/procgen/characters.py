@@ -276,6 +276,8 @@ def _blade(cv, x0, y0, x1, y1):
     cv.set(x0 + 2 * dy, y0 + 2 * dx, GUARD)
 
 
+SWORD_LIFT = 6
+
 # per direction and phase: (body dx, body dy, (hand x, hand y, tip x, tip y)) in the 48px frame.
 # phases: 0 wind-up (blade drawn back), 1 swing (blade fully out), 2 recover (blade lowered)
 ATTACK_POSES = {
@@ -295,6 +297,8 @@ def _attack_frame(sp, d, phase):
     else:
         base = _side(sp, 0)
     bx, by, (hx, hy, tx, ty) = ATTACK_POSES[src][phase]
+    # the blade is held at stomach height, not hip height
+    hy, ty = max(1, hy - SWORD_LIFT), max(1, ty - SWORD_LIFT)
     cv = Canvas(ATTACK_FW, ATTACK_FH)
     cv.blit(base, ATTACK_PAD + bx, by)
     if src == "up":  # blade passes behind the head in the back view

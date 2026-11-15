@@ -75,7 +75,7 @@ func _ready() -> void:
 
 	_swipe = AnimatedSprite2D.new()
 	_swipe.sprite_frames = CharacterSprites.swipe_frames()
-	_swipe.position = Vector2(0, -14)
+	_swipe.position = Vector2(0, -20)
 	_swipe.z_index = 5
 	_swipe.visible = false
 	add_child(_swipe)
