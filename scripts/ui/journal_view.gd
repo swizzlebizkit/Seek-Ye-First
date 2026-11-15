@@ -201,7 +201,7 @@ func _entry_bbcode(rec: Dictionary) -> String:
 	var type_name: String = Journal.types.get(rec["type"], rec["type"])
 	var status_name: String = Journal.statuses.get(rec["status"], rec["status"])
 	var s := "[b][color=#e8d29a]%s[/color][/b]\n" % _esc(rec["title"])
-	s += "[color=#b3a27c]%s  |  %s  |  Day %d[/color]\n" % [type_name, status_name, rec["day"]]
+	s += "[color=#b3a27c]%s  |  %s  |  %s[/color]\n" % [type_name, status_name, _day_label(int(rec["day"]))]
 	if rec["source"] != "":
 		s += "[color=#b3a27c]From: %s[/color]\n" % _esc(rec["source"])
 	s += "\n%s\n" % _esc(rec["text"])
@@ -214,11 +214,16 @@ func _entry_bbcode(rec: Dictionary) -> String:
 		s += "\n[b][color=#e8d29a]Later notes[/color][/b]\n"
 		for n in rec["notes"]:
 			var who: String = n.get("source", "")
-			s += "- [color=#b3a27c](%sDay %d)[/color] %s\n" % [who + ", " if who != "" else "", int(n.get("day", 1)), _esc(n["text"])]
+			s += "- [color=#b3a27c](%s%s)[/color] %s\n" % [who + ", " if who != "" else "", _day_label(int(n.get("day", 1))), _esc(n["text"])]
 			for ref in n.get("refs", []):
 				s += _scripture_bbcode(ref, "    ")
 	s += "\n[color=#7d705a]%s[/color]" % ORIGIN_LABELS.get(rec.get("origin", "fiction"), "")
 	return s
+
+
+## "Day 12, 14 Iyar": the stored day number, with the date it works out to under the current calendar.
+func _day_label(day: int) -> String:
+	return "Day %d, %s" % [day, Calendar.date_string(day)]
 
 
 ## Connections the protagonist has found for this entry. Never lists one that is still undiscovered.
@@ -226,31 +231,22 @@ func _links_bbcode(entry_id: String) -> String:
 	var found: Array = Journal.links_for(entry_id)
 	if found.is_empty():
 		return ""
-	var s := "
-[b][color=#e8d29a]Found in the Scriptures[/color][/b]
-"
+	var s := "\n[b][color=#e8d29a]Found in the Scriptures[/color][/b]\n"
 	for l in found:
 		var rel: String = Journal.relationships.get(l["relationship"], l["relationship"])
 		var who: String = l["found"].get("source", "")
-		s += "[color=#b3a27c]%s  |  %s (Day %d)[/color]
-" % [rel, who if who != "" else "Found", int(l["found"].get("day", 1))]
+		s += "[color=#b3a27c]%s  |  %s (%s)[/color]\n" % [rel, who if who != "" else "Found", _day_label(int(l["found"].get("day", 1)))]
 		s += _scripture_bbcode(l["reference"])
 		if l.get("note", "") != "":
-			s += "[i]%s[/i]
-" % _esc(l["note"])
+			s += "[i]%s[/i]\n" % _esc(l["note"])
 		if l.get("dissent", "") != "":
-			s += "[color=#b3a27c]Not everyone agrees: %s[/color]
-" % _esc(l["dissent"])
+			s += "[color=#b3a27c]Not everyone agrees: %s[/color]\n" % _esc(l["dissent"])
 		if l.get("nt_ref", "") != "":
-			s += "[color=#7d705a]For the reader: compared in %s, %s.[/color]
-" % [l["nt_ref"],
+			s += "[color=#7d705a]For the reader: compared in %s, %s.[/color]\n" % [l["nt_ref"],
 					"which says so outright" if l.get("explicit_nt", false) else "though it is not stated outright"]
-		s += "[color=#7d705a]%s[/color]
-
-" % ("Understood." if l["found"].get("understood", false) else "I do not yet understand what this means.")
+		s += "[color=#7d705a]%s[/color]\n\n" % ("Understood." if l["found"].get("understood", false) else "I do not yet understand what this means.")
 	if found.size() < Journal.links_possible(entry_id):
-		s += "[i][color=#7d705a]There may be more written about this.[/color][/i]
-"
+		s += "[i][color=#7d705a]There may be more written about this.[/color][/i]\n"
 	return s
 
 

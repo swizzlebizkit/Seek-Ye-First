@@ -1,6 +1,10 @@
 # Sabbath and calendar: plan (not built yet)
 
-Status: **S1 (calendar core) is built**; S2 to S4 are still planned. Decisions are settled (section 9). It exists so the decisions below can be
+Status: **S1 and S1.1 (calendar core, lunisolar correction) are built**; S2 to S4 are still planned.
+
+> **Superseded:** the 360-day-plus-five-extra-days year in sections 2, 9 and 10 was replaced in S1.1 by a
+> lunisolar calendar (29/30-day months, 12 or 13 months a year). See `docs/calendar.md`. The week, the
+> sunset-to-sunset day and the Sabbath rules below are unchanged and still apply. It exists so the decisions below can be
 agreed before any code is written. Proposed home: its own milestone after 2B, because it touches the
 world clock, NPC schedules and the village layout.
 

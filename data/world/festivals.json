@@ -1,0 +1,19 @@
+{
+ "note": "Festival rules, looked up by the calendar. Not used by any gameplay yet. Dates are Nisan-based months and days; they are separate from the canonical-event timeline.",
+ "festivals": {
+  "passover": {"name": "Passover", "month": "Nisan", "day": 14, "length": 1, "sources": ["Leviticus 23:5", "Exodus 12:6"]},
+  "unleavened_bread": {"name": "Feast of Unleavened Bread", "month": "Nisan", "day": 15, "length": 7, "sources": ["Leviticus 23:6-8"]},
+  "weeks": {"name": "Feast of Weeks (Pentecost)", "rule": "pentecost", "length": 1, "sources": ["Leviticus 23:15-21", "Acts 2:1"]},
+  "trumpets": {"name": "Feast of Trumpets", "month": "Tishri", "day": 1, "length": 1, "sources": ["Leviticus 23:24"]},
+  "atonement": {"name": "Day of Atonement", "month": "Tishri", "day": 10, "length": 1, "sources": ["Leviticus 23:27"]},
+  "tabernacles": {"name": "Feast of Tabernacles", "month": "Tishri", "day": 15, "length": 7, "sources": ["Leviticus 23:34-36", "John 7:2"]}
+ },
+ "pentecost": {
+  "note": "Leviticus 23:15-16 counts fifty days from 'the morrow after the sabbath'. Which sabbath was disputed in the period, so both readings are provided and the choice is configuration, not a settled fact.",
+  "selected": "pharisaic",
+  "methods": {
+   "pharisaic": {"label": "The sabbath is the Passover day: count from 16 Nisan.", "count_from": "fixed", "month": "Nisan", "day": 16},
+   "sadducean": {"label": "The sabbath is the weekly Sabbath in Unleavened Bread: count from the Sunday after it.", "count_from": "weekday_after_sabbath", "window_month": "Nisan", "window_start": 15, "window_days": 7}
+  }
+ }
+}

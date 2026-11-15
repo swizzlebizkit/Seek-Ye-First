@@ -1,17 +1,33 @@
 {
- "note": "The game calendar. Days run sunset to sunset and are counted 1, 2, 3 ... with no real date. Day 1 is the first day of the week. A year is twelve 30-day months plus five extra days at the end. The week never resets: every seventh day is the Sabbath whatever the month or year. Weekday names are ordinal, as in the New Testament (Mark 16:2, Acts 20:7).",
+ "note": "The game calendar: a simplified lunisolar Jewish calendar. It is a deterministic gameplay approximation, NOT a reconstruction of first-century practice. Days run sunset to sunset and are counted from Day 1; the seven-day week never resets. See docs/calendar.md.",
  "sunset_minute": 1080,
  "preparation_minute": 900,
+ "start_minute": 420,
  "week": {
-  "length": 7,
+  "start_weekday": 0,
   "sabbath_index": 6,
   "names": ["The first day", "The second day", "The third day", "The fourth day", "The fifth day", "The sixth day", "The Sabbath"]
  },
- "year": {
-  "month_length": 30,
-  "months": ["Nisan", "Iyyar", "Sivan", "Tammuz", "Av", "Elul", "Tishri", "Heshvan", "Kislev", "Tebeth", "Shebat", "Adar"],
-  "extra_days": 5,
-  "extra_name": "Year's end"
+ "months": {
+  "note": "Nisan-based religious-year order. In a leap year the year ends with two months named below instead of 'Adar'.",
+  "names": ["Nisan", "Iyar", "Sivan", "Tammuz", "Av", "Elul", "Tishri", "Cheshvan", "Kislev", "Tevet", "Shevat", "Adar"],
+  "leap_adar_names": ["Adar I", "Adar II"]
  },
- "start_date": {"month": 1, "day": 1}
+ "lunation": {
+  "note": "Month lengths (29 or 30 days) come from a fixed mean lunation, so every playthrough agrees. The real months began when the new moon was first seen, which no formula reproduces.",
+  "mean_length": 29.530589,
+  "phase": 0.0
+ },
+ "intercalation": {
+  "note": "Leap-year policy. 'metonic' repeats a 19-year pattern (a later computational convenience, not the first-century rule); 'never' makes every year ordinary. 'overrides' maps a year number to true (leap) or false (ordinary) and always wins.",
+  "policy": "metonic",
+  "cycle": 19,
+  "leap_positions": [3, 6, 8, 11, 14, 17, 19],
+  "cycle_offset": 0,
+  "overrides": {}
+ },
+ "start_date": {"year": 1, "month": "Nisan", "day": 1},
+ "year_label": "Year",
+ "month_length_overrides": [],
+ "anchors": {}
 }

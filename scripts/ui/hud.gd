@@ -108,7 +108,7 @@ func bind(player: Player) -> void:
 
 func _process(_delta: float) -> void:
 	var phase := Calendar.current_phase()
-	_clock.text = "%s   Day %d   %s" % [Calendar.weekday_label(WorldSim.day, WorldSim.minute_of_day), Calendar.current_day(), WorldSim.time_string()]
+	_clock.text = Calendar.hud_text(WorldSim.day, WorldSim.minute_of_day, WorldSim.time_string())
 	_clock.add_theme_color_override("font_color", UiTheme.GOLD if phase == "sabbath" else UiTheme.MUTED)
 
 

@@ -25,7 +25,7 @@ func time_string() -> String:
 
 func reset() -> void:
 	day = 1
-	minute_of_day = 7.0 * 60.0
+	minute_of_day = float(Calendar.start_minute)
 
 
 func serialize() -> Dictionary:
@@ -34,4 +34,4 @@ func serialize() -> Dictionary:
 
 func deserialize(d: Dictionary) -> void:
 	day = int(d.get("day", 1))
-	minute_of_day = float(d.get("minute", 7.0 * 60.0))
+	minute_of_day = float(d.get("minute", Calendar.start_minute))
