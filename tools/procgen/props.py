@@ -263,6 +263,34 @@ def flowers_patch(seed):
     return cv
 
 
+def scroll(seed):
+    cv = Canvas(16, 12)
+    _shadow(cv, 8, 10, 6, 2)
+    cv.rect(2, 3, 13, 8, (226, 208, 160))
+    cv.hline(2, 13, 3, (244, 230, 190))
+    cv.hline(2, 13, 8, (176, 152, 104))
+    cv.hline(4, 11, 5, (150, 126, 86))
+    cv.hline(4, 9, 6, (150, 126, 86))
+    cv.rect(1, 2, 2, 9, P.WOOD)
+    cv.rect(13, 2, 14, 9, P.WOOD)
+    cv.set(1, 2, P.WOOD_LIGHT)
+    cv.set(13, 2, P.WOOD_LIGHT)
+    cv.outline(P.OUTLINE)
+    return cv
+
+
+def flatbread(seed):
+    cv = Canvas(14, 10)
+    _shadow(cv, 7, 8, 5, 2)
+    cv.ellipse(7, 5, 5.5, 3.2, (170, 118, 66))
+    cv.ellipse(7, 4.5, 5, 2.8, (216, 170, 104))
+    cv.set(5, 4, (170, 118, 66))
+    cv.set(8, 3, (170, 118, 66))
+    cv.set(9, 5, (170, 118, 66))
+    cv.outline(P.OUTLINE)
+    return cv
+
+
 PROPS = [
     # name, builder, origin, collider (w, h) or None
     ("olive_tree_a", lambda: olive_tree(1), (32, 76), (14, 8)),
@@ -280,6 +308,8 @@ PROPS = [
     ("signpost", lambda: signpost(13), (16, 44), (6, 5)),
     ("clay_oven", lambda: clay_oven(14), (18, 31), (26, 10)),
     ("flowers_patch", lambda: flowers_patch(15), (10, 11), None),
+    ("scroll", lambda: scroll(16), (8, 11), None),
+    ("flatbread", lambda: flatbread(17), (7, 9), None),
 ]
 
 

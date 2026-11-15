@@ -17,6 +17,9 @@ const BASE_MAX_HP := 12  # drawn as hearts of 2 points each
 const LASTING_STATUSES := ["dead", "fled", "routed", "surrendered", "stood_down"]
 
 var player_hp := BASE_MAX_HP
+var regen: Dictionary = {"enabled": false}
+var calm_time := 0.0  # seconds since the protagonist last fought or was hurt
+var _regen_clock := 0.0
 var outcomes: Dictionary = {}  # encounter id -> {"outcome": String, "day": int}
 var consequences: Dictionary = {}
 var actors: Dictionary = {}  # actor id -> {"status": String, "hp": int}
@@ -36,11 +39,16 @@ func _ready() -> void:
 	if e is Dictionary:
 		encounters = e.get("encounters", {})
 		outcome_labels = e.get("outcomes", {})
+	var pl = DataFiles.load_json("res://data/combat/player.json")
+	if pl is Dictionary:
+		regen = pl.get("regen", regen)
 	reset()
 
 
 func reset() -> void:
 	player_hp = BASE_MAX_HP
+	calm_time = 0.0
+	_regen_clock = 0.0
 	outcomes.clear()
 	actors.clear()
 	consequences = {
@@ -86,12 +94,64 @@ func damage_after_armor(raw: int, from_front: bool) -> int:
 func hurt_player(amount: int) -> int:
 	if player_hp <= 0 or amount <= 0:
 		return 0
+	calm_time = 0.0
 	player_hp = maxi(0, player_hp - amount)
 	player_hp_changed.emit(player_hp, max_hp())
 	if player_hp == 0:
 		consequences["times_overcome"] = int(consequences.get("times_overcome", 0)) + 1
 		player_defeated.emit()
 	return amount
+
+
+func _process(delta: float) -> void:
+	if GameState.mode != GameState.Mode.EXPLORE:
+		return
+	calm_time += delta
+	if not regen.get("enabled", false) or player_hp <= 0 or calm_time < float(regen.get("delay", 8.0)):
+		_regen_clock = 0.0
+		return
+	if player_hp >= regen_ceiling():
+		return
+	_regen_clock += delta
+	if _regen_clock >= float(regen.get("interval", 4.0)):
+		_regen_clock = 0.0
+		heal_player(mini(int(regen.get("amount", 1)), regen_ceiling() - player_hp))
+
+
+## The most that resting alone will restore, in health points.
+func regen_ceiling() -> int:
+	return int(ceil(max_hp() * float(regen.get("ceiling", 0.5))))
+
+
+## Eats food from the satchel: the smallest portion that fully covers the wound, else the biggest.
+## Returns the item eaten, or "" if nothing was eaten.
+func eat() -> String:
+	if player_hp <= 0:
+		return ""
+	var missing := max_hp() - player_hp
+	if missing <= 0:
+		GameState.toast.emit("You are not hurt.")
+		return ""
+	var best := ""
+	for id in GameState.inventory:
+		var h := int(GameState.items.get(id, {}).get("heal", 0))
+		if h <= 0:
+			continue
+		if best == "":
+			best = id
+			continue
+		var bh := int(GameState.items[best]["heal"])
+		var covers := h >= missing
+		var best_covers := bh >= missing
+		if (covers and (not best_covers or h < bh)) or (not covers and not best_covers and h > bh):
+			best = id
+	if best == "":
+		GameState.toast.emit("You have nothing to eat.")
+		return ""
+	GameState.remove_item(best, 1)
+	heal_player(int(GameState.items[best]["heal"]))
+	GameState.toast.emit("You eat the %s." % GameState.item_name(best).to_lower())
+	return best
 
 
 func heal_player(amount: int = BASE_MAX_HP) -> void:
@@ -161,6 +221,7 @@ func command_actor(id: String, command: String) -> void:
 
 
 func swung(origin: Vector2) -> void:
+	calm_time = 0.0
 	player_swung.emit(origin)
 
 

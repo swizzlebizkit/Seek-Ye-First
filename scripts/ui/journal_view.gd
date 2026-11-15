@@ -161,6 +161,8 @@ func _refresh() -> void:
 		Tab.SATCHEL:
 			for id in GameState.inventory:
 				var worn := "  (equipped)" if Equipment.is_equipped(id) else ""
+				if GameState.flags.get("scroll_read_" + id, false):
+					worn = "  (read to you)"
 				_list.add_item("%s  x%d%s" % [GameState.item_name(id), GameState.item_count(id), worn])
 				_row_ids.append(id)
 	if _row_ids.is_empty():
@@ -207,6 +209,7 @@ func _entry_bbcode(rec: Dictionary) -> String:
 		s += "\n[b][color=#e8d29a]Scripture to compare (KJV)[/color][/b]\n"
 		for ref in rec["refs"]:
 			s += _scripture_bbcode(ref)
+	s += _links_bbcode(rec["id"])
 	if not rec["notes"].is_empty():
 		s += "\n[b][color=#e8d29a]Later notes[/color][/b]\n"
 		for n in rec["notes"]:
@@ -215,6 +218,39 @@ func _entry_bbcode(rec: Dictionary) -> String:
 			for ref in n.get("refs", []):
 				s += _scripture_bbcode(ref, "    ")
 	s += "\n[color=#7d705a]%s[/color]" % ORIGIN_LABELS.get(rec.get("origin", "fiction"), "")
+	return s
+
+
+## Connections the protagonist has found for this entry. Never lists one that is still undiscovered.
+func _links_bbcode(entry_id: String) -> String:
+	var found: Array = Journal.links_for(entry_id)
+	if found.is_empty():
+		return ""
+	var s := "
+[b][color=#e8d29a]Found in the Scriptures[/color][/b]
+"
+	for l in found:
+		var rel: String = Journal.relationships.get(l["relationship"], l["relationship"])
+		var who: String = l["found"].get("source", "")
+		s += "[color=#b3a27c]%s  |  %s (Day %d)[/color]
+" % [rel, who if who != "" else "Found", int(l["found"].get("day", 1))]
+		s += _scripture_bbcode(l["reference"])
+		if l.get("note", "") != "":
+			s += "[i]%s[/i]
+" % _esc(l["note"])
+		if l.get("dissent", "") != "":
+			s += "[color=#b3a27c]Not everyone agrees: %s[/color]
+" % _esc(l["dissent"])
+		if l.get("nt_ref", "") != "":
+			s += "[color=#7d705a]For the reader: compared in %s, %s.[/color]
+" % [l["nt_ref"],
+					"which says so outright" if l.get("explicit_nt", false) else "though it is not stated outright"]
+		s += "[color=#7d705a]%s[/color]
+
+" % ("Understood." if l["found"].get("understood", false) else "I do not yet understand what this means.")
+	if found.size() < Journal.links_possible(entry_id):
+		s += "[i][color=#7d705a]There may be more written about this.[/color][/i]
+"
 	return s
 
 

@@ -5,7 +5,7 @@ extends Node
 
 const TEST_SAVE_DIR := "user://test_saves"
 const EFFECT_KEYS := ["when", "set_flag", "clear_flag", "journal", "annotate", "set_status", "quest_start",
-	"quest_objective", "give_item", "take_item", "knowledge", "equip", "encounter", "actor"]
+	"quest_objective", "give_item", "take_item", "knowledge", "equip", "encounter", "actor", "scripture_link", "read_scroll"]
 const COND_KEYS := ["flag", "not_flag", "has_item", "equipped", "quest_active", "quest_done", "knows", "encounter", "actor"]
 
 var _failures: Array[String] = []
@@ -38,6 +38,8 @@ func _ready() -> void:
 	await test_integration()
 	_section = "m2a"
 	await load("res://tests/m2a_tests.gd").new().run(self)
+	_section = "m2a1"
+	await load("res://tests/m2a1_tests.gd").new().run(self)
 
 	_clean_test_saves()
 	print("")
@@ -567,7 +569,7 @@ func test_integration() -> void:
 	check(JSON.stringify(_norm(Journal.serialize())) == journal_before, "journal identical after reload")
 	check(GameState.item_count("water_jar") == 1, "inventory restored after reload")
 	check(not DialogueRunner.active, "no intro replay when loading a save")
-	var jar_nodes: Array = game2.region.entities.get_children().filter(func(n): return n is PickupInteractable)
+	var jar_nodes: Array = game2.region.entities.get_children().filter(func(n): return n is PickupInteractable and n.pickup_id == "water_jar")
 	check(jar_nodes.is_empty(), "collected jar does not respawn")
 	game2.queue_free()
 	await get_tree().process_frame

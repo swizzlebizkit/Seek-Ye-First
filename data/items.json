@@ -17,7 +17,11 @@
   "slot": "sword",
   "unique": true,
   "gift_from": "ezra",
-  "stats": {"attack": 2, "reach": 26, "cooldown": 0.42}
+  "stats": {
+   "attack": 2,
+   "reach": 26,
+   "cooldown": 0.42
+  }
  },
  "rope_belt": {
   "name": "Rope belt",
@@ -35,7 +39,9 @@
   "category": "equipment",
   "slot": "belt",
   "placeholder": true,
-  "stats": {"defense": 1}
+  "stats": {
+   "defense": 1
+  }
  },
  "plain_tunic": {
   "name": "Plain tunic",
@@ -53,7 +59,10 @@
   "category": "equipment",
   "slot": "body",
   "placeholder": true,
-  "stats": {"defense": 1, "mobility": -0.04}
+  "stats": {
+   "defense": 1,
+   "mobility": -0.04
+  }
  },
  "worn_sandals": {
   "name": "Worn sandals",
@@ -71,7 +80,9 @@
   "category": "equipment",
   "slot": "footwear",
   "placeholder": true,
-  "stats": {"mobility": 0.06}
+  "stats": {
+   "mobility": 0.06
+  }
  },
  "wicker_shield": {
   "name": "Wicker shield",
@@ -80,7 +91,10 @@
   "category": "equipment",
   "slot": "shield",
   "placeholder": true,
-  "stats": {"block": 2, "mobility": -0.03}
+  "stats": {
+   "block": 2,
+   "mobility": -0.03
+  }
  },
  "felt_cap": {
   "name": "Felt cap",
@@ -89,6 +103,45 @@
   "category": "equipment",
   "slot": "helmet",
   "placeholder": true,
-  "stats": {"defense": 1}
+  "stats": {
+   "defense": 1
+  }
+ },
+ "scroll_malachi": {
+  "name": "Scroll of Malachi",
+  "description": "A worn scroll in a cracked leather case, written in Hebrew. You cannot read it well enough to follow it. Elder Ezra could.",
+  "origin": "fiction",
+  "category": "scroll",
+  "unique": true,
+  "reveals": [
+   "malachi_3_1",
+   "malachi_4_5"
+  ],
+  "teacher": "Elder Ezra"
+ },
+ "scroll_kings": {
+  "name": "Scroll of the Kings",
+  "description": "A short scroll, dark with age and handling, in an old Hebrew hand. Someone must have prized it once. You cannot read it well enough to follow it.",
+  "origin": "fiction",
+  "category": "scroll",
+  "unique": true,
+  "reveals": [
+   "kings_1_8"
+  ],
+  "teacher": "Elder Ezra"
+ },
+ "fig_cake": {
+  "name": "Fig cake",
+  "description": "Pressed dried figs, sweet and dense. Eating one takes the edge off a hard day.",
+  "origin": "fiction",
+  "category": "food",
+  "heal": 4
+ },
+ "flatbread": {
+  "name": "Flatbread",
+  "description": "A round of plain barley bread, still good.",
+  "origin": "fiction",
+  "category": "food",
+  "heal": 2
  }
 }

@@ -12,6 +12,29 @@
   },
   {
    "when": {
+    "flag": "ezra_consulted",
+    "has_item": "scroll_malachi",
+    "not_flag": "scroll_read_scroll_malachi"
+   },
+   "node": "read_malachi"
+  },
+  {
+   "when": {
+    "flag": "ezra_consulted",
+    "has_item": "scroll_kings",
+    "not_flag": "scroll_read_scroll_kings"
+   },
+   "node": "read_kings"
+  },
+  {
+   "when": {
+    "flag": "ezra_sword_given",
+    "not_flag": "ezra_scroll_hint"
+   },
+   "node": "scripture_hint"
+  },
+  {
+   "when": {
     "flag": "ezra_consulted"
    },
    "node": "after"
@@ -39,6 +62,12 @@
     },
     {
      "journal": "testimony_ezra"
+    },
+    {
+     "scripture_link": {
+      "id": "isaiah_40_3",
+      "source": "Elder Ezra"
+     }
     },
     {
      "quest_objective": {
@@ -101,6 +130,14 @@
   "after": {
    "lines": [
     "Have you been to the river? No? Then why are you standing in front of an old man's door? Go and see. Come back and tell me."
+   ],
+   "effects": [
+    {
+     "scripture_link": {
+      "id": "isaiah_40_3",
+      "source": "Elder Ezra"
+     }
+    }
    ]
   },
   "sword_gift": {
@@ -140,6 +177,68 @@
    "lines": [
     "It has hung on my wall for forty years, doing nothing but gathering dust and reproach. Better it walks than hangs.",
     "Now go. Come back and tell me what you saw."
+   ]
+  },
+  "scripture_hint": {
+   "effects": [
+    {
+     "set_flag": "ezra_scroll_hint"
+    },
+    {
+     "journal": "q_look_backward"
+    }
+   ],
+   "lines": [
+    "One thing more, and then I will let you go. You heard me give you Isaiah's words. There is a good deal more written than Isaiah.",
+    "When something strange happens, I do not ask first what it means. I ask what was written before it. The Law, the Prophets, the Psalms are a long memory, and what I cannot recall I go and look up.",
+    "If you come across an old scroll, on the road or in the grass, bring it to me. My eyes are poor, but I can still read the Hebrew, and I will tell you what it says. What it means, I will leave to you."
+   ],
+   "choices": [
+    {
+     "text": "Where would I find such a scroll?",
+     "next": "scroll_where"
+    },
+    {
+     "text": "I will keep my eyes open.",
+     "next": null
+    }
+   ]
+  },
+  "scroll_where": {
+   "lines": [
+    "Scrolls are lost, sold, hidden in a hayloft and forgotten. A careless traveler drops one; a widow sells her husband's. I cannot tell you where. That is why one looks.",
+    "Look under things. Look where people do not."
+   ]
+  },
+  "read_malachi": {
+   "effects": [
+    {
+     "read_scroll": "scroll_malachi"
+    },
+    {
+     "set_flag": "ezra_scroll_hint"
+    }
+   ],
+   "lines": [
+    "Hand it here. Slowly, slowly. Ah. Malachi, the last of the Twelve.",
+    "He wrote: 'Behold, I will send my messenger, and he shall prepare the way before me: and the LORD, whom ye seek, shall suddenly come to his temple, even the messenger of the covenant, whom ye delight in: behold, he shall come, saith the LORD of hosts.'",
+    "And near the end of the book: 'Behold, I will send you Elijah the prophet before the coming of the great and dreadful day of the LORD.'",
+    "I do not tell you who the messenger is. Men have argued it for four hundred years. I tell you only what is written. Set it beside what you have heard, and see whether the two sit well together."
+   ]
+  },
+  "read_kings": {
+   "effects": [
+    {
+     "read_scroll": "scroll_kings"
+    },
+    {
+     "set_flag": "ezra_scroll_hint"
+    }
+   ],
+   "lines": [
+    "The books of the Kings. Let me find the place. Here.",
+    "The king asked his men what manner of man had met them. They answered, 'He was an hairy man, and girt with a girdle of leather about his loins.' And the king said, 'It is Elijah the Tishbite.'",
+    "You have been telling me what Hannah saw, and I see why you brought this. But a leather girdle is what poor men and wilderness men wear. Do not make too much of a garment."
    ]
   }
  }

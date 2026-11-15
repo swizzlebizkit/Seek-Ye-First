@@ -155,6 +155,10 @@ func _unhandled_input(event: InputEvent) -> void:
 	elif event.is_action_pressed("dodge"):
 		get_viewport().set_input_as_handled()
 		try_dodge()
+	elif event.is_action_pressed("eat"):
+		get_viewport().set_input_as_handled()
+		if swing_phase < 0 and dodge_time <= 0.0:
+			Combat.eat()
 
 
 func teleport(pos: Vector2, face: String = "") -> void:

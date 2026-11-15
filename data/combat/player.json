@@ -1,0 +1,10 @@
+{
+ "note": "Recovery options for the protagonist. Resting heals slowly, but only up to 'ceiling' of full health, so a real wound needs food, a meal or a healer. Set 'enabled' to false for no regeneration at all.",
+ "regen": {
+  "enabled": true,
+  "delay": 8.0,
+  "interval": 4.0,
+  "amount": 1,
+  "ceiling": 0.5
+ }
+}

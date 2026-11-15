@@ -382,6 +382,66 @@
   },
   {
    "type": "pickup",
+   "id": "yard_crate_figs",
+   "name": "Crate of fig cakes",
+   "item": "fig_cake",
+   "prop": "crate",
+   "tile": [
+    10,
+    4
+   ],
+   "radius": 20,
+   "text": [
+    "A crate of pressed fig cakes. Eating one (H) restores health. You take one."
+   ]
+  },
+  {
+   "type": "pickup",
+   "id": "yard_crate_bread",
+   "name": "Basket of bread",
+   "item": "flatbread",
+   "prop": "crate",
+   "tile": [
+    10,
+    7
+   ],
+   "radius": 20,
+   "text": [
+    "A basket of flatbread. Eating one (H) restores a little health. You take one."
+   ]
+  },
+  {
+   "type": "pickup",
+   "id": "yard_crate_scroll",
+   "name": "Scroll case",
+   "item": "scroll_malachi",
+   "prop": "crate",
+   "tile": [
+    12,
+    4
+   ],
+   "radius": 20,
+   "text": [
+    "A case with an old scroll. Elder Ezra could read it, but only in the village. You take one."
+   ]
+  },
+  {
+   "type": "pickup",
+   "id": "yard_crate_scroll2",
+   "name": "Scroll case",
+   "item": "scroll_kings",
+   "prop": "crate",
+   "tile": [
+    12,
+    7
+   ],
+   "radius": 20,
+   "text": [
+    "A case with another old scroll. You take one."
+   ]
+  },
+  {
+   "type": "pickup",
    "id": "yard_crate_coin",
    "name": "Coin box",
    "item": "lepton",
@@ -414,7 +474,7 @@
    "radius": 28,
    "text": [
     "TRAINING YARD (development only).",
-    "K or X swings the sword. Shift or L is a quick dodge step. I or Q opens equipment.",
+    "K, X or R swings the sword. H eats food. Shift or L is a quick dodge step. I or Q opens equipment.",
     "The toll-taker on the road will talk. The highwayman will give chase and can be outrun. The cutthroat by the wall will fight. The guard reacts only to what he sees you do.",
     "Every way an encounter can end counts. Nothing here has to be fought."
    ]

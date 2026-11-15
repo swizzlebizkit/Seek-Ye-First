@@ -1139,6 +1139,51 @@
    ]
   },
   {
+   "type": "pickup",
+   "id": "scroll_malachi",
+   "name": "Old scroll",
+   "item": "scroll_malachi",
+   "prop": "scroll",
+   "tile": [
+    12,
+    15
+   ],
+   "radius": 18,
+   "text": [
+    "A scroll in a cracked leather case, half hidden in the grass under the olive tree. Hebrew, in a careful hand. You cannot read it well, but someone could."
+   ]
+  },
+  {
+   "type": "pickup",
+   "id": "scroll_kings",
+   "name": "Dark scroll",
+   "item": "scroll_kings",
+   "prop": "scroll",
+   "tile": [
+    27,
+    19
+   ],
+   "radius": 18,
+   "text": [
+    "A short scroll, dark with handling, lying where a traveler must have dropped it. Hebrew writing, which you cannot follow."
+   ]
+  },
+  {
+   "type": "pickup",
+   "id": "village_bread",
+   "name": "Flatbread",
+   "item": "flatbread",
+   "prop": "flatbread",
+   "tile": [
+    31,
+    14
+   ],
+   "radius": 18,
+   "text": [
+    "A round of barley bread, left on the wall for whoever is hungry. You take it."
+   ]
+  },
+  {
    "type": "examine",
    "name": "The well",
    "tile": [

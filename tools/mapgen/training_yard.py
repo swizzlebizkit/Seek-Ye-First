@@ -58,6 +58,10 @@ crates = [
     ("yard_crate_belt", "Crate of belts", "leather_belt", [8, 4], "A crate of leather belts."),
     ("yard_crate_vest", "Crate of vests", "quilted_vest", [4, 7], "A crate of quilted vests."),
     ("yard_crate_boots", "Crate of boots", "road_boots", [6, 7], "A crate of road boots."),
+    ("yard_crate_figs", "Crate of fig cakes", "fig_cake", [10, 4], "A crate of pressed fig cakes. Eating one (H) restores health."),
+    ("yard_crate_bread", "Basket of bread", "flatbread", [10, 7], "A basket of flatbread. Eating one (H) restores a little health."),
+    ("yard_crate_scroll", "Scroll case", "scroll_malachi", [12, 4], "A case with an old scroll. Elder Ezra could read it, but only in the village."),
+    ("yard_crate_scroll2", "Scroll case", "scroll_kings", [12, 7], "A case with another old scroll."),
     ("yard_crate_coin", "Coin box", "lepton", [8, 7], "A box of copper coins for the toll-taker."),
 ]
 interactables = []
@@ -68,7 +72,7 @@ interactables += [
     {"type": "ledger", "name": "Training ledger", "tile": [4.5, 12.4], "radius": 28},
     {"type": "examine", "name": "Yard rules", "tile": [6.5, 12.4], "radius": 28,
      "text": ["TRAINING YARD (development only).",
-              "K or X swings the sword. Shift or L is a quick dodge step. I or Q opens equipment.",
+              "K, X or R swings the sword. H eats food. Shift or L is a quick dodge step. I or Q opens equipment.",
               "The toll-taker on the road will talk. The highwayman will give chase and can be outrun. "
               "The cutthroat by the wall will fight. The guard reacts only to what he sees you do.",
               "Every way an encounter can end counts. Nothing here has to be fought."]},

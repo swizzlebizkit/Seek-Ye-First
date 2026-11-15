@@ -1,0 +1,48 @@
+{
+ "note": "Old Testament passages the protagonist can come to connect with a journal entry. Nothing here shows in the journal until a conversation or a scroll reveals it, and once found it stays. 'nt_ref' is the New Testament passage that makes (or illustrates) the connection; the player sees it with the link, the protagonist does not read it. Teachers do not agree on everything, so a link may carry a 'dissent'.",
+ "relationships": {
+  "prophecy": "A prophecy the New Testament applies",
+  "typology": "A pattern the New Testament draws",
+  "theme": "A recurring theme",
+  "parallel": "A similar account"
+ },
+ "links": {
+  "isaiah_40_3": {
+   "entry": "testimony_ezra",
+   "testament": "old",
+   "reference": "Isaiah 40:3",
+   "relationship": "prophecy",
+   "nt_ref": "Matthew 3:3",
+   "explicit_nt": true,
+   "note": "Ezra read me these words himself. I do not know yet what they are for."
+  },
+  "malachi_3_1": {
+   "entry": "rumor_yosef",
+   "testament": "old",
+   "reference": "Malachi 3:1",
+   "relationship": "prophecy",
+   "nt_ref": "Matthew 11:10",
+   "explicit_nt": true,
+   "note": "A messenger sent ahead to prepare the way. Yosef spoke of a preacher crying out that the kingdom is near. I am not sure the two belong together."
+  },
+  "malachi_4_5": {
+   "entry": "testimony_hannah",
+   "testament": "old",
+   "reference": "Malachi 4:5-6",
+   "relationship": "prophecy",
+   "nt_ref": "Matthew 11:14",
+   "explicit_nt": true,
+   "note": "Elijah, promised before the great day. Hannah described the preacher's rough clothing, and I cannot stop thinking about the old stories of Elijah."
+  },
+  "kings_1_8": {
+   "entry": "testimony_hannah",
+   "testament": "old",
+   "reference": "2 Kings 1:8",
+   "relationship": "parallel",
+   "nt_ref": "Matthew 3:4",
+   "explicit_nt": false,
+   "note": "A hairy man, girt with a girdle of leather. It is how they described Elijah. It is also how Hannah described the preacher.",
+   "dissent": "Ezra says a leather girdle is only what poor men wore in the wilderness, and that I should not read too much into clothing."
+  }
+ }
+}

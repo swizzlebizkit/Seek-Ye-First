@@ -25,6 +25,11 @@ static func run(e: Dictionary) -> void:
 	if e.has("set_status"):
 		var s: Dictionary = e["set_status"]
 		Journal.set_status(s["entry"], s["status"])
+	if e.has("scripture_link"):
+		var l: Dictionary = e["scripture_link"]
+		Journal.discover_link(l["id"], l.get("source", ""))
+	if e.has("read_scroll"):
+		read_scroll(e["read_scroll"])
 	if e.has("quest_start"):
 		Quests.start(e["quest_start"])
 	if e.has("quest_objective"):
@@ -47,3 +52,15 @@ static func run(e: Dictionary) -> void:
 	if e.has("knowledge"):
 		var k: Dictionary = e["knowledge"]
 		PlayerKnowledge.learn(k["event"], k["level"], k.get("source", ""))
+
+
+## A teacher reads a scroll the protagonist is carrying. Every link it holds is found (and so becomes
+## permanent in the journal). The scroll stays in the satchel; reading it twice does nothing new.
+static func read_scroll(item_id: String) -> void:
+	var def: Dictionary = GameState.items.get(item_id, {})
+	if def.get("category", "") != "scroll" or GameState.item_count(item_id) < 1:
+		push_warning("read_scroll: '%s' is not a scroll in the satchel" % item_id)
+		return
+	for lid in def.get("reveals", []):
+		Journal.discover_link(lid, def.get("teacher", ""))
+	GameState.set_flag("scroll_read_" + item_id, true)

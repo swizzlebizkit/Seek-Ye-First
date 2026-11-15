@@ -75,6 +75,15 @@
    "origin": "fiction",
    "text": "Before I set out, Elder Ezra pressed his old sword into my hands. He said the road to the Jordan is long and not everyone on it is honest. He told me to keep it sheathed unless I must, for a sword answers a danger but does not answer a question. I do not know yet whether I will be glad to have it.",
    "refs": []
+  },
+  "q_look_backward": {
+   "type": "question",
+   "status": "open",
+   "title": "What was written before?",
+   "source": "Elder Ezra of Kefar Zayit",
+   "origin": "fiction",
+   "text": "Ezra says that when something strange happens, he asks what was written before it. He wants me to bring him any old scroll I find, and he will read it to me. What it means, he says, he will leave to me.",
+   "refs": []
   }
  }
 }

@@ -58,7 +58,7 @@ func _ready() -> void:
 	_clock.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	_root.add_child(_clock)
 
-	_hint = UiTheme.outlined(UiTheme.label("WASD move   E interact   K attack   Shift dodge   I equipment   J journal   Esc menu   F5 / F9 quick save / load", 15, UiTheme.MUTED))
+	_hint = UiTheme.outlined(UiTheme.label("WASD move   E interact   K attack   Shift dodge   H eat   I equipment   J journal   Esc menu   F5 / F9 quick save / load", 15, UiTheme.MUTED))
 	_hint.position = Vector2(24, 692)
 	_root.add_child(_hint)
 
