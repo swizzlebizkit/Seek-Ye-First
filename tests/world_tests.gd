@@ -689,6 +689,28 @@ func test_region_data() -> void:
 			for ef in it.get("effects", []):
 				t.check(ef is Dictionary, "%s effect is well formed" % it["name"])
 		rg.free()
+	# trees stand on open ground, never in water, rock, sand or on a road
+	for id in ids:
+		var rm := World.region_meta(id)
+		for pr in rm["props"]:
+			if str(pr["prop"]) in ["olive_tree_a", "olive_tree_b", "cypress"]:
+				var ch: String = rm["ground"][int(pr["tile"][1])][int(pr["tile"][0])]
+				t.check(ch in ["g", "h"], "%s: a %s at %s stands on open ground, not '%s'" % [id, pr["prop"], pr["tile"], ch])
+	# every road sign has its activation point on it
+	var signs := 0
+	for id in ids:
+		var rm2 := World.region_meta(id)
+		for it in rm2["interactables"]:
+			if not (str(it["name"]) in ["Road marker", "The road", "Signpost"]):
+				continue
+			var best := 99.0
+			for pr in rm2["props"]:
+				if str(pr["prop"]) == "signpost":
+					var foot := Vector2(float(pr["tile"][0]) + 0.5, float(pr["tile"][1]) + 1.0)
+					best = minf(best, foot.distance_to(Vector2(float(it["tile"][0]), float(it["tile"][1]))))
+			t.check(best <= 0.75, "%s: '%s' is on its signpost (%.2f tiles away)" % [id, it["name"], best])
+			signs += 1
+	t.check(signs >= 5, "road signs were checked (%d)" % signs)
 	# the countryside is a real place
 	var hills := World.region_meta("galilee_hills")
 	t.check(int(hills["size"][0]) >= 60, "the hills are a large region")

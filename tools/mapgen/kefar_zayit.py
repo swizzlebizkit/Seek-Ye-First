@@ -136,7 +136,7 @@ prop("basket", 30, 12)
 prop("crate", 33, 12, pad=0)
 
 # olive grove (south-west). The lost jar rolls into the middle of it.
-grove = [(5, 24), (8, 25), (11, 24), (14, 25), (6, 22), (10, 22), (3, 25)]
+grove = [(5, 24), (8, 24), (11, 24), (14, 24), (6, 22), (10, 22), (3, 25)]
 for i, (gx, gy) in enumerate(grove):
     prop("olive_tree_a" if i % 2 else "olive_tree_b", gx, gy)
     occupy(gx - 1, gy - 2, gx + 1, gy)
@@ -204,7 +204,7 @@ interactables = [
      "text": ["A small pond fed by a spring. Reeds crowd the sandy edge, and something small plops into the water."]},
     {"type": "examine", "name": "The olive grove", "tile": [8, 23.2], "radius": 30, "once_flag": "saw_grove",
      "text": ["Old olive trees, gnarled and silver-leaved. Some of them were here before your grandfather was born."]},
-    {"type": "examine", "name": "Signpost", "tile": [36, 12.9], "radius": 36,
+    {"type": "examine", "name": "Signpost", "tile": [36.5, 12.6], "radius": 36,
      "variants": [
          {"when": {"flag": "road_east_ready"},
           "text": ["The road east drops out of the hills toward the Jordan valley.",

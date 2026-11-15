@@ -808,7 +808,7 @@
    "prop": "olive_tree_a",
    "tile": [
     8,
-    25
+    24
    ]
   },
   {
@@ -822,7 +822,7 @@
    "prop": "olive_tree_a",
    "tile": [
     14,
-    25
+    24
    ]
   },
   {
@@ -1332,8 +1332,8 @@
    "type": "examine",
    "name": "Signpost",
    "tile": [
-    36,
-    12.9
+    36.5,
+    12.6
    ],
    "radius": 36,
    "variants": [

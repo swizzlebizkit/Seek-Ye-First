@@ -177,7 +177,7 @@
   {
    "prop": "olive_tree_b",
    "tile": [
-    17,
+    14,
     17
    ]
   },
@@ -273,87 +273,234 @@
    ]
   },
   {
-   "prop": "bush",
+   "prop": "flowers_patch",
    "tile": [
-    17,
-    30
-   ]
-  },
-  {
-   "prop": "bush",
-   "tile": [
-    56,
-    18
-   ]
-  },
-  {
-   "prop": "bush",
-   "tile": [
-    3,
-    27
+    60,
+    9
    ]
   },
   {
    "prop": "flowers_patch",
    "tile": [
-    7,
-    40
-   ]
-  },
-  {
-   "prop": "flowers_patch",
-   "tile": [
-    48,
-    19
-   ]
-  },
-  {
-   "prop": "bush",
-   "tile": [
-    37,
+    57,
     39
    ]
   },
   {
-   "prop": "bush",
+   "prop": "bush_flowers",
    "tile": [
-    37,
-    25
+    57,
+    15
    ]
   },
   {
    "prop": "boulder",
    "tile": [
-    27,
+    15,
     26
    ]
   },
   {
    "prop": "bush",
    "tile": [
-    27,
-    15
+    57,
+    18
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    5,
+    4
+   ]
+  },
+  {
+   "prop": "bush_flowers",
+   "tile": [
+    13,
+    18
+   ]
+  },
+  {
+   "prop": "bush_flowers",
+   "tile": [
+    28,
+    40
+   ]
+  },
+  {
+   "prop": "bush_flowers",
+   "tile": [
+    51,
+    16
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    34,
+    38
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    49,
+    20
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    25,
+    6
    ]
   },
   {
    "prop": "flowers_patch",
    "tile": [
-    41,
-    3
+    30,
+    4
    ]
   },
   {
-   "prop": "boulder",
+   "prop": "flowers_patch",
    "tile": [
-    44,
+    30,
+    8
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    47,
+    38
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    13,
     38
    ]
   },
   {
    "prop": "boulder",
    "tile": [
+    55,
+    38
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    13,
+    30
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    60,
+    3
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    29,
+    4
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
     53,
-    16
+    14
+   ]
+  },
+  {
+   "prop": "bush_flowers",
+   "tile": [
+    25,
+    17
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    31,
+    14
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    29,
+    17
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    52,
+    5
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    9,
+    40
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    15,
+    33
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    55,
+    17
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    45,
+    38
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    22,
+    40
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    60,
+    14
+   ]
+  },
+  {
+   "prop": "bush_flowers",
+   "tile": [
+    44,
+    26
+   ]
+  },
+  {
+   "prop": "bush_flowers",
+   "tile": [
+    50,
+    36
    ]
   },
   {
@@ -364,234 +511,87 @@
    ]
   },
   {
-   "prop": "bush",
-   "tile": [
-    52,
-    25
-   ]
-  },
-  {
    "prop": "boulder",
    "tile": [
-    33,
-    29
-   ]
-  },
-  {
-   "prop": "bush",
-   "tile": [
-    56,
+    55,
     20
    ]
   },
   {
-   "prop": "bush",
-   "tile": [
-    34,
-    18
-   ]
-  },
-  {
-   "prop": "flowers_patch",
-   "tile": [
-    27,
-    6
-   ]
-  },
-  {
-   "prop": "flowers_patch",
-   "tile": [
-    21,
-    17
-   ]
-  },
-  {
    "prop": "boulder",
-   "tile": [
-    8,
-    16
-   ]
-  },
-  {
-   "prop": "bush",
-   "tile": [
-    25,
-    18
-   ]
-  },
-  {
-   "prop": "bush",
-   "tile": [
-    30,
-    4
-   ]
-  },
-  {
-   "prop": "bush_flowers",
    "tile": [
     6,
+    37
+   ]
+  },
+  {
+   "prop": "bush_flowers",
+   "tile": [
+    8,
     20
    ]
   },
   {
-   "prop": "bush_flowers",
-   "tile": [
-    25,
-    8
-   ]
-  },
-  {
-   "prop": "bush_flowers",
-   "tile": [
-    24,
-    12
-   ]
-  },
-  {
    "prop": "boulder",
    "tile": [
-    15,
-    32
-   ]
-  },
-  {
-   "prop": "boulder",
-   "tile": [
-    60,
-    3
-   ]
-  },
-  {
-   "prop": "bush_flowers",
-   "tile": [
-    58,
+    29,
     26
    ]
   },
   {
-   "prop": "boulder",
+   "prop": "bush",
    "tile": [
-    31,
-    14
+    42,
+    38
    ]
   },
   {
    "prop": "bush",
    "tile": [
-    44,
-    40
-   ]
-  },
-  {
-   "prop": "bush",
-   "tile": [
-    3,
-    39
-   ]
-  },
-  {
-   "prop": "bush",
-   "tile": [
-    4,
-    30
-   ]
-  },
-  {
-   "prop": "flowers_patch",
-   "tile": [
-    49,
-    15
-   ]
-  },
-  {
-   "prop": "bush",
-   "tile": [
-    5,
-    18
-   ]
-  },
-  {
-   "prop": "flowers_patch",
-   "tile": [
-    32,
-    6
-   ]
-  },
-  {
-   "prop": "bush",
-   "tile": [
-    24,
-    10
-   ]
-  },
-  {
-   "prop": "bush",
-   "tile": [
-    12,
-    39
-   ]
-  },
-  {
-   "prop": "bush",
-   "tile": [
-    36,
-    28
-   ]
-  },
-  {
-   "prop": "flowers_patch",
-   "tile": [
-    5,
-    15
-   ]
-  },
-  {
-   "prop": "boulder",
-   "tile": [
-    5,
-    4
-   ]
-  },
-  {
-   "prop": "bush",
-   "tile": [
-    56,
-    39
-   ]
-  },
-  {
-   "prop": "flowers_patch",
-   "tile": [
-    35,
+    11,
     35
    ]
   },
   {
-   "prop": "flowers_patch",
+   "prop": "bush",
    "tile": [
-    12,
-    29
-   ]
-  },
-  {
-   "prop": "boulder",
-   "tile": [
-    48,
-    36
+    6,
+    39
    ]
   },
   {
    "prop": "flowers_patch",
    "tile": [
-    4,
-    15
+    17,
+    31
    ]
   },
   {
-   "prop": "bush_flowers",
+   "prop": "bush",
    "tile": [
-    53,
-    38
+    55,
+    4
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    9,
+    27
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    29,
+    9
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    23,
+    12
    ]
   }
  ],
@@ -622,8 +622,8 @@
    "type": "waymark",
    "name": "Road marker",
    "tile": [
-    35,
-    20
+    35.5,
+    19.6
    ],
    "radius": 34,
    "modes": [

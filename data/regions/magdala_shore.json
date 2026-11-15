@@ -659,8 +659,8 @@
    "type": "waymark",
    "name": "Road marker",
    "tile": [
-    7,
-    15
+    7.5,
+    16.6
    ],
    "radius": 34,
    "modes": [

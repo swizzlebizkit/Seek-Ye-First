@@ -164,6 +164,10 @@ class Region:
         return seen
 
     def verify(self):
+        for p in self.props:
+            if p["prop"] in ("olive_tree_a", "olive_tree_b", "cypress"):
+                ch = self.ground[p["tile"][1]][p["tile"][0]]
+                assert ch in "gh", f"{self.id}: tree at {p['tile']} stands on '{ch}', not open ground"
         seen = self.reach(self.spawn)
         for eid, e in self.entries.items():
             assert (int(e["tile"][0]), int(e["tile"][1])) in seen, f"{self.id}: entry {eid} unreachable"
@@ -236,7 +240,7 @@ def galilee_hills():
     r.occupy(35, 4, 46, 21)
 
     # olive groves along the road
-    for i, (gx, gy) in enumerate([(10, 18), (13, 26), (17, 17), (28, 25), (31, 17), (40, 26), (50, 19), (55, 26), (7, 27)]):
+    for i, (gx, gy) in enumerate([(10, 18), (13, 26), (14, 17), (28, 25), (31, 17), (40, 26), (50, 19), (55, 26), (7, 27)]):
         r.prop("olive_tree_a" if i % 2 else "olive_tree_b", gx, gy)
         r.occupy(gx - 1, gy - 2, gx + 1, gy)
     for tx, ty in ((38, 4), (44, 5), (39, 9), (35, 12)):
@@ -259,7 +263,7 @@ def galilee_hills():
         {"id": "to_shore", "rect": [63, 21, 1, 4], "to": {"region": "magdala_shore", "entry": "from_hills"}, "facing": "right"},
     ]
     r.interactables = [
-        {"type": "waymark", "name": "Road marker", "tile": [35, 20], "radius": 34, "modes": ["land"],
+        {"type": "waymark", "name": "Road marker", "tile": [35.5, 19.6], "radius": 34, "modes": ["land"],
          "text": ["A squared stone at the meeting of the roads, its top worn smooth by travelers' hands.",
                   "West, the road runs back to Kefar Zayit. East, it falls toward the lake and Magdala. From there, other roads lead on."]},
         {"type": "examine", "name": "The shepherds' cairn", "tile": [41, 7], "radius": 38, "landmark": "shepherds_cairn",
@@ -329,7 +333,7 @@ def magdala_shore():
     }
     r.exits = [{"id": "to_hills", "rect": [0, 16, 1, 4], "to": {"region": "galilee_hills", "entry": "from_shore"}, "facing": "left"}]
     r.interactables = [
-        {"type": "waymark", "name": "Road marker", "tile": [7, 15], "radius": 34, "modes": ["land"],
+        {"type": "waymark", "name": "Road marker", "tile": [7.5, 16.6], "radius": 34, "modes": ["land"],
          "text": ["A squared milestone. The road west climbs back into the hills; the lake road runs along the shore from here to Capernaum in one direction and Tiberias in the other."]},
         {"type": "waymark", "name": "The landing", "tile": [38, 16.2], "radius": 38, "modes": ["water"],
          "text": ["Boats are drawn up on the sand, and a few rest at the end of the pier, tarred and patched.", "Fishermen will carry a passenger across the water for a small fee, when the weather lets them."]},
@@ -366,7 +370,7 @@ def road_camp():
     r.spawn = [14.5, 12.5]
     r.entries = {"camp": {"tile": [14, 12], "facing": "down"}, "arrival": {"tile": [14, 12], "facing": "down"}}
     r.interactables = [
-        {"type": "waymark", "name": "The road", "tile": [14, 7.6], "radius": 36, "modes": ["land"],
+        {"type": "waymark", "name": "The road", "tile": [14.5, 7.6], "radius": 36, "modes": ["land"],
          "text": ["{place}. A trodden ring of earth where others have camped before you, a hearth of blackened stones, and the road running on past it in both directions."]},
         {"type": "examine", "name": "The hearth", "tile": [14, 10.9], "radius": 34,
          "variants": [
@@ -402,7 +406,7 @@ def outskirts():
     r.spawn = [8.5, 11.5]
     r.entries = {"arrival": {"tile": [6, 11], "facing": "right"}, "camp": {"tile": [6, 11], "facing": "right"}}
     r.interactables = [
-        {"type": "waymark", "name": "Road marker", "tile": [8, 9.2], "radius": 36, "modes": ["land", "water"],
+        {"type": "waymark", "name": "Road marker", "tile": [8.5, 9.6], "radius": 36, "modes": ["land", "water"],
          "text": ["You are on the approach to {place}. The roads you know lead on from here."]},
         {"type": "examine", "name": "The way into {place}", "tile": [17.5, 4.2], "radius": 44,
          "text": ["The gate of {place} stands before you; the sounds of people and animals drift out from within.",

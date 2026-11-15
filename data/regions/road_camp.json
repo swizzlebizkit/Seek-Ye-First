@@ -270,7 +270,7 @@
    "type": "waymark",
    "name": "The road",
    "tile": [
-    14,
+    14.5,
     7.6
    ],
    "radius": 36,
