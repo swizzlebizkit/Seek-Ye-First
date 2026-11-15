@@ -14,7 +14,7 @@ signal assault_reported(victim_id: String, position: Vector2)
 const BASE_MAX_HP := 12  # drawn as hearts of 2 points each
 
 ## Statuses that are remembered across saves; everything else is momentary behaviour.
-const LASTING_STATUSES := ["dead", "routed", "surrendered", "stood_down"]
+const LASTING_STATUSES := ["dead", "fled", "routed", "surrendered", "stood_down"]
 
 var player_hp := BASE_MAX_HP
 var outcomes: Dictionary = {}  # encounter id -> {"outcome": String, "day": int}

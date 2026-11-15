@@ -22,6 +22,8 @@ const HIT_IFRAMES := 0.2
 const STRIKE_WIDTH := 26.0
 const DEATH_FADE := 0.6
 const ROUTED_AVOID_RADIUS := 70.0
+const EXIT_FLEE_TIME := 12.0  # a beaten enemy keeps running this long, then fades out if it never got clear
+const EXIT_MARGIN := 40.0  # how far past the edge of the screen counts as gone
 
 var npc_id := ""
 var display_name := ""
@@ -56,6 +58,7 @@ var _knock := Vector2.ZERO
 var _lost_sight := 0.0
 var _lockout := 0.0
 var _low_hp_done := false
+var _leaving := false
 var _flee_dir := Vector2.ZERO
 var _facing_locked := false
 
@@ -283,7 +286,8 @@ func _after_stun() -> void:
 func _hostile_flee() -> void:
 	_bark_text("Enough! I'm leaving!")
 	_resolve("combat_routed")
-	_start_flee(float(profile.get("flee_time", 3.5)), _player_pos(), false)
+	_start_flee(EXIT_FLEE_TIME, _player_pos(), false)
+	_leaving = true
 
 
 func _surrender() -> void:
@@ -550,6 +554,12 @@ func _do_flee(delta: float) -> void:
 		# slide along whatever is in the way, keeping the dominant direction away from the player
 		_flee_dir = _flee_dir.slide(get_slide_collision(0).get_normal()).normalized()
 	_play("walk")
+	if _leaving:
+		if not _on_screen(EXIT_MARGIN):
+			_leave()
+		elif _walk_time <= 0.0:
+			_leave(true)
+		return
 	if _walk_time <= 0.0:
 		velocity = Vector2.ZERO
 		if disposition == "noncombatant":
@@ -558,6 +568,30 @@ func _do_flee(delta: float) -> void:
 		else:
 			_set_state(State.ROUTED)
 		_play("idle")
+
+
+## True if this character is within the visible screen area (grown by `margin`).
+func _on_screen(margin: float) -> bool:
+	var view := get_viewport().get_canvas_transform().affine_inverse() * get_viewport_rect()
+	return view.grow(margin).has_point(global_position)
+
+
+## A beaten enemy that has run clear of the screen is gone for good: it neither lingers nor comes back.
+func _leave(fade: bool = false) -> void:
+	_leaving = false
+	velocity = Vector2.ZERO
+	_set_state(State.DEAD)
+	Combat.set_actor(npc_id, "fled", hp)
+	collision_layer = 0
+	if _talk != null:
+		_talk.monitorable = false
+		_talk.visible = false
+	if fade:
+		var tw := create_tween()
+		tw.tween_property(_sprite, "modulate:a", 0.0, 0.6)
+		tw.tween_callback(queue_free)
+	else:
+		queue_free()
 
 
 ## Wary and routed characters stay clear of the player; wary ones calm down after a while.

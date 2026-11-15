@@ -95,7 +95,7 @@ func _build_props() -> void:
 
 func _build_npcs() -> void:
 	for def in data["npcs"]:
-		if Combat.actor_status(def["id"]) == "dead":
+		if Combat.actor_status(def["id"]) in ["dead", "fled"]:
 			continue  # defeated earlier; the save remembers
 		var npc := Npc.new()
 		npc.setup(def)
