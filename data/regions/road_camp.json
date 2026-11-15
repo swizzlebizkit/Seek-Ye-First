@@ -103,6 +103,13 @@
    ]
   },
   {
+   "prop": "signpost",
+   "tile": [
+    14,
+    7
+   ]
+  },
+  {
    "prop": "crate",
    "tile": [
     10,

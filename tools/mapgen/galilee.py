@@ -356,6 +356,7 @@ def road_camp():
     r.fill(24, 9, 29, 11, "d")
     r.occupy(0, 6, 29, 14)
     r.prop("clay_oven", 14, 10)
+    r.prop("signpost", 14, 7)
     for name, x, y in (("crate", 10, 8), ("basket", 19, 8), ("jar_large", 10, 12), ("crate", 19, 12)):
         r.prop(name, x, y)
     for tx, ty in ((4, 5), (26, 5), (4, 16), (25, 16)):
@@ -396,6 +397,7 @@ def outskirts():
         r.prop("olive_tree_b", tx, ty)
         r.occupy(tx - 1, ty - 2, tx + 1, ty)
     r.prop("well", 21, 8)
+    r.prop("signpost", 8, 9)
     r.scatter(18, ["bush", "bush_flowers", "boulder", "flowers_patch"], margin=3)
     r.spawn = [8.5, 11.5]
     r.entries = {"arrival": {"tile": [6, 11], "facing": "right"}, "camp": {"tile": [6, 11], "facing": "right"}}

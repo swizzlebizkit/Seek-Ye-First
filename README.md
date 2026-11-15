@@ -89,4 +89,3 @@ Three levels: **local** (a village such as Kefar Zayit), **regional** (walkable 
 - **Journal map:** the Map tab shows what has been discovered (unknown, rumored, discovered, visited, investigated), with fog over country not yet walked. It cannot move you.
 - **Saves:** version 3 adds `geo` and `travel` blocks; older saves load with defaults. See `docs/w1_playtest.md` for what has and has not been played by a person.
 - **Dev:** `-- --autostart=new --autoplay=w1` plays the whole demonstration through the live game. Other hooks: `--region`, `--loc`, `--clock`, `--journey`, `--ui=strategic|map`, `--travel=<route>`.
-

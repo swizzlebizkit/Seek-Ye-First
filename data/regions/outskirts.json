@@ -234,6 +234,13 @@
    ]
   },
   {
+   "prop": "signpost",
+   "tile": [
+    8,
+    9
+   ]
+  },
+  {
    "prop": "bush",
    "tile": [
     8,
