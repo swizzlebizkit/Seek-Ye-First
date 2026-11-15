@@ -1,0 +1,7 @@
+{
+  "database": "dolt",
+  "backend": "dolt",
+  "dolt_mode": "embedded",
+  "dolt_database": "seek_ye_first",
+  "project_id": "57617d55-77df-41c8-bd2a-46dc6aa78bab"
+}
