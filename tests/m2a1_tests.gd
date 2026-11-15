@@ -10,6 +10,7 @@ func run(runner: Node) -> void:
 	t = runner
 	t._section = "m2a1-data"
 	test_data()
+	test_full_kjv()
 	t._section = "m2a1-links"
 	test_link_logic()
 	await test_ezra_flow()
@@ -57,6 +58,19 @@ func test_data() -> void:
 				t.check(Journal.has_link_definition(lid), "scroll %s reveals a real link (%s)" % [id, lid])
 		if def.get("category", "") == "food":
 			t.check(int(def.get("heal", 0)) > 0, "food %s heals something" % id)
+
+
+func test_full_kjv() -> void:
+	t.check(Scripture.get_verses("Psalms 119:1-176").size() == 176, "the whole KJV is loaded (Psalm 119 has all 176 verses)")
+	t.check(Scripture.is_complete("Revelation 22:21") and Scripture.is_complete("Genesis 1:1"), "first and last verses of the Bible are present")
+	t.check(Scripture.get_passage("Malachi 3:1").contains("and the Lord, whom ye seek"), "Malachi 3:1 reads as the KJV has it")
+	t.check(Scripture.get_passage("Malachi 4:6").contains("to their fathers"), "Malachi 4:6 reads as the KJV has it")
+	t.check(Scripture.get_passage("2 Kings 1:8").contains("He was an hairy man"), "supplied-word brackets are removed from the text")
+	var stray := false
+	for ref in ["Genesis 1:2", "John 3:16", "Romans 8:28", "2 Kings 1:8", "Psalms 23:1-6"]:
+		if Scripture.get_passage(ref).contains("[") or Scripture.get_passage(ref).contains("’"):
+			stray = true
+	t.check(not stray, "no bracket markers or typographic apostrophes in sampled verses")
 
 
 # -- journal logic -----------------------------------------------------------------------------
