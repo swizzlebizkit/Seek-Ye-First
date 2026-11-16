@@ -33,8 +33,8 @@ and east of Cana, on the way down to Magdala. This is an **invented position** c
 geography (hills, olives, a road east down to the lake) and to give it roads to Cana, Nazareth and Magdala. Nothing in
 any source places a village there. No canonical event happens at Kefar Zayit.
 
-The playable countryside between the village and the lake (`galilee_hills`) is likewise invented; `magdala_shore` is the
-approach to a real town but only the shore road and landing are modelled.
+The playable countryside around it (`kefar_zayit_outskirts`, `cana_road`, `cana_approach`, `galilee_hills`, `hills_north`, `magdala_shore`) is likewise invented,
+and `cana` and `magdala` are placeholder settlement maps. The countryside is laid out so the compass directions between settlements match the strategic map; see `docs/world_architecture.md` section 11.
 
 ## 3. Routes
 
@@ -64,3 +64,9 @@ scene exists. Paul's journeys, Antioch and Cyprus are not built.
 - The Mediterranean coast is a rough polyline; the Dead Sea is cut off by the map's southern edge.
 - Boundaries between Galilee, Samaria, Judea and the Decapolis are labels, not borders.
 - Positions of rumored places on the map are deliberately offset by a few pixels so a rumor never reveals an exact spot.
+
+## 7. Physical layout (W1.6)
+
+On the physical map one tile is 50 m, so Cana (about 6.5 km west-south-west on the strategic map) is 130 tiles from Kefar Zayit, and the physical walk and the
+strategic road agree on direction and about on length. Only Cana and Magdala have physical roads so far; the other strategic routes are marked as not yet physical.
+

@@ -271,6 +271,16 @@ func test_walkable_routes() -> void:
 	var options := Travel.options()
 	t.check(options.any(func(o): return o["to"] == "cana") and options.any(func(o): return o["to"] == "magdala"), "the strategic map still offers Cana and Magdala from Kefar Zayit")
 	t.check(Travel.can_start(options[0])["ok"] or Calendar.is_sabbath(WorldSim.day, WorldSim.minute_of_day), "and strategic travel can be started")
+	# a marker on the open road offers the way to either end, from where it stands
+	_fresh()
+	var mark := WaymarkInteractable.new()
+	mark.route = "cana__kefar_zayit__land"
+	mark.at = 0.45
+	mark._open_map()
+	var mid := Travel.options()
+	t.check(mid.size() == 2 and mid.any(func(o): return o["to"] == "cana") and mid.any(func(o): return o["to"] == "kefar_zayit"), "a marker on the Cana road offers both ends from that point")
+	t.check(absf(float(mid[0]["from_km"]) - 0.45 * float(World.route("cana__kefar_zayit__land")["length_km"])) < 0.5 or absf(float(mid[1]["from_km"]) - 0.45 * float(World.route("cana__kefar_zayit__land")["length_km"])) < 0.5, "at the right distance along the road")
+	mark.free()
 
 
 # -- live: real key presses through real scenes -----------------------------------------------

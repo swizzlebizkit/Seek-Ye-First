@@ -7,6 +7,7 @@ extends HBoxContainer
 
 enum Level { STRATEGIC, REGIONAL, LOCAL }
 
+const WORLD_ENTRY := "__world__"
 var level: int = Level.STRATEGIC
 var _list: ItemList
 var _level_buttons: Array[Button] = []
@@ -115,10 +116,15 @@ func refresh() -> void:
 			_canvas.here = here
 			_canvas.traveller = Vector2.ZERO
 		_:
+			var shown := 0
 			for rid in World.region_ids():
 				var m := World.region_meta(rid)
 				var want: String = "local" if level == Level.LOCAL else "regional"
 				if m.get("kind", "") == want and World.regions_visited.has(rid) and World.explored.has(rid):
+					if level == Level.REGIONAL and shown == 0:
+						_list.add_item("The whole countryside")
+						_ids.append(WORLD_ENTRY)
+					shown += 1
 					_list.add_item(World.region_name(rid))
 					_ids.append(rid)
 	if _ids.is_empty():
@@ -150,6 +156,9 @@ func _on_selected(i: int) -> void:
 			_canvas.set_zoom(3.0)
 		_canvas.focus(Vector2(World.locations[id]["pos"][0], World.locations[id]["pos"][1]))
 		_details.text = place_text(id)
+	elif id == WORLD_ENTRY:
+		_region_map.set_world()
+		_details.text = world_text()
 	else:
 		_region_map.set_region(id, level == Level.LOCAL)
 		_details.text = region_text(id)
@@ -181,6 +190,15 @@ func place_text(id: String) -> String:
 	else:
 		s += "[i]No one has told you the way there.[/i]\n"
 	return s
+
+
+func world_text() -> String:
+	var seen: Array = []
+	for rid in World.continuous_rects():
+		if World.explored.has(rid):
+			seen.append("%s (%d%%)" % [World.region_name(rid), int(round(World.explored_fraction(rid) * 100.0))])
+	return "[b][color=#e8d29a]The whole countryside[/color][/b]
+Country you have walked, where it lies. Explored: %s" % ", ".join(seen)
 
 
 func region_text(id: String) -> String:

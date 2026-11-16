@@ -111,3 +111,31 @@ See each Beads task. Overall: the 17-step demonstration plays; every item in the
 - **Saves:** version 3. A real version-1 save from the first milestone is kept as `tests/fixtures/pre_w1_v1_slot.json` and loads.
 - **Dev:** `scripts/dev/autoplay_w1.gd` plays the demonstration through the live game, scene reloads included.
 
+## 11. W1.6: the continuous physical world
+
+W1 chained regions together with hand-set exits, which let a map's exit side disagree with the real direction to its destination.
+W1.6 replaces that with one shared world.
+
+- **Two scales of play, three map views.** Villages, countryside, camps and interiors are all the same 32 px tiles and the same collision. The
+  strategic map is an optional shortcut, not a place you have to go to reach something you can see.
+- **World tiles.** `data/world/physical.json`: 50 m per tile, Kefar Zayit's centre is (0, 0), x grows east, y grows south. Every map has a `world`
+  entry: the world tile of its top-left corner. Strategic longitude and latitude convert to world tiles with the same scale
+  (`World.expected_world_tile`), and `World.validate()` fails if a settlement is more than 16 tiles from where its coordinates put it or lies in the
+  wrong compass direction from another. Cana is 112 tiles west and 66 south of Kefar Zayit; Magdala 186 east and 112 north.
+- **Edges are found, not wired.** Walking off the edge of a regional map looks up the map that contains the next world tile (`World.edge_crossing`).
+  Different map sizes just work, the position along the boundary is kept to the pixel, facing is kept, and the player is placed 24 px inside the next map so
+  they are never standing on its edge. `Game` does this each physics frame. An edge with nothing beyond it is solid cliff (the validator rejects an open edge, and rock, water or wall
+  must show it).
+- **Gates.** A village or town is a *local* map whose `world` rectangle is its exact footprint inside a regional map. The regional map draws the footprint (low wall,
+  gateposts, rooftops), and the gate tiles are exits into the local map; the local map has exits back. A gate has the same world coordinates on both sides.
+- **One raster.** `tools/mapgen/world.py` generates the whole countryside as a single raster and cuts it into maps, so roads, the river, outcrops and the lake
+  continue across seams by construction. `World.validate()` still checks it: walkable ground meets walkable ground, roads and the river continue across every seam.
+- **Clock.** A regional map runs the world clock four times faster (`regional_clock_multiplier`), so walking the 130 tiles from Kefar Zayit to Cana takes about
+  the 1.5 game hours the strategic map gives. Villages and camps run at the ordinary rate.
+- **Optional strategic travel.** Road markers carry the place (or point on a road) they stand at, so `E` offers the strategic map from exactly there. Nothing opens it by itself.
+  An arrival by strategic travel puts the protagonist inside the settlement's own map at its `arrival` entry.
+- **Reachability.** `WorldGraph.path` plans a walk across maps, edges and gates from the data alone. The tests use it to prove routes marked `"physical": true` in
+  `geography.json` can be walked, and `scripts/dev/autoplay_w16.gd` walks one with real key presses.
+- **Not yet physical.** Routes without `"physical": true` (Nazareth, Tiberias, Capernaum, Bethsaida and everything farther) can still only be reached through the strategic map until their maps are built. This is a
+  recorded gap (see `docs/w16_playtest.md`), not a design intent.
+

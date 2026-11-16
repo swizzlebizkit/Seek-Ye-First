@@ -37,10 +37,14 @@ static func maybe_autostart(menu: Node) -> void:
 ##   --clock=6,1040								 day, minute of day
 ##   --visit=a,b --discover=a,b --explore=region,.. mark places visited / discovered, regions explored
 ##   --journey=route,dir,km,pause				   a journey paused on the road (pause: sabbath, player)
+static var _before_done := false
+
+
 static func before_build() -> void:
 	var args := _args()
-	if args.is_empty():
+	if args.is_empty() or _before_done:
 		return
+	_before_done = true  # starting state is set once, not again on every region change
 	if args.has("clock"):
 		var c: PackedStringArray = args["clock"].split(",")
 		WorldSim.day = int(c[0])
@@ -86,8 +90,8 @@ static func apply(game: Node) -> void:
 	var args := _args()
 	if args.is_empty():
 		return
-	if args.get("autoplay", "") == "w1":
-		AutoplayW1.on_scene(game)
+	if args.get("autoplay", "") == "w16":
+		AutoplayW16.on_scene(game)
 		return
 	if args.has("flags"):
 		for f in args["flags"].split(","):

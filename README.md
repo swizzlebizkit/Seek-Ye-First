@@ -46,7 +46,9 @@ Godot_v4.7.2-stable_win64_console.exe --headless --path . --import
 ```
 python -I tools/procgen/generate_all.py     # tiles, props, characters, UI art (then re-run --import)
 python -I tools/mapgen/kefar_zayit.py       # data/regions/kefar_zayit.json
-python -I tools/mapgen/galilee.py           # galilee_hills, magdala_shore, road_camp, outskirts
+python -I tools/mapgen/world.py            # the continuous countryside (six regional maps)
+python -I tools/mapgen/settlements.py      # placeholder settlement maps (Cana, Magdala)
+python -I tools/mapgen/galilee.py          # shared template regions (road_camp, outskirts)
 ```
 
 ## Tests
@@ -83,9 +85,9 @@ Behaviour profiles are data: `data/combat/profiles.json` (hostile / noncombatant
 
 Three levels: **local** (a village such as Kefar Zayit), **regional** (walkable country: `galilee_hills`, `magdala_shore`, and the shared template regions `road_camp` and `outskirts`) and **strategic** (a map of places and routes, `data/world/geography.json`). Read `docs/world_architecture.md` for the design and `docs/geography.md` for what is documented, uncertain and invented (Kefar Zayit is invented).
 
-- **Walking:** regions connect through data-driven `exits` and `entries`, no per-map code. Leaving Kefar Zayit by the east road enters the hills, which lead on to the lake shore.
+- **Walking (W1.6):** every map has a place in one shared world (`data/world/physical.json`). Walking off a regional map's edge continues into the map beyond, at the same point of ground, in all four directions; villages are entered through gates. Kefar Zayit has a west gate (toward Cana, south-west) and an east gate (toward Magdala, north-east). See `docs/world_architecture.md` section 11 and `docs/w16_playtest.md`.
 - **Travel:** a road marker, landing or camp opens the strategic map (`Travel`, `data/world/travel.json`). The traveller walks (4 km/h, dawn to sunset, resting overnight) or sails (6 km/h, day and night). The clock advances in steps that always stop at sunset and midnight, so nothing is skipped. A journey can be stopped at a waypoint, paused, resumed or abandoned (you stay on the road and may go on to either end).
 - **Sabbath:** the only authority is `Calendar`. Overland travel stops at sunset on the sixth day at the exact progress reached and you are put in a camp; no overland start or resume during the Sabbath, and nothing resumes by itself. A boat already at sea keeps sailing; no boat departs on the Sabbath.
 - **Journal map:** the Map tab shows what has been discovered (unknown, rumored, discovered, visited, investigated), with fog over country not yet walked. It cannot move you.
 - **Saves:** version 3 adds `geo` and `travel` blocks; older saves load with defaults. See `docs/w1_playtest.md` for what has and has not been played by a person.
-- **Dev:** `-- --autostart=new --autoplay=w1` plays the whole demonstration through the live game. Other hooks: `--region`, `--loc`, `--clock`, `--journey`, `--ui=strategic|map`, `--travel=<route>`.
+- **Dev:** `-- --autostart=new --autoplay=w16` walks Kefar Zayit to Cana and back with real key presses (add `--clock=7,600` for the Sabbath); `-- --validate` checks the world data. Other hooks: `--region`, `--loc`, `--clock`, `--journey`, `--ui=strategic|map`, `--travel=<route>`.

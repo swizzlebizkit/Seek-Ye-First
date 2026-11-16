@@ -154,8 +154,12 @@ func test_journal_map() -> void:
 	for x in range(2, 62, 3):
 		World.note_player("galilee_hills", Vector2(x, 22))
 	jm.refresh()
-	t.check(jm._list.item_count == 1 and jm._list.get_item_text(0) == "The hills above the lake", "a walked region is listed")
-	t.check(jm._region_map.region_id == "galilee_hills" and jm._region_map.labels == false, "and drawn without village labels")
+	t.check(jm._list.item_count == 2 and jm._list.get_item_text(0) == "The whole countryside" and jm._list.get_item_text(1) == "The hills above the lake", "a walked region is listed, after the whole countryside")
+	t.check(jm._region_map.world_mode, "the first entry draws the whole countryside, each map where it lies")
+	t.check(jm._region_map._world_bounds() == Rect2i(-176, -140, 416, 248), "over the whole extent of the shared world")
+	jm._list.select(1)
+	jm._on_selected(1)
+	t.check(jm._region_map.region_id == "galilee_hills" and jm._region_map.labels == false and not jm._region_map.world_mode, "a single region is drawn without village labels")
 	var rz := jm._region_map.zoom
 	jm.zoom(1.5)
 	t.check(jm._region_map.zoom > rz, "the regional map zooms")

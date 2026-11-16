@@ -13,6 +13,7 @@ const GOLD := Color("e8d29a")
 
 var region_id := ""
 var labels := false  ## local view: name the points of interest the protagonist has seen
+var world_mode := false  ## draw every explored regional map together, at its place in the shared world
 var zoom := 1.0
 var center := Vector2(0.5, 0.5)
 var _data: Dictionary = {}
@@ -28,12 +29,33 @@ func _ready() -> void:
 
 
 func set_region(id: String, with_labels: bool) -> void:
+	world_mode = false
 	region_id = id
 	labels = with_labels
 	_data = World.region_meta(id)
 	zoom = 1.0
 	center = Vector2(0.5, 0.5)
 	queue_redraw()
+
+
+## The whole countryside: every regional map the protagonist has walked, placed by world position.
+func set_world() -> void:
+	world_mode = true
+	region_id = ""
+	labels = false
+	zoom = 1.0
+	center = Vector2(0.5, 0.5)
+	queue_redraw()
+
+
+func _world_bounds() -> Rect2i:
+	var rects := World.continuous_rects()
+	var b := Rect2i()
+	var first := true
+	for id in rects:
+		b = (rects[id] as Rect2i) if first else b.merge(rects[id])
+		first = false
+	return b
 
 
 func set_zoom(z: float) -> void:
@@ -71,6 +93,9 @@ func _gui_input(event: InputEvent) -> void:
 
 func _draw() -> void:
 	draw_rect(Rect2(Vector2.ZERO, size), FOG)
+	if world_mode:
+		_draw_world()
+		return
 	if _data.is_empty():
 		return
 	var sc := _scale()
@@ -126,6 +151,49 @@ func _draw() -> void:
 	# you are here
 	if GameState.region_id == region_id and World.explored.has(region_id):
 		var pp := o + (World.player_px / 32.0) * sc
+		draw_circle(pp, 4.0, Color("c0392b"))
+		draw_arc(pp, 7.0, 0, TAU, 16, GOLD, 2.0)
+	draw_rect(Rect2(Vector2.ZERO, size), Color("c9ac6e"), false, 3.0)
+
+
+func _draw_world() -> void:
+	var b := _world_bounds()
+	if b.size.x <= 0:
+		return
+	var sc := minf(size.x / float(b.size.x), size.y / float(b.size.y)) * zoom
+	var o := size * 0.5 - Vector2(b.size) * center * sc - Vector2(b.position) * sc
+	var rects := World.continuous_rects()
+	for rid in rects:
+		var r: Rect2i = rects[rid]
+		var m := World.region_meta(rid)
+		var rows: Array = m["ground"]
+		var legend: Dictionary = m["ground_legend"]
+		var seen: Dictionary = World.explored.get(rid, {})
+		for key in seen:
+			var bx: int = int(key) % 1000
+			var by: int = int(key) / 1000
+			for y in range(by * World.BLOCK, mini((by + 1) * World.BLOCK, r.size.y)):
+				for x in range(bx * World.BLOCK, mini((bx + 1) * World.BLOCK, r.size.x)):
+					draw_rect(Rect2(o + Vector2(r.position + Vector2i(x, y)) * sc, Vector2(sc + 0.5, sc + 0.5)), GROUND.get(rows[y][x], FOG))
+	# the villages and towns known to the protagonist, where they stand
+	for lid in World.locations:
+		var reg = World.locations[lid].get("region")
+		if reg == null or not World.region_meta(str(reg)).has("world") or not World.knows_place(lid, "discovered"):
+			continue
+		var fr := World.world_rect(str(reg))
+		var rc := Rect2(o + Vector2(fr.position) * sc, Vector2(fr.size) * sc)
+		draw_rect(rc, Color("8a7a66", 0.85))
+		draw_rect(rc, INK, false, 1.5)
+		_text(str(World.locations[lid]["name"]), rc.position + Vector2(rc.size.x * 0.5 - 24.0, rc.size.y * 0.5 + 4.0), 13, INK)
+	# you are here
+	var here_region := GameState.region_id
+	var wp := Vector2.INF
+	if rects.has(here_region):
+		wp = Vector2((rects[here_region] as Rect2i).position) + World.player_px / 32.0
+	elif World.region_meta(here_region).has("world"):
+		wp = Vector2(World.world_rect(here_region).position) + World.player_px / 32.0
+	if wp != Vector2.INF:
+		var pp := o + wp * sc
 		draw_circle(pp, 4.0, Color("c0392b"))
 		draw_arc(pp, 7.0, 0, TAU, 16, GOLD, 2.0)
 	draw_rect(Rect2(Vector2.ZERO, size), Color("c9ac6e"), false, 3.0)
