@@ -8,6 +8,8 @@ signal day_rolled(day: int)
 
 const GAME_MINUTES_PER_REAL_SECOND := 0.5
 
+## Walking the countryside is a compressed scale: the clock runs this much faster there (set by the game scene).
+var clock_multiplier := 1.0
 var day := 1
 var minute_of_day := 7.0 * 60.0
 
@@ -15,7 +17,7 @@ var minute_of_day := 7.0 * 60.0
 func _process(delta: float) -> void:
 	if GameState.mode != GameState.Mode.EXPLORE:
 		return
-	advance(delta * GAME_MINUTES_PER_REAL_SECOND)
+	advance(delta * GAME_MINUTES_PER_REAL_SECOND * clock_multiplier)
 
 
 ## Moves the clock forward without ever stepping over a boundary: each step stops exactly at sunset

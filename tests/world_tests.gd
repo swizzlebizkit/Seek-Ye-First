@@ -35,6 +35,7 @@ func run(runner: Node) -> void:
 	await test_encounter()
 	t._section = "world-journal"
 	await load("res://tests/map_tests.gd").new().run(t)
+	await load("res://tests/walk_tests.gd").new().run(t)
 
 
 # -- helpers -----------------------------------------------------------------------------------
@@ -286,7 +287,7 @@ func test_journey_basics() -> void:
 	t.check(absf(WorldSim.minute_of_day - (420.0 + want_min)) < 0.01, "arrival time is distance over speed")
 	t.check(World.context == {"location": "magdala"} and World.level_of("magdala") == "visited", "the protagonist is now at Magdala, and has been there")
 	t.check(World.route_is_known("kefar_zayit__magdala__land"), "the road is known")
-	t.check(Travel.arrival_destination("magdala") == {"region": "magdala_shore", "entry": "arrival"}, "Magdala arrival uses its own region")
+	t.check(Travel.arrival_destination("magdala") == {"region": "magdala", "entry": "arrival"}, "Magdala arrival uses its own settlement map")
 	t.check(Travel.arrival_destination("nazareth") == {"region": "outskirts", "entry": "arrival"}, "a place with no scene arrives at the outskirts")
 	# a journey back along the same road
 	_at("magdala")
@@ -655,14 +656,16 @@ func _reach(rg: Region, start: Vector2i) -> Dictionary:
 func test_region_data() -> void:
 	_fresh()
 	var ids := World.region_ids()
-	for need in ["kefar_zayit", "galilee_hills", "magdala_shore", "road_camp", "outskirts"]:
+	for need in ["kefar_zayit", "kefar_zayit_outskirts", "cana_road", "cana_approach", "galilee_hills", "hills_north", "magdala_shore", "cana", "magdala", "road_camp", "outskirts"]:
 		t.check(ids.has(need), "region %s exists" % need)
+	var sizes := {}
 	for id in ids:
 		if id == "training_yard":
 			continue
 		var m := World.region_meta(id)
 		t.check(m.get("kind", "") in ["local", "regional", "template"], "%s has a kind" % id)
 		t.check(m["ground"].size() == int(m["size"][1]) and m["ground"][0].length() == int(m["size"][0]), "%s ground matches its size" % id)
+		sizes[str(m["size"])] = true
 		var rg := _load_region(id)
 		var spawn := Vector2i(int(m["spawn"][0]), int(m["spawn"][1]))
 		t.check(not rg.tile_blocked(spawn), "%s spawn is walkable" % id)
@@ -686,10 +689,9 @@ func test_region_data() -> void:
 				for dy in range(-2, 3):
 					near = near or seen.has(tile + Vector2i(dx, dy))
 			t.check(near, "%s: %s can be reached" % [id, it["name"]])
-			for ef in it.get("effects", []):
-				t.check(ef is Dictionary, "%s effect is well formed" % it["name"])
 		rg.free()
-	# trees stand on open ground, never in water, rock, sand or on a road
+	t.check(sizes.size() >= 4, "the maps are of several different sizes (%d)" % sizes.size())
+	# trees stand on open ground, never in water, rock or on a road
 	for id in ids:
 		var rm := World.region_meta(id)
 		for pr in rm["props"]:
@@ -710,30 +712,18 @@ func test_region_data() -> void:
 					best = minf(best, foot.distance_to(Vector2(float(it["tile"][0]), float(it["tile"][1]))))
 			t.check(best <= 0.75, "%s: '%s' is on its signpost (%.2f tiles away)" % [id, it["name"], best])
 			signs += 1
-	t.check(signs >= 5, "road signs were checked (%d)" % signs)
-	# the countryside is a real place
-	var hills := World.region_meta("galilee_hills")
-	t.check(int(hills["size"][0]) >= 60, "the hills are a large region")
-	t.check(hills["exits"].size() >= 2, "with a way to the village and a way on")
-	var cliffs := 0
-	for row in hills["ground"]:
-		cliffs += row.count("c")
-	t.check(cliffs > 600, "terrain barriers (cliffs and outcrops) fill part of it (%d)" % cliffs)
-	t.check(hills["ground"].any(func(r): return r.contains("w")), "a stream runs through it")
-	var branches = hills["interactables"].filter(func(i): return i["name"] == "The shepherds' cairn")
-	t.check(branches.size() == 1, "a landmark waits at the end of the north branch")
-	t.check(hills["npcs"].size() >= 1, "and there is an optional encounter")
+	t.check(signs >= 9, "road signs were checked (%d)" % signs)
+	# placeholders say so
+	for id in ["cana", "magdala", "road_camp", "outskirts"]:
+		var pm := World.region_meta(id)
+		t.check(pm.get("placeholder", false) or pm.get("template", false), "%s is identified as a placeholder" % id)
+	t.check(not World.region_meta("kefar_zayit").get("placeholder", false), "Kefar Zayit is a real map, not a placeholder")
 	t.check(World.region_name("road_camp") != "Wayside camp: {place}", "template names are filled in (%s)" % World.region_name("road_camp"))
 	World.context = {"location": "nazareth"}
 	t.check(World.region_name("outskirts") == "Outskirts of Nazareth", "outskirts takes its name from the place")
 	World.context = {"route": "kefar_zayit__magdala__land", "km": 3.0}
 	t.check(World.region_name("road_camp").contains("Magdala road"), "the camp takes its name from the road")
-	# every exit is a data entry that points back
-	for id in ["kefar_zayit", "galilee_hills", "magdala_shore"]:
-		for ex in World.region_meta(id)["exits"]:
-			var to: Dictionary = ex["to"]
-			var back = World.region_meta(to["region"])["exits"].any(func(e): return e["to"]["region"] == id)
-			t.check(back, "%s -> %s has a way back" % [id, to["region"]])
+	World.context = {}
 
 
 func _enter(region: String, entry: String, offset: float = 0.0) -> Node:
@@ -746,204 +736,192 @@ func _drop(game: Node) -> void:
 	game.free()
 
 
+## Holds a movement key until the game asks for a region change (or the frames run out); returns the requests.
+func _press(game: Node, action: String, frames: int = 120) -> Array:
+	var got: Array = []
+	var on_t := func(r, e): got.append(r)
+	World.transition_requested.connect(on_t)
+	Input.action_press(action)
+	for i in range(frames):
+		await t._frames(1)
+		if not got.is_empty():
+			break
+	Input.action_release(action)
+	World.transition_requested.disconnect(on_t)
+	return got
+
+
 func test_transitions() -> void:
+	# Kefar Zayit's gates, walked through with real key presses
 	_fresh()
 	var game: Node = await t._spawn_game({"mode": "new"})
 	DialogueRunner.cancel()
-	t.check(GameState.region_id == "kefar_zayit" and game.region.data["exits"].size() == 1, "the village has a physical exit")
-	# walk out of the village by the east road
+	var kz := World.region_meta("kefar_zayit")
+	t.check(kz["exits"].size() == 2 and kz["exits"].all(func(e): return e["to"]["region"] == "kefar_zayit_outskirts"), "the village has two physical gates into the countryside")
 	var exits = game.region.get_children().filter(func(n): return n is RegionExit)
-	t.check(exits.size() == 1, "one exit area is built")
-	t.check(game.region.is_walkable_px(Vector2(36.5, 13.5) * 32.0), "the road to the exit is open ground")
-	var seen := []
-	var on_t := func(r, e): seen.append(r)
-	World.transition_requested.connect(on_t)
-	game.player.teleport(Vector2(39.5, 13.5) * 32.0, "right")
-	await t._frames(4)
-	await t.get_tree().process_frame
-	World.transition_requested.disconnect(on_t)
-	t.check(seen.size() == 1, "walking into the exit asks for exactly one transition")
-	t.check(GameState.region_id == "galilee_hills" and World.entry_id == "from_village", "the destination is the hills, by the village entry")
-	t.check(absf(World.entry_offset - 1.5) < 0.2, "the offset along the edge is remembered (%.2f)" % World.entry_offset)
-	_drop(game)
-	# rebuild in the hills, as the real scene reload does
-	game = await t._spawn_game({"mode": "resume"})
-	t.check(game.region.data["id"] == "galilee_hills", "the hills are built")
-	t.check(not GameState.has_saved_position, "no stale position")
-	var want := Vector2(3.0, 21.0 + World.entry_offset) * 32.0
-	t.check(game.player.global_position.distance_to(want) < 2.0, "the player arrives on the west edge at the same height along it")
-	t.check(game.player.facing == "right", "facing into the region")
-	t.check(game.region.is_walkable_px(game.player.global_position), "on open ground")
-	# play state survives the move
-	_drop(game)
-	_fresh()
-	GameState.add_item("ezra_sword", 1, true)
-	GameState.set_flag("test_flag")
-	Combat.player_hp = 3
-	_clock(2, 9.0 * 60.0)
-	game = await _enter("galilee_hills", "from_village", 1.0)
-	t.check(GameState.item_count("ezra_sword") == 1 and GameState.has_flag("test_flag") and Combat.player_hp == 3 and WorldSim.day == 2, "items, flags, health and the clock are unchanged by a region change")
-	# every region reaches every other region by walking the exits
-	var graph := {}
-	for id in ["kefar_zayit", "galilee_hills", "magdala_shore"]:
-		graph[id] = World.region_meta(id)["exits"].map(func(e): return e["to"]["region"])
-	var reach := {"kefar_zayit": true}
-	var todo := ["kefar_zayit"]
-	while not todo.is_empty():
-		var c: String = todo.pop_back()
-		for n in graph[c]:
-			if not reach.has(n):
-				reach[n] = true
-				todo.append(n)
-	t.check(reach.size() == 3, "from the village the shore is reachable on foot, without the map")
-	# cross-region walk: hills east exit to the shore and back
-	game.player.teleport(Vector2(63.5, 23.5) * 32.0, "right")
-	seen = []
-	var on_t2 := func(r, e): seen.append(r)
-	World.transition_requested.connect(on_t2)
-	await t._frames(4)
-	World.transition_requested.disconnect(on_t2)
-	t.check(GameState.region_id == "magdala_shore" and World.entry_id == "from_hills", "the east end of the hills leads to the lake shore")
+	t.check(exits.size() == 2, "both gates are built as exits")
+	var out_to := World.region_meta("kefar_zayit_outskirts")
+	t.check(out_to["exits"].size() == 2 and out_to["exits"].all(func(e): return e["to"]["region"] == "kefar_zayit"), "and the countryside has the matching gates")
+	game.player.teleport(Vector2(36.5, 13.5) * 32.0, "right")
+	var got := await _press(game, "move_right")
+	t.check(got == ["kefar_zayit_outskirts"] and World.entry_id == "from_kz_east", "walking out of the east gate leads to the countryside, once")
+	var off := World.entry_offset
 	_drop(game)
 	game = await t._spawn_game({"mode": "resume"})
-	t.check(game.region.data["id"] == "magdala_shore" and game.region.is_walkable_px(game.player.global_position), "the shore is built with the player on open ground")
-	game.player.teleport(Vector2(0.5, 17.5) * 32.0, "left")
-	await t._frames(4)
-	t.check(GameState.region_id == "galilee_hills" and World.entry_id == "from_shore", "and the shore leads back")
+	t.check(game.region.data["id"] == "kefar_zayit_outskirts" and game.player.facing == "right", "the countryside is built, and the player still faces east")
+	var world_pos: Vector2 = game.player.global_position / 32.0 + Vector2(-48, -36)
+	t.check(absf(world_pos.x - 21.0) < 0.6 and absf(world_pos.y - (-2.0 + off)) < 0.1, "outside the east gate at the height they left (world %s)" % [world_pos])
+	await t._frames(20)
+	t.check(GameState.region_id == "kefar_zayit_outskirts", "no immediate re-entry")
+	game.player.teleport(Vector2(69.5, 36.5) * 32.0, "left")
+	got = await _press(game, "move_left")
+	t.check(got == ["kefar_zayit"] and World.entry_id == "gate_east", "walking back into the gate returns to the village by its east gate")
 	_drop(game)
-	# an exit does nothing while the player is in a dialogue or menu
+	game = await t._spawn_game({"mode": "resume"})
+	t.check(game.region.data["id"] == "kefar_zayit" and game.player.global_position.x / 32.0 > 36.0 and game.player.facing == "left", "inside the east gate, facing west")
+	game.player.teleport(Vector2(2.5, 13.5) * 32.0, "left")
+	got = await _press(game, "move_left")
+	t.check(got == ["kefar_zayit_outskirts"] and World.entry_id == "from_kz_west", "the west gate leads out on the west side")
+	_drop(game)
+	# repeated crossings never loop or stick
+	var regions: Array = []
+	for i in range(4):
+		game = await _enter("kefar_zayit_outskirts", "from_kz_west")
+		regions.append(GameState.region_id)
+		game.player.teleport(Vector2(26.5, 36.5) * 32.0, "right")  # outside the west gate
+		got = await _press(game, "move_right")
+		_drop(game)
+		game = await t._spawn_game({"mode": "resume"})
+		regions.append(GameState.region_id)
+		game.player.teleport(Vector2(2.5, 13.5) * 32.0, "left")
+		got = await _press(game, "move_left")
+		_drop(game)
+	t.check(regions == ["kefar_zayit_outskirts", "kefar_zayit", "kefar_zayit_outskirts", "kefar_zayit", "kefar_zayit_outskirts", "kefar_zayit", "kefar_zayit_outskirts", "kefar_zayit"], "four round trips through the gate alternate cleanly (%s)" % [regions])
 	_fresh()
-	game = await _enter("galilee_hills", "from_village")
+	game = await _enter("kefar_zayit_outskirts", "from_kz_east")
 	GameState.mode = GameState.Mode.DIALOGUE
-	game.player.teleport(Vector2(0.5, 22.5) * 32.0, "left")
-	await t._frames(4)
-	t.check(GameState.region_id == "galilee_hills", "an exit ignores the player outside exploration")
+	game.player.teleport(Vector2(67.5, 36.5) * 32.0, "left")
+	got = await _press(game, "move_left", 20)
+	t.check(got.is_empty() and GameState.region_id == "kefar_zayit_outskirts", "a gate ignores the player outside exploration")
 	GameState.mode = GameState.Mode.EXPLORE
 	_drop(game)
 
 
 func test_region_gameplay() -> void:
 	_fresh()
-	var game: Node = await _enter("galilee_hills", "from_village")
+	var game: Node = await _enter("kefar_zayit_outskirts", "camp")
 	var rg: Region = game.region
 	var player: Player = game.player
-	# terrain barriers hold the player
+	t.check(rg.is_walkable_px(player.global_position), "the camp entry is on open ground")
+	var foot := World.world_rect("kefar_zayit")
+	t.check(foot == Rect2i(-20, -14, 40, 28), "the village footprint is 40 by 28 tiles at the world's centre")
+	var local := foot.position - World.world_rect("kefar_zayit_outskirts").position
+	t.check(rg.tile_blocked(Vector2i(local.x + 4, local.y + 4)) and rg.tile_blocked(Vector2i(local.x, local.y)), "the footprint is solid: walls and rooftops")
+	var gate_tile := Vector2i(local.x + 39, local.y + 13)
+	t.check(not rg.tile_blocked(gate_tile) and not rg.tile_blocked(gate_tile + Vector2i(0, -1)), "the east gate is an opening in the wall (%s)" % [gate_tile])
+	t.check(rg.tile_blocked(Vector2i(local.x + 39, local.y + 11)) and rg.tile_blocked(Vector2i(local.x + 39, local.y + 16)), "flanked by gateposts")
 	var col := -1
-	for x in range(5, 15):
-		if rg.tile_blocked(Vector2i(x, 11)) and rg.tile_blocked(Vector2i(x, 10)):
+	for x in range(2, 20):
+		if rg.tile_blocked(Vector2i(x, 5)) and rg.tile_blocked(Vector2i(x, 6)) and rg.tile_blocked(Vector2i(x, 7)):
 			col = x
 			break
 	t.check(col > 0, "the north-west outcrop has solid ground")
-	player.teleport(Vector2(col + 0.5, 15.5) * 32.0, "up")
+	player.teleport(Vector2(col + 0.5, 16.5) * 32.0, "up")
 	Input.action_press("move_up")
-	await t._frames(90)
+	await t._frames(120)
 	Input.action_release("move_up")
 	t.check(not rg.tile_blocked(Vector2i(floori(player.global_position.x / 32.0), floori(player.global_position.y / 32.0))), "walking into an outcrop stops at its edge")
-	t.check(player.global_position.y > 12.0 * 32.0, "the outcrop could not be entered (y=%.0f)" % player.global_position.y)
-	# water blocks, the ford does not
-	var water := Vector2i(-1, -1)
-	for y in range(26, 36):
-		for x in range(14, 26):
-			if rg.data["ground_legend"][rg.data["ground"][y][x]][0] == "water_0":
-				water = Vector2i(x, y)
-	t.check(rg.tile_blocked(water), "the stream blocks the way")
-	t.check(not rg.tile_blocked(Vector2i(20, 21)) and not rg.tile_blocked(Vector2i(20, 22)), "but the ford across it is open")
-	# the road is continuous from the village edge to the shore edge
-	var seen := _reach(rg, Vector2i(3, 22))
-	t.check(seen.has(Vector2i(61, 22)), "the road runs from the village side of the hills to the lake side")
-	t.check(seen.has(Vector2i(41, 8)) and seen.has(Vector2i(40, 37)), "both branches can be walked to")
-	# camera limits cover the whole region
+	t.check(player.global_position.y > 8.0 * 32.0, "the outcrop could not be entered (y=%.0f)" % player.global_position.y)
 	var cam: Camera2D = player.get_children().filter(func(n): return n is Camera2D)[0]
-	t.check(cam.limit_right == 64 * 32 and cam.limit_bottom == 44 * 32, "the camera is bound to the large region")
-	# the landmark
-	var cairn = rg.entities.get_children().filter(func(n): return n is ExamineInteractable and n.display_name == "The shepherds' cairn")
-	t.check(cairn.size() == 1, "the cairn is built")
-	t.check(not World.landmarks_found.get("shepherds_cairn", false) and World.level_of("capernaum") == "unknown", "not yet found")
-	t.check(not GameState.check({"landmark": "shepherds_cairn"}), "the landmark condition is false before")
-	var first: Dictionary = cairn[0].variants[0]
-	Effects.run_all(first["effects"])
-	t.check(World.landmarks_found.get("shepherds_cairn", false) and GameState.check({"landmark": "shepherds_cairn"}), "examining the cairn finds the landmark")
-	t.check(World.level_of("tiberias") == "discovered" and World.level_of("capernaum") == "rumored", "it shows Tiberias and hints at Capernaum")
-	t.check(not World.route_is_known("magdala__tiberias__land"), "…without drawing roads")
-	t.check(cairn[0].variants[0]["when"] == {"not_flag": "saw_cairn"}, "the first-visit text is gated so it is read once")
-	# waymarks
-	var waymarks = rg.entities.get_children().filter(func(n): return n is WaymarkInteractable)
-	t.check(waymarks.size() == 1 and waymarks[0].modes == ["land"], "one road marker offers land routes")
+	t.check(cam.limit_right == 96 * 32 and cam.limit_bottom == 72 * 32, "the camera is bound to the large region")
+	var marks = rg.entities.get_children().filter(func(n): return n is WaymarkInteractable)
+	t.check(marks.size() == 2 and marks.all(func(m): return m.place == "kefar_zayit" and m.modes == ["land"]), "two road markers by the gates, both at Kefar Zayit")
+	t.check(not game.hud.strategic_view.visible, "the strategic screen does not open by itself")
 	var asked: Array = []
 	var on_map := func(m): asked.append(m)
 	GameState.map_requested.connect(on_map)
-	waymarks[0]._open_map()
+	marks[0]._open_map()
 	GameState.map_requested.disconnect(on_map)
-	t.check(asked == [["land"]], "the marker asks for the strategic map with its modes")
-	t.check(World.current_location() == "kefar_zayit", "the hills belong to the Kefar Zayit end of the world")
-	# the map is not reachable from the middle of nowhere: only at a marker, a landing or a camp
-	t.check(rg.data["interactables"].filter(func(i): return i["type"] == "waymark").size() == 1, "only the marker opens the map")
-	# save and load in a region: place and position
-	player.teleport(Vector2(30.5, 18.5) * 32.0, "up")
-	GameState.player_pos = player.global_position
+	t.check(asked == [["land"]] and World.current_location() == "kefar_zayit" and Travel.options().size() == 3, "a marker offers the strategic map for its place")
+	_drop(game)
+
+	_fresh()
+	game = await _enter("hills_north", "camp")
+	rg = game.region
+	var water := Vector2i(-1, -1)
+	var ford := Vector2i(-1, -1)
+	for y in range(rg.data["size"][1]):
+		for x in range(rg.data["size"][0]):
+			if RegionTerrain.tile_class(rg.data, x, y) == "water":
+				water = Vector2i(x, y)
+			if rg.data["ground"][y][x] == "p" and x > 30:
+				ford = Vector2i(x, y)
+	t.check(rg.tile_blocked(water), "the stream blocks the way")
+	t.check(ford.x > 0 and not rg.tile_blocked(ford), "but the road crosses it by a stone ford")
+	var cairn = rg.entities.get_children().filter(func(n): return n is ExamineInteractable and n.display_name == "The shepherds' cairn")
+	t.check(cairn.size() == 1, "the cairn is built")
+	t.check(not World.landmarks_found.get("shepherds_cairn", false) and World.level_of("capernaum") == "unknown", "not yet found")
+	Effects.run_all(cairn[0].variants[0]["effects"])
+	t.check(World.landmarks_found.get("shepherds_cairn", false) and GameState.check({"landmark": "shepherds_cairn"}), "examining the cairn finds the landmark")
+	t.check(World.level_of("tiberias") == "discovered" and World.level_of("capernaum") == "rumored" and not World.route_is_known("magdala__tiberias__land"), "it shows Tiberias and hints at Capernaum, without drawing roads")
+	game.player.teleport(Vector2(20.5, 30.5) * 32.0, "up")
+	GameState.player_pos = game.player.global_position
 	GameState.player_facing = "up"
-	World.find_landmark("shepherds_cairn")
-	t.check(SaveManager.save_slot(1), "saved in the hills")
+	t.check(SaveManager.save_slot(1), "saved in the northern hills")
 	_drop(game)
 	_fresh()
 	t.check(SaveManager.load_slot(1), "loaded")
-	t.check(GameState.region_id == "galilee_hills" and GameState.has_saved_position, "the region and a saved position are restored")
 	game = await t._spawn_game({"mode": "resume"})
-	t.check(game.player.global_position.distance_to(Vector2(30.5, 18.5) * 32.0) < 1.0 and game.player.facing == "up", "the player stands where they saved, facing the same way")
+	t.check(GameState.region_id == "hills_north" and game.player.global_position.distance_to(Vector2(20.5, 30.5) * 32.0) < 1.0 and game.player.facing == "up", "the player stands where they saved, facing the same way")
 	t.check(World.landmarks_found.get("shepherds_cairn", false), "and the landmark is still found")
-	# a saved spot that is no longer valid falls back to somewhere safe
 	GameState.player_pos = Vector2(10.0, 10.0)
 	GameState.has_saved_position = true
 	_drop(game)
 	game = await t._spawn_game({"mode": "resume"})
 	t.check(game.region.is_walkable_px(game.player.global_position), "an invalid saved position falls back to open ground")
 	_drop(game)
-	# template regions
+	_fresh()
+	game = await _enter("cana", "arrival")
+	t.check(World.current_location() == "cana" and GameState.place_name() == "Cana of Galilee", "Cana is a place of its own")
+	t.check(game.region.data.get("placeholder", false), "and is marked as a placeholder")
+	_drop(game)
 	_fresh()
 	World.context = {"route": "kefar_zayit__nazareth__land", "km": 4.0}
 	game = await _enter("road_camp", "camp")
-	t.check(game.region.data["template"] == true and game.player.global_position.distance_to(game.region.entry_position("camp")) < 2.0, "the camp is built where the entry says")
-	var camp_names = game.region.entities.get_children().filter(func(n): return n is WaymarkInteractable and n.display_name != "")
-	t.check(camp_names.size() == 1 and GameState.place_name().contains("Nazareth path"), "the camp is named for the road (%s)" % GameState.place_name())
-	t.check(camp_names[0].text[0].contains("Nazareth path"), "its text names the road")
+	var camp_marks = game.region.entities.get_children().filter(func(n): return n is WaymarkInteractable and n.display_name != "")
+	t.check(game.region.data["template"] == true and camp_marks.size() == 1 and GameState.place_name().contains("Nazareth path"), "the camp is named for the road (%s)" % GameState.place_name())
 	_drop(game)
 	_fresh()
-	_at("nazareth")
+	World.context = {"location": "nazareth"}
+	GameState.region_id = "outskirts"
 	game = await _enter("outskirts", "arrival")
-	t.check(GameState.place_name() == "Outskirts of Nazareth", "the outskirts are named for the place")
-	t.check(World.current_location() == "nazareth", "and put the protagonist at it")
+	t.check(GameState.place_name() == "Outskirts of Nazareth" and World.current_location() == "nazareth", "the outskirts are named for the place")
 	_drop(game)
 
 
 func test_encounter() -> void:
-	# present by day, absent at night, unaffected by the Sabbath
 	_fresh()
 	_clock(1, 10.0 * 60.0)
-	var game: Node = await _enter("galilee_hills", "from_village")
+	var game: Node = await _enter("galilee_hills", "camp")
 	t.check(game.region.npcs.has("hills_highwayman"), "the highwayman is at the spring by day")
 	_drop(game)
 	_clock(1, 23.0 * 60.0)
-	game = await _enter("galilee_hills", "from_village")
-	t.check(not game.region.npcs.has("hills_highwayman"), "…and not there at night")
+	game = await _enter("galilee_hills", "camp")
+	t.check(not game.region.npcs.has("hills_highwayman"), "and not there at night")
 	_drop(game)
 	_clock(7, 10.0 * 60.0)
 	t.check(Calendar.is_sabbath(WorldSim.day, WorldSim.minute_of_day), "it is the Sabbath")
-	game = await _enter("galilee_hills", "from_village")
+	game = await _enter("galilee_hills", "camp")
 	t.check(game.region.npcs.has("hills_highwayman"), "highwaymen do not keep the Sabbath")
-	# it is a real encounter with every outcome open
 	var enc: Dictionary = DataFiles.load_json("res://data/combat/encounters.json")["encounters"]["hills_highwayman"]
 	t.check(enc["valid"].has("avoidance") and enc["valid"].has("diplomacy") and enc["valid"].size() == 5, "avoiding, talking and fighting are all valid")
 	var npc: Npc = game.region.npcs["hills_highwayman"]
 	t.check(npc.disposition != "noncombatant" and npc.profile_id == "highwayman", "he uses the combat profile from Milestone 2A (%s)" % npc.disposition)
-	var tile := Vector2i(int(npc.position.x / 32.0), int(npc.position.y / 32.0))
-	t.check(tile == Vector2i(41, 37), "he waits at the spring")
-	# the road itself does not pass through him: the main road and both branch ends are far away
-	var road_dist := Vector2(36.0, 21.0).distance_to(Vector2(41.5, 37.5))
-	t.check(road_dist > 10.0, "he is off the main road (%.0f tiles from the junction)" % road_dist)
-	# defeated or fled, he stays gone when the region is built again
+	var spring := Vector2(63.5 - 48.0, 22.5 + 44.0)
+	t.check(Vector2(npc.position / 32.0).distance_to(spring) < 1.0, "he waits at the spring")
 	_drop(game)
 	Combat.set_actor("hills_highwayman", "fled", 0)
-	game = await _enter("galilee_hills", "from_village")
+	game = await _enter("galilee_hills", "camp")
 	t.check(not game.region.npcs.has("hills_highwayman"), "a highwayman who fled is not there on the next visit")
 	_drop(game)
 	_fresh()

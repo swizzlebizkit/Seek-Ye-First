@@ -1,0 +1,7 @@
+{
+  "_note": "How the playable maps sit in one shared world. World tiles are the same 32 px tiles as every map. Kefar Zayit's centre is world tile (0, 0); x grows east, y grows south. A map's 'world' entry is the world tile of its top-left corner. The scale is a compressed game scale: strategic positions (lon/lat) are converted with metres_per_tile, and physical walking runs the clock faster (regional_clock_multiplier, in travel.json) so a walk takes about as long as the same journey on the strategic map.",
+  "metres_per_tile": 50,
+  "origin_location": "kefar_zayit",
+  "position_tolerance_tiles": 16,
+  "direction_tolerance_degrees": 20
+}

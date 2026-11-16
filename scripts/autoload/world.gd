@@ -26,6 +26,9 @@ var features: Dictionary = {}
 var locations: Dictionary = {}  # id -> def
 var routes: Dictionary = {}  # id -> def (with computed "points", "length_km", "stop_list")
 var travel_rules: Dictionary = {}
+var physical: Dictionary = {}  # data/world/physical.json: how the playable maps sit in the shared world
+var _continuous: Dictionary = {}  # region id -> Rect2i in world tiles, for regional maps that tile the world
+const INSET := 24.0  ## px a crossing player is placed inside the next map, so they are not on its edge
 
 # saved
 var place_level: Dictionary = {}  # location id -> level (absent = unknown)
@@ -54,6 +57,10 @@ func load_geography() -> void:
 	var raw = DataFiles.load_json("res://data/world/geography.json")
 	var rules = DataFiles.load_json("res://data/world/travel.json")
 	travel_rules = rules if rules is Dictionary else {}
+	var phys = DataFiles.load_json("res://data/world/physical.json")
+	physical = phys if phys is Dictionary else {}
+	_continuous.clear()
+	_region_cache.clear()
 	maps.clear()
 	locations.clear()
 	routes.clear()
@@ -242,6 +249,8 @@ func context_label() -> String:
 
 ## The strategic location the protagonist is at, or "" while on the open road.
 func current_location(region_id: String = "") -> String:
+	if context.get("via_waymark", false):
+		return str(context.get("location", ""))  # a road marker names the place it belongs to
 	var id := region_id if region_id != "" else GameState.region_id
 	var m := region_meta(id)
 	if m.get("template", false):
@@ -263,11 +272,22 @@ func exit_target(region_id: String, exit_id: String) -> Dictionary:
 
 ## Records the destination (state only). Game reloads the scene to build it.
 func set_destination(region: String, entry: String = "") -> void:
+	context.erase("via_waymark")
 	GameState.region_id = region
 	GameState.has_saved_position = false
 	entry_id = entry
 	_note_region(region)
 	region_changed.emit(region)
+
+
+## Placing the player at an exact spot (px, in the new region) rather than at a named entry. Used when
+## walking across a map edge, where the position along the boundary is what matters.
+func go_position(region: String, pos_px: Vector2, facing: String) -> void:
+	set_destination(region, "")
+	GameState.player_pos = pos_px
+	GameState.player_facing = facing
+	GameState.has_saved_position = true
+	transition_requested.emit(region, "")
 
 
 ## Called by exits at runtime: set the destination and rebuild the scene.
@@ -321,6 +341,94 @@ func _note_region(region: String) -> void:
 	var loc := current_location(region)
 	if loc != "":
 		visit(loc)
+	for s in region_meta(region).get("sights", []):  # places in view from this ground
+		reveal(str(s["place"]), str(s.get("level", "discovered")))
+
+
+# -- the shared world ---------------------------------------------------------------------------
+## Regional maps that tile the world, with their rectangle in world tiles. Local maps and templates are
+## not in this list: a village sits inside a regional map's footprint and is entered through its gates.
+func continuous_rects() -> Dictionary:
+	if _continuous.is_empty():
+		for id in region_ids():
+			var m := region_meta(id)
+			if m.get("kind", "") == "regional" and m.has("world"):
+				_continuous[id] = Rect2i(int(m["world"][0]), int(m["world"][1]), int(m["size"][0]), int(m["size"][1]))
+	return _continuous
+
+
+## Any region that has a place in the world (regional or local), as a rectangle of world tiles.
+func world_rect(id: String) -> Rect2i:
+	var m := region_meta(id)
+	if m.is_empty() or not m.has("world"):
+		return Rect2i()
+	return Rect2i(int(m["world"][0]), int(m["world"][1]), int(m["size"][0]), int(m["size"][1]))
+
+
+func region_at_world_tile(t: Vector2i, exclude: String = "") -> String:
+	var rects := continuous_rects()
+	for id in rects:
+		if id != exclude and (rects[id] as Rect2i).has_point(t):
+			return id
+	return ""
+
+
+## Where a place should be, in world tiles, from its longitude and latitude: the same geography seen
+## through the physical scale.
+func expected_world_tile(loc: String) -> Vector2:
+	var o: Dictionary = locations[str(physical.get("origin_location", "kefar_zayit"))]
+	var p: Dictionary = locations[loc]
+	var lat := deg_to_rad((float(o["pos"][1]) + float(p["pos"][1])) * 0.5)
+	var m_per_tile := float(physical.get("metres_per_tile", 50))
+	var east_km := (float(p["pos"][0]) - float(o["pos"][0])) * KM_PER_DEG_LAT * cos(lat)
+	var north_km := (float(p["pos"][1]) - float(o["pos"][1])) * KM_PER_DEG_LAT
+	return Vector2(east_km * 1000.0 / m_per_tile, -north_km * 1000.0 / m_per_tile)
+
+
+## The centre, in world tiles, of the village or town whose local map is `region`.
+func footprint_centre(region: String) -> Vector2:
+	var r := world_rect(region)
+	return Vector2(r.position) + Vector2(r.size) * 0.5
+
+
+## If `pos_px` (in `region`) is past one of its edges, returns {"region", "pos", "edge"} for the neighbouring
+## map, found by world position: the same point of ground, whatever the two maps' sizes. {} if inside.
+## {"blocked": true} if nothing lies beyond (such an edge is a barrier, and the validator insists on it).
+func edge_crossing(region: String, pos_px: Vector2) -> Dictionary:
+	var rects := continuous_rects()
+	if not rects.has(region):
+		return {}
+	var rect: Rect2i = rects[region]
+	var size_px := Vector2(rect.size) * 32.0
+	var edge := ""
+	if pos_px.x < 0.0:
+		edge = "west"
+	elif pos_px.x >= size_px.x:
+		edge = "east"
+	elif pos_px.y < 0.0:
+		edge = "north"
+	elif pos_px.y >= size_px.y:
+		edge = "south"
+	if edge == "":
+		return {}
+	var world := Vector2(rect.position) * 32.0 + pos_px
+	var tile := Vector2i(floori(world.x / 32.0), floori(world.y / 32.0))
+	var other := region_at_world_tile(tile, region)
+	if other == "":
+		return {"blocked": true, "edge": edge}
+	var orect: Rect2i = rects[other]
+	var npos := world - Vector2(orect.position) * 32.0
+	var osize := Vector2(orect.size) * 32.0
+	match edge:
+		"east":
+			npos.x = maxf(npos.x, INSET)
+		"west":
+			npos.x = minf(npos.x, osize.x - INSET)
+		"south":
+			npos.y = maxf(npos.y, INSET)
+		"north":
+			npos.y = minf(npos.y, osize.y - INSET)
+	return {"region": other, "pos": npos, "edge": edge}
 
 
 # -- discovery ---------------------------------------------------------------------------------
@@ -504,7 +612,120 @@ func validate() -> Dictionary:
 						back = true
 				if not back:
 					warnings.append("region %s: exit %s has no way back" % [rid, e["id"]])
+	_validate_physical(errors, warnings)
 	return {"errors": errors, "warnings": warnings}
+
+
+## Every tile along every edge of a continuous map, paired with the tile across the boundary:
+## [{"a": Vector2i (in `id`), "b_region": String ("" if nothing lies beyond), "b": Vector2i, "edge": String}].
+func edge_pairs(id: String) -> Array:
+	var rects := continuous_rects()
+	var out: Array = []
+	if not rects.has(id):
+		return out
+	var r: Rect2i = rects[id]
+	for y in range(r.size.y):
+		out.append(_pair(id, r, Vector2i(0, y), Vector2i(-1, 0), "west"))
+		out.append(_pair(id, r, Vector2i(r.size.x - 1, y), Vector2i(1, 0), "east"))
+	for x in range(r.size.x):
+		out.append(_pair(id, r, Vector2i(x, 0), Vector2i(0, -1), "north"))
+		out.append(_pair(id, r, Vector2i(x, r.size.y - 1), Vector2i(0, 1), "south"))
+	return out
+
+
+func _pair(id: String, r: Rect2i, a: Vector2i, step: Vector2i, edge: String) -> Dictionary:
+	var world := r.position + a + step
+	var other := region_at_world_tile(world, id)
+	var b := Vector2i(-1, -1)
+	if other != "":
+		b = world - (continuous_rects()[other] as Rect2i).position
+	return {"a": a, "b_region": other, "b": b, "edge": edge}
+
+
+func _validate_physical(errors: Array, warnings: Array) -> void:
+	var rects := continuous_rects()
+	var ids := rects.keys()
+	# maps of the world must not overlap each other
+	for i in range(ids.size()):
+		for j in range(i + 1, ids.size()):
+			if (rects[ids[i]] as Rect2i).intersects(rects[ids[j]]):
+				errors.append("regions %s and %s overlap in the world" % [ids[i], ids[j]])
+	# terrain meets terrain across every shared boundary; an open edge must lead somewhere
+	for id in ids:
+		var m := region_meta(id)
+		var blocked := RegionTerrain.blocked_tiles(m)
+		var dead := 0
+		var blocked_across := 0
+		var broken := 0
+		for p in edge_pairs(id):
+			var a: Vector2i = p["a"]
+			var ca := RegionTerrain.tile_class(m, a.x, a.y)
+			var walk_a := not blocked.has(a)
+			if p["b_region"] == "":
+				if walk_a:
+					dead += 1
+				continue
+			var mb := region_meta(str(p["b_region"]))
+			var b: Vector2i = p["b"]
+			if walk_a and RegionTerrain.blocked_tiles_cached(str(p["b_region"]), mb).has(b):
+				blocked_across += 1
+			if ca == "road" or ca == "water":
+				# a road or river must carry on across the seam (within two tiles, since it may cross at an angle)
+				var along := Vector2i(0, 1) if (p["edge"] == "west" or p["edge"] == "east") else Vector2i(1, 0)
+				var ok := false
+				var bsize: Array = mb["size"]
+				for k in [-2, -1, 0, 1, 2]:
+					var bb: Vector2i = b + along * k
+					if bb.x >= 0 and bb.y >= 0 and bb.x < int(bsize[0]) and bb.y < int(bsize[1]) and RegionTerrain.tile_class(mb, bb.x, bb.y) == ca:
+						ok = true
+				if not ok:
+					broken += 1
+		if dead > 0:
+			errors.append("region %s: %d walkable edge tiles lead nowhere (a blocked edge must be a visible barrier)" % [id, dead])
+		if blocked_across > 0:
+			errors.append("region %s: %d walkable edge tiles meet a solid tile across the boundary" % [id, blocked_across])
+		if broken > 0:
+			errors.append("region %s: %d road or river tiles do not continue across the boundary" % [id, broken])
+	# villages and towns sit inside a map and where their longitude and latitude say they should
+	var tol := float(physical.get("position_tolerance_tiles", 16))
+	var placed: Array = []
+	for lid in locations:
+		var reg = locations[lid].get("region")
+		if reg == null or not region_meta(str(reg)).has("world"):
+			continue
+		var rect := world_rect(str(reg))
+		var inside := ""
+		for rid in ids:
+			if (rects[rid] as Rect2i).encloses(rect):
+				inside = rid
+		if inside == "":
+			errors.append("local map %s does not sit inside any regional map of the world" % reg)
+		var d := footprint_centre(str(reg)).distance_to(expected_world_tile(lid))
+		if d > tol:
+			errors.append("%s is %.0f tiles from where its longitude and latitude put it" % [lid, d])
+		placed.append(lid)
+	# and every pair of them lies in the right compass direction from the other
+	var tol_deg := float(physical.get("direction_tolerance_degrees", 20))
+	for i in range(placed.size()):
+		for j in range(i + 1, placed.size()):
+			var want := expected_world_tile(placed[j]) - expected_world_tile(placed[i])
+			var have := footprint_centre(str(locations[placed[j]]["region"])) - footprint_centre(str(locations[placed[i]]["region"]))
+			if want.length() > 1.0 and have.length() > 1.0 and rad_to_deg(absf(want.angle_to(have))) > tol_deg:
+				errors.append("%s lies in the wrong direction from %s on the physical map" % [placed[j], placed[i]])
+	# road markers belong to a real place or road
+	for rid in region_ids():
+		for it in region_meta(rid).get("interactables", []):
+			if it.get("type", "") != "waymark":
+				continue
+			if it.has("place") and not locations.has(str(it["place"])):
+				errors.append("region %s: marker names unknown place %s" % [rid, it["place"]])
+			if it.has("route") and not routes.has(str(it["route"])):
+				errors.append("region %s: marker names unknown route %s" % [rid, it["route"]])
+			if not it.has("place") and not it.has("route") and region_meta(rid).get("kind", "") != "template":
+				errors.append("region %s: marker '%s' says neither a place nor a road" % [rid, it.get("name", "")])
+		for s in region_meta(rid).get("sights", []):
+			if not locations.has(str(s.get("place", ""))):
+				errors.append("region %s: sight names unknown place %s" % [rid, s.get("place", "")])
 
 
 # -- persistence -------------------------------------------------------------------------------

@@ -1,0 +1,783 @@
+{
+ "id": "hills_north",
+ "name": "The northern hills",
+ "kind": "regional",
+ "origin": "fiction",
+ "note": "Invented countryside of lower Galilee, generated as part of the continuous world (tools/mapgen/world.py).",
+ "world": [
+  48,
+  -116
+ ],
+ "size": [
+  64,
+  72
+ ],
+ "spawn": [
+  22.5,
+  56.5
+ ],
+ "entries": {
+  "camp": {
+   "tile": [
+    22,
+    56
+   ],
+   "facing": "down"
+  }
+ },
+ "exits": [],
+ "ground": [
+  "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+  "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+  "ccgcccgccgccggccgccgcccgccggcccccggccgcccgccgccggccgccwcccgccggc",
+  "ccccgggggggggcgggggggggcggggcgggggggggcgggggggggcggggswwsscggggc",
+  "cccgggccgcgccgccgggggggggggcccggggccgccccggggggggggggswwssgggggg",
+  "cccccccccccccccccgggggggggcccccccccccccccggggggggggggswwssgggggg",
+  "cccccccccccccccccgggggggggccccccccccccccgggggggggggggswwssgggggg",
+  "ccccccccccccccccggggggggggcccccccccccccccggggggggggggswwssgggggg",
+  "ccccccccccccccccgggggggggggccccccccccccccggggggggggggswwssgggggg",
+  "ccgcccccccccccccggggggggggccccccccccccccgggggggggggggswwssgggggg",
+  "ccccccccccccccccggggghhhhhhccccccccccccccggggggggggggswwssgggggg",
+  "ccccccccccccccccggggghgghhccccccccccccccgggggggggggggswwssgggggg",
+  "ccgcccccccccccccggggggghhghcccccccccccccggggggggggggswwssggggggg",
+  "cccccccccccccccccgggggggggcccccccccccccccgggggggggggswwssggggggg",
+  "ccccccccccccccccggggggggggcccccccccccccccgggggggggggswwssggggggg",
+  "cccccccccccccccccggggggggggcccccccccccccggggggggggggswwssggggggg",
+  "cccccggcgccccccccggggggggggcccccccccccccggggggggggggswwssggggggg",
+  "cccggggggggggggggggggggggggcccccccccccccgggggggggggswwssgggggggg",
+  "cccggggggggggggggggggggggggggcgggggcgccgcggggggggggswwssgggggggg",
+  "ccgggggggggggggggggggggggggggggggggggggggggggggggggswwssgggggggg",
+  "ccgggggggggggggggggggggggggggggggggggggggggggggggggswwssgggggggg",
+  "cccgggggggggggggggggggggggggggggggggggggggggggggggswwssggggggggg",
+  "cccgggggggggggggggggggggggggggggggggggggggggggggggswwssggggggggg",
+  "ccgcggggggggggggggggggggggggggggggggggggggggggggggswwssggggggggg",
+  "cccggggggggggggggggggggggggggggggggggggggggggggggswwsscccccccggg",
+  "cccggggggggggggggggggggggggggggggggggggggggggggggswwssccccccgggg",
+  "cccggggggggggggggggggggggggggggggggggggggggggggggswwssccccccgggg",
+  "ccggggggggggggggggggggggggggggggggggggggggggggggswwssggccccccggg",
+  "ccccggggggggggggggggggggggggggggggggggggggggggggswwssgccccccgggg",
+  "cccgggggggggggggggggggggggggggggggggggggggggggggswwssgcccccccggg",
+  "ccggggggggggggggggggggggggggggggggggggggggggggggswwssgccccccgggg",
+  "cccgggggggggggggggggggggggggggggggggggggggggggggswwssgcccccccggg",
+  "cccggggggggggggggggggggggggggggggggggggggggggggswwssggcccccccggg",
+  "ccgggggggggggggggggggggggggggggggggggggggggggggswwssgggccccccggg",
+  "ccgggggggggggggggggggggggggggggggggggggggggggggswwssggcccccccggg",
+  "cccggggggggggggggggggggggggggggggggggggggggggggswwssgggcccccgggd",
+  "cccggggggggggggggggggggggggggggggggggggggggggggswwssggcgggccggdd",
+  "ccgggggggggggggggggggggggggggggggggggggggggggggswwssggggggggdddd",
+  "ccccgggggggggggggggggggggggggggggggggggggggggggswwssgggggggddddd",
+  "cccggggggggggggggggggggggggggggggggggggggggggggswwssgggggddddddg",
+  "ccgggggggggggggggggggggggggggggggggggggggggggggswwssggggdddddggg",
+  "cccggggggggggggggggggggggggggggggggggggggggggggswwssggddddddgggg",
+  "cccggggggggggggggggggggggggggggggggggggggggggggswwssgdddddgggggg",
+  "cccggggggggggggggggggggggggggggggggggggggggggggswwspdddddggggggg",
+  "ccggggggggggggggggggggggggggggggggggggggggggggggswpppddggggggggg",
+  "cccgggggggggggggggggggggggggggggggggggggggggggggpppppdggggggggcc",
+  "cccggggggggggggggggggggggggggggggggggggggggggggdppppsggggggggccc",
+  "cchhhggggggggggggggggggggggggggggggggggggggggdddpppssgggggggcccc",
+  "cchchgggggggggggggggggggggggggggggggggggggggdddddswwssggggggggcc",
+  "ccchggggggggggggggggggggggggggggggggggggggddddddgswwssgggggggccc",
+  "cccggggggggggggggggggggggggggggggggggggggdddddgggswwssgggggggccc",
+  "cccggggggggggggggggggggggggggggggggggggddddddggggswwssggggggggcc",
+  "cccggggggggggggggggggggggggggggggggggggddddgggggggswwssgggggggcc",
+  "cccgggggggggggghhhhhhhgggggggggggggggggdddggggggggswwssggggggccc",
+  "ccggcccccgggcgghhppphhgggggggggggggggggdddhhhghhhgswwssggggggccc",
+  "ccgggcccccccggghhppphhggggggggggggggggdddghhggghhggswwssggggggcc",
+  "cccggccccccccgghhppphhggggggggggggggggdddghhhhghhggswwssgggggccc",
+  "cccgcccccccccgghhpppdhggggggggggggggggdddggggggggggswwssggggcccc",
+  "ccgccccccccccgghhpppddggggggggggggggggdddggggggggggswwssggggggcc",
+  "cccgccccccccggghhhhhddggggggggggggggggdddgggggggggggswwssggggccc",
+  "cccgcccccccccgggggggddgggggggggggggggdddggggggggggggswwssggggccc",
+  "cccgcccccccccgggggggdddggggggggggggggdddggggggggggggswwssggggccc",
+  "ccggcccccccccggggggggddggggggggggggggdddggggggggggggswwssgggcgcc",
+  "cccccccccccccggggggggddggggggggggggggdddggggggggggggswwssggggccc",
+  "cccgccccccccgggggggggdddgggggggggggggdddgggggggggggggswwssgggccc",
+  "ccgggccccccccgggggggggddggggggggggggdddggggggggggggggswwssggggcc",
+  "cccggcgccccgcgggggggggddggggggggggggdddggggggggggggggswwssggggcc",
+  "cccgggggggggggggggggggdddgggggggggggdddggggggggggggggswwssgggccc",
+  "ccgggggggggggggggggggggddgggggggggggdddggggggggggggggswwssgggccc",
+  "ccgggggggggggggggggggggddgggggggggggdddggggggggggggggswwssgggccc",
+  "cccggggggggggggggggggggdddgggggggggdddgggggggggggggggswwssgggccc",
+  "cccgggggggggggggggggggggddgggggggggdddgggggggggggggggswwssggcccc"
+ ],
+ "ground_legend": {
+  "g": [
+   "grass_0",
+   "grass_0",
+   "grass_0",
+   "grass_1",
+   "grass_1",
+   "grass_2",
+   "grass_2",
+   "grass_2",
+   "grass_1",
+   "grass_flowers"
+  ],
+  "h": [
+   "grass_dry_0",
+   "grass_dry_1"
+  ],
+  "d": [
+   "dirt_0",
+   "dirt_1"
+  ],
+  "p": [
+   "path_0",
+   "path_1"
+  ],
+  "s": [
+   "sand_0",
+   "sand_1"
+  ],
+  "w": [
+   "water_0",
+   "water_1"
+  ],
+  "c": [
+   "cliff_0",
+   "cliff_1"
+  ],
+  "f": [
+   "field_0",
+   "field_1"
+  ]
+ },
+ "objects": [],
+ "props": [
+  {
+   "prop": "olive_tree_b",
+   "tile": [
+    30,
+    54
+   ]
+  },
+  {
+   "prop": "olive_tree_b",
+   "tile": [
+    43,
+    42
+   ]
+  },
+  {
+   "prop": "olive_tree_b",
+   "tile": [
+    44,
+    39
+   ]
+  },
+  {
+   "prop": "olive_tree_a",
+   "tile": [
+    33,
+    64
+   ]
+  },
+  {
+   "prop": "bush_flowers",
+   "tile": [
+    3,
+    47
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    52,
+    32
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    41,
+    62
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    26,
+    16
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    27,
+    58
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    40,
+    44
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    25,
+    63
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    61,
+    62
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    17,
+    61
+   ]
+  },
+  {
+   "prop": "bush_flowers",
+   "tile": [
+    5,
+    52
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    33,
+    54
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    53,
+    33
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    36,
+    58
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    41,
+    10
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    40,
+    11
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    59,
+    19
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    4,
+    22
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    3,
+    17
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    10,
+    26
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    57,
+    58
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    52,
+    4
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    18,
+    32
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    47,
+    67
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    16,
+    40
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    3,
+    27
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    9,
+    67
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    13,
+    58
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    58,
+    18
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    48,
+    19
+   ]
+  },
+  {
+   "prop": "bush_flowers",
+   "tile": [
+    25,
+    53
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    3,
+    32
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    30,
+    33
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    56,
+    46
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    3,
+    66
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    33,
+    38
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    41,
+    3
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    38,
+    49
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    49,
+    13
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    35,
+    45
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    40,
+    41
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    6,
+    22
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    13,
+    28
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    16,
+    52
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    40,
+    37
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    31,
+    67
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    45,
+    9
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    28,
+    67
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    21,
+    16
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    30,
+    24
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    50,
+    19
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    36,
+    56
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    50,
+    13
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    22,
+    41
+   ]
+  },
+  {
+   "prop": "bush_flowers",
+   "tile": [
+    8,
+    39
+   ]
+  },
+  {
+   "prop": "bush_flowers",
+   "tile": [
+    35,
+    3
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    9,
+    52
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    5,
+    36
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    22,
+    24
+   ]
+  },
+  {
+   "prop": "bush_flowers",
+   "tile": [
+    38,
+    45
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    31,
+    45
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    31,
+    51
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    39,
+    41
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    19,
+    50
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    38,
+    23
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    26,
+    37
+   ]
+  },
+  {
+   "prop": "bush_flowers",
+   "tile": [
+    34,
+    61
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    13,
+    47
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    51,
+    66
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    29,
+    41
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    45,
+    31
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    41,
+    7
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    46,
+    19
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    40,
+    16
+   ]
+  },
+  {
+   "prop": "cypress",
+   "tile": [
+    16,
+    54
+   ]
+  },
+  {
+   "prop": "cypress",
+   "tile": [
+    20,
+    54
+   ]
+  },
+  {
+   "prop": "cypress",
+   "tile": [
+    16,
+    59
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    18,
+    55
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    19,
+    56
+   ]
+  }
+ ],
+ "npcs": [],
+ "interactables": [
+  {
+   "type": "examine",
+   "name": "The shepherds' cairn",
+   "tile": [
+    18.5,
+    56.5
+   ],
+   "radius": 38,
+   "landmark": "shepherds_cairn",
+   "variants": [
+    {
+     "when": {
+      "not_flag": "saw_cairn"
+     },
+     "text": [
+      "A heap of fieldstones taller than a man, each one laid by a passing shepherd for luck or for a landmark.",
+      "From up here the land opens out. East, beyond the hills, the lake lies like a dropped blue coin. Smoke rises from the fishing towns on its shore."
+     ],
+     "effects": [
+      {
+       "landmark": "shepherds_cairn"
+      },
+      {
+       "set_flag": "saw_cairn"
+      },
+      {
+       "reveal_place": {
+        "place": "tiberias",
+        "level": "discovered"
+       }
+      },
+      {
+       "reveal_place": {
+        "place": "capernaum",
+        "level": "rumored"
+       }
+      }
+     ]
+    },
+    {
+     "text": [
+      "The shepherds' cairn. Someone has added a stone since you were last here."
+     ]
+    }
+   ]
+  },
+  {
+   "type": "examine",
+   "name": "The ford",
+   "tile": [
+    51.5,
+    44.5
+   ],
+   "radius": 44,
+   "text": [
+    "Flat stones set across the stream where the road crosses. The water runs cold and fast underneath."
+   ]
+  }
+ ]
+}

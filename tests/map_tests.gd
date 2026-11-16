@@ -98,7 +98,7 @@ func test_journal_map() -> void:
 	_fresh()
 	World.note_player("kefar_zayit", Vector2(20, 14))
 	World.regions_visited["kefar_zayit"] = true
-	var game: Node = await _enter("kefar_zayit", "from_hills")
+	var game: Node = await _enter("kefar_zayit", "gate_east")
 	var jv: JournalView = game.hud.journal_view
 	jv.open()
 	jv._set_tab(JournalView.Tab.MAP)
@@ -160,9 +160,9 @@ func test_journal_map() -> void:
 	jm.zoom(1.5)
 	t.check(jm._region_map.zoom > rz, "the regional map zooms")
 	t.check(jm.region_text("galilee_hills").contains("Explored"), "its detail says how much is explored")
-	t.check(not jm.region_text("galilee_hills").contains("cairn"), "the cairn is not listed before it is found")
+	t.check(not jm.region_text("hills_north").contains("cairn"), "the cairn is not listed before it is found")
 	World.find_landmark("shepherds_cairn")
-	t.check(jm.region_text("galilee_hills").contains("shepherds' cairn"), "a found landmark is listed")
+	t.check(jm.region_text("hills_north").contains("shepherds' cairn"), "a found landmark is listed")
 
 	# local level
 	jm.set_level(JournalMap.Level.LOCAL)
@@ -235,8 +235,11 @@ func test_strategic_ui_walk() -> void:
 	_fresh()
 	WorldSim.day = 2
 	WorldSim.minute_of_day = 8.0 * 60.0
-	var game: Node = await _enter("galilee_hills", "camp")
-	var sv := await _open_strategic(game, ["land"])
+	var game: Node = await _enter("kefar_zayit_outskirts", "camp")
+	var marks = game.region.entities.get_children().filter(func(n): return n is WaymarkInteractable and n.place == "kefar_zayit")
+	marks[0]._open_map()
+	await t._frames(2)
+	var sv: StrategicView = game.hud.strategic_view
 	t.check(GameState.mode == GameState.Mode.MAP and sv.visible, "the road marker opens the map and pauses play")
 	t.check(sv._list.item_count == 3, "three roads are offered from the countryside around Kefar Zayit")
 	t.check(sv._title.text.contains("Kefar Zayit"), "titled with where the protagonist is")
@@ -262,7 +265,7 @@ func test_strategic_ui_walk() -> void:
 	t.check(WorldSim.minute_of_day > mins_before or WorldSim.day > 2, "the clock advances while it moves")
 	await _wait(2.8)
 	t.check(not Travel.active() and Travel.last_arrival == "magdala", "the journey ends at Magdala")
-	t.check(GameState.region_id == "magdala_shore" and World.entry_id == "arrival", "and the protagonist is put on the shore at Magdala")
+	t.check(GameState.region_id == "magdala" and World.entry_id == "arrival", "and the protagonist is put inside Magdala at its arrival point")
 	t.check(Travel.notice == "arrived", "arrival leaves a notice for the next scene")
 	t.check(not sv.visible and GameState.mode == GameState.Mode.EXPLORE, "the map has closed")
 	t.check(World.level_of("magdala") == "visited", "Magdala is now visited")
@@ -375,7 +378,7 @@ func test_notices() -> void:
 	_fresh()
 	Travel.notice = "arrived"
 	Travel.last_arrival = "magdala"
-	game = await _enter("magdala_shore", "arrival")
+	game = await _enter("magdala", "arrival")
 	t.check(Travel.notice == "", "an arrival notice is used up too")
 	game.free()
 	_fresh()

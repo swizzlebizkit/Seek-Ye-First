@@ -216,18 +216,24 @@ interactables = [
      ]},
 ]
 
-# --- the east road leaves the village (W1): a gap in the boundary cliffs where the road runs out ----
+# --- the gates (W1.6): the village road leaves through an opening in the boundary at each end, with gateposts ----
 for yy in range(12, 16):
-    for xx in (38, 39):
+    for xx in (0, 1, 2, 37, 38, 39):
         ground[yy][xx] = "d"
+for gx in (1, 38):
+    for gy in (11, 16):
+        objects.append([gx, gy, "wall_stone"])
 
 region = {
     "id": "kefar_zayit",
     "kind": "local",
     "anchor": "kefar_zayit",
-    "entries": {"from_hills": {"tile": [36, 13], "span": 1, "axis": "y", "facing": "left"},
-				"arrival": {"tile": [35, 14], "facing": "left"}},
-    "exits": [{"id": "east_road", "rect": [39, 12, 1, 4], "to": {"region": "galilee_hills", "entry": "from_village"}, "facing": "right"}],
+    "world": [-20, -14],
+    "entries": {"gate_east": {"tile": [37, 12], "span": 3, "axis": "y", "facing": "left"},
+                "gate_west": {"tile": [3, 12], "span": 3, "axis": "y", "facing": "right"},
+                "arrival": {"tile": [35, 14], "facing": "left"}},
+    "exits": [{"id": "east_gate", "rect": [39, 12, 1, 4], "to": {"region": "kefar_zayit_outskirts", "entry": "from_kz_east"}, "facing": "right"},
+              {"id": "west_gate", "rect": [0, 12, 1, 4], "to": {"region": "kefar_zayit_outskirts", "entry": "from_kz_west"}, "facing": "left"}],
     "name": "Kefar Zayit",
     "origin": "fiction",
     "note": "An invented Galilean village; no canonical event occurs here.",

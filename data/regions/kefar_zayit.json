@@ -2,15 +2,28 @@
  "id": "kefar_zayit",
  "kind": "local",
  "anchor": "kefar_zayit",
+ "world": [
+  -20,
+  -14
+ ],
  "entries": {
-  "from_hills": {
+  "gate_east": {
    "tile": [
-    36,
-    13
+    37,
+    12
    ],
-   "span": 1,
+   "span": 3,
    "axis": "y",
    "facing": "left"
+  },
+  "gate_west": {
+   "tile": [
+    3,
+    12
+   ],
+   "span": 3,
+   "axis": "y",
+   "facing": "right"
   },
   "arrival": {
    "tile": [
@@ -22,7 +35,7 @@
  },
  "exits": [
   {
-   "id": "east_road",
+   "id": "east_gate",
    "rect": [
     39,
     12,
@@ -30,10 +43,24 @@
     4
    ],
    "to": {
-    "region": "galilee_hills",
-    "entry": "from_village"
+    "region": "kefar_zayit_outskirts",
+    "entry": "from_kz_east"
    },
    "facing": "right"
+  },
+  {
+   "id": "west_gate",
+   "rect": [
+    0,
+    12,
+    1,
+    4
+   ],
+   "to": {
+    "region": "kefar_zayit_outskirts",
+    "entry": "from_kz_west"
+   },
+   "facing": "left"
   }
  ],
  "name": "Kefar Zayit",
@@ -60,10 +87,10 @@
   "cccggggdggggdddggggddggggdgggggdddgggccc",
   "ccgggggdgggggdggghgddggggdgggggdddggggcc",
   "cccggggdgggggdggpppppppphdhgggggdggggccc",
-  "cccggggdgggggdggppppppppgdhghhggdgggggdd",
-  "ccgdddddddddddddppppppppdddddddddddddddd",
-  "ccgdddddddddddddppppppppdddddddddddddddd",
-  "ccggggggggggggggppppppppgggghghhggggggdd",
+  "dddggggdgggggdggppppppppgdhghhggdggggddd",
+  "ddddddddddddddddppppppppdddddddddddddddd",
+  "ddddddddddddddddppppppppdddddddddddddddd",
+  "dddgggggggggggggppppppppgggghghhgggggddd",
   "cccgggggggggggggppppppppgggggggggggggccc",
   "cccsswwwssgggggggggddggggggggggggggggccc",
   "cccswwwwwsgggggggggddggggggggggggggggccc",
@@ -724,6 +751,26 @@
    29,
    25,
    "lowwall_v"
+  ],
+  [
+   1,
+   11,
+   "wall_stone"
+  ],
+  [
+   1,
+   16,
+   "wall_stone"
+  ],
+  [
+   38,
+   11,
+   "wall_stone"
+  ],
+  [
+   38,
+   16,
+   "wall_stone"
   ]
  ],
  "props": [

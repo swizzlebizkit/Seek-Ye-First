@@ -1,0 +1,2504 @@
+{
+ "id": "kefar_zayit_outskirts",
+ "name": "Around Kefar Zayit",
+ "kind": "regional",
+ "origin": "fiction",
+ "note": "Invented countryside of lower Galilee, generated as part of the continuous world (tools/mapgen/world.py).",
+ "world": [
+  -48,
+  -36
+ ],
+ "size": [
+  96,
+  72
+ ],
+ "spawn": [
+  74.5,
+  33.5
+ ],
+ "entries": {
+  "from_kz_east": {
+   "tile": [
+    69,
+    34
+   ],
+   "span": 3,
+   "axis": "y",
+   "facing": "right"
+  },
+  "from_kz_west": {
+   "tile": [
+    26,
+    34
+   ],
+   "span": 3,
+   "axis": "y",
+   "facing": "left"
+  },
+  "camp": {
+   "tile": [
+    74,
+    33
+   ],
+   "facing": "down"
+  }
+ },
+ "exits": [
+  {
+   "id": "kz_east",
+   "rect": [
+    67,
+    34,
+    1,
+    4
+   ],
+   "to": {
+    "region": "kefar_zayit",
+    "entry": "gate_east"
+   },
+   "facing": "right"
+  },
+  {
+   "id": "kz_west",
+   "rect": [
+    28,
+    34,
+    1,
+    4
+   ],
+   "to": {
+    "region": "kefar_zayit",
+    "entry": "gate_west"
+   },
+   "facing": "left"
+  }
+ ],
+ "ground": [
+  "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+  "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+  "ccccgcccgcccccccccgcccgccgccggccgccgcccgccggcccccggccgcccgccgccggccgccgcccgccggcccccggccgcccgccc",
+  "cccgcccccccccccccggcgggggggggcgggggggggcggggcgggggggggcgggggggggcgggggggggcggggcgggggggggcgggggg",
+  "cccggcccccccccccggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggccgccccccccccggggg",
+  "cccggcccccccccccggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggccccccccccccccgggg",
+  "cccggcccccccccccgggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggccccccccccccccggg",
+  "ccgggccccccccccccgggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggccccccccccccccgggg",
+  "ccgggccccccccccccgggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggcccccccccccccccggg",
+  "cccggccccccccccccgggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggcccccccccccccccggg",
+  "cccggccgccccggcggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggccccccccccccccggg",
+  "gggcggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggccccccccccccccgggg",
+  "ggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggccgcggcccgccgggg",
+  "gggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg",
+  "gggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg",
+  "gggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg",
+  "gggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg",
+  "gggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg",
+  "gggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg",
+  "gggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg",
+  "gggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg",
+  "gggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg",
+  "ggggggggggggggggggggggggggggddddddddddddddddddddddddddddddddddddddddgggggggggggggggggggggggggggg",
+  "ggggggggggggggggggggggggggggddddddddddddddddddddddddddddddddddddddddgggggggggggggggggggggggggggg",
+  "ggggggggggggggggggggggggggggddddddddddddddddddddddddddddddddddddddddgggggggggggggggggggggggggggg",
+  "ggggggggggggggggggggggggggggddddddddddddddddddddddddddddddddddddddddgggggggggggggggggggggggggggg",
+  "ggggggggggggggggggggggggggggddddddddddddddddddddddddddddddddddddddddgggggggggggggggggggggggggggg",
+  "ggggggggggggggggggggggggggggddddddddddddddddddddddddddddddddddddddddgggggggggggggggggggggggggggg",
+  "ggggggggggggggggggggggggggggddddddddddddddddddddddddddddddddddddddddgggggggggggggggggggggggggggg",
+  "ggggggggggggggggggggggggggggddddddddddddddddddddddddddddddddddddddddgggggggggggggggggggggggggggg",
+  "ggggggggggggggggggggggggggggddddddddddddddddddddddddddddddddddddddddgggggggggggggggggggggggggggg",
+  "ggggggggggggggggggggggggggggddddddddddddddddddddddddddddddddddddddddgggggggggggggggggggggggggggg",
+  "ggggggggggggggggggggggggggggddddddddddddddddddddddddddddddddddddddddgggggggggggggggggggggggggggg",
+  "ggggggggggggggggggggggggggggddddddddddddddddddddddddddddddddddddddddgggggggggggggggggggggggggggg",
+  "ggggggggggggggggggggggggggggddddddddddddddddddddddddddddddddddddddddgggggggggggggggggggggggggggg",
+  "ggggggggggggggggggggggggdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+  "ggggggggggggggdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+  "gggggddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+  "ddddddddddddddddddddddddggggddddddddddddddddddddddddddddddddddddddddgggggggggggggggggggggggggggg",
+  "dddddddddddddddgggggggggggggddddddddddddddddddddddddddddddddddddddddgggggggggggggggggggggggggggg",
+  "dddddgggggggggggggggggggggggddddddddddddddddddddddddddddddddddddddddgggggggggggggggggggggggggggg",
+  "ggggggggggggggggggggggggggggddddddddddddddddddddddddddddddddddddddddgggggggggggggggggggggggggggg",
+  "ggggggggggggggggggggggggggggddddddddddddddddddddddddddddddddddddddddggggggghghhhhhgggggggggggggg",
+  "ggggggggggggggggggggggggggggddddddddddddddddddddddddddddddddddddddddgggggggghghhhggggggggggggggg",
+  "ggggggggggggggggggggggggggggddddddddddddddddddddddddddddddddddddddddggggggghhhhhhhgggggggggggggg",
+  "ggggggggggggggggggggggggggggddddddddddddddddddddddddddddddddddddddddgggggggggggggggggggggggggggg",
+  "ggggggggggggggggggggggggggggddddddddddddddddddddddddddddddddddddddddgggggggggggggggggggggggggggg",
+  "ggggggggggggggggggggggggggggddddddddddddddddddddddddddddddddddddddddgggggggggggggggggggggggggggg",
+  "ggggggggggggggggggggggggggggddddddddddddddddddddddddddddddddddddddddgggggggggggggggggggggggggggg",
+  "ggggggggggggggggggggggggggggddddddddddddddddddddddddddddddddddddddddgggggggggggggggggggggggggggg",
+  "gggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg",
+  "ggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggghghhhgggggggggggggg",
+  "ggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggghhhhghhgggggggggggggg",
+  "ggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggghhhhgghgggggggggggggg",
+  "gggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg",
+  "gggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg",
+  "gggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg",
+  "gggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg",
+  "gggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg",
+  "gggggggggggggggggggggggggggggggggggggggggggggggggghghhhhgggggggggggggggggggggggggggggggggggggggg",
+  "gggggccgcccgccgggggggggggggggggggggggggggggggggggghhhhhghgggggggggggggggggggcgggcggggcgcccgggggc",
+  "gggggcccccccccccccggggggggggggggggggggggggggggggggghhhhghggggggggggggggggggggcccccccccccccgggccg",
+  "ggggccccccccccccccggggggggggggggggggggggggggggggggggggggggggggggggggggggggggcccccccccccccccggccc",
+  "gggggcccccccccccccgggggggggggggggggggggggggggggggggggggggggggggggggggggggggggccccccccccccccgggcc",
+  "ggggcccccccccccccccgggggggggggggggggggggggggggggggggggggggggggggggggggggggggcccccccccccccccgggcc",
+  "gggggcccccccccccccgggggggggggggggggggggggggggggggggggggggggggggggggggggggggggcccccccccccccgggccc",
+  "ggggcccccccccccccccggggggggggggggggggggggggggggggggggghghhghgggggggggggggggggccccccccccccccggccc",
+  "ggggcccccccccccccccggggggggggggggggggggggggggggggggggghhhghhhggggggggggggggggcccccccccccccggggcc",
+  "cggggcgcgccgggcccccgggggcgggggggggcgggggggggcggggcgggghhhghchggggggggcggggggcggccccgcccggccggccc",
+  "cccggcccccggccgcccgccgccggccgccgcccgccggcccccggccgcccgccgccggccgccgcccgccggcccccggccgcccgccgcccc",
+  "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+  "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+ ],
+ "ground_legend": {
+  "g": [
+   "grass_0",
+   "grass_0",
+   "grass_0",
+   "grass_1",
+   "grass_1",
+   "grass_2",
+   "grass_2",
+   "grass_2",
+   "grass_1",
+   "grass_flowers"
+  ],
+  "h": [
+   "grass_dry_0",
+   "grass_dry_1"
+  ],
+  "d": [
+   "dirt_0",
+   "dirt_1"
+  ],
+  "p": [
+   "path_0",
+   "path_1"
+  ],
+  "s": [
+   "sand_0",
+   "sand_1"
+  ],
+  "w": [
+   "water_0",
+   "water_1"
+  ],
+  "c": [
+   "cliff_0",
+   "cliff_1"
+  ],
+  "f": [
+   "field_0",
+   "field_1"
+  ]
+ },
+ "objects": [
+  [
+   28,
+   22,
+   "lowwall_h"
+  ],
+  [
+   28,
+   49,
+   "lowwall_h"
+  ],
+  [
+   29,
+   22,
+   "lowwall_h"
+  ],
+  [
+   29,
+   49,
+   "lowwall_h"
+  ],
+  [
+   30,
+   22,
+   "lowwall_h"
+  ],
+  [
+   30,
+   49,
+   "lowwall_h"
+  ],
+  [
+   31,
+   22,
+   "lowwall_h"
+  ],
+  [
+   31,
+   49,
+   "lowwall_h"
+  ],
+  [
+   32,
+   22,
+   "lowwall_h"
+  ],
+  [
+   32,
+   49,
+   "lowwall_h"
+  ],
+  [
+   33,
+   22,
+   "lowwall_h"
+  ],
+  [
+   33,
+   49,
+   "lowwall_h"
+  ],
+  [
+   34,
+   22,
+   "lowwall_h"
+  ],
+  [
+   34,
+   49,
+   "lowwall_h"
+  ],
+  [
+   35,
+   22,
+   "lowwall_h"
+  ],
+  [
+   35,
+   49,
+   "lowwall_h"
+  ],
+  [
+   36,
+   22,
+   "lowwall_h"
+  ],
+  [
+   36,
+   49,
+   "lowwall_h"
+  ],
+  [
+   37,
+   22,
+   "lowwall_h"
+  ],
+  [
+   37,
+   49,
+   "lowwall_h"
+  ],
+  [
+   38,
+   22,
+   "lowwall_h"
+  ],
+  [
+   38,
+   49,
+   "lowwall_h"
+  ],
+  [
+   39,
+   22,
+   "lowwall_h"
+  ],
+  [
+   39,
+   49,
+   "lowwall_h"
+  ],
+  [
+   40,
+   22,
+   "lowwall_h"
+  ],
+  [
+   40,
+   49,
+   "lowwall_h"
+  ],
+  [
+   41,
+   22,
+   "lowwall_h"
+  ],
+  [
+   41,
+   49,
+   "lowwall_h"
+  ],
+  [
+   42,
+   22,
+   "lowwall_h"
+  ],
+  [
+   42,
+   49,
+   "lowwall_h"
+  ],
+  [
+   43,
+   22,
+   "lowwall_h"
+  ],
+  [
+   43,
+   49,
+   "lowwall_h"
+  ],
+  [
+   44,
+   22,
+   "lowwall_h"
+  ],
+  [
+   44,
+   49,
+   "lowwall_h"
+  ],
+  [
+   45,
+   22,
+   "lowwall_h"
+  ],
+  [
+   45,
+   49,
+   "lowwall_h"
+  ],
+  [
+   46,
+   22,
+   "lowwall_h"
+  ],
+  [
+   46,
+   49,
+   "lowwall_h"
+  ],
+  [
+   47,
+   22,
+   "lowwall_h"
+  ],
+  [
+   47,
+   49,
+   "lowwall_h"
+  ],
+  [
+   48,
+   22,
+   "lowwall_h"
+  ],
+  [
+   48,
+   49,
+   "lowwall_h"
+  ],
+  [
+   49,
+   22,
+   "lowwall_h"
+  ],
+  [
+   49,
+   49,
+   "lowwall_h"
+  ],
+  [
+   50,
+   22,
+   "lowwall_h"
+  ],
+  [
+   50,
+   49,
+   "lowwall_h"
+  ],
+  [
+   51,
+   22,
+   "lowwall_h"
+  ],
+  [
+   51,
+   49,
+   "lowwall_h"
+  ],
+  [
+   52,
+   22,
+   "lowwall_h"
+  ],
+  [
+   52,
+   49,
+   "lowwall_h"
+  ],
+  [
+   53,
+   22,
+   "lowwall_h"
+  ],
+  [
+   53,
+   49,
+   "lowwall_h"
+  ],
+  [
+   54,
+   22,
+   "lowwall_h"
+  ],
+  [
+   54,
+   49,
+   "lowwall_h"
+  ],
+  [
+   55,
+   22,
+   "lowwall_h"
+  ],
+  [
+   55,
+   49,
+   "lowwall_h"
+  ],
+  [
+   56,
+   22,
+   "lowwall_h"
+  ],
+  [
+   56,
+   49,
+   "lowwall_h"
+  ],
+  [
+   57,
+   22,
+   "lowwall_h"
+  ],
+  [
+   57,
+   49,
+   "lowwall_h"
+  ],
+  [
+   58,
+   22,
+   "lowwall_h"
+  ],
+  [
+   58,
+   49,
+   "lowwall_h"
+  ],
+  [
+   59,
+   22,
+   "lowwall_h"
+  ],
+  [
+   59,
+   49,
+   "lowwall_h"
+  ],
+  [
+   60,
+   22,
+   "lowwall_h"
+  ],
+  [
+   60,
+   49,
+   "lowwall_h"
+  ],
+  [
+   61,
+   22,
+   "lowwall_h"
+  ],
+  [
+   61,
+   49,
+   "lowwall_h"
+  ],
+  [
+   62,
+   22,
+   "lowwall_h"
+  ],
+  [
+   62,
+   49,
+   "lowwall_h"
+  ],
+  [
+   63,
+   22,
+   "lowwall_h"
+  ],
+  [
+   63,
+   49,
+   "lowwall_h"
+  ],
+  [
+   64,
+   22,
+   "lowwall_h"
+  ],
+  [
+   64,
+   49,
+   "lowwall_h"
+  ],
+  [
+   65,
+   22,
+   "lowwall_h"
+  ],
+  [
+   65,
+   49,
+   "lowwall_h"
+  ],
+  [
+   66,
+   22,
+   "lowwall_h"
+  ],
+  [
+   66,
+   49,
+   "lowwall_h"
+  ],
+  [
+   67,
+   22,
+   "lowwall_h"
+  ],
+  [
+   67,
+   49,
+   "lowwall_h"
+  ],
+  [
+   28,
+   23,
+   "lowwall_v"
+  ],
+  [
+   67,
+   23,
+   "lowwall_v"
+  ],
+  [
+   28,
+   24,
+   "lowwall_v"
+  ],
+  [
+   67,
+   24,
+   "lowwall_v"
+  ],
+  [
+   28,
+   25,
+   "lowwall_v"
+  ],
+  [
+   67,
+   25,
+   "lowwall_v"
+  ],
+  [
+   28,
+   26,
+   "lowwall_v"
+  ],
+  [
+   67,
+   26,
+   "lowwall_v"
+  ],
+  [
+   28,
+   27,
+   "lowwall_v"
+  ],
+  [
+   67,
+   27,
+   "lowwall_v"
+  ],
+  [
+   28,
+   28,
+   "lowwall_v"
+  ],
+  [
+   67,
+   28,
+   "lowwall_v"
+  ],
+  [
+   28,
+   29,
+   "lowwall_v"
+  ],
+  [
+   67,
+   29,
+   "lowwall_v"
+  ],
+  [
+   28,
+   30,
+   "lowwall_v"
+  ],
+  [
+   67,
+   30,
+   "lowwall_v"
+  ],
+  [
+   28,
+   31,
+   "lowwall_v"
+  ],
+  [
+   67,
+   31,
+   "lowwall_v"
+  ],
+  [
+   28,
+   32,
+   "lowwall_v"
+  ],
+  [
+   67,
+   32,
+   "lowwall_v"
+  ],
+  [
+   28,
+   39,
+   "lowwall_v"
+  ],
+  [
+   67,
+   39,
+   "lowwall_v"
+  ],
+  [
+   28,
+   40,
+   "lowwall_v"
+  ],
+  [
+   67,
+   40,
+   "lowwall_v"
+  ],
+  [
+   28,
+   41,
+   "lowwall_v"
+  ],
+  [
+   67,
+   41,
+   "lowwall_v"
+  ],
+  [
+   28,
+   42,
+   "lowwall_v"
+  ],
+  [
+   67,
+   42,
+   "lowwall_v"
+  ],
+  [
+   28,
+   43,
+   "lowwall_v"
+  ],
+  [
+   67,
+   43,
+   "lowwall_v"
+  ],
+  [
+   28,
+   44,
+   "lowwall_v"
+  ],
+  [
+   67,
+   44,
+   "lowwall_v"
+  ],
+  [
+   28,
+   45,
+   "lowwall_v"
+  ],
+  [
+   67,
+   45,
+   "lowwall_v"
+  ],
+  [
+   28,
+   46,
+   "lowwall_v"
+  ],
+  [
+   67,
+   46,
+   "lowwall_v"
+  ],
+  [
+   28,
+   47,
+   "lowwall_v"
+  ],
+  [
+   67,
+   47,
+   "lowwall_v"
+  ],
+  [
+   28,
+   48,
+   "lowwall_v"
+  ],
+  [
+   67,
+   48,
+   "lowwall_v"
+  ],
+  [
+   67,
+   33,
+   "wall_stone"
+  ],
+  [
+   67,
+   38,
+   "wall_stone"
+  ],
+  [
+   28,
+   33,
+   "wall_stone"
+  ],
+  [
+   28,
+   38,
+   "wall_stone"
+  ],
+  [
+   31,
+   25,
+   "roof_tl"
+  ],
+  [
+   32,
+   25,
+   "roof_t"
+  ],
+  [
+   33,
+   25,
+   "roof_t"
+  ],
+  [
+   34,
+   25,
+   "roof_t"
+  ],
+  [
+   35,
+   25,
+   "roof_t"
+  ],
+  [
+   36,
+   25,
+   "roof_tr"
+  ],
+  [
+   31,
+   26,
+   "roof_l"
+  ],
+  [
+   32,
+   26,
+   "roof_c"
+  ],
+  [
+   33,
+   26,
+   "roof_c"
+  ],
+  [
+   34,
+   26,
+   "roof_c"
+  ],
+  [
+   35,
+   26,
+   "roof_c"
+  ],
+  [
+   36,
+   26,
+   "roof_r"
+  ],
+  [
+   31,
+   27,
+   "roof_l"
+  ],
+  [
+   32,
+   27,
+   "roof_c"
+  ],
+  [
+   33,
+   27,
+   "roof_c"
+  ],
+  [
+   34,
+   27,
+   "roof_c"
+  ],
+  [
+   35,
+   27,
+   "roof_c"
+  ],
+  [
+   36,
+   27,
+   "roof_r"
+  ],
+  [
+   31,
+   28,
+   "roof_bl"
+  ],
+  [
+   32,
+   28,
+   "roof_b"
+  ],
+  [
+   33,
+   28,
+   "roof_b"
+  ],
+  [
+   34,
+   28,
+   "roof_b"
+  ],
+  [
+   35,
+   28,
+   "roof_b"
+  ],
+  [
+   36,
+   28,
+   "roof_br"
+  ],
+  [
+   39,
+   25,
+   "roof_tl"
+  ],
+  [
+   40,
+   25,
+   "roof_t"
+  ],
+  [
+   41,
+   25,
+   "roof_t"
+  ],
+  [
+   42,
+   25,
+   "roof_t"
+  ],
+  [
+   43,
+   25,
+   "roof_t"
+  ],
+  [
+   44,
+   25,
+   "roof_tr"
+  ],
+  [
+   39,
+   26,
+   "roof_l"
+  ],
+  [
+   40,
+   26,
+   "roof_c"
+  ],
+  [
+   41,
+   26,
+   "roof_c"
+  ],
+  [
+   42,
+   26,
+   "roof_c"
+  ],
+  [
+   43,
+   26,
+   "roof_c"
+  ],
+  [
+   44,
+   26,
+   "roof_r"
+  ],
+  [
+   39,
+   27,
+   "roof_l"
+  ],
+  [
+   40,
+   27,
+   "roof_c"
+  ],
+  [
+   41,
+   27,
+   "roof_c"
+  ],
+  [
+   42,
+   27,
+   "roof_c"
+  ],
+  [
+   43,
+   27,
+   "roof_c"
+  ],
+  [
+   44,
+   27,
+   "roof_r"
+  ],
+  [
+   39,
+   28,
+   "roof_bl"
+  ],
+  [
+   40,
+   28,
+   "roof_b"
+  ],
+  [
+   41,
+   28,
+   "roof_b"
+  ],
+  [
+   42,
+   28,
+   "roof_b"
+  ],
+  [
+   43,
+   28,
+   "roof_b"
+  ],
+  [
+   44,
+   28,
+   "roof_br"
+  ],
+  [
+   47,
+   25,
+   "roof_tl"
+  ],
+  [
+   48,
+   25,
+   "roof_t"
+  ],
+  [
+   49,
+   25,
+   "roof_t"
+  ],
+  [
+   50,
+   25,
+   "roof_t"
+  ],
+  [
+   51,
+   25,
+   "roof_t"
+  ],
+  [
+   52,
+   25,
+   "roof_tr"
+  ],
+  [
+   47,
+   26,
+   "roof_l"
+  ],
+  [
+   48,
+   26,
+   "roof_c"
+  ],
+  [
+   49,
+   26,
+   "roof_c"
+  ],
+  [
+   50,
+   26,
+   "roof_c"
+  ],
+  [
+   51,
+   26,
+   "roof_c"
+  ],
+  [
+   52,
+   26,
+   "roof_r"
+  ],
+  [
+   47,
+   27,
+   "roof_l"
+  ],
+  [
+   48,
+   27,
+   "roof_c"
+  ],
+  [
+   49,
+   27,
+   "roof_c"
+  ],
+  [
+   50,
+   27,
+   "roof_c"
+  ],
+  [
+   51,
+   27,
+   "roof_c"
+  ],
+  [
+   52,
+   27,
+   "roof_r"
+  ],
+  [
+   47,
+   28,
+   "roof_bl"
+  ],
+  [
+   48,
+   28,
+   "roof_b"
+  ],
+  [
+   49,
+   28,
+   "roof_b"
+  ],
+  [
+   50,
+   28,
+   "roof_b"
+  ],
+  [
+   51,
+   28,
+   "roof_b"
+  ],
+  [
+   52,
+   28,
+   "roof_br"
+  ],
+  [
+   55,
+   25,
+   "roof_tl"
+  ],
+  [
+   56,
+   25,
+   "roof_t"
+  ],
+  [
+   57,
+   25,
+   "roof_t"
+  ],
+  [
+   58,
+   25,
+   "roof_t"
+  ],
+  [
+   59,
+   25,
+   "roof_t"
+  ],
+  [
+   60,
+   25,
+   "roof_tr"
+  ],
+  [
+   55,
+   26,
+   "roof_l"
+  ],
+  [
+   56,
+   26,
+   "roof_c"
+  ],
+  [
+   57,
+   26,
+   "roof_c"
+  ],
+  [
+   58,
+   26,
+   "roof_c"
+  ],
+  [
+   59,
+   26,
+   "roof_c"
+  ],
+  [
+   60,
+   26,
+   "roof_r"
+  ],
+  [
+   55,
+   27,
+   "roof_l"
+  ],
+  [
+   56,
+   27,
+   "roof_c"
+  ],
+  [
+   57,
+   27,
+   "roof_c"
+  ],
+  [
+   58,
+   27,
+   "roof_c"
+  ],
+  [
+   59,
+   27,
+   "roof_c"
+  ],
+  [
+   60,
+   27,
+   "roof_r"
+  ],
+  [
+   55,
+   28,
+   "roof_bl"
+  ],
+  [
+   56,
+   28,
+   "roof_b"
+  ],
+  [
+   57,
+   28,
+   "roof_b"
+  ],
+  [
+   58,
+   28,
+   "roof_b"
+  ],
+  [
+   59,
+   28,
+   "roof_b"
+  ],
+  [
+   60,
+   28,
+   "roof_br"
+  ],
+  [
+   31,
+   38,
+   "roof_tl"
+  ],
+  [
+   32,
+   38,
+   "roof_t"
+  ],
+  [
+   33,
+   38,
+   "roof_t"
+  ],
+  [
+   34,
+   38,
+   "roof_t"
+  ],
+  [
+   35,
+   38,
+   "roof_t"
+  ],
+  [
+   36,
+   38,
+   "roof_tr"
+  ],
+  [
+   31,
+   39,
+   "roof_l"
+  ],
+  [
+   32,
+   39,
+   "roof_c"
+  ],
+  [
+   33,
+   39,
+   "roof_c"
+  ],
+  [
+   34,
+   39,
+   "roof_c"
+  ],
+  [
+   35,
+   39,
+   "roof_c"
+  ],
+  [
+   36,
+   39,
+   "roof_r"
+  ],
+  [
+   31,
+   40,
+   "roof_l"
+  ],
+  [
+   32,
+   40,
+   "roof_c"
+  ],
+  [
+   33,
+   40,
+   "roof_c"
+  ],
+  [
+   34,
+   40,
+   "roof_c"
+  ],
+  [
+   35,
+   40,
+   "roof_c"
+  ],
+  [
+   36,
+   40,
+   "roof_r"
+  ],
+  [
+   31,
+   41,
+   "roof_bl"
+  ],
+  [
+   32,
+   41,
+   "roof_b"
+  ],
+  [
+   33,
+   41,
+   "roof_b"
+  ],
+  [
+   34,
+   41,
+   "roof_b"
+  ],
+  [
+   35,
+   41,
+   "roof_b"
+  ],
+  [
+   36,
+   41,
+   "roof_br"
+  ],
+  [
+   39,
+   38,
+   "roof_tl"
+  ],
+  [
+   40,
+   38,
+   "roof_t"
+  ],
+  [
+   41,
+   38,
+   "roof_t"
+  ],
+  [
+   42,
+   38,
+   "roof_t"
+  ],
+  [
+   43,
+   38,
+   "roof_t"
+  ],
+  [
+   44,
+   38,
+   "roof_tr"
+  ],
+  [
+   39,
+   39,
+   "roof_l"
+  ],
+  [
+   40,
+   39,
+   "roof_c"
+  ],
+  [
+   41,
+   39,
+   "roof_c"
+  ],
+  [
+   42,
+   39,
+   "roof_c"
+  ],
+  [
+   43,
+   39,
+   "roof_c"
+  ],
+  [
+   44,
+   39,
+   "roof_r"
+  ],
+  [
+   39,
+   40,
+   "roof_l"
+  ],
+  [
+   40,
+   40,
+   "roof_c"
+  ],
+  [
+   41,
+   40,
+   "roof_c"
+  ],
+  [
+   42,
+   40,
+   "roof_c"
+  ],
+  [
+   43,
+   40,
+   "roof_c"
+  ],
+  [
+   44,
+   40,
+   "roof_r"
+  ],
+  [
+   39,
+   41,
+   "roof_bl"
+  ],
+  [
+   40,
+   41,
+   "roof_b"
+  ],
+  [
+   41,
+   41,
+   "roof_b"
+  ],
+  [
+   42,
+   41,
+   "roof_b"
+  ],
+  [
+   43,
+   41,
+   "roof_b"
+  ],
+  [
+   44,
+   41,
+   "roof_br"
+  ],
+  [
+   47,
+   38,
+   "roof_tl"
+  ],
+  [
+   48,
+   38,
+   "roof_t"
+  ],
+  [
+   49,
+   38,
+   "roof_t"
+  ],
+  [
+   50,
+   38,
+   "roof_t"
+  ],
+  [
+   51,
+   38,
+   "roof_t"
+  ],
+  [
+   52,
+   38,
+   "roof_tr"
+  ],
+  [
+   47,
+   39,
+   "roof_l"
+  ],
+  [
+   48,
+   39,
+   "roof_c"
+  ],
+  [
+   49,
+   39,
+   "roof_c"
+  ],
+  [
+   50,
+   39,
+   "roof_c"
+  ],
+  [
+   51,
+   39,
+   "roof_c"
+  ],
+  [
+   52,
+   39,
+   "roof_r"
+  ],
+  [
+   47,
+   40,
+   "roof_l"
+  ],
+  [
+   48,
+   40,
+   "roof_c"
+  ],
+  [
+   49,
+   40,
+   "roof_c"
+  ],
+  [
+   50,
+   40,
+   "roof_c"
+  ],
+  [
+   51,
+   40,
+   "roof_c"
+  ],
+  [
+   52,
+   40,
+   "roof_r"
+  ],
+  [
+   47,
+   41,
+   "roof_bl"
+  ],
+  [
+   48,
+   41,
+   "roof_b"
+  ],
+  [
+   49,
+   41,
+   "roof_b"
+  ],
+  [
+   50,
+   41,
+   "roof_b"
+  ],
+  [
+   51,
+   41,
+   "roof_b"
+  ],
+  [
+   52,
+   41,
+   "roof_br"
+  ],
+  [
+   55,
+   38,
+   "roof_tl"
+  ],
+  [
+   56,
+   38,
+   "roof_t"
+  ],
+  [
+   57,
+   38,
+   "roof_t"
+  ],
+  [
+   58,
+   38,
+   "roof_t"
+  ],
+  [
+   59,
+   38,
+   "roof_t"
+  ],
+  [
+   60,
+   38,
+   "roof_tr"
+  ],
+  [
+   55,
+   39,
+   "roof_l"
+  ],
+  [
+   56,
+   39,
+   "roof_c"
+  ],
+  [
+   57,
+   39,
+   "roof_c"
+  ],
+  [
+   58,
+   39,
+   "roof_c"
+  ],
+  [
+   59,
+   39,
+   "roof_c"
+  ],
+  [
+   60,
+   39,
+   "roof_r"
+  ],
+  [
+   55,
+   40,
+   "roof_l"
+  ],
+  [
+   56,
+   40,
+   "roof_c"
+  ],
+  [
+   57,
+   40,
+   "roof_c"
+  ],
+  [
+   58,
+   40,
+   "roof_c"
+  ],
+  [
+   59,
+   40,
+   "roof_c"
+  ],
+  [
+   60,
+   40,
+   "roof_r"
+  ],
+  [
+   55,
+   41,
+   "roof_bl"
+  ],
+  [
+   56,
+   41,
+   "roof_b"
+  ],
+  [
+   57,
+   41,
+   "roof_b"
+  ],
+  [
+   58,
+   41,
+   "roof_b"
+  ],
+  [
+   59,
+   41,
+   "roof_b"
+  ],
+  [
+   60,
+   41,
+   "roof_br"
+  ]
+ ],
+ "props": [
+  {
+   "prop": "signpost",
+   "tile": [
+    72,
+    32
+   ]
+  },
+  {
+   "prop": "signpost",
+   "tile": [
+    23,
+    32
+   ]
+  },
+  {
+   "prop": "olive_tree_a",
+   "tile": [
+    20,
+    33
+   ]
+  },
+  {
+   "prop": "olive_tree_a",
+   "tile": [
+    12,
+    47
+   ]
+  },
+  {
+   "prop": "olive_tree_b",
+   "tile": [
+    7,
+    47
+   ]
+  },
+  {
+   "prop": "olive_tree_a",
+   "tile": [
+    72,
+    27
+   ]
+  },
+  {
+   "prop": "olive_tree_a",
+   "tile": [
+    75,
+    28
+   ]
+  },
+  {
+   "prop": "olive_tree_a",
+   "tile": [
+    82,
+    47
+   ]
+  },
+  {
+   "prop": "olive_tree_b",
+   "tile": [
+    79,
+    43
+   ]
+  },
+  {
+   "prop": "olive_tree_a",
+   "tile": [
+    86,
+    40
+   ]
+  },
+  {
+   "prop": "bush_flowers",
+   "tile": [
+    58,
+    14
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    44,
+    14
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    85,
+    59
+   ]
+  },
+  {
+   "prop": "bush_flowers",
+   "tile": [
+    26,
+    10
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    4,
+    52
+   ]
+  },
+  {
+   "prop": "bush_flowers",
+   "tile": [
+    51,
+    17
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    18,
+    52
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    35,
+    65
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    55,
+    67
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    88,
+    54
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    60,
+    14
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    8,
+    55
+   ]
+  },
+  {
+   "prop": "bush_flowers",
+   "tile": [
+    67,
+    11
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    34,
+    58
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    41,
+    15
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    9,
+    14
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    23,
+    68
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    52,
+    56
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    23,
+    62
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    66,
+    69
+   ]
+  },
+  {
+   "prop": "bush_flowers",
+   "tile": [
+    86,
+    18
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    82,
+    27
+   ]
+  },
+  {
+   "prop": "bush_flowers",
+   "tile": [
+    73,
+    18
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    30,
+    57
+   ]
+  },
+  {
+   "prop": "bush_flowers",
+   "tile": [
+    74,
+    26
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    64,
+    6
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    65,
+    68
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    51,
+    6
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    72,
+    8
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    48,
+    55
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    19,
+    26
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    58,
+    54
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    54,
+    13
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    88,
+    23
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    63,
+    58
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    31,
+    14
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    19,
+    48
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    69,
+    6
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    19,
+    12
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    7,
+    53
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    41,
+    52
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    91,
+    33
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    78,
+    17
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    40,
+    19
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    4,
+    23
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    58,
+    4
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    85,
+    23
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    25,
+    5
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    70,
+    63
+   ]
+  },
+  {
+   "prop": "bush_flowers",
+   "tile": [
+    74,
+    48
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    41,
+    61
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    14,
+    32
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    58,
+    58
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    72,
+    49
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    35,
+    62
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    84,
+    24
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    21,
+    55
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    90,
+    52
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    14,
+    53
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    9,
+    48
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    54,
+    52
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    21,
+    54
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    35,
+    67
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    78,
+    25
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    10,
+    17
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    22,
+    46
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    69,
+    14
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    16,
+    25
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    25,
+    59
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    78,
+    19
+   ]
+  },
+  {
+   "prop": "bush_flowers",
+   "tile": [
+    38,
+    55
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    86,
+    33
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    24,
+    65
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    40,
+    8
+   ]
+  },
+  {
+   "prop": "bush_flowers",
+   "tile": [
+    15,
+    50
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    81,
+    44
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    18,
+    16
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    51,
+    4
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    66,
+    7
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    76,
+    20
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    67,
+    58
+   ]
+  },
+  {
+   "prop": "bush_flowers",
+   "tile": [
+    26,
+    63
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    65,
+    55
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    76,
+    13
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    64,
+    4
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    25,
+    3
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    18,
+    31
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    21,
+    65
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    88,
+    46
+   ]
+  }
+ ],
+ "npcs": [],
+ "interactables": [
+  {
+   "type": "waymark",
+   "name": "Road marker",
+   "tile": [
+    72.5,
+    32.6
+   ],
+   "radius": 34,
+   "modes": [
+    "land"
+   ],
+   "text": [
+    "East of the village the road forks toward the lake and the northern hills. West, it runs back through the gate. Other roads lead on from the places along them."
+   ],
+   "place": "kefar_zayit"
+  },
+  {
+   "type": "waymark",
+   "name": "Road marker",
+   "tile": [
+    23.5,
+    32.6
+   ],
+   "radius": 34,
+   "modes": [
+    "land"
+   ],
+   "text": [
+    "A squared stone beside the western gate. The road west bends south toward Cana of Galilee."
+   ],
+   "place": "kefar_zayit"
+  }
+ ]
+}

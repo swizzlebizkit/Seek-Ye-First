@@ -6,6 +6,10 @@ extends Interactable
 var text: Array = []
 var modes: Array = ["land", "water"]
 var landmark := ""
+## What this marker stands at: a strategic place, or a point part-way along a route (0 to 1).
+var place := ""
+var route := ""
+var at := 0.5
 
 
 func _init() -> void:
@@ -24,4 +28,10 @@ func _on_interact(_by: Node) -> void:
 
 
 func _open_map(_id = "") -> void:
+	if not Travel.active():  # a journey already knows where it is
+		if route != "":
+			var length := float(World.route(route).get("length_km", 0.0))
+			World.context = {"route": route, "km": clampf(at, 0.0, 1.0) * length, "via_waymark": true}
+		elif place != "":
+			World.context = {"location": place, "via_waymark": true}
 	GameState.map_requested.emit(modes)

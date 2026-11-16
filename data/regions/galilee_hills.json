@@ -2,117 +2,101 @@
  "id": "galilee_hills",
  "name": "The hills above the lake",
  "kind": "regional",
- "anchor": "kefar_zayit",
  "origin": "fiction",
- "note": "An invented stretch of lower-Galilean countryside on the way from Kefar Zayit to Magdala.",
+ "note": "Invented countryside of lower Galilee, generated as part of the continuous world (tools/mapgen/world.py).",
+ "world": [
+  48,
+  -44
+ ],
  "size": [
   64,
-  44
+  72
  ],
  "spawn": [
-  36.5,
-  22.5
+  10.5,
+  35.5
  ],
  "entries": {
-  "from_village": {
-   "tile": [
-    3,
-    21
-   ],
-   "span": 3,
-   "axis": "y",
-   "facing": "right"
-  },
-  "from_shore": {
-   "tile": [
-    60,
-    21
-   ],
-   "span": 3,
-   "axis": "y",
-   "facing": "left"
-  },
   "camp": {
    "tile": [
-    34,
-    23
+    10,
+    35
    ],
    "facing": "down"
   }
  },
- "exits": [
-  {
-   "id": "to_village",
-   "rect": [
-    0,
-    21,
-    1,
-    4
-   ],
-   "to": {
-    "region": "kefar_zayit",
-    "entry": "from_hills"
-   },
-   "facing": "left"
-  },
-  {
-   "id": "to_shore",
-   "rect": [
-    63,
-    21,
-    1,
-    4
-   ],
-   "to": {
-    "region": "magdala_shore",
-    "entry": "from_hills"
-   },
-   "facing": "right"
-  }
- ],
+ "exits": [],
  "ground": [
-  "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
-  "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
-  "ccggcgccggcgccgggccswwssggccgggcgggggcgcggccgggcgcgggccccgccgccc",
-  "cccggggggggggggggggswwssggghghghggggggggggggggggggggggggggggggcc",
-  "ccggggggggggggggggggswwssgghhhhhgggggghhhhhhhgggggggggggggggggcc",
-  "ccgggggggggggghhggggswwssgghhhghgggggghhppphhgggggggggggggggggcc",
-  "cccgcggccccccccchhhgswwssggggggggggggghhppphhgggggggggggggggggcc",
-  "ccgggcccccccccccghhgswwssggggggggggggghhppphhgggcccgggccgcgggccc",
-  "ccggcccccccccccgggggswwssggggggggggggdhhhhhhhggggccccccccccggccc",
-  "cccggcccccccccccggggswwssgggggggggggdddgggggggggccccccccccggggcc",
-  "ccgggcccccccccccgggswwssggggggggggggddggggggggggcccccccccccgggcc",
-  "cccgccccccccccccgggswwssggggggggggggddgggggggggggccccccccccgggcc",
-  "cccgccgcgccgcccgggswwssgggggggggggggddgghhggggggcgcgcgcccgggggcc",
-  "cccgggggggggggggggswwssgggggggggggggddhhhgggggggggggggggggggggcc",
-  "ccgggggggggggggggswwssgggggggggggggdddhhhhgggggggggggggggggggccc",
-  "cccggggggggggggggswwssggggggggggggggdgggggggggggggggggggggggggcc",
-  "ccggggggggggggggswwsshggggggggggggggdggggggggggggggggggggggggccc",
-  "ccggggggggggggggswwsshggggggggggggghdghhggggggggggggggggggggggcc",
-  "cccgggggggggggggswwsshgggggggghhhhhhdhhhggggggggggggggghghhhggcc",
-  "cccgggggggggggggpppdddddddddgghhghhhdhghggggggggggggggghghhhggcc",
-  "cccggggggggddddddddddddddddddddddddddddgggggggggggggggghhhhhggcc",
-  "dddddddddddddddddddddddddddddddddddddddddddggggggggggggggggddddd",
-  "ddddddddddddddddddddppgggggddddddddddddddddddddddddddddddddddddd",
-  "ddddddddddddgggggpppppggggggggggggghhhdddddddddddddddddddddddddd",
-  "ddcggggggggggggggswwssggggggggggggghhhhhggdddddddddddddddddghgdd",
-  "ccggggggggggggggggswwssgggggggggggggggggggggggdggggggggggggggccc",
-  "ccghhhhgggggggggggswwssgggggggggggggggggggggggdgggggggggggggggcc",
-  "ccgghhhggggggggggggswwssggggggggggggggggggggggdggggggggggggggccc",
-  "ccgghhhggggggggggggswwssggggggggggggggggggggggdggggggggggggggccc",
-  "ccggggggggggggggggggswwsscccgccgggggggggggggggdgggggcgcgcggccgcc",
-  "cccgggggggggggggggggswwsscccccggggggggggggggggdgggggcccccccccgcc",
-  "ccggggggggggggggggggswwscccccccggggggggggggggdddgggggcccccccgccc",
-  "ccggggggggggggggggggswwsccccccgggggggggggggggddggggggcccccccgccc",
-  "cccgggggggggggggggggswwsccccccggggggggghghhgddgggggggccccccccccc",
-  "cccggggggggggggggghhswwsscccccgghhhhhgghhghgddggggggcccccccccccc",
-  "cchhhghggggggggggghswwsscccccccgghggggghhhgddgggggggggccggcccccc",
-  "ccghhghggggggggggggswwsscccccccghhhhhgggggdddggggggggggggggggccc",
-  "cchhhhggggggggggggswwsshggcccccgggggggggddddggggggggggggggggggcc",
-  "ccggggggggggggggggswwsshgggggggggggggggdddggggggggggggggggggggcc",
-  "cccggggggggggggggswwssghggggggggggggggggdgggggggggggggggggggggcc",
-  "cccggggggggggggggswwssgggggggggggswwwsgggggggggggggggggggggggccc",
-  "ccgcgccggcccgggccswwsscgccccgccccswwwscgccccgcccccgggcggcgcggccc",
+  "cccgggggggggggggggggggggdddggggggggdddgggggggggggggggswwssggcccc",
+  "ccccgggggggggggggggggggggddgggggggddddgggggggggggggggswwssggggcc",
+  "cccggggggggggggggggggggggdddggggggdddggggggggggggggggswwssgggccc",
+  "ccggggggggggggggggggggggggddgggggdddggggggggggggggggswwssggggccc",
+  "cccgggcccggcggggggggggggggdddgggddddggggggggggggggggswwssgggggcc",
+  "cccgggcccccccccggggggggggggddgggdddgggggggggggggggggswwssggggccc",
+  "cccggccccccccccggggggggggggdddgddddgggggggggggggggggswwssggggccc",
+  "ccggggcccccccccgggggggggggggddgdddggggggggggggggggggswwssggggccc",
+  "cccggccccccccccgggggggggggggdddddggggggggggggggggggswwssggggggcc",
+  "cccggccccccccccggggggggggggggddddggggggggggggggggggswwssgggggccc",
+  "ccggggcccccccccggggggggggggggdddgggggggggggggggggggswwssggggcccc",
+  "gggcgccccccccccgggggggggggggddddggggggggggggggggggswwssgggggggcc",
+  "ggggggcccccccccgggggggggggggdddgggggggggggggggggggswwssggggggccc",
+  "gggggcccccccccggggggggggggggdddgggggggggggggggggggswwssggggggccc",
+  "ggggggcccccccccggggggggggggdddggggggggggggggggggggswwssgggggggcc",
+  "gggggcccccccccgggggggggggggdddgggggggggggggggggggswwssggggggggcc",
+  "gggggccgcgggccggggggggggggddddgggggggggggggggggggswwssgggggggccc",
+  "ggggggggggggggggggggggggggdddggggggggggggggggggggswwssgggggggccc",
+  "gggggggggggggggggggggggggddddgggggggggggggggggggswwssgggggggggcc",
+  "gggggggggggggggggggggggggdddggggggggggggggggggggswwssggggggggccc",
+  "gggggggggggggggggggggggggdddggggggggggggggggggggswwssgggggggcccc",
+  "ggggggggggggggggggggggggdddgggggggggggggggggggggswwssgggggggggcc",
+  "ggggggggggggggggggggggggdddgggggggggggggggggggggswwssggggggggccc",
+  "gggggggggggggggggggggggddddggggggggggggggggggggswwssgggggggggccc",
+  "gggggggggggggggggggggggdddgggggggggggggggggggggswwssgggggggggccc",
+  "ggggggggggggggggggggggddddgggggggggggggggggggggswwssggggggggcgcc",
+  "ggggggggggggggggggggggdddggggggggggggggggggggggswwssgggggggggccc",
+  "gggggggggggggggggggggddddggggggggggggggggggggggswwssgggggggggccc",
+  "ggggggggggggggggggggddddgggggggggggggggggggggggswwssggggggggggcc",
+  "ggggggggggggggggggggdddggggggggggggggggggggggggswwssggggggggggcc",
+  "gggggggggggggggggggddddggggggggggggggggggggggggswwssgggggggggccc",
+  "gggggggggggggggggggdddgggggggggggggggggggggggggswwssgggggggggccc",
+  "ggggggggggggggggggddddgggggggggggggggggggggggggswwssgggggggggccc",
+  "ggggggggggggggggggdddggggggggggggggggggggggggggswwssgggggggggccc",
+  "gggggggggggggggggddddggggggggggggggggggggggggggswwssgggggggggccc",
+  "ggggggggggggggggddddggggggggggggggggggggggggggggswwssgggggggcgcc",
+  "ggggggggggggggggdddgggggggggggggggggggggggggggggswwssgggggggggcc",
+  "gggggggggggggggddddgggggggggggggggggggggggggggggswwssggggggggccc",
+  "ggggggggggggddddddggggggggggggggggggggggggggggggswwssggggggggccc",
+  "ggggggggggddddddddgggggggggggggggggggggggggggggggswwssggggggggcc",
+  "gggggggddddddddggggggggggggggggggggggggggggggggggswwssgggggggccc",
+  "ggggdddddddddggggggggggggggggggggggggggggggggggggswwssgggggggccc",
+  "ggddddddddgggggggggggggggggggggggggggggghhhhhggggswwssgggggggccc",
+  "dddddddgdggggggggggggggggggggggggggggggghghhhhhgggswwssgggggggcc",
+  "dddddggdddgggggggggggggggggggggggggggggghhgghhhgggswwssggggggccc",
+  "ddggggggddggggggggggggggggggggggggggggggggggggggggswwssgggggcccc",
+  "ggggggggddggggggggggggggggggggggggggggggghhhhhhggggswwssggggggcc",
+  "ggggggggddggggggggggggggggggggggggggggggghhhhhgggggswwssgggggccc",
+  "ggggggggddggggggggggggggggggggggggggggggghhhhhccccccwwcccgggcccc",
+  "ggggggggddggggggggggggggggggggggggggggggggggccccccccwwcccccccgcc",
+  "ggggggggdddgggggggggggggggggggggggggggggggggcccccccccwwccccccgcc",
+  "gggggggggddgggggggggggggggggggggggggggggggggcccccccccwwccccccccc",
+  "gggggggggddgggggggggggggggggggggggggggggggggcccccccccwwcccccgccc",
+  "gggggggggddggggggggggggggggggggggggggggggggggccccccccwwcccccggcc",
+  "gggggggggddgggggggggggggggggggggggggggggggggccccccccccwwcccccccc",
+  "gggggggggddggggggggggggggggggggggggggggggggggcccccccccwwcccccccc",
+  "gggggggggdddggggggggggggggggggggggggggggggggccccccccccwwccccggcc",
+  "ggggggggggddggggggggggggggggggggggggggggggggccccccccccwwcccccccc",
+  "ggggcgcgcgdddgggggggggggggggggggggggggggggggccccccccccwwccccgccc",
+  "gggggcccgggddgggggggggggggggggggggggggggggggccccccccccwwccccgccc",
+  "ggggcccccggdddggggggggggggggggggggggggggggggccccccccccwwcccccgcc",
+  "gggggcccggggddggggggggggggggggggggggggggggggccccccccccwwcccccccc",
+  "gggggcccggggdddgggggggggggggggggggggggggggggccccccccccwwcccccccc",
+  "ggggcccccggggddgggggsgggggggggggggggggggggggccccccccccwwccccggcc",
+  "ggggccccgggggdddggswwwsgggggggggggggggggggggggcgccccgcwwcccgggcc",
+  "gggggccccgggggdddswwwwwsgggggggggggggggggggggggggggggswwssgggccc",
+  "ggggcccccggggggdddswwwsgggggggggggggggggggggggggggggswwssggggccc",
+  "gggggccccgggggggdgggsgggggggggggggggggggggggggggggggswwssggggccc",
+  "cgggccccccgggggggggcggggcgggggggggcgggggggggcgggggggswcssggcgccc",
+  "gccgccccccgccggcccccggccgcccgccgccggccgccgcccgccggcccccssccgcccc",
   "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
   "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
  ],
@@ -161,437 +145,472 @@
  "objects": [],
  "props": [
   {
-   "prop": "olive_tree_b",
+   "prop": "signpost",
    "tile": [
-    10,
-    18
-   ]
-  },
-  {
-   "prop": "olive_tree_a",
-   "tile": [
-    13,
-    26
+    8,
+    37
    ]
   },
   {
    "prop": "olive_tree_b",
    "tile": [
     14,
-    17
+    27
    ]
   },
   {
-   "prop": "olive_tree_a",
+   "prop": "olive_tree_b",
    "tile": [
-    28,
+    17,
+    24
+   ]
+  },
+  {
+   "prop": "olive_tree_b",
+   "tile": [
+    31,
+    24
+   ]
+  },
+  {
+   "prop": "olive_tree_b",
+   "tile": [
+    29,
     25
    ]
   },
   {
    "prop": "olive_tree_b",
    "tile": [
-    31,
-    17
-   ]
-  },
-  {
-   "prop": "olive_tree_a",
-   "tile": [
-    40,
-    26
-   ]
-  },
-  {
-   "prop": "olive_tree_b",
-   "tile": [
-    50,
-    19
-   ]
-  },
-  {
-   "prop": "olive_tree_a",
-   "tile": [
-    55,
-    26
-   ]
-  },
-  {
-   "prop": "olive_tree_b",
-   "tile": [
-    7,
-    27
-   ]
-  },
-  {
-   "prop": "cypress",
-   "tile": [
-    38,
-    4
-   ]
-  },
-  {
-   "prop": "cypress",
-   "tile": [
-    44,
-    5
-   ]
-  },
-  {
-   "prop": "cypress",
-   "tile": [
-    39,
-    9
-   ]
-  },
-  {
-   "prop": "cypress",
-   "tile": [
-    35,
-    12
-   ]
-  },
-  {
-   "prop": "boulder",
-   "tile": [
-    41,
-    5
-   ]
-  },
-  {
-   "prop": "boulder",
-   "tile": [
-    42,
-    6
-   ]
-  },
-  {
-   "prop": "signpost",
-   "tile": [
-    35,
-    19
-   ]
-  },
-  {
-   "prop": "flowers_patch",
-   "tile": [
-    60,
-    9
-   ]
-  },
-  {
-   "prop": "flowers_patch",
-   "tile": [
-    57,
-    39
-   ]
-  },
-  {
-   "prop": "bush_flowers",
-   "tile": [
-    57,
+    34,
     15
    ]
   },
   {
-   "prop": "boulder",
+   "prop": "olive_tree_b",
    "tile": [
-    15,
-    26
-   ]
-  },
-  {
-   "prop": "bush",
-   "tile": [
-    57,
-    18
-   ]
-  },
-  {
-   "prop": "bush",
-   "tile": [
-    5,
-    4
-   ]
-  },
-  {
-   "prop": "bush_flowers",
-   "tile": [
-    13,
-    18
-   ]
-  },
-  {
-   "prop": "bush_flowers",
-   "tile": [
-    28,
-    40
-   ]
-  },
-  {
-   "prop": "bush_flowers",
-   "tile": [
-    51,
-    16
-   ]
-  },
-  {
-   "prop": "bush",
-   "tile": [
-    34,
-    38
-   ]
-  },
-  {
-   "prop": "bush",
-   "tile": [
-    49,
-    20
-   ]
-  },
-  {
-   "prop": "bush",
-   "tile": [
-    25,
-    6
-   ]
-  },
-  {
-   "prop": "flowers_patch",
-   "tile": [
-    30,
-    4
-   ]
-  },
-  {
-   "prop": "flowers_patch",
-   "tile": [
-    30,
-    8
-   ]
-  },
-  {
-   "prop": "bush",
-   "tile": [
-    47,
-    38
-   ]
-  },
-  {
-   "prop": "bush",
-   "tile": [
-    13,
-    38
+    18,
+    51
    ]
   },
   {
    "prop": "boulder",
    "tile": [
-    55,
-    38
-   ]
-  },
-  {
-   "prop": "bush",
-   "tile": [
-    13,
-    30
-   ]
-  },
-  {
-   "prop": "flowers_patch",
-   "tile": [
-    60,
-    3
-   ]
-  },
-  {
-   "prop": "boulder",
-   "tile": [
-    29,
-    4
-   ]
-  },
-  {
-   "prop": "boulder",
-   "tile": [
-    53,
-    14
-   ]
-  },
-  {
-   "prop": "bush_flowers",
-   "tile": [
-    25,
-    17
-   ]
-  },
-  {
-   "prop": "bush",
-   "tile": [
-    31,
-    14
-   ]
-  },
-  {
-   "prop": "boulder",
-   "tile": [
-    29,
-    17
-   ]
-  },
-  {
-   "prop": "bush",
-   "tile": [
-    52,
-    5
-   ]
-  },
-  {
-   "prop": "bush",
-   "tile": [
-    9,
-    40
-   ]
-  },
-  {
-   "prop": "flowers_patch",
-   "tile": [
-    15,
-    33
-   ]
-  },
-  {
-   "prop": "flowers_patch",
-   "tile": [
-    55,
-    17
-   ]
-  },
-  {
-   "prop": "boulder",
-   "tile": [
-    45,
-    38
-   ]
-  },
-  {
-   "prop": "bush",
-   "tile": [
-    22,
-    40
-   ]
-  },
-  {
-   "prop": "bush",
-   "tile": [
-    60,
-    14
-   ]
-  },
-  {
-   "prop": "bush_flowers",
-   "tile": [
-    44,
-    26
-   ]
-  },
-  {
-   "prop": "bush_flowers",
-   "tile": [
-    50,
-    36
-   ]
-  },
-  {
-   "prop": "bush_flowers",
-   "tile": [
-    10,
-    4
-   ]
-  },
-  {
-   "prop": "boulder",
-   "tile": [
-    55,
-    20
-   ]
-  },
-  {
-   "prop": "boulder",
-   "tile": [
-    6,
-    37
-   ]
-  },
-  {
-   "prop": "bush_flowers",
-   "tile": [
-    8,
-    20
-   ]
-  },
-  {
-   "prop": "boulder",
-   "tile": [
-    29,
-    26
-   ]
-  },
-  {
-   "prop": "bush",
-   "tile": [
-    42,
-    38
-   ]
-  },
-  {
-   "prop": "bush",
-   "tile": [
-    11,
-    35
-   ]
-  },
-  {
-   "prop": "bush",
-   "tile": [
-    6,
-    39
-   ]
-  },
-  {
-   "prop": "flowers_patch",
-   "tile": [
-    17,
-    31
-   ]
-  },
-  {
-   "prop": "bush",
-   "tile": [
-    55,
-    4
-   ]
-  },
-  {
-   "prop": "flowers_patch",
-   "tile": [
-    9,
-    27
-   ]
-  },
-  {
-   "prop": "bush",
-   "tile": [
-    29,
-    9
+    33,
+    52
    ]
   },
   {
    "prop": "bush",
    "tile": [
     23,
-    12
+    9
+   ]
+  },
+  {
+   "prop": "bush_flowers",
+   "tile": [
+    38,
+    63
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    15,
+    44
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    41,
+    55
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    58,
+    44
+   ]
+  },
+  {
+   "prop": "bush_flowers",
+   "tile": [
+    27,
+    28
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    37,
+    13
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    54,
+    37
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    41,
+    46
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    15,
+    48
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    37,
+    4
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    45,
+    38
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    21,
+    7
+   ]
+  },
+  {
+   "prop": "bush_flowers",
+   "tile": [
+    25,
+    49
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    20,
+    50
+   ]
+  },
+  {
+   "prop": "bush_flowers",
+   "tile": [
+    10,
+    24
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    12,
+    31
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    31,
+    17
+   ]
+  },
+  {
+   "prop": "bush_flowers",
+   "tile": [
+    46,
+    8
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    11,
+    27
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    20,
+    10
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    8,
+    17
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    10,
+    67
+   ]
+  },
+  {
+   "prop": "bush_flowers",
+   "tile": [
+    33,
+    18
+   ]
+  },
+  {
+   "prop": "bush_flowers",
+   "tile": [
+    21,
+    15
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    34,
+    29
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    40,
+    24
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    31,
+    49
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    10,
+    33
+   ]
+  },
+  {
+   "prop": "bush_flowers",
+   "tile": [
+    20,
+    37
+   ]
+  },
+  {
+   "prop": "bush_flowers",
+   "tile": [
+    20,
+    8
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    45,
+    29
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    40,
+    48
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    40,
+    18
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    59,
+    41
+   ]
+  },
+  {
+   "prop": "bush_flowers",
+   "tile": [
+    16,
+    20
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    60,
+    14
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    59,
+    19
+   ]
+  },
+  {
+   "prop": "bush_flowers",
+   "tile": [
+    42,
+    65
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    34,
+    25
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    45,
+    10
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    5,
+    31
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    26,
+    30
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    18,
+    41
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    42,
+    23
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    39,
+    40
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    4,
+    48
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    43,
+    50
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    12,
+    45
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    42,
+    27
+   ]
+  },
+  {
+   "prop": "bush_flowers",
+   "tile": [
+    56,
+    11
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    53,
+    26
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    28,
+    60
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    5,
+    35
+   ]
+  },
+  {
+   "prop": "bush_flowers",
+   "tile": [
+    49,
+    47
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    45,
+    45
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    39,
+    28
+   ]
+  },
+  {
+   "prop": "bush_flowers",
+   "tile": [
+    35,
+    59
+   ]
+  },
+  {
+   "prop": "bush_flowers",
+   "tile": [
+    30,
+    28
    ]
   }
  ],
@@ -604,11 +623,11 @@
    "dialogue": "",
    "encounter": "hills_highwayman",
    "tile": [
-    41.5,
-    37.5
+    15.5,
+    66.5
    ],
    "wander": 0,
-   "facing": "up",
+   "facing": "right",
    "when": {
     "time_of_day": {
      "from": 360,
@@ -622,86 +641,29 @@
    "type": "waymark",
    "name": "Road marker",
    "tile": [
-    35.5,
-    19.6
+    8.5,
+    37.6
    ],
    "radius": 34,
    "modes": [
     "land"
    ],
    "text": [
-    "A squared stone at the meeting of the roads, its top worn smooth by travelers' hands.",
-    "West, the road runs back to Kefar Zayit. East, it falls toward the lake and Magdala. From there, other roads lead on."
-   ]
-  },
-  {
-   "type": "examine",
-   "name": "The shepherds' cairn",
-   "tile": [
-    41,
-    7
+    "A squared stone where the road toward Magdala leaves the hills above Kefar Zayit."
    ],
-   "radius": 38,
-   "landmark": "shepherds_cairn",
-   "variants": [
-    {
-     "when": {
-      "not_flag": "saw_cairn"
-     },
-     "text": [
-      "A heap of fieldstones taller than a man, each one laid by a passing shepherd for luck or for a landmark.",
-      "From up here the land opens out. East, beyond the hills, the lake lies like a dropped blue coin. Smoke rises from the fishing towns on its shore."
-     ],
-     "effects": [
-      {
-       "landmark": "shepherds_cairn"
-      },
-      {
-       "set_flag": "saw_cairn"
-      },
-      {
-       "reveal_place": {
-        "place": "tiberias",
-        "level": "discovered"
-       }
-      },
-      {
-       "reveal_place": {
-        "place": "capernaum",
-        "level": "rumored"
-       }
-      }
-     ]
-    },
-    {
-     "text": [
-      "The shepherds' cairn. Someone has added a stone since you were last here."
-     ]
-    }
-   ]
+   "route": "kefar_zayit__magdala__land",
+   "at": 0.15
   },
   {
    "type": "examine",
    "name": "The spring",
    "tile": [
-    35,
-    39
+    19.0,
+    65.5
    ],
    "radius": 34,
    "text": [
     "A spring seeps from the foot of the rocks into a clear pool. The ground around it is trodden by sheep and, you think, by people who prefer not to be seen."
-   ]
-  },
-  {
-   "type": "examine",
-   "name": "The ford",
-   "tile": [
-    20,
-    21.5
-   ],
-   "radius": 40,
-   "text": [
-    "Flat stones set across the stream where the road crosses. The water runs cold and fast underneath."
    ]
   }
  ]

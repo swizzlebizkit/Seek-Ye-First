@@ -1,0 +1,742 @@
+{
+ "id": "cana_road",
+ "name": "The Cana road",
+ "kind": "regional",
+ "origin": "fiction",
+ "note": "Invented countryside of lower Galilee, generated as part of the continuous world (tools/mapgen/world.py).",
+ "world": [
+  -112,
+  -28
+ ],
+ "size": [
+  64,
+  72
+ ],
+ "spawn": [
+  46.5,
+  37.5
+ ],
+ "entries": {
+  "camp": {
+   "tile": [
+    46,
+    37
+   ],
+   "facing": "down"
+  }
+ },
+ "exits": [],
+ "ground": [
+  "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+  "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+  "cccccccggccgcccgccgccggccgccgcccgccggcccccggccgcccgccgccggccgccc",
+  "cccgggggggggcgggggggggcgggggggggcggggcgggggggggcgggggggggcgggggg",
+  "ccggcggcgcccgggcgggggggggggggggggggggggggggggggggggggggggggggggg",
+  "ccccgccccccccccccggggggggggggggggggggggggggggggggggggggggggggggg",
+  "cccgcccccccccccccggggggggggggggggggggggggggggggggggggggggggggggg",
+  "ccggccccccccccccgggggggggggggggggggggggggggggggggggggggggggggggg",
+  "cccggcccccccccccggggggggggggggggggggggggccgccccggccgccgggggggggg",
+  "cccggccccccccccccgggggggggggggggggggggggccccccccccccccccgggggggg",
+  "cccgcccccccccccccgggggggggggggggggggggggcccccccccccccccchhhggggg",
+  "ccggccccccccccccggggggggggggggggggggggggccccccccccccccccchgggggg",
+  "cccgcccccccccccccgggggggggggggggggggggggccccccccccccccccchhggggg",
+  "cccgccccccccccccggggggggggggggggggggggggcccccccccccccccccggggggg",
+  "ccggcccccccccccccggggggggggggggggggggggggcccccccccccccccgggggggg",
+  "ccgccccccccccccccgggggggggggggggggggggggccccccccccccccccgggggggg",
+  "cccgccccccccccccggggggggggggggggggggggggcccccccccccccccccggggggg",
+  "cccggccccccccccccgggggggggggggggggggggggcccccccccccccccccggggggg",
+  "cccggcgccgcgcccccgggggggggggggggggggggggcccccccccccccccccggggggg",
+  "cccggggggggggggggggggggggggggggggggggggggccccccccccccccccggggggg",
+  "cccgggggggggggggggggggggggggggggggggggggggccgcggccgcccgccggggggg",
+  "ccgggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg",
+  "ccgggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg",
+  "cccggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg",
+  "cccggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg",
+  "ccgcgggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg",
+  "cccggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg",
+  "cccggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg",
+  "cccggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg",
+  "ccgggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg",
+  "ccccgggggggggggggggggggggggggggggggggggggggggggggggggggggggggggd",
+  "cccggggggggggggggggggggggggggggggggggggggggggggggggggggggggggddd",
+  "ccgggggggggggggggggggggggggggggggggggggggggggggggggggggggggddddd",
+  "cccgggggggggggggggggggggggggggggggggggggggggggggggggggggdddddddd",
+  "cccgggggggggggggggggggggggggggggggggggggggggggggggggggdddddddggg",
+  "ccggggggggggggggggggggggggggggggggggggggggggggggggggdddddddggggg",
+  "ccggggggggggggggggggggggggggggggggggggggggggggggggdddddddggggggg",
+  "cccgggggggggggggggggggggggggggggggggggggggggggggdddddddggggggggg",
+  "cccghhhhhhhgggggggggggggggggggggggggggggggggggdddddddggggggggggg",
+  "ccgghhhhhhhggggggggggggggggggggggggggggggggddddddddggggggggggggg",
+  "ccccccccghgccggggggggggggggggggggggggggggdddddddgggggggggggggggg",
+  "cccgccccccccccgggggggggggggggggggggggggggdddddgggggggggggggggggg",
+  "ccgggcccccccccggggggggggggggggggggggggggddddgggggggggggggggggggg",
+  "cccggccccccccccggggggggggggggggggggggggddddggggggggggggggggggggg",
+  "cccggcccccccccggggggggggggggggggggggggddddgggggggggggggggggggggg",
+  "cccggccccccccccggggggggggggggggggggggddddggggggggggggggggggggggg",
+  "ccgggcccccccccggggggggggggggggggggggddddgggggggggggggggggggggggg",
+  "cccgcccccccccccgggggggggggggggggggggdddggggggggggggggggggggggggg",
+  "cccggcccccccccgggggggggggggggggggggddddggggggggggggggggggggggggg",
+  "ccggcccccccccccgggggggggggggggggggddddgggggggggggggggggggggggggg",
+  "ccgccccccccccccggggggggggggggggggddddggggggggggggggggggggggggggg",
+  "cccggcccccccccggggggggggggggggggddddgggggggggggggggggggggggggggg",
+  "cccggcccccccccggggggggggggggggggdddggggggggggggggggggggggggggggg",
+  "cccgccccccccccgggggggggggggggggddddggggggggggggggggggggggggggggg",
+  "cccggccccccccccgggggggggggggggddddgggggggggggggggggggggggggggggg",
+  "cccggcccccccccgggggggggggggggddddggggggggggggggggggggggggggggggg",
+  "ccggggcccgcccccgggggggggggggddddgggggggggggggggggggggggggggggggg",
+  "ccgggggggggggggggggggggggggddddggggggggggggggggggggggggggggggggg",
+  "cccgggggggggggggggggggggggddddghhhhhhhgggggcccccgcccccgccggggggg",
+  "cccggggggggggggggggggggggdddddghhhhhhhggggcccccccccccccccggggggg",
+  "ccgcggggggggggggggggggggdddddgghhhghhhggggcccccccccccccccggggggc",
+  "cccggggggggggggggggggggdddddggggggggggggggcccccccccccccccggggccc",
+  "cccgggggggggggggggggggdddddggggggggggggggggccccccccccccccggggccc",
+  "cccggggggggggggggggggdddddggggggggggggggggccccccccccccccgggggccc",
+  "ccggggggggggggggggggdddddgggggggggggggggggccccccccccccccggggcgcc",
+  "ccccgggggggggggggggdddddggggggggggggggggggccccccccccccccgggggccc",
+  "cccgggggggggggggggdddddgggggggggggggggggggcccccccccccccccggggccc",
+  "ccgggggggggggggggdddddggggggggggggggggggggccccccccccccccggggggcc",
+  "cccgggggggggggggdddddgggggggggggggggggggggcccccgcgccccggggggggcc",
+  "cccggggggggggggdddddgggggggggggggggggggggggggggggggggggggggggccc",
+  "ccgggggghghhhddddddggggggggggggggggggggggggggggggggggggggggggccc",
+  "cccggggghhhdddddddgggggggggggggggggggggggggggggggggggggggggggccc"
+ ],
+ "ground_legend": {
+  "g": [
+   "grass_0",
+   "grass_0",
+   "grass_0",
+   "grass_1",
+   "grass_1",
+   "grass_2",
+   "grass_2",
+   "grass_2",
+   "grass_1",
+   "grass_flowers"
+  ],
+  "h": [
+   "grass_dry_0",
+   "grass_dry_1"
+  ],
+  "d": [
+   "dirt_0",
+   "dirt_1"
+  ],
+  "p": [
+   "path_0",
+   "path_1"
+  ],
+  "s": [
+   "sand_0",
+   "sand_1"
+  ],
+  "w": [
+   "water_0",
+   "water_1"
+  ],
+  "c": [
+   "cliff_0",
+   "cliff_1"
+  ],
+  "f": [
+   "field_0",
+   "field_1"
+  ]
+ },
+ "objects": [],
+ "props": [
+  {
+   "prop": "signpost",
+   "tile": [
+    42,
+    36
+   ]
+  },
+  {
+   "prop": "olive_tree_b",
+   "tile": [
+    47,
+    28
+   ]
+  },
+  {
+   "prop": "olive_tree_b",
+   "tile": [
+    55,
+    47
+   ]
+  },
+  {
+   "prop": "olive_tree_a",
+   "tile": [
+    53,
+    45
+   ]
+  },
+  {
+   "prop": "olive_tree_a",
+   "tile": [
+    51,
+    43
+   ]
+  },
+  {
+   "prop": "olive_tree_b",
+   "tile": [
+    44,
+    52
+   ]
+  },
+  {
+   "prop": "olive_tree_a",
+   "tile": [
+    44,
+    49
+   ]
+  },
+  {
+   "prop": "olive_tree_b",
+   "tile": [
+    33,
+    45
+   ]
+  },
+  {
+   "prop": "olive_tree_b",
+   "tile": [
+    31,
+    47
+   ]
+  },
+  {
+   "prop": "olive_tree_b",
+   "tile": [
+    23,
+    50
+   ]
+  },
+  {
+   "prop": "olive_tree_b",
+   "tile": [
+    21,
+    50
+   ]
+  },
+  {
+   "prop": "olive_tree_a",
+   "tile": [
+    32,
+    65
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    9,
+    65
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    5,
+    25
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    18,
+    39
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    17,
+    62
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    57,
+    53
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    24,
+    43
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    24,
+    20
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    16,
+    22
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    58,
+    51
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    5,
+    37
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    59,
+    62
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    28,
+    27
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    14,
+    25
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    19,
+    54
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    36,
+    59
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    20,
+    37
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    41,
+    24
+   ]
+  },
+  {
+   "prop": "bush_flowers",
+   "tile": [
+    40,
+    36
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    37,
+    25
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    25,
+    46
+   ]
+  },
+  {
+   "prop": "bush_flowers",
+   "tile": [
+    36,
+    62
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    20,
+    56
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    29,
+    12
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    17,
+    60
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    35,
+    20
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    30,
+    36
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    17,
+    10
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    12,
+    39
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    46,
+    23
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    3,
+    3
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    29,
+    10
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    15,
+    63
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    33,
+    32
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    30,
+    61
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    39,
+    56
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    55,
+    6
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    16,
+    48
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    11,
+    32
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    16,
+    19
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    25,
+    7
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    40,
+    23
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    39,
+    64
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    51,
+    41
+   ]
+  },
+  {
+   "prop": "bush_flowers",
+   "tile": [
+    41,
+    47
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    48,
+    57
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    13,
+    25
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    7,
+    31
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    35,
+    17
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    27,
+    24
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    6,
+    65
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    56,
+    8
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    7,
+    3
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    41,
+    29
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    37,
+    52
+   ]
+  },
+  {
+   "prop": "bush_flowers",
+   "tile": [
+    14,
+    21
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    13,
+    63
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    45,
+    25
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    58,
+    38
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    14,
+    67
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    40,
+    67
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    29,
+    6
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    30,
+    38
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    41,
+    52
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    19,
+    27
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    56,
+    24
+   ]
+  },
+  {
+   "prop": "bush_flowers",
+   "tile": [
+    18,
+    21
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    43,
+    56
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    35,
+    37
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    13,
+    39
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    2,
+    25
+   ]
+  }
+ ],
+ "npcs": [],
+ "interactables": [
+  {
+   "type": "waymark",
+   "name": "Road marker",
+   "tile": [
+    42.5,
+    36.6
+   ],
+   "radius": 34,
+   "modes": [
+    "land"
+   ],
+   "text": [
+    "A squared milestone on the road between Kefar Zayit and Cana. Travelers who do not care to walk the whole way arrange passage on the long roads from here."
+   ],
+   "route": "cana__kefar_zayit__land",
+   "at": 0.45
+  }
+ ]
+}

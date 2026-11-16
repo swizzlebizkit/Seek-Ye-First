@@ -18,6 +18,7 @@
   },
   "arrival_region": "outskirts",
   "chunk_max_minutes": 120,
+  "regional_clock_multiplier": 4.0,
   "animation_minutes_per_second": 40,
   "max_catchup_days": 30
 }

@@ -46,22 +46,7 @@ func load_region(id: String) -> bool:
 
 ## Tiles the player can never stand on, from the same data the physics uses.
 func _index_blocked() -> void:
-	_blocked.clear()
-	var meta = DataFiles.load_json(TilesetBuilder.META_PATH)
-	var solid := {}
-	for n in meta["solid"]:
-		solid[n] = true
-	var rows: Array = data["ground"]
-	for y in range(rows.size()):
-		for x in range(rows[y].length()):
-			if solid.has(data["ground_legend"][rows[y][x]][0]):
-				_blocked[Vector2i(x, y)] = true
-	for o in data["objects"]:
-		if solid.has(o[2]):
-			_blocked[Vector2i(int(o[0]), int(o[1]))] = true
-	for p in data["props"]:
-		if _prop_meta[p["prop"]]["collider"] != null:
-			_blocked[Vector2i(int(p["tile"][0]), int(p["tile"][1]))] = true
+	_blocked = RegionTerrain.blocked_tiles(data)
 
 
 func tile_blocked(tile: Vector2i) -> bool:
@@ -204,6 +189,9 @@ func _build_interactables() -> void:
 				wm.text = def.get("text", [])
 				wm.modes = def.get("modes", ["land", "water"])
 				wm.landmark = def.get("landmark", "")
+				wm.place = def.get("place", "")
+				wm.route = def.get("route", "")
+				wm.at = float(def.get("at", 0.5))
 				entities.add_child(wm)
 			"ledger":
 				var lg := LedgerInteractable.new()

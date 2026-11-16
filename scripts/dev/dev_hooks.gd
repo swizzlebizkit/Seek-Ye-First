@@ -15,6 +15,15 @@ static func _args() -> Dictionary:
 
 static func maybe_autostart(menu: Node) -> void:
 	var args := _args()
+	if args.has("validate"):
+		var v := World.validate()
+		for e in v["errors"]:
+			print("[validate] ERROR ", e)
+		for w in v["warnings"]:
+			print("[validate] warning ", w)
+		print("[validate] %d errors, %d warnings" % [v["errors"].size(), v["warnings"].size()])
+		menu.get_tree().quit(0 if v["errors"].is_empty() else 1)
+		return
 	if args.has("autostart"):
 		var request := {"mode": args["autostart"]} if args["autostart"] in ["new", "training"] else {"mode": "load", "slot": int(args["autostart"])}
 		menu.start_game.call_deferred(request)

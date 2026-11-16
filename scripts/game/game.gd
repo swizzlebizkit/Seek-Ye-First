@@ -25,6 +25,7 @@ func _ready() -> void:
 			_set_up_training_yard()
 
 	DevHooks.before_build()
+	WorldSim.clock_multiplier = float(World.travel_rules.get("regional_clock_multiplier", 4.0)) if World.region_meta(GameState.region_id).get("kind", "") == "regional" else 1.0
 	region = Region.new()
 	region.name = "Region"
 	add_child(region)
@@ -92,6 +93,27 @@ func _on_transition(_region: String, _entry: String) -> void:
 
 
 var _sight_tile := Vector2i(-1, -1)
+var _crossing := false
+
+
+func _exit_tree() -> void:
+	WorldSim.clock_multiplier = 1.0
+
+
+## Walking off the edge of a map continues into whatever lies beyond it, at the same point of ground.
+func _physics_process(_delta: float) -> void:
+	if player == null or region == null or _crossing or GameState.mode != GameState.Mode.EXPLORE:
+		return
+	var cross := World.edge_crossing(GameState.region_id, player.global_position)
+	if cross.is_empty():
+		return
+	if cross.get("blocked", false):
+		var limit := region.size_px() - Vector2(8, 8)
+		player.global_position = player.global_position.clamp(Vector2(8, 8), limit)
+		return
+	_crossing = true
+	GameState.player_pos = cross["pos"]
+	World.go_position(cross["region"], cross["pos"], player.facing)
 
 
 func _process(_delta: float) -> void:

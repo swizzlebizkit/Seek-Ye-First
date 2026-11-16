@@ -1,4 +1,5 @@
-"""Builds the W1 regions: galilee_hills, magdala_shore, and the template regions road_camp and outskirts.
+"""Builds the shared TEMPLATE regions road_camp and outskirts (placeholders used where no hand-built scene exists).
+The countryside and settlements are built by tools/mapgen/world.py and settlements.py.
 
 Run from the project root:  python -I tools/mapgen/galilee.py
 Each region is an ASCII ground grid plus explicit objects, props, NPCs, interactables, entries and exits.
@@ -197,156 +198,6 @@ class Region:
 
 
 # ================================================================================================
-# galilee_hills: the countryside between Kefar Zayit and the lake
-# ================================================================================================
-def galilee_hills():
-    r = Region("galilee_hills", "The hills above the lake", 64, 44, 61, kind="regional", anchor="kefar_zayit", origin="fiction",
-               note="An invented stretch of lower-Galilean countryside on the way from Kefar Zayit to Magdala.")
-    r.border()
-    r.dry_patches(18)
-    # the stream: a spring in the northern cliffs, wandering south to the cliffs below
-    def sx(y):
-        return 20 + round(2 * math.sin(y / 4.0))
-    for y in range(2, r.h - 2):
-        for x in range(sx(y) - 2, sx(y) + 3):
-            r.ground[y][x] = "s"
-        for x in range(sx(y) - 1, sx(y) + 1):
-            r.ground[y][x] = "w"
-    # main road, west to east, with a stone ford where it crosses the stream
-    main = [(0, 22), (8, 22), (14, 21), (24, 20), (30, 21), (36, 21), (44, 23), (54, 23), (63, 22)]
-    r.road(main, 3)
-    for y in range(19, 24):
-        for x in range(sx(y) - 2, sx(y) + 3):
-            if r.ground[y][x] in ("w", "s"):
-                r.ground[y][x] = "p"
-    # branches: north to the shepherds' cairn, south to the spring grove
-    r.road([(36, 21), (36, 14), (37, 9), (41, 6)], 2)
-    r.road([(46, 24), (46, 31), (43, 36), (40, 38)], 2)
-    # open the cliff at both ends of the road (the exits)
-    r.fill(0, 21, 1, 24, "d")
-    r.fill(62, 21, 63, 24, "d")
-    # the cairn clearing
-    r.fill(38, 4, 44, 8, "h")
-    r.fill(40, 5, 42, 7, "p")
-    # the spring pool
-    r.fill(33, 40, 37, 41, "s")
-    r.fill(34, 40, 36, 41, "w")
-    # outcrops (elevation barriers) that the road and branches wind around
-    r.ridge(4, 6, 15, 12)
-    r.ridge(52, 29, 60, 35)
-    r.ridge(24, 29, 30, 37)
-    r.ridge(48, 7, 58, 12)
-    r.occupy(0, 21, 63, 24)
-    r.occupy(35, 4, 46, 21)
-
-    # olive groves along the road
-    for i, (gx, gy) in enumerate([(10, 18), (13, 26), (14, 17), (28, 25), (31, 17), (40, 26), (50, 19), (55, 26), (7, 27)]):
-        r.prop("olive_tree_a" if i % 2 else "olive_tree_b", gx, gy)
-        r.occupy(gx - 1, gy - 2, gx + 1, gy)
-    for tx, ty in ((38, 4), (44, 5), (39, 9), (35, 12)):
-        r.prop("cypress", tx, ty)
-        r.occupy(tx - 1, ty - 1, tx + 1, ty)
-    # the cairn itself is a heap of boulders on the paved spot, with a clear spot to stand beside it
-    r.prop("boulder", 41, 5, block=True)
-    r.prop("boulder", 42, 6, block=True)
-    r.prop("signpost", 35, 19)
-    r.scatter(46, ["bush", "bush", "bush_flowers", "boulder", "flowers_patch", "flowers_patch"])
-
-    r.spawn = [36.5, 22.5]
-    r.entries = {
-        "from_village": {"tile": [3, 21], "span": 3, "axis": "y", "facing": "right"},
-        "from_shore": {"tile": [60, 21], "span": 3, "axis": "y", "facing": "left"},
-        "camp": {"tile": [34, 23], "facing": "down"},
-    }
-    r.exits = [
-        {"id": "to_village", "rect": [0, 21, 1, 4], "to": {"region": "kefar_zayit", "entry": "from_hills"}, "facing": "left"},
-        {"id": "to_shore", "rect": [63, 21, 1, 4], "to": {"region": "magdala_shore", "entry": "from_hills"}, "facing": "right"},
-    ]
-    r.interactables = [
-        {"type": "waymark", "name": "Road marker", "tile": [35.5, 19.6], "radius": 34, "modes": ["land"],
-         "text": ["A squared stone at the meeting of the roads, its top worn smooth by travelers' hands.",
-                  "West, the road runs back to Kefar Zayit. East, it falls toward the lake and Magdala. From there, other roads lead on."]},
-        {"type": "examine", "name": "The shepherds' cairn", "tile": [41, 7], "radius": 38, "landmark": "shepherds_cairn",
-         "variants": [
-             {"when": {"not_flag": "saw_cairn"},
-              "text": ["A heap of fieldstones taller than a man, each one laid by a passing shepherd for luck or for a landmark.",
-                       "From up here the land opens out. East, beyond the hills, the lake lies like a dropped blue coin. Smoke rises from the fishing towns on its shore."],
-              "effects": [{"landmark": "shepherds_cairn"}, {"set_flag": "saw_cairn"},
-                          {"reveal_place": {"place": "tiberias", "level": "discovered"}},
-                          {"reveal_place": {"place": "capernaum", "level": "rumored"}}]},
-             {"text": ["The shepherds' cairn. Someone has added a stone since you were last here."]},
-         ]},
-        {"type": "examine", "name": "The spring", "tile": [35, 39], "radius": 34,
-         "text": ["A spring seeps from the foot of the rocks into a clear pool. The ground around it is trodden by sheep and, you think, by people who prefer not to be seen."]},
-        {"type": "examine", "name": "The ford", "tile": [20, 21.5], "radius": 40,
-         "text": ["Flat stones set across the stream where the road crosses. The water runs cold and fast underneath."]},
-    ]
-    r.npcs = [
-        {"id": "hills_highwayman", "name": "Highwayman", "sprite": "highwayman", "profile": "highwayman", "dialogue": "",
-         "encounter": "hills_highwayman", "tile": [41.5, 37.5], "wander": 0, "facing": "up",
-         "when": {"time_of_day": {"from": 360, "to": 1080}}},
-    ]
-    r.write()
-
-
-# ================================================================================================
-# magdala_shore: the lake shore and landing outside Magdala
-# ================================================================================================
-def magdala_shore():
-    r = Region("magdala_shore", "Magdala shore", 48, 34, 77, kind="regional", anchor="magdala", origin="documented",
-               note="The shore road and landing just outside Magdala. Only the approach is modelled; the town itself is a later chapter.")
-    r.border()
-    r.dry_patches(8)
-    # the lake: water down the east side, sand shore in front of it
-    for y in range(2, r.h - 2):
-        shore = 33 + round(1.5 * math.sin(y / 3.0))
-        r.fill(shore - 2, y, shore, y, "s")
-        r.fill(shore + 1, y, r.w - 3, y, "w")
-    # lane from the hills to the landing, and the pier
-    r.road([(0, 17), (10, 17), (20, 16), (31, 17)], 3)
-    r.fill(0, 16, 1, 19, "d")
-    r.fill(33, 17, 41, 18, "p")
-    r.road([(20, 16), (20, 10)], 2)
-    # houses on the rise above the lane (Magdala's edge)
-    d1 = r.house(8, 5, 5, 2, 2, windows=(0, 4))
-    d2 = r.house(15, 4, 6, 3, 3, windows=(1,))
-    d3 = r.house(26, 5, 5, 2, 1, windows=(3,))
-    for dx, dy in (d1, d2, d3):
-        r.fill(dx, dy + 1, dx, 15, "d")
-        r.occupy(dx, dy + 1, dx, 15)
-    r.road([(0, 17), (10, 17)], 3)
-    r.occupy(0, 15, 41, 19)
-    # nets, jars and baskets at the landing
-    for name, x, y in (("jar_large", 31, 14), ("basket", 30, 14), ("crate", 32, 20), ("basket", 31, 20), ("jar_large", 29, 21)):
-        r.prop(name, x, y, pad=0)
-    for i, (gx, gy) in enumerate([(5, 24), (10, 26), (16, 24), (23, 27), (4, 12)]):
-        r.prop("olive_tree_a" if i % 2 else "olive_tree_b", gx, gy)
-        r.occupy(gx - 1, gy - 2, gx + 1, gy)
-    r.prop("signpost", 7, 16)
-    r.scatter(24, ["bush", "bush_flowers", "boulder", "flowers_patch", "flowers_patch"])
-
-    r.spawn = [6.5, 17.5]
-    r.entries = {
-        "from_hills": {"tile": [3, 16], "span": 3, "axis": "y", "facing": "right"},
-        "arrival": {"tile": [28, 17], "span": 1, "axis": "y", "facing": "right"},
-        "camp": {"tile": [27, 18], "facing": "down"},
-    }
-    r.exits = [{"id": "to_hills", "rect": [0, 16, 1, 4], "to": {"region": "galilee_hills", "entry": "from_shore"}, "facing": "left"}]
-    r.interactables = [
-        {"type": "waymark", "name": "Road marker", "tile": [7.5, 16.6], "radius": 34, "modes": ["land"],
-         "text": ["A squared milestone. The road west climbs back into the hills; the lake road runs along the shore from here to Capernaum in one direction and Tiberias in the other."]},
-        {"type": "waymark", "name": "The landing", "tile": [38, 16.2], "radius": 38, "modes": ["water"],
-         "text": ["Boats are drawn up on the sand, and a few rest at the end of the pier, tarred and patched.", "Fishermen will carry a passenger across the water for a small fee, when the weather lets them."]},
-        {"type": "examine", "name": "Magdala", "tile": [20, 10.5], "radius": 38,
-         "text": ["The houses of Magdala run along the shore a little farther on, where the lane bends. Drying racks for salted fish stand between them.",
-                  "[The town itself is not yet part of the road.]"]},
-        {"type": "examine", "name": "The lake", "tile": [35, 24], "radius": 44,
-         "text": ["The lake lies flat and bright. Across the water, the far hills are blue. A boat is working its way back with the wind behind it."]},
-    ]
-    r.write()
-
-
-# ================================================================================================
 # road_camp and outskirts: shared template regions used wherever no hand-built scene exists
 # ================================================================================================
 def road_camp():
@@ -418,7 +269,5 @@ def outskirts():
 
 
 if __name__ == "__main__":
-    galilee_hills()
-    magdala_shore()
     road_camp()
     outskirts()
