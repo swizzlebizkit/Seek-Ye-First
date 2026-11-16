@@ -78,28 +78,28 @@
   "gggggggggggggggggggggggggggggggggggggggg",
   "gggggggggggggggggggggggggggggggggggggggg",
   "gggggggggggggggggggggggggggggggggggggggg",
-  "gggggggggggggggggggddggggghhhghggggggggg",
-  "gggggggggggggggggggddggggghhhghggggggggg",
-  "gggggggggggggggggggddggggghhhhhggggggggg",
-  "gggghhhhghhhgggggggddghhgggggggggggggggg",
-  "gggghgdddhhhgggggggddhhhdddgggggghhhghgg",
-  "ggggghdddghhdddggggddhhhdddgggggghhhhhgg",
-  "gggggggdggggdddggggddhhhhdhggggdddhghhgg",
-  "gggggggdgggggdgggggddhhhhdhggggdddgggggg",
-  "gggggggdgggggdggpppppppphdhgggggdggggggg",
+  "gggggggggggggggggggddggggggggggggggggggg",
+  "gggggggggggggggggggddggggggggggggggggggg",
+  "gggggggggggggggggggddggggggggggggggggggg",
+  "gggggggggggggggggggddggggggggggggggggggg",
+  "ggggggdddggggggggggddgggdddggggggggggggg",
+  "ggggggdddgggdddggggddgghdddggggggggggggg",
+  "gggggggdggggdddhhhhddghhhdgggggdddgggggg",
+  "gggggggdgggggdghhhhddgghgdgggggdddgggggg",
+  "gggggggdgggggdghppppppppgdggggggdggggggg",
   "dddggggdgggggdggppppppppgdggggggdggggddd",
   "ddddddddddddddddppppppppdddddddddddddddd",
   "ddddddddddddddddppppppppdddddddddddddddd",
-  "dddgggggggggggggppppppppgggggggggggggddd",
-  "ggggggggggggggggppppppppgggggggggggggggg",
-  "gggsswwwssgggggggggddggggggggggggggggggg",
-  "gghswwwwwsgggggggggddggggggggggggggggggg",
-  "gghswwwwwsgggggggggddggggggggggggggggggg",
-  "gghswwwwwsgggggggggddggggggggggggggggggg",
-  "gggsssssssgggggggggddggdddgggggggggggggg",
-  "gggggghgghgggdddgggdddddddggggfffffffggg",
-  "ggggghhhhhgggddddddddgggggggggfffffffggg",
-  "ggggghhhhggggggggggddgggggggggfffffffggg",
+  "dddgggggggggggggppppppppgggggghhhhhhhddd",
+  "ggggggggggggggggppppppppgggggghhhhhhgggg",
+  "gggsswwwssgggggggggddgggggggggggghgggggg",
+  "gggswwwwwsgggggggggddggggggggggghhhhhggg",
+  "gggswwwwwsgggggggggddggggggggggghhhhhggg",
+  "gggswwwwwsgggggggggddggggggggggghhhhhggg",
+  "gggsssssssgggggggggddggdddggghggghgggggg",
+  "gggggggggggggdddgggdddddddhhhhfffffffggg",
+  "gggggggggggggddddddddghhhhghhgfffffffggg",
+  "gggggggggggggggggggddgghhhggggfffffffggg",
   "ggggggggggggggggggggggggggggggfffffffggg",
   "gggggggggggggggggggggggggggggggggggggggg",
   "gggggggggggggggggggggggggggggggggggggggg"
@@ -205,7 +205,7 @@
   [
    6,
    6,
-   "wall_stone_b"
+   "wall_stone"
   ],
   [
    7,
@@ -215,7 +215,7 @@
   [
    8,
    6,
-   "wall_stone_b"
+   "wall_stone"
   ],
   [
    9,
@@ -305,7 +305,7 @@
   [
    12,
    7,
-   "wall_stone"
+   "wall_stone_b"
   ],
   [
    13,
@@ -315,7 +315,7 @@
   [
    14,
    7,
-   "wall_stone_b"
+   "wall_stone"
   ],
   [
    15,
@@ -385,7 +385,7 @@
   [
    26,
    6,
-   "wall_stone"
+   "wall_stone_b"
   ],
   [
    27,
@@ -485,7 +485,7 @@
   [
    33,
    8,
-   "wall_stone_b"
+   "wall_stone"
   ],
   [
    34,
@@ -495,7 +495,7 @@
   [
    35,
    8,
-   "wall_stone_b"
+   "wall_stone"
   ],
   [
    12,
@@ -555,7 +555,7 @@
   [
    13,
    21,
-   "wall_stone"
+   "wall_stone_b"
   ],
   [
    14,
@@ -670,7 +670,7 @@
   [
    23,
    20,
-   "wall_stone_b"
+   "wall_stone"
   ],
   [
    24,
@@ -690,7 +690,7 @@
   [
    27,
    20,
-   "wall_stone_b"
+   "wall_stone"
   ],
   [
    29,
@@ -1564,122 +1564,87 @@
    ]
   },
   {
-   "prop": "bush_flowers",
+   "prop": "boulder",
    "tile": [
-    5,
-    15
+    15,
+    17
    ]
   },
   {
    "prop": "flowers_patch",
    "tile": [
-    25,
-    15
-   ]
-  },
-  {
-   "prop": "bush_flowers",
-   "tile": [
-    9,
-    12
-   ]
-  },
-  {
-   "prop": "bush_flowers",
-   "tile": [
-    5,
-    11
-   ]
-  },
-  {
-   "prop": "bush_flowers",
-   "tile": [
-    24,
-    12
+    32,
+    16
    ]
   },
   {
    "prop": "flowers_patch",
-   "tile": [
-    18,
-    19
-   ]
-  },
-  {
-   "prop": "bush",
    "tile": [
     22,
-    6
+    3
    ]
   },
   {
-   "prop": "bush_flowers",
+   "prop": "flowers_patch",
    "tile": [
-    18,
+    12,
+    17
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    17,
+    5
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    36,
     20
    ]
   },
   {
-   "prop": "bush",
+   "prop": "bush_flowers",
    "tile": [
-    29,
-    18
-   ]
-  },
-  {
-   "prop": "flowers_patch",
-   "tile": [
-    3,
-    12
-   ]
-  },
-  {
-   "prop": "flowers_patch",
-   "tile": [
-    8,
-    9
-   ]
-  },
-  {
-   "prop": "flowers_patch",
-   "tile": [
-    21,
+    27,
     23
    ]
   },
   {
    "prop": "flowers_patch",
    "tile": [
-    26,
-    9
+    35,
+    20
    ]
   },
   {
    "prop": "bush",
    "tile": [
-    32,
+    27,
     15
    ]
   },
   {
    "prop": "flowers_patch",
    "tile": [
-    17,
-    9
-   ]
-  },
-  {
-   "prop": "flowers_patch",
-   "tile": [
-    36,
-    18
-   ]
-  },
-  {
-   "prop": "flowers_patch",
-   "tile": [
-    36,
+    30,
     15
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    31,
+    3
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    8,
+    12
    ]
   },
   {
@@ -1692,57 +1657,92 @@
   {
    "prop": "bush",
    "tile": [
-    23,
-    9
-   ]
-  },
-  {
-   "prop": "bush_flowers",
-   "tile": [
-    26,
-    24
-   ]
-  },
-  {
-   "prop": "bush",
-   "tile": [
-    17,
-    24
-   ]
-  },
-  {
-   "prop": "flowers_patch",
-   "tile": [
-    34,
-    12
-   ]
-  },
-  {
-   "prop": "bush_flowers",
-   "tile": [
-    36,
+    33,
     3
    ]
   },
   {
    "prop": "boulder",
    "tile": [
-    12,
-    16
+    15,
+    15
    ]
   },
   {
-   "prop": "flowers_patch",
+   "prop": "bush_flowers",
    "tile": [
-    11,
+    12,
     10
    ]
   },
   {
    "prop": "boulder",
    "tile": [
-    12,
+    22,
+    9
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    30,
+    20
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    35,
+    3
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    23,
+    23
+   ]
+  },
+  {
+   "prop": "bush_flowers",
+   "tile": [
+    14,
+    10
+   ]
+  },
+  {
+   "prop": "bush_flowers",
+   "tile": [
+    29,
+    17
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    24,
+    23
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    15,
     12
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    18,
+    3
+   ]
+  },
+  {
+   "prop": "bush_flowers",
+   "tile": [
+    27,
+    8
    ]
   }
  ],

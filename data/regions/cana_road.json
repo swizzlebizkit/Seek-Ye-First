@@ -31,23 +31,23 @@
   "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
   "cccccccggccgcccgccgccggccgccgcccgccggcccccggccgcccgccgccggccgccc",
   "cccgggggggggcgggggggggcgggggggggcggggcgggggggggcgggggggggcgggggg",
-  "ccggcggcgcccgggcgggggggggggggggggggggggggggggggggggggggggggggggg",
+  "ccgggggcccccgccggggggggggggggggggggggggggggggggggggggggggggggggg",
   "ccccgccccccccccccggggggggggggggggggggggggggggggggggggggggggggggg",
-  "cccgcccccccccccccggggggggggggggggggggggggggggggggggggggggggggggg",
+  "cccggccccccccccccggggggggggggggggggggggggggggggggggggggggggggggg",
   "ccggccccccccccccgggggggggggggggggggggggggggggggggggggggggggggggg",
-  "cccggcccccccccccggggggggggggggggggggggggccgccccggccgccgggggggggg",
-  "cccggccccccccccccgggggggggggggggggggggggccccccccccccccccgggggggg",
-  "cccgcccccccccccccgggggggggggggggggggggggcccccccccccccccchhhggggg",
-  "ccggccccccccccccggggggggggggggggggggggggccccccccccccccccchgggggg",
-  "cccgcccccccccccccgggggggggggggggggggggggccccccccccccccccchhggggg",
+  "cccggccccccccccccggggggggggggggggggggggggcgcgccccgcggcggcggggggg",
+  "cccgcccccccccccccggggggggggggggggggggggggccccccccccccccccggggggg",
+  "cccgccccccccccccggggggggggggggggggggggggccccccccccccccccgggggggg",
+  "ccggcccccccccccccgggggggggggggggggggggggcccccccccccccccccggggggg",
+  "cccgcccccccccccccggggggggggggggggggggggggccccccccccccccccggggggg",
+  "cccggccccccccccccggggggggggggggggggggggggcccccccccccccccgggggggg",
+  "ccggcccccccccccccggggggggggggggggggggggggccccccccccccccccggggggg",
+  "ccgcccccccccccccggggggggggggggggggggggggccccccccccccccccgggggggg",
+  "cccgcccccccccccccgggggggggggggggggggggggcccccccccccccccccggggggg",
   "cccgccccccccccccggggggggggggggggggggggggcccccccccccccccccggggggg",
-  "ccggcccccccccccccggggggggggggggggggggggggcccccccccccccccgggggggg",
-  "ccgccccccccccccccgggggggggggggggggggggggccccccccccccccccgggggggg",
-  "cccgccccccccccccggggggggggggggggggggggggcccccccccccccccccggggggg",
-  "cccggccccccccccccgggggggggggggggggggggggcccccccccccccccccggggggg",
-  "cccggcgccgcgcccccgggggggggggggggggggggggcccccccccccccccccggggggg",
-  "cccggggggggggggggggggggggggggggggggggggggccccccccccccccccggggggg",
-  "cccgggggggggggggggggggggggggggggggggggggggccgcggccgcccgccggggggg",
+  "cccgccgggcgccgcggggggggggggggggggggggggggccccccccccccccccggggggg",
+  "cccgggggggggggggggggggggggggggggggggggggccccccccccccccccgggggggg",
+  "cccggggggggggggggggggggggggggggggggggggggcccgcccccgggccgcggggggg",
   "ccgggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg",
   "ccgggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg",
   "cccggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg",
@@ -65,40 +65,40 @@
   "ccggggggggggggggggggggggggggggggggggggggggggggggggggdddddddggggg",
   "ccggggggggggggggggggggggggggggggggggggggggggggggggdddddddggggggg",
   "cccgggggggggggggggggggggggggggggggggggggggggggggdddddddggggggggg",
-  "cccghhhhhhhgggggggggggggggggggggggggggggggggggdddddddggggggggggg",
-  "ccgghhhhhhhggggggggggggggggggggggggggggggggddddddddggggggggggggg",
-  "ccccccccghgccggggggggggggggggggggggggggggdddddddgggggggggggggggg",
-  "cccgccccccccccgggggggggggggggggggggggggggdddddgggggggggggggggggg",
+  "cccgggggggggggggggggggggggggggggggggggggggggggdddddddggggggggggg",
+  "ccgggggggggggggggggggggggggggggggggggggggggddddddddggggggggggggg",
+  "ccccccccgggcgggggggggggggggggggggggggggggdddddddgggggggggggggggg",
+  "cccggcccccccccgggggggggggggggggggggggggggdddddgggggggggggggggggg",
   "ccgggcccccccccggggggggggggggggggggggggggddddgggggggggggggggggggg",
-  "cccggccccccccccggggggggggggggggggggggggddddggggggggggggggggggggg",
-  "cccggcccccccccggggggggggggggggggggggggddddgggggggggggggggggggggg",
+  "cccgcccccccccccggggggggggggggggggggggggddddggggggggggggggggggggg",
+  "cccgcccccccccccgggggggggggggggggggggggddddgggggggggggggggggggggg",
   "cccggccccccccccggggggggggggggggggggggddddggggggggggggggggggggggg",
-  "ccgggcccccccccggggggggggggggggggggggddddgggggggggggggggggggggggg",
+  "ccggcccccccccccgggggggggggggggggggggddddgggggggggggggggggggggggg",
   "cccgcccccccccccgggggggggggggggggggggdddggggggggggggggggggggggggg",
-  "cccggcccccccccgggggggggggggggggggggddddggggggggggggggggggggggggg",
-  "ccggcccccccccccgggggggggggggggggggddddgggggggggggggggggggggggggg",
-  "ccgccccccccccccggggggggggggggggggddddggggggggggggggggggggggggggg",
-  "cccggcccccccccggggggggggggggggggddddgggggggggggggggggggggggggggg",
-  "cccggcccccccccggggggggggggggggggdddggggggggggggggggggggggggggggg",
+  "cccgcccccccccccggggggggggggggggggggddddggggggggggggggggggggggggg",
+  "ccgggcccccccccggggggggggggggggggggddddgggggggggggggggggggggggggg",
+  "ccgcccccccccccgggggggggggggggggggddddggggggggggggggggggggggggggg",
+  "cccgcccccccccccgggggggggggggggggddddgggggggggggggggggggggggggggg",
+  "cccgcccccccccccgggggggggggggggggdddggggggggggggggggggggggggggggg",
   "cccgccccccccccgggggggggggggggggddddggggggggggggggggggggggggggggg",
-  "cccggccccccccccgggggggggggggggddddgggggggggggggggggggggggggggggg",
-  "cccggcccccccccgggggggggggggggddddggggggggggggggggggggggggggggggg",
-  "ccggggcccgcccccgggggggggggggddddgggggggggggggggggggggggggggggggg",
+  "cccgccccccccccggggggggggggggggddddgggggggggggggggggggggggggggggg",
+  "cccggccccccccccggggggggggggggddddggggggggggggggggggggggggggggggg",
+  "ccgggccccccgcgggggggggggggggddddgggggggggggggggggggggggggggggggg",
   "ccgggggggggggggggggggggggggddddggggggggggggggggggggggggggggggggg",
-  "cccgggggggggggggggggggggggddddghhhhhhhgggggcccccgcccccgccggggggg",
-  "cccggggggggggggggggggggggdddddghhhhhhhggggcccccccccccccccggggggg",
-  "ccgcggggggggggggggggggggdddddgghhhghhhggggcccccccccccccccggggggc",
-  "cccggggggggggggggggggggdddddggggggggggggggcccccccccccccccggggccc",
+  "cccgggggggggggggggggggggggddddggghhhhgggggggggcggggcccgccggggggg",
+  "cccggggggggggggggggggggggdddddgghhhhhgggggcccccccccccccccggggggg",
+  "ccgcggggggggggggggggggggdddddgggghhhggggggccccccccccccccggggghhc",
+  "cccggggggggggggggggggggdddddggggggggggggggccccccccccccccgggggccc",
   "cccgggggggggggggggggggdddddggggggggggggggggccccccccccccccggggccc",
-  "cccggggggggggggggggggdddddggggggggggggggggccccccccccccccgggggccc",
-  "ccggggggggggggggggggdddddgggggggggggggggggccccccccccccccggggcgcc",
-  "ccccgggggggggggggggdddddggggggggggggggggggccccccccccccccgggggccc",
+  "cccggggggggggggggggggdddddggggggggggggggggcccccccccccccccggggccc",
+  "ccggggggggggggggggggdddddggggggggggggggggggcccccccccccccggggcgcc",
+  "ccccgggggggggggggggdddddggggggggggggggggggcccccccccccccccggggccc",
   "cccgggggggggggggggdddddgggggggggggggggggggcccccccccccccccggggccc",
-  "ccgggggggggggggggdddddggggggggggggggggggggccccccccccccccggggggcc",
-  "cccgggggggggggggdddddgggggggggggggggggggggcccccgcgccccggggggggcc",
+  "ccgggggggggggggggdddddggggggggggggggggggggcccccccccccccccgggggcc",
+  "cccgggggggggggggdddddggggggggggggggggggggggcccccccccgggccgggggcc",
   "cccggggggggggggdddddgggggggggggggggggggggggggggggggggggggggggccc",
-  "ccgggggghghhhddddddggggggggggggggggggggggggggggggggggggggggggccc",
-  "cccggggghhhdddddddgggggggggggggggggggggggggggggggggggggggggggccc"
+  "ccgggggggggggddddddggggggggggggggggggggggggggggggggggggggggggccc",
+  "cccggggggggdddddddgggggggggggggggggggggggggggggggggggggggggggccc"
  ],
  "ground_legend": {
   "g": [
@@ -154,131 +154,327 @@
   {
    "prop": "olive_tree_b",
    "tile": [
-    47,
-    28
-   ]
-  },
-  {
-   "prop": "olive_tree_b",
-   "tile": [
-    55,
-    47
-   ]
-  },
-  {
-   "prop": "olive_tree_a",
-   "tile": [
-    53,
-    45
-   ]
-  },
-  {
-   "prop": "olive_tree_a",
-   "tile": [
-    51,
+    56,
     43
    ]
   },
   {
    "prop": "olive_tree_b",
    "tile": [
-    44,
-    52
+    43,
+    32
    ]
   },
   {
    "prop": "olive_tree_a",
    "tile": [
-    44,
-    49
-   ]
-  },
-  {
-   "prop": "olive_tree_b",
-   "tile": [
-    33,
+    46,
     45
    ]
   },
   {
+   "prop": "olive_tree_a",
+   "tile": [
+    48,
+    44
+   ]
+  },
+  {
    "prop": "olive_tree_b",
    "tile": [
-    31,
-    47
+    41,
+    51
+   ]
+  },
+  {
+   "prop": "olive_tree_b",
+   "tile": [
+    40,
+    57
+   ]
+  },
+  {
+   "prop": "olive_tree_a",
+   "tile": [
+    23,
+    52
+   ]
+  },
+  {
+   "prop": "olive_tree_b",
+   "tile": [
+    19,
+    50
    ]
   },
   {
    "prop": "olive_tree_b",
    "tile": [
     23,
-    50
-   ]
-  },
-  {
-   "prop": "olive_tree_b",
-   "tile": [
-    21,
-    50
+    56
    ]
   },
   {
    "prop": "olive_tree_a",
    "tile": [
-    32,
+    9,
+    66
+   ]
+  },
+  {
+   "prop": "olive_tree_a",
+   "tile": [
+    11,
     65
+   ]
+  },
+  {
+   "prop": "olive_tree_a",
+   "tile": [
+    10,
+    63
+   ]
+  },
+  {
+   "prop": "olive_tree_a",
+   "tile": [
+    13,
+    62
+   ]
+  },
+  {
+   "prop": "olive_tree_b",
+   "tile": [
+    13,
+    65
+   ]
+  },
+  {
+   "prop": "bush_flowers",
+   "tile": [
+    18,
+    26
+   ]
+  },
+  {
+   "prop": "bush_flowers",
+   "tile": [
+    4,
+    49
    ]
   },
   {
    "prop": "flowers_patch",
    "tile": [
-    9,
-    65
+    36,
+    58
    ]
   },
   {
    "prop": "flowers_patch",
    "tile": [
     5,
-    25
+    33
    ]
   },
   {
-   "prop": "boulder",
+   "prop": "flowers_patch",
    "tile": [
-    18,
+    34,
     39
    ]
   },
   {
    "prop": "flowers_patch",
    "tile": [
-    17,
-    62
+    52,
+    32
+   ]
+  },
+  {
+   "prop": "bush_flowers",
+   "tile": [
+    46,
+    24
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    15,
+    45
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    36,
+    3
+   ]
+  },
+  {
+   "prop": "bush_flowers",
+   "tile": [
+    25,
+    24
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    24,
+    14
    ]
   },
   {
    "prop": "bush",
+   "tile": [
+    29,
+    6
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    36,
+    61
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    58,
+    67
+   ]
+  },
+  {
+   "prop": "bush_flowers",
+   "tile": [
+    59,
+    11
+   ]
+  },
+  {
+   "prop": "bush_flowers",
+   "tile": [
+    22,
+    11
+   ]
+  },
+  {
+   "prop": "flowers_patch",
    "tile": [
     57,
-    53
+    17
    ]
   },
   {
    "prop": "flowers_patch",
    "tile": [
-    24,
-    43
+    14,
+    19
    ]
   },
   {
    "prop": "bush",
    "tile": [
-    24,
-    20
+    27,
+    16
+   ]
+  },
+  {
+   "prop": "bush_flowers",
+   "tile": [
+    51,
+    25
    ]
   },
   {
    "prop": "flowers_patch",
+   "tile": [
+    26,
+    14
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    33,
+    63
+   ]
+  },
+  {
+   "prop": "bush_flowers",
+   "tile": [
+    42,
+    54
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    13,
+    58
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    5,
+    4
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    3,
+    16
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    55,
+    46
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    40,
+    59
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    59,
+    23
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    24,
+    39
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    33,
+    65
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    34,
+    65
+   ]
+  },
+  {
+   "prop": "bush",
    "tile": [
     16,
     22
@@ -287,418 +483,229 @@
   {
    "prop": "flowers_patch",
    "tile": [
-    58,
-    51
-   ]
-  },
-  {
-   "prop": "bush",
-   "tile": [
-    5,
-    37
+    34,
+    24
    ]
   },
   {
    "prop": "bush",
    "tile": [
     59,
-    62
+    44
    ]
   },
   {
    "prop": "bush",
    "tile": [
-    28,
-    27
-   ]
-  },
-  {
-   "prop": "flowers_patch",
-   "tile": [
-    14,
+    48,
     25
    ]
   },
   {
-   "prop": "flowers_patch",
+   "prop": "bush_flowers",
    "tile": [
-    19,
-    54
+    7,
+    30
    ]
   },
   {
    "prop": "bush",
    "tile": [
-    36,
-    59
+    21,
+    55
    ]
   },
   {
    "prop": "flowers_patch",
-   "tile": [
-    20,
-    37
-   ]
-  },
-  {
-   "prop": "flowers_patch",
-   "tile": [
-    41,
-    24
-   ]
-  },
-  {
-   "prop": "bush_flowers",
    "tile": [
     40,
     36
    ]
   },
   {
-   "prop": "boulder",
-   "tile": [
-    37,
-    25
-   ]
-  },
-  {
-   "prop": "flowers_patch",
-   "tile": [
-    25,
-    46
-   ]
-  },
-  {
-   "prop": "bush_flowers",
-   "tile": [
-    36,
-    62
-   ]
-  },
-  {
    "prop": "bush",
    "tile": [
-    20,
+    56,
     56
    ]
   },
   {
-   "prop": "boulder",
+   "prop": "bush",
    "tile": [
     29,
-    12
-   ]
-  },
-  {
-   "prop": "flowers_patch",
-   "tile": [
-    17,
-    60
+    64
    ]
   },
   {
    "prop": "boulder",
    "tile": [
-    35,
-    20
+    32,
+    9
    ]
   },
   {
    "prop": "flowers_patch",
    "tile": [
-    30,
-    36
+    23,
+    48
    ]
   },
   {
-   "prop": "flowers_patch",
+   "prop": "boulder",
    "tile": [
-    17,
-    10
-   ]
-  },
-  {
-   "prop": "flowers_patch",
-   "tile": [
-    12,
-    39
-   ]
-  },
-  {
-   "prop": "flowers_patch",
-   "tile": [
-    46,
-    23
-   ]
-  },
-  {
-   "prop": "bush",
-   "tile": [
-    3,
-    3
-   ]
-  },
-  {
-   "prop": "bush",
-   "tile": [
-    29,
-    10
-   ]
-  },
-  {
-   "prop": "flowers_patch",
-   "tile": [
-    15,
+    38,
     63
    ]
   },
   {
    "prop": "boulder",
    "tile": [
-    33,
-    32
+    59,
+    38
    ]
   },
   {
    "prop": "flowers_patch",
    "tile": [
-    30,
-    61
-   ]
-  },
-  {
-   "prop": "boulder",
-   "tile": [
-    39,
-    56
-   ]
-  },
-  {
-   "prop": "flowers_patch",
-   "tile": [
-    55,
-    6
-   ]
-  },
-  {
-   "prop": "bush",
-   "tile": [
-    16,
-    48
-   ]
-  },
-  {
-   "prop": "flowers_patch",
-   "tile": [
-    11,
-    32
-   ]
-  },
-  {
-   "prop": "bush",
-   "tile": [
-    16,
-    19
-   ]
-  },
-  {
-   "prop": "bush",
-   "tile": [
-    25,
-    7
-   ]
-  },
-  {
-   "prop": "bush",
-   "tile": [
-    40,
-    23
-   ]
-  },
-  {
-   "prop": "flowers_patch",
-   "tile": [
-    39,
-    64
-   ]
-  },
-  {
-   "prop": "flowers_patch",
-   "tile": [
-    51,
-    41
+    10,
+    33
    ]
   },
   {
    "prop": "bush_flowers",
    "tile": [
-    41,
-    47
+    3,
+    39
    ]
   },
   {
    "prop": "boulder",
    "tile": [
-    48,
-    57
+    35,
+    16
    ]
   },
   {
    "prop": "flowers_patch",
    "tile": [
-    13,
-    25
+    29,
+    28
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    25,
+    22
    ]
   },
   {
    "prop": "bush",
    "tile": [
-    7,
-    31
+    32,
+    20
    ]
   },
   {
-   "prop": "flowers_patch",
+   "prop": "bush",
    "tile": [
-    35,
-    17
+    19,
+    3
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    34,
+    8
+   ]
+  },
+  {
+   "prop": "boulder",
+   "tile": [
+    58,
+    51
    ]
   },
   {
    "prop": "flowers_patch",
    "tile": [
     27,
-    24
+    52
    ]
   },
   {
-   "prop": "boulder",
+   "prop": "bush",
    "tile": [
-    6,
-    65
+    54,
+    54
    ]
   },
   {
    "prop": "flowers_patch",
-   "tile": [
-    56,
-    8
-   ]
-  },
-  {
-   "prop": "bush",
-   "tile": [
-    7,
-    3
-   ]
-  },
-  {
-   "prop": "bush",
-   "tile": [
-    41,
-    29
-   ]
-  },
-  {
-   "prop": "boulder",
    "tile": [
     37,
-    52
-   ]
-  },
-  {
-   "prop": "bush_flowers",
-   "tile": [
-    14,
-    21
-   ]
-  },
-  {
-   "prop": "flowers_patch",
-   "tile": [
-    13,
-    63
-   ]
-  },
-  {
-   "prop": "boulder",
-   "tile": [
-    45,
-    25
-   ]
-  },
-  {
-   "prop": "flowers_patch",
-   "tile": [
-    58,
-    38
-   ]
-  },
-  {
-   "prop": "bush",
-   "tile": [
-    14,
-    67
-   ]
-  },
-  {
-   "prop": "boulder",
-   "tile": [
-    40,
-    67
-   ]
-  },
-  {
-   "prop": "boulder",
-   "tile": [
-    29,
-    6
-   ]
-  },
-  {
-   "prop": "boulder",
-   "tile": [
-    30,
     38
    ]
   },
   {
    "prop": "flowers_patch",
    "tile": [
-    41,
-    52
+    31,
+    22
    ]
   },
   {
    "prop": "bush",
    "tile": [
-    19,
+    31,
     27
    ]
   },
   {
    "prop": "bush",
    "tile": [
-    56,
-    24
+    42,
+    49
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    8,
+    62
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    52,
+    43
    ]
   },
   {
    "prop": "bush_flowers",
    "tile": [
-    18,
-    21
+    16,
+    36
    ]
   },
   {
-   "prop": "boulder",
+   "prop": "bush",
    "tile": [
-    43,
-    56
+    41,
+    6
    ]
   },
   {
-   "prop": "boulder",
+   "prop": "bush",
+   "tile": [
+    38,
+    26
+   ]
+  },
+  {
+   "prop": "flowers_patch",
    "tile": [
     35,
     37
@@ -707,15 +714,29 @@
   {
    "prop": "boulder",
    "tile": [
-    13,
-    39
+    16,
+    50
    ]
   },
   {
-   "prop": "boulder",
+   "prop": "flowers_patch",
    "tile": [
-    2,
-    25
+    57,
+    26
+   ]
+  },
+  {
+   "prop": "bush",
+   "tile": [
+    17,
+    48
+   ]
+  },
+  {
+   "prop": "flowers_patch",
+   "tile": [
+    52,
+    41
    ]
   }
  ],

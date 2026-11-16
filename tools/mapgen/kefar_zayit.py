@@ -38,9 +38,10 @@ def prop(name, x, y, block=True, pad=0):
 # dry grass patches
 for _ in range(10):
     cx, cy = rng.randrange(4, W - 4), rng.randrange(4, H - 4)
-    for yy in range(cy - 1, cy + 2):
-        for xx in range(cx - 2, cx + 3):
-            if ground[yy][xx] == "g" and rng.random() < 0.8:
+    rx_, ry_ = rng.uniform(1.5, 3.0), rng.uniform(1.2, 2.2)
+    for yy in range(int(cy - ry_) - 1, int(cy + ry_) + 2):
+        for xx in range(int(cx - rx_) - 1, int(cx + rx_) + 2):
+            if 0 <= yy < H and 0 <= xx < W and ground[yy][xx] == "g" and ((xx - cx) / rx_) ** 2 + ((yy - cy) / ry_) ** 2 < 0.55 + rng.random() * 0.6:
                 ground[yy][xx] = "h"
 
 # --- roads and plaza ---------------------------------------------------------------------------

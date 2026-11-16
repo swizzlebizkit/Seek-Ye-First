@@ -87,9 +87,11 @@ class World:
         for _ in range(60):
             cx = self.rng.randrange(self.x0 + 4, self.x1 - 4)
             cy = self.rng.randrange(self.y0 + 4, self.y1 - 4)
-            for yy in range(cy - 1, cy + 2):
-                for xx in range(cx - 3, cx + 4):
-                    if self.get(xx, yy) == "g" and self.rng.random() < 0.8:
+            rx, ry = self.rng.uniform(2.0, 4.0), self.rng.uniform(1.5, 3.0)
+            for yy in range(int(cy - ry) - 1, int(cy + ry) + 2):
+                for xx in range(int(cx - rx) - 1, int(cx + rx) + 2):
+                    d = ((xx - cx) / rx) ** 2 + ((yy - cy) / ry) ** 2
+                    if self.get(xx, yy) == "g" and d < 0.55 + self.rng.random() * 0.6:
                         self.g[(xx, yy)] = "h"
 
     def ridge(self, x0, y0, x1, y1):
