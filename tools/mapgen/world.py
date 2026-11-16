@@ -5,7 +5,7 @@ Run from the project root:  python -I tools/mapgen/world.py   (then python -I to
 The whole countryside is generated as ONE raster in world tile coordinates (x east, y south, Kefar Zayit's centre at 0,0;
 one tile is 50 m of strategic distance), then cut into the region rectangles below. Roads, streams, outcrops and the lake
 therefore continue across every shared boundary by construction. Edges that have no neighbour become cliff bands.
-Settlements are footprints in the raster (a wall ring, rooftops, gates); their interiors are the local maps.
+Settlements are footprints in the raster: each is a copy of its local map (wall ring, gates, houses).
 """
 import json
 import math
@@ -147,33 +147,19 @@ class World:
                         ("", "r"): "r", ("b", "l"): "bl", ("b", ""): "b", ("b", "r"): "br"}[(row, col)]
                 self.objects.append([x + rx, y + ry, "roof_" + name])
 
-    def footprint(self, sid, gates):
-        """A village seen from outside: a low wall round the edge with gate gaps and gateposts, rooftops within."""
+    def footprint(self, sid):
+        """A village seen from outside: exactly its local map (ground, low wall ring with gates, houses, props) laid on
+        the countryside, so nothing is invented that the inside does not have. Run the local generators first."""
         x, y, w, h = FOOT[sid]
-        self.fill(x, y, x + w - 1, y + h - 1, "d")
-        gate_tiles = set()
-        posts = []
-        for side, a, b in gates:  # side: n/s/e/w; a..b the gap along the wall
-            for k in range(a, b + 1):
-                gate_tiles.add({"n": (k, y), "s": (k, y + h - 1), "w": (x, k), "e": (x + w - 1, k)}[side])
-            for k in (a - 1, b + 1):
-                posts.append({"n": (k, y), "s": (k, y + h - 1), "w": (x, k), "e": (x + w - 1, k)}[side])
-        for xx in range(x, x + w):
-            for yy in (y, y + h - 1):
-                if (xx, yy) not in gate_tiles and (xx, yy) not in posts:
-                    self.objects.append([xx, yy, "lowwall_h"])
-        for yy in range(y + 1, y + h - 1):
-            for xx in (x, x + w - 1):
-                if (xx, yy) not in gate_tiles and (xx, yy) not in posts:
-                    self.objects.append([xx, yy, "lowwall_v"])
-        for px, py in posts:
-            self.objects.append([px, py, "wall_stone"])
-        # rooftops in two rows of blocks, with lanes between
-        for by in (y + 3, y + h // 2 + 2):
-            bx = x + 3
-            while bx + 6 < x + w - 2:
-                self.roof_block(bx, by, 6, 4)
-                bx += 8
+        d = json.load(open(os.path.join(OUT, sid + ".json")))
+        assert d["size"] == [w, h] and d["world"] == [x, y], f"{sid}: local map does not match its footprint"
+        for ty, row in enumerate(d["ground"]):
+            for tx, ch in enumerate(row):
+                self.g[(x + tx, y + ty)] = ch
+        for ox, oy, name in d["objects"]:
+            self.objects.append([x + ox, y + oy, name])
+        for p in d["props"]:
+            self.props.append({"prop": p["prop"], "tile": [x + p["tile"][0], y + p["tile"][1]]})
         for tx in range(x, x + w):
             for ty in range(y, y + h):
                 self.occupied.add((tx, ty))
@@ -346,9 +332,9 @@ def build():
     w.fill(65, -62, 67, -58, "p")
 
     # settlement footprints
-    w.footprint("kefar_zayit", [("e", -2, 1), ("w", -2, 1)])
-    w.footprint("cana", [("n", -114, -111)])
-    w.footprint("magdala", [("w", -114, -111), ("e", -114, -111)])
+    w.footprint("kefar_zayit")
+    w.footprint("cana")
+    w.footprint("magdala")
     for (cx, cy) in [(-21, 0), (20, 0), (-112, 51), (165, -112), (206, -112)]:
         w.roads.add((cx, cy))
 

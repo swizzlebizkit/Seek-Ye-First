@@ -512,13 +512,13 @@ func test_integration() -> void:
 	Input.action_release("move_up")
 	check(player.global_position.y >= 7.0 * 32.0, "the house wall stops the player (y=%.1f)" % player.global_position.y)
 
-	# collision: cliffs on the map edge
+	# collision: the wall on the map edge
 	player.teleport(Vector2(10.5, 3.5) * 32.0, "up")
 	Input.action_press("move_up")
 	await _frames(90)
 	Input.action_release("move_up")
-	# rows 0-1 are solid cliff, so the collider top (y-8) can never be above y=64
-	check(player.global_position.y >= 2.0 * 32.0 + 8.0 - 0.5, "boundary cliffs stop the player (y=%.1f)" % player.global_position.y)
+	# row 0 is the village's low wall, so the collider top (y-8) can never be above the wall (y=32)
+	check(player.global_position.y >= 1.0 * 32.0 - 0.5, "the boundary wall stops the player (y=%.1f)" % player.global_position.y)
 
 	# talk to Yosef through the real interaction path
 	var yosef: Npc = npcs["yosef"]

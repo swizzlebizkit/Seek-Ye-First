@@ -2,7 +2,7 @@
 
 Run from the project root:  python -I tools/mapgen/settlements.py
 
-These are PLACEHOLDERS: a walled ring of houses round a plaza, a well and a few stalls, with gates that match the ones drawn
+These are PLACEHOLDERS: a low-walled ring of houses round a plaza, a well and a few stalls, with gates that match the ones drawn
 in the surrounding countryside (tools/mapgen/world.py). Real streets, people and stories come later. Each map's `world`
 entry is the exact footprint it occupies in the continuous world, so a gate has the same coordinates on both sides.
 """
@@ -32,6 +32,7 @@ class Local:
         self.objects, self.props, self.interactables = [], [], []
         self.entries, self.exits = {}, []
         self.occupied = set()
+        self.ring = {}
 
     def fill(self, x0, y0, x1, y1, ch):
         for y in range(y0, y1 + 1):
@@ -45,31 +46,33 @@ class Local:
                 self.occupied.add((x, y))
 
     def border(self):
-        self.fill(0, 0, W - 1, 1, "c")
-        self.fill(0, H - 2, W - 1, H - 1, "c")
-        self.fill(0, 0, 1, H - 1, "c")
-        self.fill(W - 2, 0, W - 1, H - 1, "c")
-        for x in range(2, W - 2):
-            for y in (2, H - 3):
-                if self.rng.random() < 0.4:
-                    self.g[y][x] = "c"
-        for y in range(2, H - 2):
-            for x in (2, W - 3):
-                if self.rng.random() < 0.4:
-                    self.g[y][x] = "c"
+        """The same low wall ring the countryside shows round the village (tools/mapgen/world.py copies this map's
+        ground, wall ring and houses, so the village looks the same from outside and inside)."""
+        self.ring = {}
+        for x in range(W):
+            for y in (0, H - 1):
+                self.ring[(x, y)] = "lowwall_h"
+        for y in range(1, H - 1):
+            for x in (0, W - 1):
+                self.ring[(x, y)] = "lowwall_v"
 
     def gate(self, side, a, b):
-        """An opening in the boundary with a gatepost either side. side n/s/e/w, a..b along the wall."""
+        """An opening in the wall ring with a stone post either side. side n/s/e/w, a..b along the wall."""
         if side in ("w", "e"):
             x = (0, 1, 2) if side == "w" else (W - 3, W - 2, W - 1)
             self.fill(min(x), a, max(x), b, "d")
-            for yy in (a - 1, b + 1):
-                self.objects.append([min(x) if side == "w" else max(x) - 1, yy, "wall_stone"])
+            wall = [(0 if side == "w" else W - 1, k) for k in range(a - 1, b + 2)]
         else:
             y = (0, 1, 2) if side == "n" else (H - 3, H - 2, H - 1)
             self.fill(a, min(y), b, max(y), "d")
-            for xx in (a - 1, b + 1):
-                self.objects.append([xx, min(y) if side == "n" else max(y) - 1, "wall_stone"])
+            wall = [(k, 0 if side == "n" else H - 1) for k in range(a - 1, b + 2)]
+        for t in wall:
+            self.ring[t] = "wall_stone" if t in (wall[0], wall[-1]) else None
+
+    def finish_ring(self):
+        for (x, y), name in self.ring.items():
+            if name:
+                self.objects.append([x, y, name])
 
     def house(self, x, y, w, rh, door_dx, windows=()):
         for ry in range(rh):
@@ -103,6 +106,7 @@ class Local:
         return b
 
     def write(self, spawn):
+        self.finish_ring()
         b = self.blocked()
         start = (int(spawn[0]), int(spawn[1]))
         assert start not in b, f"{self.id}: spawn blocked"

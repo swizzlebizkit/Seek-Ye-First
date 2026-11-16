@@ -35,21 +35,6 @@ def prop(name, x, y, block=True, pad=0):
         occupy(x, y, x, y, pad)
 
 
-# --- boundary cliffs (irregular, 2-3 tiles thick) ---------------------------------------------
-fill(0, 0, W - 1, 1, "c")
-fill(0, H - 2, W - 1, H - 1, "c")
-fill(0, 0, 1, H - 1, "c")
-fill(W - 2, 0, W - 1, H - 1, "c")
-for x in range(2, W - 2):
-    for y in (2, H - 3):
-        if rng.random() < 0.45:
-            ground[y][x] = "c"
-for y in range(2, H - 2):
-    for x in (2, W - 3):
-        if rng.random() < 0.45:
-            ground[y][x] = "c"
-fill(0, 0, W - 1, 1, "c")
-
 # dry grass patches
 for _ in range(10):
     cx, cy = rng.randrange(4, W - 4), rng.randrange(4, H - 4)
@@ -216,13 +201,23 @@ interactables = [
      ]},
 ]
 
-# --- the gates (W1.6): the village road leaves through an opening in the boundary at each end, with gateposts ----
+# --- the village wall: a low wall ring (the countryside shows the same one) with a gate and posts at each end -------
+ring = {}
+for x in range(W):
+    for y in (0, H - 1):
+        ring[(x, y)] = "lowwall_h"
+for y in range(1, H - 1):
+    for x in (0, W - 1):
+        ring[(x, y)] = "lowwall_v"
 for yy in range(12, 16):
     for xx in (0, 1, 2, 37, 38, 39):
         ground[yy][xx] = "d"
-for gx in (1, 38):
-    for gy in (11, 16):
-        objects.append([gx, gy, "wall_stone"])
+for gx in (0, W - 1):
+    for gy in range(11, 17):
+        ring[(gx, gy)] = "wall_stone" if gy in (11, 16) else None
+for (rx_, ry_), nm in ring.items():
+    if nm:
+        objects.append([rx_, ry_, nm])
 
 region = {
     "id": "kefar_zayit",

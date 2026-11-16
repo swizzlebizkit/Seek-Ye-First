@@ -816,7 +816,7 @@ func test_region_gameplay() -> void:
 	var foot := World.world_rect("kefar_zayit")
 	t.check(foot == Rect2i(-20, -14, 40, 28), "the village footprint is 40 by 28 tiles at the world's centre")
 	var local := foot.position - World.world_rect("kefar_zayit_outskirts").position
-	t.check(rg.tile_blocked(Vector2i(local.x + 4, local.y + 4)) and rg.tile_blocked(Vector2i(local.x, local.y)), "the footprint is solid: walls and rooftops")
+	t.check(rg.tile_blocked(Vector2i(local.x + 6, local.y + 4)) and rg.tile_blocked(Vector2i(local.x, local.y)), "the footprint is solid: walls and rooftops")
 	var gate_tile := Vector2i(local.x + 39, local.y + 13)
 	t.check(not rg.tile_blocked(gate_tile) and not rg.tile_blocked(gate_tile + Vector2i(0, -1)), "the east gate is an opening in the wall (%s)" % [gate_tile])
 	t.check(rg.tile_blocked(Vector2i(local.x + 39, local.y + 11)) and rg.tile_blocked(Vector2i(local.x + 39, local.y + 16)), "flanked by gateposts")
