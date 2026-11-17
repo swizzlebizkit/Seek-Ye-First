@@ -9,3 +9,6 @@ __pycache__/
 .beads-credential-key
 .beads/proxieddb/
 *.gate.lock*
+
+# Beads issue export (contains owner email); issues stay local
+.beads/issues.jsonl
