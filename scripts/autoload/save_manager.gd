@@ -4,7 +4,7 @@ extends Node
 ## mid-save cannot corrupt an existing slot.
 
 const SLOTS := 3
-const VERSION := 3
+const VERSION := 4
 
 ## Overridden by tests so they never touch real saves.
 var save_dir := "user://saves"
@@ -84,6 +84,7 @@ func save_slot(slot: int) -> bool:
 		"protection": CanonicalProtection.serialize(),
 		"geo": World.serialize(),
 		"travel": Travel.serialize(),
+		"scripture": Scripture.serialize(),  # the player's reader only (bookmarks); optional on load
 	}
 	var path := slot_path(slot)
 	var tmp := path + ".tmp"
@@ -121,6 +122,8 @@ func load_slot(slot: int) -> bool:
 	# Saves from before version 3 have no map knowledge or journey: start-of-game defaults apply.
 	World.deserialize(data.get("geo", {}))
 	Travel.deserialize(data.get("travel", {}))
+	# Saves from before the Scripture reader have no block: no bookmarks.
+	Scripture.deserialize(data.get("scripture", {}))
 	return true
 
 

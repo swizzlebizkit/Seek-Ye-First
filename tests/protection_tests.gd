@@ -310,7 +310,7 @@ func test_save_roundtrip() -> void:
 	CanonicalProtection.begin_event("stale")
 	t.check(SaveManager.load_slot(SLOT), "a save without the protection block loads")
 	t.check(CanonicalProtection.serialize()["events"].is_empty() and CanonicalProtection.applied.is_empty() and not CanonicalProtection.restricted, "and the protection state defaults")
-	t.check(SaveManager.VERSION == 3 and int(data.get("version", 0)) == 3, "the save version is unchanged")
+	t.check(SaveManager.VERSION == 4 and int(data.get("version", 0)) == 4, "saves carry the GC save version (4)")
 	SaveManager.delete_slot(SLOT)
 
 

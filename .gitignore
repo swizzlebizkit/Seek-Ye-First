@@ -12,3 +12,6 @@ __pycache__/
 
 # Beads issue export (contains owner email); issues stay local
 .beads/issues.jsonl
+
+# Local agent worktrees
+.claude/worktrees/

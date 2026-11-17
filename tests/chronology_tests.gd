@@ -414,19 +414,25 @@ func test_outcomes_via_timeline() -> void:
 	evs.append({"id": "fall", "order": 1, "name": "fall", "refs": ["John 2:1"], "access": "public", "location": "cana", "participants": ["a"], "witnesses": [],
 			"dependencies": [], "schedule": {"mode": "ministry_offset", "days": 3, "certainty": "simulated"},
 			"duration": {"amount": 1, "unit": "days", "basis": "estimate", "certainty": "simulated", "min": 1, "max": 2},
-			"outcomes": [{"character_id": "john_baptist", "outcome": "arrest"}]})
+			"outcomes": [{"character_id": "john_the_baptist", "outcome": "arrest"}]})
 	CanonicalTimeline.load_events(evs)
 	GameState.new_game()
 	if stub != null:
 		existing.calls.clear()
 		WorldSim.advance(Calendar.baptism_minutes() + 20.0 * MIN_DAY - _now())
-		t.check(existing.calls == [["john_baptist", "arrest", "timeline"]], "a canonical outcome reaches CanonicalProtection once, from the timeline")
+		t.check(existing.calls == [["john_the_baptist", "arrest", "timeline"]], "a canonical outcome reaches CanonicalProtection once, from the timeline")
 		WorldSim.advance(10.0 * MIN_DAY)
 		t.check(existing.calls.size() == 1, "and is never applied again")
 		stub.queue_free()
 		await t.get_tree().process_frame
 	else:
-		t.check(existing.has_method("apply_outcome"), "CanonicalProtection is present and exposes apply_outcome")
+		# the real autoload: the scheduler outcome must land in the real protection system, once
+		existing.reset()
+		WorldSim.advance(Calendar.baptism_minutes() + 20.0 * MIN_DAY - _now())
+		t.check(existing.outcome_of("john_the_baptist") == "arrest", "the timeline applies a canonical outcome through the real CanonicalProtection")
+		WorldSim.advance(10.0 * MIN_DAY)
+		t.check(existing.applied.size() == 1 and existing.outcome_of("john_the_baptist") == "arrest", "and it is applied once")
+		existing.reset()
 	_new_game()
 
 

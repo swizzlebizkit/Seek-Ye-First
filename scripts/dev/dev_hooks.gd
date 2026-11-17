@@ -135,6 +135,9 @@ static func apply(game: Node) -> void:
 			game.hud.journal_view._map.set_level(int(args.get("maplevel", "0")))
 			if args.has("mapzoom"):
 				game.hud.journal_view._map.zoom(float(args["mapzoom"]))
+		"scripture":
+			game.hud.journal_view.open()
+			game.hud.journal_view.open_scripture(args.get("ref", ""))
 		"equipment":
 			game.hud.equipment_view.open()
 		"journal":

@@ -67,7 +67,7 @@ func discover(id: String) -> bool:
 
 ## Appends a later note. `note_id` makes the call idempotent. Original text is never touched.
 func annotate(id: String, text: String, refs: Array = [], source: String = "", note_id: String = "") -> bool:
-	if not _entries.has(id):
+	if not _entries.has(id) or text.strip_edges() == "":
 		return false
 	var rec: Dictionary = _entries[id]
 	if note_id != "":
@@ -194,3 +194,7 @@ func deserialize(d: Dictionary) -> void:
 					"understood": bool(saved[lid].get("understood", false))}
 	for id in _entries:
 		_entries[id]["day"] = int(_entries[id].get("day", 1))
+		if not _entries[id].get("notes") is Array:  # very old saves carried no notes
+			_entries[id]["notes"] = []
+		for n in _entries[id]["notes"]:
+			n["day"] = int(n.get("day", 1))
