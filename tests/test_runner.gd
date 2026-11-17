@@ -44,6 +44,8 @@ func _ready() -> void:
 	await load("res://tests/calendar_tests.gd").new().run(self)
 	_section = "world"
 	await load("res://tests/world_tests.gd").new().run(self)
+	_section = "scripture"
+	await load("res://tests/scripture_tests.gd").new().run(self)
 
 	_clean_test_saves()
 	print("")

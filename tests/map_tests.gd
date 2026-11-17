@@ -103,7 +103,7 @@ func test_journal_map() -> void:
 	jv.open()
 	jv._set_tab(JournalView.Tab.MAP)
 	var jm: JournalMap = jv._map
-	t.check(jv.TAB_NAMES.size() == 4 and jv.TAB_NAMES[3] == "Map", "the journal has a Map tab beside the others")
+	t.check(jv.TAB_NAMES.size() == 5 and jv.TAB_NAMES[3] == "Map", "the journal has a Map tab beside the others")
 	t.check(jm.visible and not jv._details.visible and not jv._list.visible, "the Map tab shows the map, not the journal list")
 	jv._set_tab(JournalView.Tab.JOURNAL)
 	t.check(not jm.visible and jv._details.visible, "the Journal tab is unchanged")

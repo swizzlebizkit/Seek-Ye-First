@@ -1,0 +1,23 @@
+{
+  "note": "Player-side cross-references between related biblical events and passages, for the Scripture reader. Shown to the human player only; nothing here is known to the protagonist and following one never changes any game state. Every reference must resolve to complete KJV text (tested).",
+  "groups": {
+    "baptism_of_jesus": {"title": "The baptism of Jesus", "refs": ["Matthew 3:13-17", "Mark 1:9-11", "Luke 3:21-22", "John 1:32-34"]},
+    "john_forerunner": {"title": "The voice in the wilderness", "refs": ["Isaiah 40:3", "Malachi 3:1", "Malachi 4:5-6", "Matthew 3:1-3", "Mark 1:2-4", "Luke 3:2-6", "John 1:23"]},
+    "elijah_clothing": {"title": "A hairy man with a leather girdle", "refs": ["2 Kings 1:8", "Matthew 3:4", "Mark 1:6"]},
+    "temptation": {"title": "The temptation in the wilderness", "refs": ["Matthew 4:1-11", "Luke 4:1-13", "Deuteronomy 8:3"]},
+    "beatitudes": {"title": "The blessings of the sermon", "refs": ["Matthew 5:3-12", "Luke 6:20-26"]},
+    "lords_prayer": {"title": "The Lord's prayer", "refs": ["Matthew 6:9-13", "Luke 11:2-4"]},
+    "seek_first": {"title": "Seeking the kingdom first", "refs": ["Matthew 6:33", "Luke 12:31"]},
+    "feeding_five_thousand": {"title": "The feeding of the five thousand", "refs": ["Matthew 14:13-21", "Mark 6:30-44", "Luke 9:10-17", "John 6:1-14"]},
+    "transfiguration": {"title": "The transfiguration", "refs": ["Matthew 17:1-8", "Mark 9:2-8", "Luke 9:28-36", "2 Peter 1:16-18"]},
+    "good_shepherd": {"title": "The shepherd of the flock", "refs": ["Psalms 23:1-6", "Ezekiel 34:11-16", "John 10:11-16"]},
+    "jonah_sign": {"title": "The sign of Jonah", "refs": ["Jonah 1:17", "Matthew 12:39-41"]},
+    "nativity": {"title": "The birth at Bethlehem", "refs": ["Micah 5:2", "Matthew 2:1-6", "Luke 2:4-7"]},
+    "creation_word": {"title": "In the beginning", "refs": ["Genesis 1:1-5", "John 1:1-5"]},
+    "passover": {"title": "The Passover", "refs": ["Exodus 12:21-28", "Luke 22:7-20", "1 Corinthians 5:7"]},
+    "suffering_servant": {"title": "The suffering servant", "refs": ["Isaiah 53:4-7", "Acts 8:32-35"]},
+    "crucifixion": {"title": "The crucifixion", "refs": ["Psalms 22:1-18", "Matthew 27:33-50", "Mark 15:22-37", "Luke 23:33-46", "John 19:17-30"]},
+    "resurrection": {"title": "The empty tomb", "refs": ["Matthew 28:1-10", "Mark 16:1-8", "Luke 24:1-12", "John 20:1-10", "1 Corinthians 15:3-8"]},
+    "pentecost": {"title": "The outpouring of the Spirit", "refs": ["Joel 2:28-29", "Acts 2:1-4", "Acts 2:14-18"]}
+  }
+}

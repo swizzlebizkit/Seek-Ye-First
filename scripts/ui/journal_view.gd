@@ -3,8 +3,8 @@ extends Control
 ## The protagonist's journal, quest log and satchel. Journal entries show their original text first,
 ## then relevant KJV passages, then any later notes the protagonist added.
 
-enum Tab { JOURNAL, QUESTS, SATCHEL, MAP }
-const TAB_NAMES := ["Journal", "Quests", "Satchel", "Map"]
+enum Tab { JOURNAL, QUESTS, SATCHEL, MAP, SCRIPTURE }
+const TAB_NAMES := ["Journal", "Quests", "Satchel", "Map", "Scripture"]
 
 const TYPE_COLORS := {
 	"eyewitness": Color("9fd3a4"),
@@ -23,7 +23,9 @@ var _tab_buttons: Array[Button] = []
 var _list: ItemList
 var _details: RichTextLabel
 var _map: JournalMap
+var _scripture: ScriptureView
 const HINT := "Left/Right: tab    Up/Down: choose    PgUp/PgDn: scroll    J or Esc: close"
+const HINT_ENTRY := "Left/Right: tab    Up/Down: choose    S: read in Scripture    PgUp/PgDn: scroll    J or Esc: close"
 var _hint: Label
 var _tab: int = Tab.JOURNAL
 var _row_ids: Array = []
@@ -107,6 +109,10 @@ func _ready() -> void:
 	_map.visible = false
 	_map.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	body.add_child(_map)
+	_scripture = ScriptureView.new()
+	_scripture.visible = false
+	_scripture.journal_requested.connect(show_entry)
+	body.add_child(_scripture)
 
 
 func open() -> void:
@@ -122,9 +128,42 @@ func close() -> void:
 		GameState.mode = GameState.Mode.EXPLORE
 
 
+## Opens the Scripture tab at a passage. Reading never touches the protagonist's records.
+func open_scripture(ref: String = "") -> void:
+	_set_tab(Tab.SCRIPTURE)
+	if ref != "":
+		_scripture.goto(ref)
+
+
+## Switches to the Journal tab with one entry selected.
+func show_entry(id: String) -> void:
+	_set_tab(Tab.JOURNAL)
+	var i := _row_ids.find(id)
+	if i >= 0:
+		_list.select(i)
+		_on_row_selected(i)
+
+
 func _input(event: InputEvent) -> void:
 	if not visible:
 		return
+	if _tab == Tab.SCRIPTURE:
+		if _scripture.typing():  # the search box owns the keyboard; Esc leaves it
+			if event.is_action_pressed("ui_cancel"):
+				get_viewport().set_input_as_handled()
+				_scripture.end_typing()
+			return
+		if _scripture.handle_key(event):
+			get_viewport().set_input_as_handled()
+			return
+	elif _tab == Tab.JOURNAL and event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_S:
+		var i := _list.get_selected_items()
+		if not i.is_empty() and i[0] < _row_ids.size():
+			var refs := ScriptureLinks.refs_for_entry(_row_ids[i[0]])
+			if not refs.is_empty():
+				get_viewport().set_input_as_handled()
+				open_scripture(refs[0])
+				return
 	if event.is_action_pressed("journal") or event.is_action_pressed("pause") or event.is_action_pressed("ui_cancel"):
 		get_viewport().set_input_as_handled()
 		close()
@@ -161,10 +200,17 @@ func _refresh() -> void:
 	_list.clear()
 	_row_ids.clear()
 	var on_map := _tab == Tab.MAP
-	_hint.text = "Left/Right: tab    Up/Down: choose    1 2 3: level    + / -: zoom    J: close" if on_map else HINT
-	_list.visible = not on_map
-	_details.visible = not on_map
+	var on_scripture := _tab == Tab.SCRIPTURE
+	_hint.text = "Left/Right: tab    Up/Down: choose    1 2 3: level    + / -: zoom    J: close" if on_map else (HINT_ENTRY if _tab == Tab.JOURNAL else HINT)
+	_list.visible = not on_map and not on_scripture
+	_details.visible = not on_map and not on_scripture
 	_map.visible = on_map
+	_scripture.visible = on_scripture
+	if on_scripture:
+		_scripture.open()
+		_hint.text = "Left/Right: tab    J or Esc: close"
+		_scripture.focus_list()
+		return
 	if on_map:
 		_map.refresh()
 		_map.focus_list()
