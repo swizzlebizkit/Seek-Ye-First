@@ -68,9 +68,25 @@ and `start_minute` are separate. Nothing assumes 1 Nisan is a particular weekday
 `start_date.year` with the label `year_label` ("Year 1"). **The game does not claim a historical year**; the
 numbers are a fictional design assumption until the story needs otherwise.
 
-`anchors` pins a story event to an exact date: `"baptism": {"year": 3, "month": "Sivan", "day": 3}`.
-`Calendar.anchor_day("baptism")` gives its day number. Anchors only look dates up; they never touch the
-canonical-event timeline.
+`anchors` pins a story event to a date: `"baptism": {"year": 1, "month": "Shevat", "day": 15, "minute": 540,
+"certainty": "simulated", "provisional": true}`. `Calendar.anchor_day("baptism")` gives its day number and
+`Calendar.anchor_certainty("baptism")` its certainty class. Anchors only look dates up; the canonical timeline
+(`docs/chronology.md`) reads the baptism anchor to place its events, but an anchor never changes an event.
+
+**Two clocks, one authority.** The `start_date` (1 Nisan, 07:00) is only the protagonist's game opening. It is
+not a claim about when anything in Scripture happened. The **baptism is ministry Day 0**. Scripture gives no
+calendar date for it, so `anchors.baptism` is a provisional *simulation setting* labeled `simulated`; the
+earlier Year 3, Sivan 3 anchor, and any idea that the baptism fell on 1 Nisan, are dropped. The month and year
+were chosen so the first Passover of the ministry (John 2:13) falls a few weeks after the baptism and the
+forty days; change them freely.
+
+- `Calendar.ministry_elapsed(cal_day = today)`: calendar days since the baptism's calendar day (0 on it,
+  negative before it). It is derived from the same day count as the date and the Sabbath, so it turns over
+  at sunset with them and cannot drift. `Calendar.has_ministry_clock()` is false without an anchor (then it is 0).
+- `Calendar.baptism_minutes()` / `ministry_minutes(abs)` / `world_minutes(day, minute)`: the same clock in
+  minutes. Canonical events are scheduled in world minutes, and each is also reported as a ministry day.
+- The roughly three-year ministry and the three Passovers John names (2:13, 6:4, 11:55) are recorded in
+  `data/canon/events.json` as an *inferred* overall bound only. No precise date is invented from them.
 
 ## 6. Festivals (lookup only, nothing uses them yet)
 
@@ -100,6 +116,9 @@ are always worked out, never stored, so:
 - The *date* belonging to a day number is different from S1 (which used twelve 30-day months and five
   extra days). The journal shows "Day 12, 12 Nisan" using the current calendar. The stored stamp is never
   rewritten; if the calendar is configured again later, the shown date follows.
+
+The ministry clock adds nothing to saves: `ministry_elapsed` is worked out from the day count. Adding the
+baptism anchor changes no date, weekday, Sabbath or phase for any existing day (tested).
 
 ## 8. How to change things
 

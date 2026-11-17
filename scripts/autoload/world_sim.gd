@@ -31,7 +31,18 @@ func advance(minutes: float) -> void:
 		var hits_sunset := minute_of_day < sunset and minute_of_day + step >= sunset
 		if hits_sunset:
 			step = sunset - minute_of_day
-		minute_of_day = sunset if hits_sunset else minute_of_day + step
+		# The clock also stops exactly at the start or end of every canonical event, so a long rest
+		# or journey cannot step over one; the timeline announces each in order.
+		var day_start := float(day - 1) * 1440.0
+		var to_canon := CanonicalTimeline.next_boundary(day_start + minute_of_day) - (day_start + minute_of_day)
+		var hits_canon := to_canon < step
+		if hits_canon:
+			step = to_canon
+			hits_sunset = false
+		if hits_canon:
+			minute_of_day += step
+		else:
+			minute_of_day = sunset if hits_sunset else minute_of_day + step
 		left -= step
 		if hits_sunset:
 			sunset_passed.emit(day)
@@ -39,6 +50,7 @@ func advance(minutes: float) -> void:
 			minute_of_day -= 1440.0
 			day += 1
 			day_rolled.emit(day)
+		CanonicalTimeline.sync_to(Calendar.world_minutes(day, minute_of_day))
 
 
 ## Minutes from now until the next sunset (the day number and the Sabbath both turn over there).
@@ -66,3 +78,4 @@ func serialize() -> Dictionary:
 func deserialize(d: Dictionary) -> void:
 	day = int(d.get("day", 1))
 	minute_of_day = float(d.get("minute", Calendar.start_minute))
+	CanonicalTimeline.sync_to(Calendar.world_minutes(day, minute_of_day))  # canon is a function of time

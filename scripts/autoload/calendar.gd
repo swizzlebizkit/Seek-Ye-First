@@ -15,6 +15,7 @@ const DATA_PATH := "res://data/world/calendar.json"
 const FESTIVALS_PATH := "res://data/world/festivals.json"
 
 var config: Dictionary = {}
+var config_version := 0  # bumps on every load_config; lets dependants (the canon scheduler) cache safely
 var festival_config: Dictionary = {}
 
 var sunset_minute := 18 * 60
@@ -49,6 +50,7 @@ func _ready() -> void:
 ## Applies a calendar configuration (the contents of calendar.json). Tests use this to try other set-ups.
 func load_config(d: Dictionary) -> void:
 	config = d.duplicate(true)
+	config_version += 1
 	sunset_minute = int(d.get("sunset_minute", 18 * 60))
 	preparation_minute = int(d.get("preparation_minute", 15 * 60))
 	start_minute = int(d.get("start_minute", 7 * 60))
@@ -257,6 +259,53 @@ func anchor_day(anchor_id: String) -> int:
 	if a.is_empty():
 		return 0
 	return day_of(int(a["year"]), a["month"], int(a["day"]))
+
+
+# -- the ministry clock ------------------------------------------------------------------------
+## The baptism is ministry Day 0. Its date in calendar.json ("anchors.baptism") is a provisional
+## simulation setting (certainty "simulated"), not a historical claim; Scripture gives no date.
+## ministry_elapsed is derived from the same day count as everything else, so it cannot drift.
+func baptism_anchor() -> Dictionary:
+	return config.get("anchors", {}).get("baptism", {})
+
+
+func has_ministry_clock() -> bool:
+	return baptism_day() > 0
+
+
+## The calendar day that is ministry Day 0, or 0 when no baptism anchor is configured.
+func baptism_day() -> int:
+	return anchor_day("baptism")
+
+
+## Certainty class of a configured anchor ("explicit", "inferred" or "simulated"; "" if unknown).
+func anchor_certainty(anchor_id: String) -> String:
+	return str(config.get("anchors", {}).get(anchor_id, {}).get("certainty", ""))
+
+
+## Calendar days since the baptism: 0 on its day, negative before it, 0 if there is no anchor.
+func ministry_elapsed(cal_day: int = -1) -> int:
+	if not has_ministry_clock():
+		return 0
+	return (current_day() if cal_day < 0 else cal_day) - baptism_day()
+
+
+## Absolute world minutes since the start of WorldSim day 1 (midnight-based, like WorldSim.day).
+func world_minutes(day: int, minute: float) -> float:
+	return float(day - 1) * 1440.0 + minute
+
+
+## The world minute of the baptism itself (WorldSim day = the anchor day, at anchors.baptism.minute),
+## or -1.0 when unanchored.
+func baptism_minutes() -> float:
+	if not has_ministry_clock():
+		return -1.0
+	return world_minutes(baptism_day(), float(baptism_anchor().get("minute", 9 * 60)))
+
+
+## Minutes since the baptism moment (negative before it).
+func ministry_minutes(abs_minutes: float) -> float:
+	return abs_minutes - baptism_minutes()
 
 
 ## The three-part HUD line: weekday (and preparation), Jewish date. The time is added by the HUD.
