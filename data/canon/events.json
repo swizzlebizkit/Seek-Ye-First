@@ -43,7 +43,7 @@
    "dependencies": [
     {"id": "john_preaching", "relation": "after_start", "certainty": "explicit"}
    ],
-   "schedule": {"mode": "ministry_offset", "days": 0, "certainty": "simulated", "note": "Ministry Day 0. Its calendar date is the provisional setting calendar.json anchors.baptism.", "window_days": {"earliest": 0, "latest": 0}},
+   "schedule": {"mode": "player_arrival", "certainty": "simulated", "note": "THE BAPTISM EXCEPTION: the sole player-arrival-triggered canonical event. It starts the ministry clock at Day 0 on whatever calendar date the player reaches the Jordan trigger; that date is recorded from the playthrough, never configured. Scripture gives no calendar date for it. Every later event is scheduled relative to it. The protagonist does not cause Jesus to be baptized: the arrival triggers the game representation of an event Scripture establishes independently.", "window_days": {"earliest": 0, "latest": 0}},
    "duration": {"amount": 120, "unit": "minutes", "basis": "estimate", "certainty": "simulated", "min": 30, "max": 480},
    "participants": ["jesus", "john_baptist"],
    "witnesses": ["crowds"],
@@ -147,9 +147,9 @@
    "access": "public",
    "location": "jerusalem",
    "dependencies": [
-    {"id": "capernaum_stay", "relation": "after_end", "certainty": "explicit", "gap_days": 0}
+    {"id": "capernaum_stay", "relation": "after_end", "certainty": "explicit", "gap_days": 5, "gap_certainty": "simulated"}
    ],
-   "schedule": {"mode": "festival", "festival": "passover", "minute": 540, "certainty": "inferred", "note": "John 2:13 says the Passover was at hand. It starts on the calendar's Passover day, never earlier than its dependency allows."},
+   "schedule": {"mode": "festival", "festival": "passover", "minute": 540, "certainty": "simulated", "note": "EXPLICIT: John 2:12-13 puts the Capernaum stay before a Passover that was at hand. SIMULATED: which calendar Passover it is. Passover stays fixed on 14 Nisan (festivals are never moved); the event takes the EARLIEST calendar Passover that is not before the end of the Capernaum stay plus the travel gap (5 days, simulated: about 172 km on the shortest land route, 4 km/h, daylight only, no Sabbath travel). A late baptism therefore selects a later Passover (see CanonicalTimeline.first_passover_selection and chronology_flags) and never compresses the forty days or skips an event."},
    "duration": {"amount": 8, "unit": "days", "basis": "estimate", "certainty": "simulated", "min": 1, "max": 14, "note": "The festival lasts Passover plus the seven days of Unleavened Bread; how long Jesus stayed is not given."},
    "participants": ["jesus", "disciples", "moneychangers", "jews"],
    "witnesses": ["jews", "disciples", "many_who_believed"],

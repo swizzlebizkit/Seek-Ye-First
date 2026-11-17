@@ -52,7 +52,7 @@ All required unless marked optional; unknown fields fail validation.
 | `notes`, `outcomes` (optional) | `outcomes` is `[{character_id, outcome: death\|injury\|arrest}]`, applied at the event's start only through `CanonicalProtection.apply_outcome(id, outcome, "timeline")`. |
 
 Schedule modes: `opening_offset {days}` (relative to the game opening), `ministry_offset {days}` (relative to the
-baptism, ministry Day 0), `after_dependencies` (starts when its dependencies allow), `festival {festival,
+recorded baptism, ministry Day 0), `player_arrival` (the baptism only, below), `after_dependencies` (starts when its dependencies allow), `festival {festival,
 minute?}` (the first occurrence of a `festivals.json` festival not earlier than its dependencies). Whatever the
 mode, an event never starts before its dependencies allow. The start is a function of the data and
 `calendar.json` only, so it is identical in every playthrough. The document also carries
@@ -67,5 +67,53 @@ legitimate. `event_location(id)` is fixed by the data; the player's position nev
 
 ## Saves
 
-`serialize()` returns `{occurred, completed}`. A block with only `occurred` (older saves) loads unchanged; time
-then fills in anything due.
+`serialize()` returns `{occurred, completed}` plus `baptism_minutes` once the baptism is recorded. A block with only
+`occurred` (older saves) loads as before the baptism: ids that cannot be placed without it are dropped; time then
+fills in anything due.
+
+## The Baptism Exception
+
+Jesus' baptism is the **sole player-arrival-triggered canonical event**. Its schedule mode is `player_arrival`
+(the validator allows it on `baptism_of_jesus` only). Until `CanonicalTimeline.trigger_baptism(location)` is
+accepted, the ministry chronology has not begun: the baptism and every event that depends on it are
+unscheduled (start `NEVER`, `arrival_state` "unscheduled"), nothing fires, `Calendar.has_ministry_clock()` is
+false, and the world clock runs normally (never frozen or adjusted). John's preaching is already under way
+from the opening.
+
+- The trigger is refused unless `location` equals the baptism's own location id (`bethany_beyond_jordan`) and
+  no baptism has been recorded. Entering a region or talking to John never calls it; the Jordan scene (GC-E) is
+  a specific location or interaction with a clear on-screen indication.
+- It is persistent and fires **exactly once**. A second call, from anywhere, at any time, is refused; the record
+  survives saves (`baptism_minutes` in the canon block, optional) and loading a save cannot fire a second one.
+- It records the **current world minute** as ministry Day 0. There is no baptism date in `calendar.json`
+  (`certainty simulated`, "recorded from the playthrough"). Every later event is placed relative to it and the
+  relative schedule is identical for any arrival date; only the absolute dates differ.
+- The protagonist does not cause Jesus to be baptized: their arrival triggers the game's representation of an
+  event Scripture establishes independently. Every later canonical event occurs on the world's schedule whatever
+  the protagonist does or knows.
+
+### The first Jerusalem Passover
+
+**Explicit** (John 2:1-13): the Cana wedding, then Capernaum "not many days", then a Passover that was at hand.
+**Simulated**: which calendar Passover it is, and the gaps (`gap_days` with `gap_certainty: simulated`, including
+5 days of travel from Capernaum to Jerusalem, at least the walking time of the shortest land route: tested).
+Festivals never move; Passover stays on 14 Nisan. `passover_jerusalem` takes the **earliest calendar Passover**
+that is not before the end of the Capernaum stay plus the travel gap. The forty days are never compressed and no
+event is skipped: a late baptism simply selects a later Passover (possibly the next year).
+
+### Review flags
+
+The choice of first Passover must not silently redefine the length of the ministry.
+`CanonicalTimeline.first_passover_selection()` reports which Passover was chosen ({calendar_day, date,
+ministry_day, baptism_to_passover_days, wait_days, skipped_count, skipped_days, certainty}) and
+`chronology_flags()` raises:
+
+| id | severity | when |
+|---|---|---|
+| `passion_passover_unreconciled` | info | always, while the Passion Passover is not in the data |
+| `first_passover_skipped` | warning | a calendar Passover fell after the baptism but before the selected one |
+| `first_passover_long_wait` | warning | the selected Passover is more than 150 days after the end of the preceding events |
+
+These need **chronology review** before the Passion chronology is built: the baptism date moves the whole
+ministry on the calendar, and the total length (the inferred three Passovers) has to be reconciled with the
+Passion Passover.

@@ -5,7 +5,7 @@ extends RefCounted
 const CERTAINTY := ["explicit", "inferred", "simulated"]
 const ACCESS := ["public", "restricted", "private"]
 const RELATIONS := ["after_start", "after_end"]
-const MODES := ["opening_offset", "ministry_offset", "after_dependencies", "festival"]
+const MODES := ["opening_offset", "ministry_offset", "after_dependencies", "festival", "player_arrival"]
 const UNITS := ["minutes", "hours", "days"]
 const BASES := ["scripture", "estimate"]
 const OUTCOMES := ["death", "injury", "arrest"]
@@ -16,7 +16,7 @@ const REQUIRED := ["id", "order", "name", "origin", "refs", "certainty", "access
 const OPTIONAL := ["notes", "outcomes"]
 const SCHEDULE_KEYS := ["mode", "days", "gap_days", "festival", "minute", "certainty", "note", "window_days"]
 const DURATION_KEYS := ["amount", "unit", "basis", "certainty", "min", "max", "note"]
-const DEP_KEYS := ["id", "relation", "certainty", "gap_days"]
+const DEP_KEYS := ["id", "relation", "certainty", "gap_days", "gap_certainty"]
 const LIST_FIELDS := ["participants", "witnesses", "traveling_party", "rumor_sources", "testimony_sources"]
 
 var _errs: Array = []
@@ -68,6 +68,15 @@ func validate_events(events: Array, fresh: bool = true, location_ids: Array = []
 			continue
 		_check_event(e, ids)
 	_check_cycles(ids)
+	var arrivals := 0
+	for id in ids:
+		var sch = ids[id].get("schedule", {}) if ids[id] is Dictionary else {}
+		if sch is Dictionary and sch.get("mode", "") == "player_arrival":
+			arrivals += 1
+			if id != "baptism_of_jesus":
+				_err("%s: only the baptism may use schedule mode player_arrival (the Baptism Exception)" % id)
+	if arrivals > 1:
+		_err("document: only one event may use schedule mode player_arrival")
 	return _errs
 
 
@@ -146,6 +155,8 @@ func _check_deps(w: String, e: Dictionary, ids: Dictionary) -> void:
 		_enum(w + " dependency", "certainty", d.get("certainty", null), CERTAINTY, d.has("certainty"))
 		if d.has("gap_days") and not _num(d["gap_days"]):
 			_err("%s: dependency gap_days must be a number" % w)
+		if d.has("gap_certainty"):
+			_enum(w + " dependency", "gap_certainty", d["gap_certainty"], CERTAINTY, true)
 
 
 func _check_schedule(w: String, e: Dictionary) -> void:

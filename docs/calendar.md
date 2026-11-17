@@ -64,27 +64,35 @@ better-documented practice. Evidence for exactly how it was named in the first c
 ## 5. Epoch and chronology
 
 `start_date` is `{year, month, day}` (month by name or number), and Day 1 is that date. `start_weekday`
-and `start_minute` are separate. Nothing assumes 1 Nisan is a particular weekday. Years are numbered from
+and `start_minute` are separate. Nothing assumes a particular month or weekday. Years are numbered from
 `start_date.year` with the label `year_label` ("Year 1"). **The game does not claim a historical year**; the
 numbers are a fictional design assumption until the story needs otherwise.
 
-`anchors` pins a story event to a date: `"baptism": {"year": 1, "month": "Shevat", "day": 15, "minute": 540,
-"certainty": "simulated", "provisional": true}`. `Calendar.anchor_day("baptism")` gives its day number and
-`Calendar.anchor_certainty("baptism")` its certainty class. Anchors only look dates up; the canonical timeline
-(`docs/chronology.md`) reads the baptism anchor to place its events, but an anchor never changes an event.
+**The opening is 1 Kislev, Year 1, 07:00.** That is a simulated gameplay anchor (the protagonist's game
+opening), not a claim about when anything in Scripture happened, and not the baptism date. Kislev is the ninth
+month of a Nisan-numbered year, so the first Passover after the opening is 14 Nisan, Year 2.
 
-**Two clocks, one authority.** The `start_date` (1 Nisan, 07:00) is only the protagonist's game opening. It is
-not a claim about when anything in Scripture happened. The **baptism is ministry Day 0**. Scripture gives no
-calendar date for it, so `anchors.baptism` is a provisional *simulation setting* labeled `simulated`; the
-earlier Year 3, Sivan 3 anchor, and any idea that the baptism fell on 1 Nisan, are dropped. The month and year
-were chosen so the first Passover of the ministry (John 2:13) falls a few weeks after the baptism and the
-forty days; change them freely.
+`anchors` pins other story events to a date: `Calendar.anchor_day(id)` gives its day number and
+`Calendar.anchor_certainty(id)` its certainty class. Anchors only look dates up; an anchor never changes an
+event. **There is no baptism anchor.**
+
+**The Baptism Exception.** The baptism is ministry Day 0 and the one canonical event the player's arrival
+triggers. Scripture gives no calendar date for it, so none is configured: when the player reaches the
+designated Jordan trigger, `CanonicalTimeline.trigger_baptism` records the actual world minute
+(certainty `simulated`, "recorded from the playthrough") and `Calendar.set_ministry_start` makes it Day 0. A
+player who arrives on 2 Kislev is baptized on 2 Kislev; one who explores for weeks and arrives on 11 Nisan is
+baptized on 11 Nisan. Before it, the world clock and calendar run normally, nothing is frozen, and the ministry
+chronology has not begun. **Festivals never move**: Passover stays on 14 Nisan whatever the baptism date, and the
+first Jerusalem Passover takes the earliest calendar Passover its preceding events allow (see
+`docs/chronology.md`).
 
 - `Calendar.ministry_elapsed(cal_day = today)`: calendar days since the baptism's calendar day (0 on it,
   negative before it). It is derived from the same day count as the date and the Sabbath, so it turns over
-  at sunset with them and cannot drift. `Calendar.has_ministry_clock()` is false without an anchor (then it is 0).
-- `Calendar.baptism_minutes()` / `ministry_minutes(abs)` / `world_minutes(day, minute)`: the same clock in
-  minutes. Canonical events are scheduled in world minutes, and each is also reported as a ministry day.
+  at sunset with them and cannot drift. `Calendar.has_ministry_clock()` is false until the baptism is
+  recorded (then it is 0).
+- `Calendar.baptism_minutes()` / `baptism_day()` / `baptism_record()` / `ministry_minutes(abs)` /
+  `world_minutes(day, minute)`: the same clock in minutes. Canonical events are scheduled in world minutes, and
+  each is also reported as a ministry day.
 - The roughly three-year ministry and the three Passovers John names (2:13, 6:4, 11:55) are recorded in
   `data/canon/events.json` as an *inferred* overall bound only. No precise date is invented from them.
 
@@ -114,11 +122,12 @@ are always worked out, never stored, so:
 - Day numbers, weekdays and the Sabbath are **identical** to the previous (S1) calendar, because the
   week formula did not change.
 - The *date* belonging to a day number is different from S1 (which used twelve 30-day months and five
-  extra days). The journal shows "Day 12, 12 Nisan" using the current calendar. The stored stamp is never
+  extra days). The journal shows a date such as "Day 12, 12 Kislev" using the current calendar. The stored stamp is never
   rewritten; if the calendar is configured again later, the shown date follows.
 
-The ministry clock adds nothing to saves: `ministry_elapsed` is worked out from the day count. Adding the
-baptism anchor changes no date, weekday, Sabbath or phase for any existing day (tested).
+`Calendar` itself still saves nothing: the recorded baptism minute is stored in the canon block
+(`CanonicalTimeline.serialize()`, key `baptism_minutes`, optional). A save without it loads as before the
+baptism. Recording the baptism changes no date, weekday, Sabbath or phase for any day (tested).
 
 ## 8. How to change things
 

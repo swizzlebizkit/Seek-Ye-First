@@ -254,6 +254,7 @@ func day_of(year: int, month, day: int) -> int:
 
 
 ## A day configured in data for a story event (calendar.json "anchors"): {"year", "month", "day"}.
+## There is no baptism anchor any more: the baptism date is recorded from the playthrough.
 func anchor_day(anchor_id: String) -> int:
 	var a: Dictionary = config.get("anchors", {}).get(anchor_id, {})
 	if a.is_empty():
@@ -262,28 +263,64 @@ func anchor_day(anchor_id: String) -> int:
 
 
 # -- the ministry clock ------------------------------------------------------------------------
-## The baptism is ministry Day 0. Its date in calendar.json ("anchors.baptism") is a provisional
-## simulation setting (certainty "simulated"), not a historical claim; Scripture gives no date.
+## The baptism is ministry Day 0, and it is NOT a configured date. It is the one canonical event the
+## player's arrival triggers (the Baptism Exception): CanonicalTimeline.trigger_baptism records the
+## actual world minute at which it happened and hands it to set_ministry_start. Before that there is no
+## ministry clock; the world clock and the calendar run exactly as usual and nothing is frozen. The
+## recorded moment is a playthrough value with certainty "simulated", never a historical claim.
 ## ministry_elapsed is derived from the same day count as everything else, so it cannot drift.
-func baptism_anchor() -> Dictionary:
-	return config.get("anchors", {}).get("baptism", {})
+## Calendar keeps this runtime value only; CanonicalTimeline is what a save stores.
+var _ministry_recorded := false
+var _ministry_start := 0.0  # world minutes (see world_minutes); meaningful only when recorded
+
+
+## Records the moment that is ministry Day 0. Bumps config_version so the canon schedule is rebuilt.
+func set_ministry_start(world_minute: float) -> void:
+	_ministry_recorded = true
+	_ministry_start = world_minute
+	config_version += 1
+
+
+func clear_ministry_start() -> void:
+	if _ministry_recorded:
+		config_version += 1
+	_ministry_recorded = false
+	_ministry_start = 0.0
 
 
 func has_ministry_clock() -> bool:
-	return baptism_day() > 0
+	return _ministry_recorded
 
 
-## The calendar day that is ministry Day 0, or 0 when no baptism anchor is configured.
+## The calendar day that is ministry Day 0, or 0 before the baptism has been recorded.
 func baptism_day() -> int:
-	return anchor_day("baptism")
+	if not _ministry_recorded:
+		return 0
+	var wd := int(floor(_ministry_start / 1440.0)) + 1
+	return calendar_day(wd, _ministry_start - float(wd - 1) * 1440.0)
+
+
+## What is known about the recorded baptism: {recorded, world_minutes, calendar_day, date, certainty, source}.
+func baptism_record() -> Dictionary:
+	if not _ministry_recorded:
+		return {"recorded": false}
+	return {"recorded": true, "world_minutes": _ministry_start, "calendar_day": baptism_day(),
+			"date": full_date_string(baptism_day()), "certainty": baptism_certainty(),
+			"source": "recorded from the playthrough"}
+
+
+## The recorded baptism date is a simulation value (Scripture gives no calendar date); "" before it exists.
+func baptism_certainty() -> String:
+	return "simulated" if _ministry_recorded else ""
 
 
 ## Certainty class of a configured anchor ("explicit", "inferred" or "simulated"; "" if unknown).
 func anchor_certainty(anchor_id: String) -> String:
-	return str(config.get("anchors", {}).get(anchor_id, {}).get("certainty", ""))
+	var a = config.get("anchors", {}).get(anchor_id, {})
+	return str(a.get("certainty", "")) if a is Dictionary else ""
 
 
-## Calendar days since the baptism: 0 on its day, negative before it, 0 if there is no anchor.
+## Calendar days since the baptism: 0 on its day, negative before it, 0 if it has not happened yet.
 func ministry_elapsed(cal_day: int = -1) -> int:
 	if not has_ministry_clock():
 		return 0
@@ -295,12 +332,9 @@ func world_minutes(day: int, minute: float) -> float:
 	return float(day - 1) * 1440.0 + minute
 
 
-## The world minute of the baptism itself (WorldSim day = the anchor day, at anchors.baptism.minute),
-## or -1.0 when unanchored.
+## The world minute of the baptism itself, or -1.0 before it has been recorded.
 func baptism_minutes() -> float:
-	if not has_ministry_clock():
-		return -1.0
-	return world_minutes(baptism_day(), float(baptism_anchor().get("minute", 9 * 60)))
+	return _ministry_start if _ministry_recorded else -1.0
 
 
 ## Minutes since the baptism moment (negative before it).

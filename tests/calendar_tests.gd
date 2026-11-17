@@ -11,7 +11,14 @@ const LEAP_YEARS_FIRST_CYCLE := [3, 6, 8, 11, 14, 17, 19]
 
 func run(runner: Node) -> void:
 	t = runner
-	orig = Calendar.config.duplicate(true)
+	var shipped := Calendar.config.duplicate(true)
+	test_shipped_start(shipped)
+	# The mechanics below (months, leap years, week, Sabbath, festivals, HUD) were written against a Nisan 1
+	# first day. They are checked unchanged under that start; the shipped 1 Kislev opening is checked above.
+	orig = shipped.duplicate(true)
+	orig["start_date"] = {"year": 1, "month": "Nisan", "day": 1}
+	Calendar.load_config(orig)
+	WorldSim.reset()
 	t._section = "calendar-data"
 	test_data()
 	t._section = "calendar-months"
@@ -32,8 +39,22 @@ func run(runner: Node) -> void:
 	t._section = "calendar-conditions"
 	test_conditions()
 	await test_hud_and_saves()
-	Calendar.load_config(orig)
+	Calendar.load_config(shipped)
 	WorldSim.reset()
+
+
+## The calendar the game ships with: the protagonist opens the game on 1 Kislev, Year 1, 07:00 (a
+## simulated gameplay anchor, not a baptism date), and no baptism date is configured anywhere.
+func test_shipped_start(shipped: Dictionary) -> void:
+	t._section = "calendar-start"
+	t.check(shipped["start_date"]["month"] == "Kislev" and shipped["start_date"]["day"] == 1 and shipped["start_date"]["year"] == 1, "calendar.json opens the game on 1 Kislev, Year 1")
+	t.check(Calendar.date_string(1) == "1 Kislev" and Calendar.full_date_string(1) == "1 Kislev, Year 1" and Calendar.start_minute == 7 * 60, "Day 1 is 1 Kislev, 07:00")
+	t.check(not shipped["anchors"].has("baptism"), "no fixed baptism anchor in calendar.json")
+	t.check(Calendar.date(1)["year"] == 1 and Calendar.day_of(1, "Nisan", 14) < 1, "Nisan of Year 1 precedes the opening; the first Passover after it is 14 Nisan, Year 2")
+	var p2: int = int(Calendar.festivals_in_year(2)["passover"]["start"])
+	t.check(Calendar.date_string(p2) == "14 Nisan" and p2 > 1, "Passover stays on 14 Nisan")
+	t.check(Calendar.date_string(Calendar.calendar_day(1, 12.0 * 60.0)) == "1 Kislev" and Calendar.date_string(Calendar.calendar_day(1, SUNSET)) == "2 Kislev", "the date turns over at sunset on the shipped calendar too")
+	t.check(Calendar.weekday(1) == int(shipped["week"]["start_weekday"]), "the opening weekday is the configured one")
 
 
 func cfg() -> Dictionary:

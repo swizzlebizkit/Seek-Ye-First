@@ -47,6 +47,9 @@ func _ready() -> void:
 	_section = "chronology"
 	await load("res://tests/chronology_tests.gd").new().run(self)
 
+	_section = "baptism"
+	await load("res://tests/baptism_tests.gd").new().run(self)
+
 	_section = "protection"
 	await load("res://tests/protection_tests.gd").new().run(self)
 

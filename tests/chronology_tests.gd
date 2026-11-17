@@ -8,6 +8,9 @@ var doc: Dictionary = {}
 var _defaults: Array = []
 
 const MIN_DAY := 1440.0
+const BAPTISM_LOC := "bethany_beyond_jordan"
+const BAPTISM_DAY := 2  # WorldSim day 2, 09:00 is "2 Kislev" (the calendar day turns over at the previous sunset)
+const BAPTISM_MINUTE := 540.0
 
 
 func run(runner: Node) -> void:
@@ -47,10 +50,19 @@ func _to(time: float) -> void:
 		WorldSim.advance(time - _now())
 
 
-func _new_game() -> void:
+func _new_game(baptize: bool = true) -> void:
 	CanonicalTimeline.load_events(_defaults)
 	GameState.new_game()
 	GameState.mode = GameState.Mode.PAUSED  # the real-time clock stays still; tests drive WorldSim.advance
+	if baptize:
+		_baptize()
+
+
+## The player reaches the Jordan trigger at the given world time. Nothing happens before this.
+func _baptize(day: int = BAPTISM_DAY, minute: float = BAPTISM_MINUTE) -> bool:
+	WorldSim.day = day
+	WorldSim.minute_of_day = minute
+	return CanonicalTimeline.trigger_baptism(BAPTISM_LOC)
 
 
 func _errs(mutate: Callable) -> Array:
@@ -130,7 +142,7 @@ func test_compat() -> void:
 	t.check(CanonicalTimeline.serialize()["occurred"] == ["john_preaching"], "and serializes the same occurred list")
 	WorldSim.deserialize(fixture["world"] if fixture.has("world") else {"day": 1, "minute": 420})
 	t.check(CanonicalTimeline.occurred_ids() == ["john_preaching"], "loading the old clock adds nothing that is not yet due")
-	t.check(Calendar.date_string(Calendar.current_day()).contains("Nisan") or WorldSim.day > 1, "old save clock reads normally")
+	t.check(Calendar.date_string(Calendar.current_day()).contains("Kislev") or WorldSim.day > 1, "old save clock reads normally")
 	t._fresh()
 
 
@@ -187,14 +199,19 @@ func _ordinal(dt: Dictionary) -> int:
 
 
 func test_ministry_clock() -> void:
-	var a := Calendar.baptism_anchor()
-	t.check(Calendar.anchor_certainty("baptism") == "simulated" and a.get("provisional", false) == true, "the baptism anchor is provisional and labeled simulated")
+	_new_game(false)
+	t.check(Calendar.date_string(1) == "1 Kislev" and Calendar.full_date_string(1) == "1 Kislev, Year 1" and Calendar.start_minute == 7 * 60, "the game opening is 1 Kislev, Year 1, 07:00")
+	t.check(not Calendar.config.get("anchors", {}).has("baptism") and Calendar.anchor_day("baptism") == 0, "calendar.json holds no baptism anchor")
+	t.check(not Calendar.has_ministry_clock() and Calendar.baptism_day() == 0 and Calendar.baptism_minutes() < 0.0 and Calendar.ministry_elapsed() == 0 and Calendar.baptism_certainty() == "", "before the baptism there is no ministry clock")
+	t.check(Calendar.baptism_record() == {"recorded": false}, "and no baptism record")
+	WorldSim.advance(3.0 * MIN_DAY)
+	t.check(not Calendar.has_ministry_clock() and Calendar.ministry_elapsed() == 0 and Calendar.current_day() > 1, "the world clock runs on normally and still no ministry clock")
+	t.check(_baptize(5, 600.0), "the player reaches the trigger")
 	var bd := Calendar.baptism_day()
-	t.check(bd > 1, "the baptism falls after the game opens")
 	var dt := Calendar.date(bd)
-	t.check(not (dt["name"] == "Nisan" and dt["day"] == 1), "the baptism is not assumed to be 1 Nisan")
-	t.check(not (int(dt["year"]) == 3 and dt["name"] == "Sivan" and dt["day"] == 3), "nor the old Year 3, Sivan 3")
-	t.check(Calendar.date_string(1) == "1 Nisan" and Calendar.start_minute == 7 * 60, "the game opening is still 1 Nisan, 07:00")
+	t.check(bd == Calendar.current_day() and Calendar.baptism_minutes() == Calendar.world_minutes(5, 600.0), "the recorded baptism is the actual moment, not a configured date")
+	var rec := Calendar.baptism_record()
+	t.check(rec["recorded"] and rec["certainty"] == "simulated" and rec["source"] == "recorded from the playthrough" and rec["calendar_day"] == bd, "it is labeled simulated and recorded from the playthrough")
 	t.check(Calendar.ministry_elapsed(bd) == 0 and Calendar.ministry_elapsed(bd + 1) == 1 and Calendar.ministry_elapsed(bd - 1) == -1, "ministry_elapsed is 0 at the baptism, 1 the next day")
 	var bad := 0
 	var span_leap := false
@@ -204,52 +221,49 @@ func test_ministry_clock() -> void:
 		if Calendar.date(d)["leap"]:
 			span_leap = true
 	t.check(bad == 0 and span_leap, "ministry_elapsed equals calendar days since the baptism across month, year and leap-year boundaries")
-	_new_game()
-	WorldSim.day = bd
-	WorldSim.minute_of_day = 17.0 * 60 + 59
+	_new_game(false)
+	t.check(_baptize(8, 17.0 * 60 + 59), "a baptism just before sunset")
 	var before_sunset := Calendar.ministry_elapsed()
 	WorldSim.advance(2.0)
 	t.check(before_sunset == 0 and Calendar.ministry_elapsed() == 1, "ministry_elapsed turns over at sunset, like the calendar day")
-	WorldSim.day = bd - 1
-	WorldSim.minute_of_day = 18.0 * 60
-	t.check(Calendar.ministry_elapsed() == 0, "the baptism's calendar day begins at the previous sunset")
 	var start_day := Calendar.current_day()
 	WorldSim.advance(100.0 * MIN_DAY + 300.0)
-	t.check(Calendar.ministry_elapsed() == Calendar.current_day() - bd and Calendar.current_day() - start_day >= 100, "the elapsed value follows WorldSim after a long advance")
-	var cfg: Dictionary = Calendar.config.duplicate(true)
-	cfg["anchors"] = {}
-	Calendar.load_config(cfg)
-	t.check(not Calendar.has_ministry_clock() and Calendar.ministry_elapsed(50) == 0, "without an anchor there is no ministry clock and nothing breaks")
-	Calendar.load_config(DataFiles.load_json("res://data/world/calendar.json"))
-	t.check(Calendar.has_ministry_clock(), "the data anchor is back")
+	t.check(Calendar.ministry_elapsed() == Calendar.current_day() - Calendar.baptism_day() and Calendar.current_day() - start_day >= 100, "the elapsed value follows WorldSim after a long advance")
+	Calendar.clear_ministry_start()
+	t.check(not Calendar.has_ministry_clock() and Calendar.ministry_elapsed(50) == 0, "clearing the record leaves no ministry clock and nothing breaks")
 	t._fresh()
 
 
 func test_old_clock_unchanged() -> void:
-	var with_anchor: Array = []
+	var with_record: Array = []
 	var without: Array = []
-	var cfg: Dictionary = DataFiles.load_json("res://data/world/calendar.json")
 	for pass_i in range(2):
-		var c: Dictionary = cfg.duplicate(true)
-		if pass_i == 1:
-			c["anchors"] = {}
-		Calendar.load_config(c)
-		var out: Array = with_anchor if pass_i == 0 else without
+		_new_game(false)
+		if pass_i == 0:
+			_baptize(40, 540.0)
+		var out: Array = with_record if pass_i == 0 else without
 		for d in range(1, 800):
 			out.append([Calendar.date_string(d), Calendar.weekday(d), Calendar.is_sabbath(d, 600.0), Calendar.phase(d, 960.0)])
-	Calendar.load_config(cfg)
-	t.check(with_anchor == without, "dates, weekdays, Sabbaths and phases are identical with and without the ministry anchor")
+	t.check(with_record == without, "dates, weekdays, Sabbaths and phases are identical with and without a recorded baptism")
 	WorldSim.deserialize({"day": 12, "minute": 600.0})
-	t.check(WorldSim.day == 12 and WorldSim.minute_of_day == 600.0 and Calendar.date_string(Calendar.current_day()) == "12 Nisan", "an old clock reading loads unchanged")
+	t.check(WorldSim.day == 12 and WorldSim.minute_of_day == 600.0 and Calendar.date_string(Calendar.current_day()) == "12 Kislev", "an old clock reading loads unchanged")
 	t._fresh()
 
 
 # -- GC-A.3 the scheduler -----------------------------------------------------------------------
 func test_schedule_shape() -> void:
-	_new_game()
+	_new_game(false)
 	t.check(CanonicalTimeline.has_occurred("john_preaching") and CanonicalTimeline.occurred_ids().size() == 1, "at the opening only John's preaching is under way")
+	t.check(CanonicalTimeline.scheduled_start("baptism_of_jesus") >= CanonicalTimeline.NEVER and CanonicalTimeline.arrival_state("baptism_of_jesus") == "unscheduled", "before the trigger the baptism is unscheduled")
+	var anything := false
+	for id in CanonicalTimeline.event_ids():
+		if id != "john_preaching" and CanonicalTimeline.scheduled_start(id) < CanonicalTimeline.NEVER:
+			anything = true
+	t.check(not anything and CanonicalTimeline.next_boundary(0.0) < CanonicalTimeline.NEVER, "no ministry event is scheduled; only John's own end remains on the clock")
+	_new_game()
 	t.check(CanonicalTimeline.scheduled_start("baptism_of_jesus") == Calendar.baptism_minutes(), "the baptism starts at ministry Day 0")
 	t.check(CanonicalTimeline.scheduled_ministry_day("baptism_of_jesus") == 0 and CanonicalTimeline.scheduled_calendar_day("baptism_of_jesus") == Calendar.baptism_day(), "and on the baptism's calendar day")
+	t.check(Calendar.date_string(Calendar.baptism_day()) == "2 Kislev", "a baptism on 2 Kislev is recorded as 2 Kislev")
 	for id in CanonicalTimeline.event_ids():
 		for dep in CanonicalTimeline.get_event(id)["dependencies"]:
 			var ref: float = CanonicalTimeline.scheduled_start(dep["id"]) if dep["relation"] == "after_start" else CanonicalTimeline.scheduled_end(dep["id"])
@@ -257,9 +271,10 @@ func test_schedule_shape() -> void:
 	var pday := CanonicalTimeline.scheduled_calendar_day("passover_jerusalem")
 	var fs := Calendar.festivals_on(pday)
 	t.check(fs.has("passover"), "the Passover event starts on the calendar's Passover day (%s)" % Calendar.full_date_string(pday))
+	t.check(Calendar.date_string(pday) == "14 Nisan", "which is 14 Nisan")
 	var md := CanonicalTimeline.scheduled_ministry_day("passover_jerusalem")
-	t.check(md > CanonicalTimeline.scheduled_ministry_day("capernaum_stay") and md < 120, "the first Passover follows Capernaum, within weeks of the baptism")
-	t.check(CanonicalTimeline.arrival_state("baptism_of_jesus") == "before", "before the baptism the state is before")
+	t.check(md > CanonicalTimeline.scheduled_ministry_day("capernaum_stay"), "the first Passover follows Capernaum")
+	t.check(CanonicalTimeline.arrival_state("baptism_of_jesus") == "during", "at the trigger the baptism is under way")
 
 
 func test_story_advance_refused() -> void:
@@ -278,7 +293,7 @@ func test_story_advance_refused() -> void:
 
 ## One run of the history: returns {times: id -> world minute at emission, order, done, final}.
 func _history(style: String) -> Dictionary:
-	_new_game()
+	_new_game(false)
 	var h := {"times": {}, "order": [], "done": [], "counts": {}}
 	var on_start := func(id):
 		h["times"][id] = _now()
@@ -289,6 +304,10 @@ func _history(style: String) -> Dictionary:
 	var on_end := func(id): h["done"].append(id)
 	CanonicalTimeline.event_occurred.connect(on_start)
 	CanonicalTimeline.event_completed.connect(on_end)
+	# The same arrival at the Jordan in every style: 2 Kislev, 09:00 (the ministry is unscheduled until then).
+	h["pre"] = CanonicalTimeline.arrival_state("baptism_of_jesus")
+	WorldSim.advance(float(BAPTISM_DAY - 1) * MIN_DAY + BAPTISM_MINUTE - float(Calendar.start_minute))
+	t.check(_baptize(WorldSim.day, WorldSim.minute_of_day), "%s: the trigger is accepted at the Jordan" % style)
 	var end := _end()
 	match style:
 		"miss", "witness":
@@ -299,7 +318,7 @@ func _history(style: String) -> Dictionary:
 		"early":
 			for id in CanonicalTimeline.event_ids():
 				var s := CanonicalTimeline.scheduled_start(id)
-				if s > _now():
+				if s > _now() and s < CanonicalTimeline.NEVER:
 					_to(s - 180.0)  # arrive three hours early and wait
 					h["early_" + id] = CanonicalTimeline.arrival_state(id)
 					_to(s + 30.0)
@@ -339,7 +358,7 @@ func test_same_history_all_ways() -> void:
 				once = false
 	t.check(once, "no event is announced twice in any run")
 	t.check(runs["witness"]["know"] == "witnessed" and runs["miss"]["know"] == "unknown" and runs["rest"]["know"] == "unknown", "witnessing changes what the protagonist knows, never what happened")
-	t.check(runs["early"]["early_baptism_of_jesus"] == "before" and runs["early"]["early_passover_jerusalem"] == "before", "arriving early finds the event still before")
+	t.check(runs["early"]["pre"] == "unscheduled" and runs["early"]["early_passover_jerusalem"] == "before" and not runs["early"].has("early_baptism_of_jesus"), "before the trigger the baptism cannot be waited for; later events can be, and are still before")
 	var chrono := true
 	var last := -1.0e30
 	for id in base["order"]:
@@ -360,6 +379,7 @@ func test_dependency_order() -> void:
 				"duration": {"amount": 2, "unit": "days", "basis": "estimate", "certainty": "simulated", "min": 1, "max": 3}})
 	CanonicalTimeline.load_events(evs)
 	GameState.new_game()
+	Calendar.set_ministry_start(Calendar.world_minutes(BAPTISM_DAY, BAPTISM_MINUTE))  # a ministry clock for the offset mode
 	t.check(CanonicalTimeline.scheduled_start("x1") >= CanonicalTimeline.scheduled_end("x0") + MIN_DAY - 0.01 and CanonicalTimeline.scheduled_start("x2") >= CanonicalTimeline.scheduled_end("x1") + MIN_DAY - 0.01, "a dependency forces its dependants later, never earlier")
 	var order: Array = []
 	var cb := func(id): order.append(id)
@@ -393,7 +413,7 @@ func test_save_mid_event() -> void:
 	t.check(ends == ["temptation_in_wilderness"] and not starts.has("temptation_in_wilderness") and not starts.has("baptism_of_jesus"), "the loaded game finishes the event once and does not restart earlier ones")
 	# an old-format block (occurred only) is accepted
 	CanonicalTimeline.deserialize({"occurred": ["john_preaching", "baptism_of_jesus"]})
-	t.check(CanonicalTimeline.has_occurred("baptism_of_jesus") and not CanonicalTimeline.is_completed("baptism_of_jesus"), "a block with only 'occurred' loads")
+	t.check(CanonicalTimeline.has_occurred("john_preaching") and not CanonicalTimeline.has_occurred("baptism_of_jesus") and not Calendar.has_ministry_clock(), "a block with only 'occurred' loads before the baptism: a stale baptism without a record is dropped")
 	_new_game()
 
 
@@ -417,6 +437,7 @@ func test_outcomes_via_timeline() -> void:
 			"outcomes": [{"character_id": "john_the_baptist", "outcome": "arrest"}]})
 	CanonicalTimeline.load_events(evs)
 	GameState.new_game()
+	Calendar.set_ministry_start(Calendar.world_minutes(BAPTISM_DAY, BAPTISM_MINUTE))  # a ministry clock for the offset mode
 	if stub != null:
 		existing.calls.clear()
 		WorldSim.advance(Calendar.baptism_minutes() + 20.0 * MIN_DAY - _now())
@@ -466,15 +487,14 @@ func test_access_classes() -> void:
 
 func test_early_arrival() -> void:
 	_new_game()
-	var s := CanonicalTimeline.scheduled_start("baptism_of_jesus")
-	var loc := CanonicalTimeline.event_location("baptism_of_jesus")
-	_to(s - 300.0)  # the knowledgeable player is already at the Jordan, five hours early
-	t.check(CanonicalTimeline.arrival_state("baptism_of_jesus") == "before" and not CanonicalTimeline.witness("baptism_of_jesus", loc), "five hours early: nothing yet")
+	var s := CanonicalTimeline.scheduled_start("passover_jerusalem")
+	var loc := CanonicalTimeline.event_location("passover_jerusalem")
+	_to(s - 300.0)  # the knowledgeable player is already in Jerusalem, five hours early
+	t.check(CanonicalTimeline.arrival_state("passover_jerusalem") == "before" and not CanonicalTimeline.witness("passover_jerusalem", loc), "five hours early: nothing yet")
 	_to(s - 60.0)
-	t.check(not CanonicalTimeline.has_occurred("baptism_of_jesus"), "the baptism does not wait for the player")
+	t.check(not CanonicalTimeline.has_occurred("passover_jerusalem"), "the Passover does not wait for the player")
 	_to(s + 20.0)
-	t.check(CanonicalTimeline.has_occurred("baptism_of_jesus") and CanonicalTimeline.arrival_state("baptism_of_jesus") == "during", "it begins on schedule")
-	t.check(CanonicalTimeline.witness("baptism_of_jesus", loc) and PlayerKnowledge.level_of("baptism_of_jesus") == "witnessed", "an early arrival who waits witnesses a public event")
-	var started_at := CanonicalTimeline.scheduled_start("baptism_of_jesus")
-	t.check(started_at == s, "the early arrival did not move it")
+	t.check(CanonicalTimeline.has_occurred("passover_jerusalem") and CanonicalTimeline.arrival_state("passover_jerusalem") == "during", "it begins on schedule")
+	t.check(CanonicalTimeline.witness("passover_jerusalem", loc) and PlayerKnowledge.level_of("passover_jerusalem") == "witnessed", "an early arrival who waits witnesses a public event")
+	t.check(CanonicalTimeline.scheduled_start("passover_jerusalem") == s, "the early arrival did not move it")
 	_new_game()

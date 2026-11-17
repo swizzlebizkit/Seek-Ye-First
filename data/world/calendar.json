@@ -26,11 +26,10 @@
   "cycle_offset": 0,
   "overrides": {}
  },
- "start_date": {"year": 1, "month": "Nisan", "day": 1},
+ "start_date": {"year": 1, "month": "Kislev", "day": 1, "note": "The protagonist game opening: 1 Kislev, Year 1, 07:00. A simulated gameplay anchor, not an asserted historical date, and NOT the baptism date. The baptism happens on whatever date the player reaches the Jordan trigger; that date is recorded from the playthrough (CanonicalTimeline.trigger_baptism)."},
  "year_label": "Year",
  "month_length_overrides": [],
  "anchors": {
-  "note": "Story dates. Every entry here is a provisional SIMULATION setting, not a historical claim: Scripture gives no calendar date for the baptism. The 1 Nisan start_date above is only the protagonist's game opening. The baptism is ministry Day 0. The year number and the month are chosen so the first Passover of the ministry (John 2:13) falls a few weeks after the baptism and the forty days; change them freely.",
-  "baptism": {"year": 1, "month": "Shevat", "day": 15, "minute": 540, "certainty": "simulated", "provisional": true}
+  "note": "Story dates fixed in data, looked up by Calendar.anchor_day. There is deliberately no baptism anchor: the baptism is ministry Day 0 and its calendar date is recorded when the player triggers it. Festivals stay on their fixed calendar dates (festivals.json) whatever date that is."
  }
 }

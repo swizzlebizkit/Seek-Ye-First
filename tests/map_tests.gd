@@ -247,7 +247,7 @@ func test_strategic_ui_walk() -> void:
 	t.check(GameState.mode == GameState.Mode.MAP and sv.visible, "the road marker opens the map and pauses play")
 	t.check(sv._list.item_count == 3, "three roads are offered from the countryside around Kefar Zayit")
 	t.check(sv._title.text.contains("Kefar Zayit"), "titled with where the protagonist is")
-	t.check(sv._clock.text.contains("Nisan"), "the date is shown")
+	t.check(sv._clock.text.contains("Kislev"), "the date is shown")
 	var texts: Array = []
 	for i in range(sv._list.item_count):
 		texts.append(sv._list.get_item_text(i))
