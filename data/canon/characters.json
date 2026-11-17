@@ -1,0 +1,22 @@
+{
+ "note": "Historically identified biblical individuals. Protection is independent of NPC faction and combat profile. Outcomes for these characters are applied only by the canonical timeline.",
+ "characters": {
+  "jesus": {"display_name": "Jesus", "canonical_character": true, "combat_protected": true, "protected_event": "", "combat_restriction_radius": 160},
+  "simon_peter": {"display_name": "Simon Peter", "canonical_character": true, "combat_protected": true, "protected_event": "", "combat_restriction_radius": 96},
+  "andrew": {"display_name": "Andrew", "canonical_character": true, "combat_protected": true, "protected_event": "", "combat_restriction_radius": 96},
+  "james_zebedee": {"display_name": "James son of Zebedee", "canonical_character": true, "combat_protected": true, "protected_event": "", "combat_restriction_radius": 96},
+  "john_zebedee": {"display_name": "John son of Zebedee", "canonical_character": true, "combat_protected": true, "protected_event": "", "combat_restriction_radius": 96},
+  "philip": {"display_name": "Philip", "canonical_character": true, "combat_protected": true, "protected_event": "", "combat_restriction_radius": 96},
+  "bartholomew": {"display_name": "Bartholomew (Nathanael)", "canonical_character": true, "combat_protected": true, "protected_event": "", "combat_restriction_radius": 96},
+  "thomas": {"display_name": "Thomas", "canonical_character": true, "combat_protected": true, "protected_event": "", "combat_restriction_radius": 96},
+  "matthew": {"display_name": "Matthew (Levi)", "canonical_character": true, "combat_protected": true, "protected_event": "", "combat_restriction_radius": 96},
+  "james_alphaeus": {"display_name": "James son of Alphaeus", "canonical_character": true, "combat_protected": true, "protected_event": "", "combat_restriction_radius": 96},
+  "thaddaeus": {"display_name": "Thaddaeus", "canonical_character": true, "combat_protected": true, "protected_event": "", "combat_restriction_radius": 96},
+  "simon_zealot": {"display_name": "Simon the Zealot", "canonical_character": true, "combat_protected": true, "protected_event": "", "combat_restriction_radius": 96},
+  "judas_iscariot": {"display_name": "Judas Iscariot", "canonical_character": true, "combat_protected": true, "protected_event": "", "combat_restriction_radius": 96},
+  "paul": {"display_name": "Paul of Tarsus", "canonical_character": true, "combat_protected": true, "protected_event": "", "combat_restriction_radius": 96},
+  "john_the_baptist": {"display_name": "John the Baptist", "canonical_character": true, "combat_protected": true, "protected_event": "john_preaching", "combat_restriction_radius": 128},
+  "mary_mother_of_jesus": {"display_name": "Mary, mother of Jesus", "canonical_character": true, "combat_protected": true, "protected_event": "", "combat_restriction_radius": 96},
+  "joseph_of_nazareth": {"display_name": "Joseph of Nazareth", "canonical_character": true, "combat_protected": true, "protected_event": "", "combat_restriction_radius": 96}
+ }
+}

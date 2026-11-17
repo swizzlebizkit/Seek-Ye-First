@@ -30,6 +30,7 @@ Journal="*res://scripts/autoload/journal.gd"
 Quests="*res://scripts/autoload/quests.gd"
 DialogueRunner="*res://scripts/autoload/dialogue_runner.gd"
 Equipment="*res://scripts/autoload/equipment.gd"
+CanonicalProtection="*res://scripts/autoload/canonical_protection.gd"
 Combat="*res://scripts/autoload/combat.gd"
 SaveManager="*res://scripts/autoload/save_manager.gd"
 
