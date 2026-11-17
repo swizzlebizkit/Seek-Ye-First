@@ -185,7 +185,7 @@ interactables = [
     {"type": "examine", "name": "Door", "tile": [h5[0] + 0.5, h5[1] + 1.15], "radius": 26,
      "text": ["Miriam's house. Her door stands open, but nobody is inside."]},
     {"type": "examine", "name": "Door", "tile": [h6[0] + 0.5, h6[1] + 1.15], "radius": 26,
-     "text": ["A heavy door. The family that lives here is away at a wedding in Cana."]},
+     "text": ["The heavy wooden door is barred. The family has gone to Cana to help prepare for a wedding. No one knows exactly when they'll return."]},
     {"type": "examine", "name": "Pond", "tile": [6, 21.2], "radius": 34,
      "text": ["A small pond fed by a spring. Reeds crowd the sandy edge, and something small plops into the water."]},
     {"type": "examine", "name": "The olive grove", "tile": [8, 23.2], "radius": 30, "once_flag": "saw_grove",
