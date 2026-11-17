@@ -1,19 +1,204 @@
 {
- "note": "Canonical events. They are advanced by the story controller only; nothing the player does can add, remove, reorder or alter them.",
+ "note": "Canonical events, schema v2 (docs/chronology.md). They are scheduled by the world clock (CanonicalTimeline) and happen whether or not the protagonist is there. Nothing the player does, and no quest or story flag, can add, remove, reorder, delay or alter them. KJV references only; Scripture wording is never altered here.",
+ "schema_version": 2,
+ "preliminary_harmonization": true,
+ "harmonization_note": "The order of the early-ministry events combines the Synoptic Gospels with John. Where the Gospels do not say how the accounts interlock, the placement is inferred or simulated and is marked so on each event and dependency. It is a working harmonization, not a settled one.",
+ "ministry": {
+  "span_years": {"approx": 3, "certainty": "inferred", "note": "Inferred from the Passovers John names; no Gospel states the length of the ministry."},
+  "passovers": [
+   {"ref": "John 2:13", "ordinal": 1, "certainty": "explicit"},
+   {"ref": "John 6:4", "ordinal": 2, "certainty": "explicit"},
+   {"ref": "John 11:55", "ordinal": 3, "certainty": "explicit"}
+  ]
+ },
  "events": [
   {
    "id": "john_preaching",
    "order": 1,
-   "title": "John the Baptist preaches and baptizes in the wilderness of Judaea",
+   "name": "John the Baptist preaches and baptizes in the wilderness of Judaea",
+   "origin": "scripture",
    "refs": ["Matthew 3:1-6", "Mark 1:4-5", "Luke 3:3"],
-   "origin": "scripture"
+   "certainty": "explicit",
+   "access": "public",
+   "location": "judea",
+   "dependencies": [],
+   "schedule": {"mode": "opening_offset", "days": -1, "certainty": "simulated", "note": "Under way when the game opens. Only that it precedes the baptism is scriptural; when it began is not given."},
+   "duration": {"amount": 600, "unit": "days", "basis": "estimate", "certainty": "simulated", "min": 300, "max": 900},
+   "participants": ["john_baptist"],
+   "witnesses": ["crowds"],
+   "traveling_party": [],
+   "rumor_sources": ["yosef"],
+   "testimony_sources": ["hannah"],
+   "significance": "The forerunner announces repentance; the protagonist first hears of it as a rumor."
   },
   {
    "id": "baptism_of_jesus",
    "order": 2,
-   "title": "Jesus is baptized by John in the Jordan",
-   "refs": ["Matthew 3:13-17"],
-   "origin": "scripture"
+   "name": "Jesus is baptized by John in the Jordan",
+   "origin": "scripture",
+   "refs": ["Matthew 3:13-17", "Mark 1:9-11", "Luke 3:21-22"],
+   "certainty": "explicit",
+   "access": "public",
+   "location": "bethany_beyond_jordan",
+   "dependencies": [
+    {"id": "john_preaching", "relation": "after_start", "certainty": "explicit"}
+   ],
+   "schedule": {"mode": "ministry_offset", "days": 0, "certainty": "simulated", "note": "Ministry Day 0. Its calendar date is the provisional setting calendar.json anchors.baptism.", "window_days": {"earliest": 0, "latest": 0}},
+   "duration": {"amount": 120, "unit": "minutes", "basis": "estimate", "certainty": "simulated", "min": 30, "max": 480},
+   "participants": ["jesus", "john_baptist"],
+   "witnesses": ["crowds"],
+   "traveling_party": [],
+   "rumor_sources": [],
+   "testimony_sources": [],
+   "significance": "The beginning of the ministry; the Spirit descends and the Father speaks.",
+   "notes": "The place is inferred from John 1:28, which names where John was baptizing."
+  },
+  {
+   "id": "temptation_in_wilderness",
+   "order": 3,
+   "name": "Jesus is tempted forty days in the wilderness",
+   "origin": "scripture",
+   "refs": ["Matthew 4:1-11", "Mark 1:12-13", "Luke 4:1-13"],
+   "certainty": "explicit",
+   "access": "private",
+   "location": "judea",
+   "dependencies": [
+    {"id": "baptism_of_jesus", "relation": "after_end", "certainty": "explicit", "gap_days": 0}
+   ],
+   "schedule": {"mode": "after_dependencies", "certainty": "explicit", "note": "Mark 1:12 says immediately."},
+   "duration": {"amount": 40, "unit": "days", "basis": "scripture", "certainty": "explicit", "min": 40, "max": 40},
+   "participants": ["jesus"],
+   "witnesses": [],
+   "traveling_party": [],
+   "rumor_sources": [],
+   "testimony_sources": [],
+   "significance": "Alone; no one else could have seen it. Known only because Jesus later told it."
+  },
+  {
+   "id": "john_testimony_first_disciples",
+   "order": 4,
+   "name": "John bears witness to the Lamb of God and the first disciples follow",
+   "origin": "scripture",
+   "refs": ["John 1:19-51"],
+   "certainty": "explicit",
+   "access": "public",
+   "location": "bethany_beyond_jordan",
+   "dependencies": [
+    {"id": "temptation_in_wilderness", "relation": "after_end", "certainty": "inferred", "gap_days": 1}
+   ],
+   "schedule": {"mode": "after_dependencies", "gap_days": 1, "certainty": "simulated", "window_days": {"earliest": 0, "latest": 14}, "note": "John places this after the baptism but does not mention the forty days; the harmonization is inferred and the gap is a simulation setting."},
+   "duration": {"amount": 4, "unit": "days", "basis": "scripture", "certainty": "inferred", "min": 3, "max": 5, "note": "Counted from the day markers in John 1:19, 1:29, 1:35 and 1:43."},
+   "participants": ["jesus", "john_baptist", "andrew", "simon_peter", "philip", "nathanael"],
+   "witnesses": ["priests_and_levites", "crowds"],
+   "traveling_party": [],
+   "rumor_sources": [],
+   "testimony_sources": ["hannah"],
+   "significance": "John names Jesus publicly; the first disciples attach themselves to him."
+  },
+  {
+   "id": "wedding_at_cana",
+   "order": 5,
+   "name": "The wedding at Cana of Galilee",
+   "origin": "scripture",
+   "refs": ["John 2:1-11"],
+   "certainty": "explicit",
+   "access": "restricted",
+   "location": "cana",
+   "dependencies": [
+    {"id": "john_testimony_first_disciples", "relation": "after_end", "certainty": "inferred", "gap_days": 2}
+   ],
+   "schedule": {"mode": "after_dependencies", "gap_days": 2, "certainty": "inferred", "window_days": {"earliest": -1, "latest": 1}, "note": "John 2:1 says the third day; how that count runs from John 1:43 is inferred."},
+   "duration": {"amount": 1, "unit": "days", "basis": "estimate", "certainty": "simulated", "min": 1, "max": 7},
+   "participants": ["jesus", "mary_mother_of_jesus", "disciples", "governor_of_the_feast", "servants"],
+   "witnesses": ["servants", "disciples"],
+   "traveling_party": ["disciples"],
+   "rumor_sources": [],
+   "testimony_sources": [],
+   "significance": "The first sign: his disciples believed on him (John 2:11)."
+  },
+  {
+   "id": "capernaum_stay",
+   "order": 6,
+   "name": "Jesus goes down to Capernaum for not many days",
+   "origin": "scripture",
+   "refs": ["John 2:12"],
+   "certainty": "explicit",
+   "access": "restricted",
+   "location": "capernaum",
+   "dependencies": [
+    {"id": "wedding_at_cana", "relation": "after_end", "certainty": "explicit", "gap_days": 1}
+   ],
+   "schedule": {"mode": "after_dependencies", "gap_days": 1, "certainty": "simulated", "note": "John 2:12 says after this; the gap is a simulation setting."},
+   "duration": {"amount": 4, "unit": "days", "basis": "estimate", "certainty": "simulated", "min": 2, "max": 8, "note": "Scripture says only not many days."},
+   "participants": ["jesus", "mary_mother_of_jesus", "his_brethren", "disciples"],
+   "witnesses": [],
+   "traveling_party": ["mary_mother_of_jesus", "his_brethren", "disciples"],
+   "rumor_sources": [],
+   "testimony_sources": [],
+   "significance": "A short family stay before going up to Jerusalem."
+  },
+  {
+   "id": "passover_jerusalem",
+   "order": 7,
+   "name": "The first Passover of the ministry, in Jerusalem",
+   "origin": "scripture",
+   "refs": ["John 2:13-25"],
+   "certainty": "explicit",
+   "access": "public",
+   "location": "jerusalem",
+   "dependencies": [
+    {"id": "capernaum_stay", "relation": "after_end", "certainty": "explicit", "gap_days": 0}
+   ],
+   "schedule": {"mode": "festival", "festival": "passover", "minute": 540, "certainty": "inferred", "note": "John 2:13 says the Passover was at hand. It starts on the calendar's Passover day, never earlier than its dependency allows."},
+   "duration": {"amount": 8, "unit": "days", "basis": "estimate", "certainty": "simulated", "min": 1, "max": 14, "note": "The festival lasts Passover plus the seven days of Unleavened Bread; how long Jesus stayed is not given."},
+   "participants": ["jesus", "disciples", "moneychangers", "jews"],
+   "witnesses": ["jews", "disciples", "many_who_believed"],
+   "traveling_party": ["disciples"],
+   "rumor_sources": [],
+   "testimony_sources": [],
+   "significance": "The temple is cleansed; many believe, but Jesus does not commit himself to them."
+  },
+  {
+   "id": "judean_ministry_samaria",
+   "order": 8,
+   "name": "The Judean ministry and the journey through Samaria",
+   "origin": "scripture",
+   "refs": ["John 3:1-36", "John 4:1-42"],
+   "certainty": "explicit",
+   "access": "public",
+   "location": "judea",
+   "dependencies": [
+    {"id": "passover_jerusalem", "relation": "after_end", "certainty": "explicit", "gap_days": 1}
+   ],
+   "schedule": {"mode": "after_dependencies", "gap_days": 1, "certainty": "inferred", "window_days": {"earliest": 0, "latest": 7}, "note": "John 3:22 says after these things."},
+   "duration": {"amount": 150, "unit": "days", "basis": "estimate", "certainty": "simulated", "min": 60, "max": 240, "note": "John 4:35 mentions four months to harvest; the length of the Judean stay is not given."},
+   "participants": ["jesus", "disciples", "john_baptist", "nicodemus", "samaritan_woman"],
+   "witnesses": ["disciples", "crowds", "samaritans"],
+   "traveling_party": ["disciples"],
+   "rumor_sources": [],
+   "testimony_sources": [],
+   "significance": "Jesus and his disciples baptize in Judaea; on the way to Galilee he stays two days in Sychar of Samaria."
+  },
+  {
+   "id": "galilean_ministry_expands",
+   "order": 9,
+   "name": "The Galilean ministry widens",
+   "origin": "scripture",
+   "refs": ["Matthew 4:12-17", "Mark 1:14-15", "Luke 4:14-15", "John 4:43-45"],
+   "certainty": "inferred",
+   "access": "public",
+   "location": "galilee",
+   "dependencies": [
+    {"id": "judean_ministry_samaria", "relation": "after_end", "certainty": "inferred", "gap_days": 0}
+   ],
+   "schedule": {"mode": "after_dependencies", "gap_days": 0, "certainty": "inferred", "window_days": {"earliest": -30, "latest": 30}, "note": "The Synoptic Gospels tie the start to John's imprisonment; John does not mention it. Interleaving them is inferred."},
+   "duration": {"amount": 250, "unit": "days", "basis": "estimate", "certainty": "simulated", "min": 120, "max": 400},
+   "participants": ["jesus", "disciples"],
+   "witnesses": ["crowds", "disciples"],
+   "traveling_party": ["disciples"],
+   "rumor_sources": [],
+   "testimony_sources": [],
+   "significance": "He preaches in the synagogues of Galilee and his fame spreads."
   }
  ]
 }
