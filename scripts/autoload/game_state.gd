@@ -52,6 +52,7 @@ func new_game() -> void:
 	has_saved_position = false
 	play_seconds = 0.0
 	Journal.reset()
+	Scripture.reset()  # the player's own bookmarks; not protagonist knowledge
 	Quests.reset()
 	PlayerKnowledge.reset()
 	CanonicalTimeline.reset()

@@ -83,6 +83,7 @@ func save_slot(slot: int) -> bool:
 		"combat": Combat.serialize(),
 		"geo": World.serialize(),
 		"travel": Travel.serialize(),
+		"scripture": Scripture.serialize(),  # the player's reader only (bookmarks); optional on load
 	}
 	var path := slot_path(slot)
 	var tmp := path + ".tmp"
@@ -118,6 +119,8 @@ func load_slot(slot: int) -> bool:
 	# Saves from before version 3 have no map knowledge or journey: start-of-game defaults apply.
 	World.deserialize(data.get("geo", {}))
 	Travel.deserialize(data.get("travel", {}))
+	# Saves from before the Scripture reader have no block: no bookmarks.
+	Scripture.deserialize(data.get("scripture", {}))
 	return true
 
 
