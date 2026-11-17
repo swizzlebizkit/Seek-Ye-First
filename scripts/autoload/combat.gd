@@ -46,6 +46,7 @@ func _ready() -> void:
 
 
 func reset() -> void:
+	CanonicalProtection.reset()
 	player_hp = BASE_MAX_HP
 	calm_time = 0.0
 	_regen_clock = 0.0
@@ -212,11 +213,15 @@ func actor_hp(id: String, fallback: int) -> int:
 
 
 func set_actor(id: String, status: String, hp: int) -> void:
+	if _shielded(id) and LASTING_STATUSES.has(status):
+		return  # ordinary combat never changes the lasting state of a protected character
 	actors[id] = {"status": status, "hp": hp}
 
 
 ## Lets data (dialogue effects) steer a character: "stand_down", "provoke", "release".
 func command_actor(id: String, command: String) -> void:
+	if _shielded(id) and command == "provoke":
+		return  # a protected character cannot be provoked into a fight
 	actor_command.emit(id, command)
 
 
@@ -226,6 +231,8 @@ func swung(origin: Vector2) -> void:
 
 
 func report_assault(victim_id: String, pos: Vector2) -> void:
+	if _shielded(victim_id):
+		return
 	consequences["noncombatants_struck"] = int(consequences.get("noncombatants_struck", 0)) + 1
 	assault_reported.emit(victim_id, pos)
 
@@ -258,3 +265,21 @@ func deserialize(d: Dictionary) -> void:
 		var a: Dictionary = d["actors"][id]
 		actors[id] = {"status": String(a.get("status", "")), "hp": int(a.get("hp", 0))}
 	player_hp_changed.emit(player_hp, max_hp())
+
+
+# -- canonical protection gates ----------------------------------------------------------------
+## Offensive, player-initiated combat is available at this position. Checked before an attack
+## begins, while it winds up, and again before any damage is applied.
+func offense_allowed(pos: Vector2) -> bool:
+	return not CanonicalProtection.restricted_at(pos)
+
+
+## A protected character is immune to ordinary combat from every source.
+func _shielded(actor_id: String) -> bool:
+	return CanonicalProtection.is_protected(actor_id)
+
+
+## The one gate for damaging a non-player actor. Returns false when the actor is protected or the
+## attacker stands inside a restricted area; callers must not apply damage in that case.
+func may_damage_actor(actor_id: String, attacker_pos: Vector2) -> bool:
+	return not _shielded(actor_id) and offense_allowed(attacker_pos)

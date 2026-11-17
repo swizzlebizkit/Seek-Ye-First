@@ -81,6 +81,7 @@ func save_slot(slot: int) -> bool:
 		"world": WorldSim.serialize(),
 		"equipment": Equipment.serialize(),
 		"combat": Combat.serialize(),
+		"protection": CanonicalProtection.serialize(),
 		"geo": World.serialize(),
 		"travel": Travel.serialize(),
 	}
@@ -115,6 +116,8 @@ func load_slot(slot: int) -> bool:
 	# Saves from before version 2 have neither block: defaults apply.
 	Equipment.deserialize(data.get("equipment", {}))
 	Combat.deserialize(data.get("combat", {}))
+	# Saves from before protection state have no block: defaults apply.
+	CanonicalProtection.deserialize(data.get("protection", {}))
 	# Saves from before version 3 have no map knowledge or journey: start-of-game defaults apply.
 	World.deserialize(data.get("geo", {}))
 	Travel.deserialize(data.get("travel", {}))
