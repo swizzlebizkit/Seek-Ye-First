@@ -44,6 +44,8 @@ func _ready() -> void:
 	await load("res://tests/calendar_tests.gd").new().run(self)
 	_section = "world"
 	await load("res://tests/world_tests.gd").new().run(self)
+	_section = "chronology"
+	await load("res://tests/chronology_tests.gd").new().run(self)
 
 	_clean_test_saves()
 	print("")
@@ -292,7 +294,9 @@ func test_canon_and_knowledge() -> void:
 	check(PlayerKnowledge.level_of("baptism_of_jesus") == "unknown", "unrelated canon event stays unknown to protagonist")
 	CanonicalTimeline.reset()
 	check(not CanonicalTimeline.story_advance("baptism_of_jesus"), "canon enforces scriptural order")
-	check(CanonicalTimeline.story_advance("john_preaching") and CanonicalTimeline.story_advance("baptism_of_jesus"), "events advance in order")
+	# GC-A.3: story code can no longer advance canonical events; the world clock does, in order.
+	check(not CanonicalTimeline.story_advance("john_preaching") and not CanonicalTimeline.story_advance("baptism_of_jesus"), "story_advance cannot trigger canonical events")
+	check(CanonicalTimeline.has_occurred("john_preaching") and not CanonicalTimeline.has_occurred("baptism_of_jesus"), "events advance in order: John first, then the baptism")
 
 
 func test_canon_is_player_proof() -> void:
