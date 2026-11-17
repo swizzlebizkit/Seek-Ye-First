@@ -29,5 +29,8 @@
  "start_date": {"year": 1, "month": "Nisan", "day": 1},
  "year_label": "Year",
  "month_length_overrides": [],
- "anchors": {}
+ "anchors": {
+  "note": "Story dates. Every entry here is a provisional SIMULATION setting, not a historical claim: Scripture gives no calendar date for the baptism. The 1 Nisan start_date above is only the protagonist's game opening. The baptism is ministry Day 0. The year number and the month are chosen so the first Passover of the ministry (John 2:13) falls a few weeks after the baptism and the forty days; change them freely.",
+  "baptism": {"year": 1, "month": "Shevat", "day": 15, "minute": 540, "certainty": "simulated", "provisional": true}
+ }
 }
