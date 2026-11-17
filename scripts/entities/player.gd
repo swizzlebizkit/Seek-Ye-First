@@ -182,6 +182,9 @@ func is_invulnerable() -> bool:
 func try_attack() -> bool:
 	if GameState.mode != GameState.Mode.EXPLORE or _down:
 		return false
+	if not Combat.offense_allowed(global_position):
+		_buffered = 0.0
+		return false
 	var weapon := Equipment.weapon()
 	if weapon.is_empty():
 		if _toast_cooldown <= 0.0:
@@ -225,6 +228,9 @@ func _strike() -> void:
 	var weapon := Equipment.weapon()
 	if weapon.is_empty():
 		return
+	if not Combat.offense_allowed(global_position):
+		_end_swing()  # re-checked before any damage: no hitbox is made while restricted
+		return
 	var space := get_world_2d().direct_space_state
 	for body in SwordStrike.bodies_hit(space, global_position, facing, float(weapon["reach"]), LAYER_NPC, [self]):
 		if last_swing_hits.has(body):
@@ -241,7 +247,7 @@ func _end_swing() -> void:
 
 # -- dodge and damage --------------------------------------------------------------------------
 func try_dodge() -> bool:
-	if GameState.mode != GameState.Mode.EXPLORE or _down:
+	if GameState.mode != GameState.Mode.EXPLORE or _down or not Combat.offense_allowed(global_position):
 		return false
 	if swing_phase >= 0 or dodge_time > 0.0 or dodge_cooldown > 0.0:
 		return false
@@ -289,7 +295,18 @@ func is_down() -> bool:
 	return _down
 
 
+## Entering a protected area cancels any swing and any buffered attack input at once.
+func _update_restriction() -> void:
+	var was := CanonicalProtection.restricted
+	var now := CanonicalProtection.update_restriction(global_position)
+	if now and (not was or _buffered > 0.0 or swing_phase >= 0):
+		_buffered = 0.0
+		if swing_phase >= 0:
+			_end_swing()
+
+
 func _tick_timers(delta: float) -> void:
+	_update_restriction()
 	if swing_phase >= 0 and GameState.mode == GameState.Mode.EXPLORE:
 		swing_time += delta
 	attack_cooldown = maxf(0.0, attack_cooldown - delta)

@@ -19,6 +19,7 @@ var strategic_view: StrategicView
 var _tracker: Label
 var _clock: Label
 var _hint: Label
+var _combat_note: Label
 var _prompt: Label
 var _toasts: VBoxContainer
 var _root: Control
@@ -62,6 +63,13 @@ func _ready() -> void:
 	_hint = UiTheme.outlined(UiTheme.label("WASD move   E interact   K attack   Shift dodge   H eat   I equipment   J journal   Esc menu   F5 / F9 quick save / load", 15, UiTheme.MUTED))
 	_hint.position = Vector2(24, 692)
 	_root.add_child(_hint)
+
+	# A plain gameplay notice, shown only while a protected area restricts combat.
+	_combat_note = UiTheme.outlined(UiTheme.label(CanonicalProtection.HINT_TEXT, 15, UiTheme.MUTED))
+	_combat_note.position = Vector2(24, 664)
+	_combat_note.visible = CanonicalProtection.restricted
+	_root.add_child(_combat_note)
+	CanonicalProtection.restriction_changed.connect(func(_r): _update_chrome())
 
 	_prompt = UiTheme.outlined(UiTheme.label("", 22, UiTheme.GOLD))
 	_prompt.set_anchors_preset(Control.PRESET_CENTER_BOTTOM)
@@ -215,4 +223,5 @@ func _update_chrome() -> void:
 	_tracker.visible = exploring
 	_clock.visible = exploring
 	_hint.visible = exploring
+	_combat_note.visible = exploring and CanonicalProtection.restricted
 	_prompt.visible = exploring

@@ -239,6 +239,9 @@ func _on_talk(by: Node) -> void:
 func receive_strike(by: Node, damage: int, from_dir: String) -> void:
 	if state == State.DEAD or _invuln > 0.0:
 		return
+	var from_pos: Vector2 = by.global_position if by is Node2D else global_position
+	if not Combat.may_damage_actor(npc_id, from_pos):
+		return  # protected character or restricted area: no damage, no reaction
 	_invuln = HIT_IFRAMES
 	_flash = 0.15
 	if disposition == "noncombatant":
@@ -371,7 +374,13 @@ func provoke(reason: String) -> void:
 
 
 # -- per-frame behaviour -----------------------------------------------------------------------
+func _exit_tree() -> void:
+	CanonicalProtection.clear_presence(npc_id)
+
+
 func _physics_process(delta: float) -> void:
+	if CanonicalProtection.is_protected(npc_id):
+		CanonicalProtection.set_presence(npc_id, global_position)
 	if state == State.DEAD:
 		return
 	if _talking or GameState.mode != GameState.Mode.EXPLORE:

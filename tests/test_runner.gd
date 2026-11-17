@@ -45,6 +45,9 @@ func _ready() -> void:
 	_section = "world"
 	await load("res://tests/world_tests.gd").new().run(self)
 
+	_section = "protection"
+	await load("res://tests/protection_tests.gd").new().run(self)
+
 	_clean_test_saves()
 	print("")
 	if _failures.is_empty():
